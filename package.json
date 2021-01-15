@@ -1,0 +1,22 @@
+{
+  "name": "teerna",
+  "version": "1.0.0",
+  "description": "Teerna is intended to act as a communications aid for RPG groups meeting online, and also as an information organisation system for the game masters (GMs).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juraj80/Agile-team-project-g9g2-x01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juraj80/Agile-team-project-g9g2-x01/issues"
+  },
+  "homepage": "https://github.com/juraj80/Agile-team-project-g9g2-x01#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -19,5 +19,6 @@ jobs:
         password: FmyhTt6OFb
         port: 22
         script: |
-            cd /home/project/Teerna/teerna-app
+            cd /home/project/Teerna
+            git pull origin master
             git status

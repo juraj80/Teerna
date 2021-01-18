@@ -15,7 +15,7 @@ jobs:
       with: 
         host: teerna-project.com
         username: root
-        password: FmyhTt6OFb
+        key: ${{ secrets.TEERNA_SECRET }}
         port: 22
         script: |
             cd /home/project/Teerna

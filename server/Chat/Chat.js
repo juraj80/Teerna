@@ -1,13 +1,12 @@
+const WebSocket = require('ws');
 
 function setUpChat() {
-  const WebSocket = require('ws');
   const server = new WebSocket.Server({
     port: 8888
   });
 
   let sockets = [];
   server.on('connection', function(socket) {
-    console.log(socket);
     sockets.push(socket);
 
     // When you receive a message, send that message to every socket.

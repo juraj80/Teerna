@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Chat from './Chat/Chat.js';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <main>
+        <Chat ></Chat>
+      </main>
     </div>
   );
 }

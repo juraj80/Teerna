@@ -18,5 +18,6 @@ export default {
 		dropdown: { listitem: { anchor: '12px' } },
 		popup: { title: '18px', subtitle: '14px' },
 		checkbox: { wrapper: '14px' },
+		button: '14px',
 	},
 };

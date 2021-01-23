@@ -14,7 +14,15 @@ export default {
 		text: colours.white.lighter,
 	},
 	button: {
-		background: '',
+		background: {
+			base: '',
+			primary: '',
+			secondary: '',
+			accept: '',
+			cancel: '',
+			danger: '',
+			disabled: '',
+		},
 		text: colours.white.lighter,
 		border: '',
 		inactive: transparentize(0.55, colours.white.medium),

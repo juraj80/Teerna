@@ -10,6 +10,6 @@ const StyledIcon = styled(Icon)`
 	}
 `;
 
-export default function MessageIcon({ type }) {
+export default function MessageIcon(type) {
 	return <StyledIcon icon={type} />;
 }

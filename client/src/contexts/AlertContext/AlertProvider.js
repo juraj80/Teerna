@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import uuid from 'uuidv4';
+import { uuid } from 'uuidv4';
 import { element, string, oneOfType } from 'prop-types';
 import { AlertContainer } from './styles';
 import { Alert } from '../../components';
@@ -14,7 +14,7 @@ export default function AlertProvider({ children }) {
 
 	const addAlert = (type, msg) => {
 		const id = uuid();
-		updateAlerts([...alerts, { id, msg, type }]);
+		updateAlerts([...alerts, { id, type, msg }]);
 		setTimeout(() => {
 			closeAlert(id);
 		}, 5000);
@@ -24,7 +24,7 @@ export default function AlertProvider({ children }) {
 		<AlertContext.Provider value={addAlert}>
 			<AlertContainer>
 				{alerts.map(({ id, type, msg }) => (
-					<Alert type={type} key={id} id={id} closeAlert={closeAlert}>
+					<Alert key={id} id={id} type={type} closeAlert={() => closeAlert(id)}>
 						{msg}
 					</Alert>
 				))}

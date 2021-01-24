@@ -6,7 +6,7 @@ const Item = styled.li`
 	width: 100%;
 	color: ${({ theme }) => theme.dropdown.text};
 	font-size: ${typography.size.dropdown.listitem};
-	font-weight: ${typography.weight.body.extrabold};
+	font-weight: ${typography.weight.body.bold};
 	text-align: center;
 	background: ${({ theme }) => theme.dropdown.background};
 	&:hover {
@@ -18,6 +18,6 @@ const Item = styled.li`
 	}
 `;
 
-export default function MenuOption({ option: { name, action } }) {
-	return <Item onClick={action}>{name}</Item>;
+export default function MenuOption({ descriptor, action }) {
+	return <Item onClick={action}>{descriptor}</Item>;
 }

@@ -1,7 +1,7 @@
 import { func, oneOfType, string, element } from 'prop-types';
 import { Card, Message, Heading, MessageIcon, CloseIcon } from './styles';
 
-export default function index({ id, type, children, closeAlert }) {
+export default function index({ id, type, msg, closeAlert }) {
 	const MIcon = MessageIcon(type);
 	return (
 		<Card type={type}>
@@ -10,7 +10,7 @@ export default function index({ id, type, children, closeAlert }) {
 				<Heading>
 					{`${type[0].toUpperCase()}${type.substr(1).toLowerCase()}`}
 				</Heading>
-				{children}
+				{msg}
 			</Message>
 			<CloseIcon
 				color={({ theme }) => theme.app.text}
@@ -24,7 +24,7 @@ export default function index({ id, type, children, closeAlert }) {
 
 index.propTypes = {
 	type: string.isRequired,
+	msg: string.isRequired,
 	children: oneOfType([element, string]).isRequired,
-	id: string.isRequired,
 	closeAlert: func.isRequired,
 };

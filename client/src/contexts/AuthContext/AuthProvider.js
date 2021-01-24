@@ -20,8 +20,8 @@ export default function AuthProvider({ children }) {
 	const [user, setUser] = useState(defaultUser);
 
 	const onAuthStateChange = () => {
-		return firebase.auth().onAuthStateChanged(({ id, email, username }) => {
-			id && setUser({ loggedIn: true, id, email, username });
+		return firebase.auth().onAuthStateChanged(({ uid, email, displayName }) => {
+			id && setUser({ loggedIn: true, id: uid, email, username: displayName });
 			!id && setUser({ loggedIn: false });
 		});
 	};

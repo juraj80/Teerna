@@ -1,5 +1,5 @@
 //import Chat from '../src/modules/Chat/Chat';
-import { useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, match } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import {
@@ -15,23 +15,24 @@ import { darkTheme, lightTheme } from './shared';
 import { GlobalStyle } from './styles';
 import { Landing } from './pages';
 import ActiveDashboard from './components/ActiveDashboard';
+import { onAuthStateChange } from './contexts';
 
 export default function App() {
+	const [user, setUser] = useState({ loggedIn: false });
+
 	const [theme, toggleTheme, componentMounted] = useDarkMode();
 	const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-	const { onAuthStateChange } = useContext(AuthContext);
-
 	useEffect(() => {
-		const unsubscribe = onAuthStateChange;
+		const unsubscribe = onAuthStateChange(setUser);
 		return () => unsubscribe();
 	}, []);
 
 	return (
 		<ThemeProvider theme={themeMode}>
-			<AuthProvider>
-				<PlayerProvider>
-					<AlertProvider>
+			<AuthProvider value={user}>
+				<AlertProvider>
+					<PlayerProvider>
 						<ModalProvider>
 							<>
 								<GlobalStyle />
@@ -58,8 +59,8 @@ export default function App() {
 								)}
 							</>
 						</ModalProvider>
-					</AlertProvider>
-				</PlayerProvider>
+					</PlayerProvider>
+				</AlertProvider>
 			</AuthProvider>
 		</ThemeProvider>
 	);

@@ -11,10 +11,10 @@ export default function ActiveDashboard({ match, userId }) {
 	const { user } = useContext(AuthContext);
 	const { isGM } = useContext(PlayerContext);
 
-	if (!user.loggedIn) {
-		addAlert('warning', 'incorrect user credentials');
-		return <Redirect to='/' />;
-	}
+	useEffect(() => {
+		if (!user.loggedIn)
+			addAlert({ type: 'warning', msg: 'incorrect user credentials' });
+	}, []);
 
 	if (isGM) return <GMDashboard />;
 	return <PlayerDashboard />;

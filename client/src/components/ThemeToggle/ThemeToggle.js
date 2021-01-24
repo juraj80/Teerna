@@ -1,7 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
-import styled, { ThemeContext } from 'styled-components';
-import { useDarkMode } from '../../hooks';
-import { ARed, AGreen } from '../../styles';
+import styled from 'styled-components';
+import { AGreen, ARed } from '../../styles';
 
 const Toggle = styled.div``;
 
@@ -17,6 +15,7 @@ const CheckerLabel = styled.label`
 	border-radius: 50%;
 	background: #fe4551;
 	box-shadow: 0 10px 10px 0 rgba(#fe4551, 0.3);
+	${ARed}
 
 	&:active {
 		width: 28px;
@@ -38,12 +37,13 @@ const CheckerLabel = styled.label`
 		border-radius: 50%;
 		cursor: pointer;
 
-		animation: ${ARed} 0.7s linear forwards;
+		animation: red 0.7s linear forwards;
 	}
 `;
 
 const Checker = styled.input`
 	display: none;
+	${AGreen};
 	&:checked {
 		& + ${CheckerLabel} {
 			background: #48e98a;
@@ -58,7 +58,7 @@ const Checker = styled.input`
 				background: #fff;
 				border-color: transparent;
 				border-radius: 30px;
-				animation: ${AGreen} 0.7s linear forwards !important;
+				animation: green 0.7s linear forwards !important;
 			}
 		}
 	}
@@ -67,8 +67,13 @@ const Checker = styled.input`
 export default function ({ toggleTheme }) {
 	return (
 		<>
-			<Checker onChange={toggleTheme} id='toggle' type='checkbox' />
-			<CheckerLabel for='toggle'>
+			<Checker
+				style={{ marginLeft: '16px' }}
+				onChange={toggleTheme}
+				id='toggle'
+				type='checkbox'
+			/>
+			<CheckerLabel htmlFor='toggle'>
 				<Toggle />
 			</CheckerLabel>
 		</>

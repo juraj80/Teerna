@@ -8,10 +8,6 @@ const SpaceWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-
-	& ${ThemeToggle} {
-		margin-left: 20px;
-	}
 `;
 
 export default function LogoSubHeader({ toggleTheme }) {

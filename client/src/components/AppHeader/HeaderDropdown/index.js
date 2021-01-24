@@ -1,5 +1,13 @@
 import { useContext, useCallback, useState, useEffect } from 'react';
-import { AlertContext, AuthContext, PlayerContext } from '../../../contexts';
+import { Redirect } from 'react-router-dom';
+import {
+	AlertContext,
+	AuthContext,
+	PlayerContext,
+	googleLogin,
+	githubLogin,
+	logout,
+} from '../../../contexts';
 import styled from 'styled-components';
 import MenuOption from '../MenuOption';
 
@@ -15,18 +23,18 @@ const List = styled.ul`
 export default function HeaderDropdown() {
 	const [options, setOptions] = useState([{}]);
 	const addAlert = useContext(AlertContext);
-	const { user, googleLogin, githubLogin, logout } = useContext(AuthContext);
+	const user = useContext(AuthContext);
 	const { isGM, togglePlayerMode } = useContext(PlayerContext);
 
 	const requestGoogleLogin = useCallback(() => {
 		googleLogin().catch(error =>
-			addAlert('error', 'unsuccesful login through Google')
+			addAlert({ type: 'error', msg: 'unsuccessful login with Google' })
 		);
 	});
 
 	const requestGithubLogin = useCallback(() => {
 		githubLogin().catch(error =>
-			addAlert('error', 'unsuccesful login through Github')
+			addAlert({ type: 'error', msg: 'unsuccessful login with Github' })
 		);
 	});
 
@@ -35,14 +43,16 @@ export default function HeaderDropdown() {
 	}, []);
 
 	useEffect(() => {
-		if (user) {
+		if (!user.loggedIn) {
 			setOptions([
 				{
+					key: '01',
 					id: 'google',
 					descriptor: 'Google Authentication',
 					action: requestGoogleLogin,
 				},
 				{
+					key: '02',
 					id: 'github',
 					descriptor: 'Github Authentication',
 					action: requestGithubLogin,
@@ -51,11 +61,13 @@ export default function HeaderDropdown() {
 		} else {
 			setOptions([
 				{
+					key: '03',
 					id: 'swithPlayerMode',
 					descriptor: `Switch to ${isGM ? 'Player' : 'Game Master'} View`,
 					action: togglePlayerMode,
 				},
 				{
+					key: '04',
 					id: 'logout',
 					descriptor: 'Logout',
 					action: requestLogout,
@@ -66,8 +78,8 @@ export default function HeaderDropdown() {
 
 	return (
 		<List>
-			{options.map(({ id, descriptor, action }) => (
-				<MenuOption key={id} descriptor={descriptor} action={action} />
+			{options.map(({ key, descriptor, action }) => (
+				<MenuOption key={key} descriptor={descriptor} action={action} />
 			))}
 		</List>
 	);

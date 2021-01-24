@@ -7,9 +7,7 @@ export default function index({ id, type, msg, closeAlert }) {
 		<Card type={type}>
 			<MIcon />
 			<Message>
-				<Heading>
-					{`${type[0].toUpperCase()}${type.substr(1).toLowerCase()}`}
-				</Heading>
+				<Heading>{type}</Heading>
 				{msg}
 			</Message>
 			<CloseIcon

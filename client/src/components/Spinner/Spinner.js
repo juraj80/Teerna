@@ -7,12 +7,13 @@ const Loading = styled.div`
 	width: 80px;
 	height: 80px;
 	z-index: 998;
+	${ALoading};
 
 	& div {
 		position: absolute;
 		opacity: 1;
 		border-radius: 50%;
-		animation: ${ALoading} 1.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+		animation: loading 1.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 		background: ${({ theme }) => theme.app.background};
 		&:nth-child(2) {
 			animation-delay: -0.7s;

@@ -1,4 +1,4 @@
-import { rgb } from 'polished';
+import { linearGradient, rgb } from 'polished';
 
 export default {
 	black: {
@@ -40,5 +40,25 @@ export default {
 	authOrgs: {
 		github: rgb(110, 84, 148),
 		google: rgb(219, 68, 55),
+	},
+	primaries: {
+		yellow: rgb(255, 224, 80),
+		orange: rgb(255, 162, 75),
+		red: rgb(255, 102, 99),
+		pink: rgb(253, 50, 160),
+		purple: rgb(216, 67, 231),
+		gradient: linearGradient({
+			colorStops: [
+				'rgb(255,102,9) 0%',
+				'rgb(255,162,75)',
+				'20%,rgb(255,224,80) 40%',
+				'rgb(253,50,160) 60%',
+				'rgb(253,50,160) 60%',
+				'rgb(216,67,231) 80%',
+				'rgb(125,185,232) 100%',
+			],
+			toDirection: 'to bottom right',
+			fallback: 'rgb(216,67,231)',
+		}),
 	},
 };

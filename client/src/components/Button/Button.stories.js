@@ -10,6 +10,7 @@ export default {
 
 export const primary = () => <Button type='primary'>Primary</Button>;
 export const secondary = () => <Button type='secondary'>Secondary</Button>;
+export const cta = () => <Button type='cta'>CTA</Button>;
 export const actionButtons = () => (
 	<div
 		style={{

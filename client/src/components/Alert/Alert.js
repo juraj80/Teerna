@@ -1,5 +1,5 @@
-import { func, oneOfType, string } from 'prop-types';
-import { Card, MessageIcon } from './styles';
+import { func, oneOfType, string, element } from 'prop-types';
+import { Card, Message, Heading, MessageIcon, CloseIcon } from './styles';
 
 export default function index({ id, type, children, closeAlert }) {
 	const MIcon = MessageIcon(type);

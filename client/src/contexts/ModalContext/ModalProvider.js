@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { element, oneOfType, string } from 'prop-types';
 import { Transition } from 'react-transition-group';
-import { useLocation } from 'react-router-dom';
 import { DarkBackground } from './styles';
 import ModalContext from './ModalContext';
 
@@ -9,11 +8,10 @@ export default function ModalProvider({ children }) {
 	const [show, updateShow] = useState(false);
 	const [Content, updateContent] = useState(false);
 	const [locked, updateLocked] = useState(false);
-	const location = useLocation();
 
 	useEffect(() => {
 		show && updateShow(false);
-	}, [location]);
+	}, [show]);
 
 	return (
 		<ModalContext.Provider value={{ updateShow, updateContent, updateLocked }}>

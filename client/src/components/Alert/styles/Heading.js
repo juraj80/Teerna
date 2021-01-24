@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { typography } from '../../../../styles';
+import { typography } from '../../../styles';
 
 export default styled.h1`
 	font-size: ${typography.size.popup.title};

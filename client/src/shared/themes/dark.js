@@ -15,17 +15,10 @@ export default {
 	},
 	button: {
 		background: {
-			base: '',
-			primary: '',
-			secondary: '',
-			accept: '',
-			cancel: '',
-			danger: '',
-			disabled: '',
+			base: colours.black.light,
 		},
 		text: colours.white.lighter,
-		border: '',
-		inactive: transparentize(0.55, colours.white.medium),
+		inactive: transparentize(0.55, colours.grey.medium),
 	},
 	overlay: {
 		background: colours.blue.dark,

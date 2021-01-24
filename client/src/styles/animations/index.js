@@ -19,48 +19,51 @@ export const ALoading = keyframes`
 
 export const ARed = keyframes`
  0% {
-    height: 30px;
+    height: 15px;
     width: 0;
-    border-width: 5px;
+    border-width: 2.5px;
   }
   55% {
-    height: 13px;
-    width: 27px;
-    border-width: 10px;
+    height: 6.5px;
+    width: 13.5px;
+    border-width: 5px;
   }
   
   70% {
-    height: 20px;
-    width: 20px;
-    border-width: 10px;
+    height: 10px;
+    width: 10px;
+    border-width: 5px;
   }
   
   85% {
-    height: 15px;
-    width: 25px;
-    border-width: 10px;
+    height: 7.5px;
+    width: 12.5px;
+    border-width: 5px;
   }
   
   100% {
-    height: 20px;
-    width: 20px;
-    border-width: 10px;
+    height: 10px;
+    width: 10px;
+    border-width: 5px;
   }`;
 
 export const AGreen = keyframes`
-   0% {
-    height: 20px;
-    width: 20px;
-    border-width: 10px;
+
+  0% {
+    height: 10px
+    width: 10px
+    border-width: 5px;
   }
   25%, 55%, 85% {
-    height: 30px;
-    width: 5px;
-    border-width: 5px;
+    height: 15px;
+    width: 2.5px;
+    border-width: 2.5px;
   }
   
   40%, 70%, 100% {
-    height: 30px;
+    height: 15px;
     width: 0;
-    border-width: 5px;
-  }`;
+    border-width: 2.5px;
+  }
+
+`;

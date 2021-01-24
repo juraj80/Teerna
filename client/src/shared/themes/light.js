@@ -3,7 +3,6 @@ import { transparentize } from 'polished';
 
 export default {
 	name: 'light',
-
 	app: {
 		background: transparentize(0.31, colours.white.lightest),
 		text: colours.grey.midDark,
@@ -15,25 +14,27 @@ export default {
 		text: colours.black.default,
 	},
 	button: {
-		background: '',
+		background: {
+			base: colours.white.medium,
+			primary: colours.primaries.yellow,
+			secondary: colours.primaries.red,
+			accept: colours.status.success,
+			cancel: colours.status.error,
+			danger: colours.status.warning,
+			disabled: colours.grey.lighter,
+			cta: colours.primaries.gradient,
+		},
 		text: colours.black.lighter,
-		border: '',
-		inactive: colours.grey.midDark,
+		inactive: colours.grey.medium,
 	},
 	overlay: {
 		background: transparentize(0.3, colours.white.lightest),
-		text: '',
-		border: '',
 	},
 	scrollbar: {
 		background: transparentize(0.57, colours.white.lighter),
-		text: '',
-		border: '',
 	},
 	searchbar: {
 		background: transparentize(0.31, colours.white.lightest),
-		text: '',
-		border: '',
 	},
 	menu: {
 		hover: {

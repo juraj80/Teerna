@@ -6,21 +6,21 @@ const Loading = styled.div`
 	position: relative;
 	width: 80px;
 	height: 80px;
+	z-index: 998;
 
 	& div {
 		position: absolute;
-		background: ${({ theme }) => theme.app.background};
 		opacity: 1;
-		border-radius: 50%50%;
+		border-radius: 50%;
 		animation: ${ALoading} 1.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-
+		background: ${({ theme }) => theme.app.background};
 		&:nth-child(2) {
 			animation-delay: -0.7s;
 		}
 	}
 `;
 
-export default function ({}) {
+export default function Spinner() {
 	return (
 		<Loading>
 			<div></div>

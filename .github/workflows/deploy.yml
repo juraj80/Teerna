@@ -5,20 +5,26 @@ name: Deploy Workflow
 
 on:
   push:
-    branches: [ master ]
- 
-jobs: 
-  job_one: 
+    branches: [master]
+
+jobs:
+  job_one:
     runs-on: ubuntu-latest
-    steps: 
-    - name: "testing teerna server ssh connection"
-      uses: appleboy/ssh-action@master
-      with: 
-        host: teerna-project.com
-        username: root
-        key: ${{ secrets.TEERNA_SECRET }}
-        port: 22
-        script: |
+    steps:
+      - name: "testing teerna server ssh connection"
+        uses: appleboy/ssh-action@master
+        with:
+          host: teerna-project.com
+          username: root
+          key: ${{ secrets.TEERNA_SECRET }}
+          port: 22
+          script: |
             cd /home/project/Teerna
             git pull origin master
             git status
+            cd server
+            npm ci
+            pm2 restart index.js
+            cd ..
+            cd client
+            yarn build

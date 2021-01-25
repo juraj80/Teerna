@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.vscode/
+client/.eslintcache
+client/node_modules/
+server/node_modules/
+client/package-lock.json

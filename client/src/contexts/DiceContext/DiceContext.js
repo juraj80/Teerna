@@ -1,5 +1,4 @@
 import React from 'react'
-import {DiceBag} from "../../modules/DiceBag/DiceBag";
 
 const DiceContext = React.createContext(undefined);
 

@@ -13,7 +13,7 @@ function setUpChat() {
     socket.on('message', function(msg) {
       const message = JSON.parse(msg);
       const types = ['story', 'background'];
-      if (types.includes(message.type) && message.author == 'GM') {
+      if (types.includes(message.type) && message.author === 'GM') {
         sockets.forEach(s => s.send(msg));
       } else {
         console.log('player message', message);

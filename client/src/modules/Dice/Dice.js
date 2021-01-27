@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Dice.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
+import { timeAgo} from "../Time/Time";
 
 class Dice extends Component {
 
@@ -46,22 +47,7 @@ class Dice extends Component {
      * @returns {string} time of the roll.
      */
     rolledWhen(roll) {
-        const now = new Date().getTime() / 1000;
-        const seconds = Math.floor(now - (roll.time.getTime() / 1000));
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        if (seconds < 5) {
-            return 'now';
-        } else if (seconds < 60) {
-            return `${ seconds }s ago`;
-        } else if (minutes < 60) {
-            return `${ minutes }m ago`
-        } else if (hours < 24) {
-            return `${ hours }h ago`;
-        } else {
-            return `~${ days }d ago`;
-        }
+      return timeAgo(roll.time);
     }
 
     /**

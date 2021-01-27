@@ -7,7 +7,6 @@ import {DiceProvider} from './contexts/DiceContext/DiceContext';
 
 function App() {
   const diceBag = new DiceBag();
-  console.log(diceBag);
   return (
     <div className="App">
       <header className="App-header">

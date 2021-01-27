@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import ChatMessage from './Message';
 import './Chat.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
+import {timeAgo} from "../Time/Time";
 
 const config = {
   ws: {
@@ -18,6 +20,7 @@ class Chat extends Component {
     disabled: true,
     messages: [],
     newMessage: "",
+    diceHistory: []
   }
 
   constructor(props) {
@@ -30,6 +33,11 @@ class Chat extends Component {
     this.ws.onopen = this.onOpen.bind(this);
     this.ws.onmessage = this.onMessage.bind(this);
     this.diceBag = this.context;
+    this.diceBag.subscribe(this.changeHistory.bind(this));
+  }
+
+  changeHistory(history) {
+    this.setState({diceHistory: history});
   }
 
   /**
@@ -45,9 +53,10 @@ class Chat extends Component {
    * @param {MessageEvent} msg received
    */
   onMessage(msg) {
-    const message = JSON.parse(msg.data);
+    let message = JSON.parse(msg.data);
+    message = new ChatMessage(message.message, message.author, message.type, message.time);
     if (message.type === 'story') {
-      const added = this.state.messages.concat([message.value])
+      const added = this.state.messages.concat([message])
       if (added.length > this.historyLimit) {
         added.splice(0, added.length - this.historyLimit);
       }
@@ -62,11 +71,7 @@ class Chat extends Component {
    */
   buildMessage(text) {
     return JSON.stringify(
-        {
-          type: 'story',
-          author: 'GM',
-          value: text
-        }
+      new ChatMessage(text, 'GM', 'story')
     );
   }
 
@@ -96,11 +101,26 @@ class Chat extends Component {
     };
   }
 
+  getChatBoardContent() {
+    const diceMessages = this.state.diceHistory ? this.state.diceHistory.map(d => new ChatMessage(
+      `d${d.sides}: ${d.result}`,
+      'GM',
+      'dice',
+      d.time.toString()
+    )) : [];
+    return this.state.messages.concat(diceMessages).sort((a,b) => a.time.getTime() - b.time.getTime())
+  }
+
   render() {
     return (
       <div id="chat-box">
         <div id="chat-board">
-          {this.state.messages.map((m, index) => (<div key={index} className="message">{m}</div>))}
+          {this.getChatBoardContent().map((m, index) => (
+            <div key={index} className="message">
+              <span className="time-ago">{timeAgo(m.time)}</span>
+              {m.message}
+            </div>
+          ))}
         </div>
         <div className="actions">
           <div className="action">

@@ -20,6 +20,14 @@
     padding: 0.25em;
     font-size: 0.85em
 }
+.message .time-ago {
+    font-size: 0.8em;
+    color: #666;
+    padding: 0.2em;
+}
+.message .time-ago:after {
+    content: ": ";
+}
 
 .action {
     display: flex;

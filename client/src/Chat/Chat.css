@@ -1,0 +1,35 @@
+
+#chat-box {
+    max-width: 40ch;
+    border: double silver;
+    background: #ededed;
+    margin: 1em auto;
+    padding: 1em;
+}
+
+#chat-board {
+    width: 100%;
+    background: #fefefe;
+    min-height: 10em;
+    max-height: 15em;
+    overflow-y: auto;
+}
+#chat-board .message {
+    border-bottom: dotted thin silver;
+    text-align: left;
+    padding: 0.25em;
+    font-size: 0.85em
+}
+
+.action {
+    display: flex;
+}
+.action * {
+    margin: 0.5em;
+}
+.action input{
+    flex-grow: 3;
+}
+.action button{
+    width: 100px;
+}

@@ -1,3 +1,16 @@
+# Teerna
+
+Teerna is a Game Master tool developed with Node and React
+
+
+### Development
+
+#### Useful commands
+
+- Update the project: `git pull && cd server && yarn install && cd ../client && yarn install && cd ..`
+- Download all branches at once: `git fetch`
+- Handling merges: `git mergetool` ([Meld](https://meldmerge.org/) is a nice GUI tool to merge files. If you have it installed this command will open it.)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

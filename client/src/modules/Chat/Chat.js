@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Chat.css';
+import DiceContext from "../../contexts/DiceContext/DiceContext";
 
 const config = {
   ws: {
@@ -9,6 +10,7 @@ const config = {
 }
 
 class Chat extends Component {
+  static contextType = DiceContext;
 
   historyLimit = 100;
 
@@ -27,6 +29,7 @@ class Chat extends Component {
     // Bind the WebSockets events when the component is already mounted
     this.ws.onopen = this.onOpen.bind(this);
     this.ws.onmessage = this.onMessage.bind(this);
+    this.diceBag = this.context;
   }
 
   /**

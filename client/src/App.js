@@ -1,8 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Chat from './Chat/Chat.js';
+import Chat from './modules/Chat/Chat.js';
+import Dice from './modules/Dice/Dice.js';
+import {DiceBag} from './modules/DiceBag/DiceBag';
+import {DiceProvider} from './contexts/DiceContext/DiceContext';
 
 function App() {
+  const diceBag = new DiceBag();
+  console.log(diceBag);
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +25,16 @@ function App() {
         </a>
       </header>
       <main>
-        <Chat ></Chat>
+          <DiceProvider value={diceBag}>
+              <Chat />
+              <section className="dice">
+                  <Dice sides={4}/>
+                  <Dice sides={6}/>
+                  <Dice sides={8}/>
+                  <Dice sides={12}/>
+                  <Dice sides={20}/>
+              </section>
+          </DiceProvider>
       </main>
     </div>
   );

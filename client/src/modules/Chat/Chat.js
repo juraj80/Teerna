@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ChatMessage from './Message';
+import {ChatMessage, createMessage} from './Message';
 import './Chat.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
 import {timeAgo} from "../Time/Time";
@@ -55,7 +55,7 @@ class Chat extends Component {
   onMessage(msg) {
     let message = JSON.parse(msg.data);
     message = new ChatMessage(message.message, message.author, message.type, message.time);
-    if (message.type === 'story') {
+    if (["story", "dice", "error"].includes(message.type)) {
       const added = this.state.messages.concat([message])
       if (added.length > this.historyLimit) {
         added.splice(0, added.length - this.historyLimit);
@@ -71,7 +71,7 @@ class Chat extends Component {
    */
   buildMessage(text) {
     return JSON.stringify(
-      new ChatMessage(text, 'GM', 'story')
+      createMessage(text)
     );
   }
 

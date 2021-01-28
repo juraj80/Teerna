@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 const { Roll } = require ("../Dice/Dice");
-const { errorMessage, diceRollToMessage } = require("./Message");
+const { errorMessage, diceRollToMessage, ChatMessage } = require("./Message");
 
 function setUpChat() {
   const wsPort = 8888;
@@ -17,14 +17,15 @@ function setUpChat() {
     // When you receive a message, send that message to every socket.
     socket.on('message', function(msg) {
       const message = JSON.parse(msg);
+      console.log(message);
       switch (message.type) {
         case "dice":
-          if (!validateDice(msg)) {
-            socket.send(new Message("Dice error", null, null, new Date().toString()))
+          if (!validateDice(message)) {
+            socket.send(JSON.stringify(errorMessage("Invalid dice")));
           } else {
+            const diceRoll = new Roll(message.sides, message.type, "GM");
             sockets.forEach(s => {
-              const diceRoll = new Roll(msg.sides, msg.type, "GM");
-              s.send(diceRollToMessage(new Roll(msg.sides, msg.type, "GM")))
+              s.send(JSON.stringify(diceRollToMessage(diceRoll)));
             })
           }
           break;
@@ -46,7 +47,7 @@ function setUpChat() {
 
 function validateDice(msg) {
   return msg.sides &&
-    Number.isInteger(msg.sides) &&
+    parseInt(msg.sides, 10) &&
     msg.type &&
     msg.type === "dice"
 }

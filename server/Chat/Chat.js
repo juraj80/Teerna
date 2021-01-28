@@ -45,8 +45,10 @@ function setUpChat() {
 }
 
 function validateDice(msg) {
-  return msg.sides && Number.isInteger(msg.sides) &&
-    msg.type && Roll.types.includes(msg.type)
+  return msg.sides &&
+    Number.isInteger(msg.sides) &&
+    msg.type &&
+    msg.type === "dice"
 }
 
 module.exports = {

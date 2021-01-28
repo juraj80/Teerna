@@ -1,4 +1,5 @@
 class Roll {
+
     constructor(sides, type) {
         this.sides = sides;
         this.type = type;

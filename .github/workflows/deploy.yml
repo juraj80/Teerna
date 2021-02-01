@@ -20,11 +20,7 @@ jobs:
           port: 22
           script: |
             cd /home/project/Teerna
-            git pull origin master
+            git pull origin master &&
             git status
-            cd server
-            npm ci
-            pm2 restart index.js
-            cd ..
-            cd client
-            yarn build
+            cd client ; yarn install && yarn build &&
+            cd ../server; npm install && pm2 start index.js

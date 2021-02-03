@@ -19,12 +19,11 @@ jobs:
           key: ${{ secrets.TEERNA_SECRET }}
           port: 22
           script: |
-            cd /home/project/Teerna
-            git pull origin master
-            git status
-            cd server
-            npm ci
-            pm2 restart index.js
+            cd /home/project/Teerna ;
+            git pull origin master ;
+            cd client; yarn install --non-interactive --silent && yarn build  ;
+            cd ../server; npm install  --quiet --no-progress ;
+            pm2 restart index.js ;
             cd ..
-            cd client
-            yarn build
+            git status ;
+

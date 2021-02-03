@@ -1,30 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+//import Chat from '../src/modules/Chat/Chat';
 import Chat from './modules/Chat/Chat.js';
 import Dice from './modules/Dice/Dice.js';
 import {DiceBag} from './modules/DiceBag/DiceBag';
 import {DiceProvider} from './contexts/DiceContext/DiceContext';
+import { useState, useContext, useEffect } from 'react';
+import { BrowserRouter, Switch, Route, match } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import {
+	AlertProvider,
+	ModalProvider,
+	AuthContext,
+	AuthProvider,
+	PlayerProvider,
+} from './contexts';
+import { useDarkMode } from './hooks';
+import { AppWrapper, AppHeader, Spinner } from './components';
+import { darkTheme, lightTheme } from './shared';
+import { GlobalStyle } from './styles';
+import { Landing } from './pages';
+import ActiveDashboard from './components/ActiveDashboard';
+import { onAuthStateChange } from './contexts';
 
-function App() {
+export default function App() {
   const diceBag = new DiceBag();
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <main>
-          <DiceProvider value={diceBag}>
+	const [user, setUser] = useState({ loggedIn: false });
+
+	const [theme, toggleTheme, componentMounted] = useDarkMode();
+	const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChange(setUser);
+		return () => unsubscribe();
+	}, []);
+
+	return (
+		<ThemeProvider theme={themeMode}>
+			<AuthProvider value={user}>
+				<AlertProvider>
+					<PlayerProvider>
+						<ModalProvider>
+							<>
+								<GlobalStyle />
+								{!componentMounted ? (
+									<Spinner />
+								) : (
+									<AppWrapper>
+										<AppHeader toggleTheme={toggleTheme} />
+										<BrowserRouter>
+											<Switch>
+												<Route path='/' exact component={Landing} />
+												<Route
+													path='/:userId'
+													render={({ match }) => (
+														<ActiveDashboard
+															match={match}
+															userId={match.params.userId}
+														/>
+													)}
+												/>
+         
+											</Switch>
+										</BrowserRouter>
+	<DiceProvider value={diceBag}>
               <Chat />
               <section className="dice">
                   <Dice sides={4}/>
@@ -34,9 +71,15 @@ function App() {
                   <Dice sides={20}/>
               </section>
           </DiceProvider>
-      </main>
-    </div>
-  );
+									</AppWrapper>
+								)}
+							</>
+						</ModalProvider>
+					</PlayerProvider>
+				</AlertProvider>
+			</AuthProvider>
+		</ThemeProvider>
+	);
 }
 
 export default App;

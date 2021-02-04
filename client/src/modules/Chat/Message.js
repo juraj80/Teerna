@@ -1,6 +1,6 @@
 
-export function createMessage(message) {
-  const regularMessage =  new ChatMessage(message, "GM", "story");
+export function createMessage(message, author) {
+  const regularMessage =  new ChatMessage(message, author, "story");
   // regular message
   if (!isSpecialMessage(message)) {
     return regularMessage;
@@ -50,7 +50,7 @@ export class ChatMessage {
    * Builds a message object
    *
    * @param {string} message the message text.
-   * @param {string} author of the message.
+   * @param {user} author of the message.
    * @param {string} type type of the message.
    * @param {string|null} time a string representation of the time.
    */

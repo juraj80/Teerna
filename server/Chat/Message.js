@@ -15,7 +15,6 @@ class ChatMessage {
     this.type = type;
     this.time = time ? new Date(time): new Date();
   }
-
 }
 
 function diceRollToMessage(roll) {

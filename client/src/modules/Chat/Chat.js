@@ -8,13 +8,19 @@ import {connection} from "../WSocket/WSocket"
 class Chat extends Component {
   static contextType = DiceContext;
 
+  // The number of messages to display in the chat
   historyLimit = 100;
+
+  // The timespan of the "typing" message
+  typingTimespan = 2000;
 
   state = {
     disabled: true,
     messages: [],
     newMessage: "",
-    diceHistory: []
+    diceHistory: [],
+    amITyping: false,
+    whoIsTyping: []
   }
 
   constructor(props) {
@@ -45,11 +51,24 @@ class Chat extends Component {
     let message = JSON.parse(msg.data);
     message = new ChatMessage(message.message, message.author, message.type, message.time);
     if (["story", "dice", "error"].includes(message.type)) {
-      const added = this.state.messages.concat([message])
-      if (added.length > this.historyLimit) {
-        added.splice(0, added.length - this.historyLimit);
-      }
-      this.setState({messages: added});
+      this.addChatStory(message);
+    } else if (message.type === 'typing') {
+      this.addWhoIsTyping(message);
+    }
+  }
+
+  addChatStory(message) {
+    const added = this.state.messages.concat([message])
+    if (added.length > this.historyLimit) {
+      added.splice(0, added.length - this.historyLimit);
+    }
+    this.setState({messages: added});
+  }
+
+  addWhoIsTyping(message) {
+    if (this.state.whoIsTyping.every(w => w.author && w.author.username !== message.author.username)) {
+      this.setState({whoIsTyping: this.state.whoIsTyping.concat(message.author)})
+      setTimeout(() => this.setState({whoIsTyping: this.state.whoIsTyping.filter(w => w !==message.author)}), this.typingTimespan)
     }
   }
 
@@ -67,6 +86,32 @@ class Chat extends Component {
   sendMessage() {
     this.ws.sendMessage(this.state.newMessage);
     this.setState({newMessage: ""});
+  }
+
+  /**
+   * Handles the user input in the chat input box.
+   *
+   * @param {KeyboardEvent} e: the keyPress event
+   * @returns {function(*): void}
+   */
+  handleKeyPress(e) {
+    if (e.key === "Enter") {
+      this.sendMessage();
+    } else {
+      this.sendTyping();
+    }
+  }
+
+  /**
+   * Sends a typing message at most once every two seconds.
+   */
+  sendTyping() {
+    console.log(this.state.amITyping)
+    if (!this.state.amITyping) {
+      this.ws.sendMessage({type: 'typing', message: 'typing'});
+      this.setState({amITyping: true});
+    }
+    setTimeout(() => this.setState({amITyping: false}), this.typingTimespan);
   }
 
   submitOnEnter(handleSubmit) {
@@ -103,10 +148,15 @@ class Chat extends Component {
             </div>
           ))}
         </div>
+        <div id="who-is-typing" className={this.state.whoIsTyping.length === 0 ? "" : "typing"}>
+          {this.state.whoIsTyping.map((a, index) => (
+            <span key={index} className="typing-user">{a.username||'anonymous'}</span>
+          ))}
+        </div>
         <div className="actions">
           <div className="action">
             <input name="message"
-              onKeyPress={this.submitOnEnter(this.sendMessage.bind(this))}
+              onKeyPress={this.handleKeyPress.bind(this)}
               onChange={this.handleMessageInput.bind(this)}
               placeholder="Message"
               value={this.state.newMessage}

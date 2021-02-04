@@ -17,7 +17,6 @@ function setUpChat() {
 
   let sockets = [];
   server.on('connection', function(socket) {
-    console.log("New connection ");
     sockets.push(socket);
 
     // When you receive a message, send that message to every socket.
@@ -38,8 +37,11 @@ function setUpChat() {
         case "story":
           sockets.forEach(s => s.send(msg));
           break;
+        case "typing":
+          sockets.forEach(s => {if (s!==socket) s.send(msg)});
+          break;
         default:
-          socket.send(errorMessage("Invalid message type " + message.type));
+          socket.send(JSON.stringify(errorMessage("Invalid message type " + message.type)));
       }
     });
 

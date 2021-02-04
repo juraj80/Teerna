@@ -1,13 +1,20 @@
+import Chat from "./Chat";
 
 export function createMessage(message, author) {
-  const regularMessage =  new ChatMessage(message, author, "story");
-  // regular message
-  if (!isSpecialMessage(message)) {
-    return regularMessage;
+  let regularMessage;
+  if (typeof message === 'string') {
+    regularMessage =  new ChatMessage(message, author, "story");
+    // regular message
+    if (isSpecialMessage(message)) {
+      regularMessage = specialMessage(regularMessage);
+    }
   } else {
-    // special message
-    return specialMessage(regularMessage);
+    regularMessage = {
+      ... new ChatMessage('', author, "story"),
+      ... message
+    }
   }
+  return regularMessage;
 }
 
 

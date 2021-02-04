@@ -33,7 +33,6 @@ class WSConnection {
   }
 
   onMessage(msg) {
-    console.log("message received")
     if (msg.data !== undefined) this.subscribers.message.forEach(f => f(msg));
   }
 
@@ -49,7 +48,6 @@ class WSConnection {
    */
   subscribe(type, callback) {
     if (Object.keys(this.subscribers).includes(type)) {
-      console.log("adding", type, "into", this.subscribers);
       if (!this.subscribers[type].includes(callback)) {
         this.subscribers[type].push(callback);
       }
@@ -59,7 +57,13 @@ class WSConnection {
   /**
    * Sends a text message with the WebSockets Client.
    *
-   * @param {string} text: simple message to be sent via WS.
+   * Message can be a string or an object.
+   * If message is an object, a regular message is created and the attributes of the object are used to overwrite the attributes of the regular message.
+   * If message is a string, a message is built with that string.
+   * The author is automatically added to the message.
+   * The id is automatically added to the message - You can use the id to track answers to that particular message.
+   *
+   * @param {string|Object} text: simple message to be sent via WS.
    */
   sendMessage(text) {
     const message = createMessage(text, this.user);
@@ -69,6 +73,14 @@ class WSConnection {
     return message;
   }
 
+  /**
+   * Returns either open or close for the WebSocket connection status.
+   *
+   * Open means messages can be sent.
+   * Closed means messages cannot be sent.
+   *
+   * @returns {"open"|"closed"}
+   */
   getStatus() {
     return this.ws.readyState === this.ws.OPEN ? 'open': 'closed';
   }

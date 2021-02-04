@@ -1,15 +1,28 @@
 const fs = require("fs");
 const { v4: uuid } = require('uuid');
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('sqlite3');
 
 class GameSession {
 
-  ready = false;
+  static sessions = {};
 
-  constructor(sessionId) {
-    this.setId(sessionId);
+  static createSession(gm) {
+    return new GameSession(gm);
+  }
+
+  static getSession(sessionId) {
+    return GameSession.sessions[sessionId];
+  }
+
+  ready = false;
+  gameMaster;
+
+  constructor(gm) {
+    this.setId();
     this.db = this.getDatabase();
     this.initialize().then(() => this.ready = true);
+    GameSession.sessions[this.sessionId] = this;
+    this.gameMaster = gm;
   }
 
   setId(sessionId) {
@@ -94,3 +107,5 @@ class GameSession {
   }
 
 }
+
+module.exports = GameSession;

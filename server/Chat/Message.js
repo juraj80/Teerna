@@ -19,11 +19,10 @@ class ChatMessage {
 }
 
 function diceRollToMessage(roll) {
-  return new ChatMessage(
-    `roll${roll.sides}: ${roll.result}`,
-    roll.user,
-    "dice"
-  );
+  roll.message = `roll${roll.sides}: ${roll.result}`;
+  roll.author = roll.user;
+  roll.type = 'dice';
+  return roll;
 }
 
 function errorMessage(error) {

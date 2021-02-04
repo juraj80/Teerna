@@ -59,5 +59,6 @@ export class ChatMessage {
       this.author = author;
       this.type = type;
       this.time = time ? new Date(time): new Date();
+      this.id = this.time.getTime() + Math.random();
     }
 }

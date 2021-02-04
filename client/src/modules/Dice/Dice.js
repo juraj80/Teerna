@@ -29,7 +29,7 @@ class Dice extends Component {
     }
 
     async roll(type = 'public') {
-        const roll = await this.diceBag.throw(this.sides, "public");
+        const roll = await this.diceBag.throw.bind(this.diceBag)(this.sides, "public");
         this.setState({history: this.state.history.concat([roll])})
         this.setState(
             {roll: roll, rollState: "rolling"},

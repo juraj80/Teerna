@@ -1,10 +1,13 @@
+import {connection} from "../WSocket/WSocket";
+
 class Roll {
 
-    constructor(sides, type) {
-        this.sides = sides;
-        this.type = type;
-        this.result = Math.floor(Math.random() * this.sides) + 1;
-        this.time = new Date();
+    constructor(roll) {
+        this.sides = Number(roll.sides);
+        this.type = roll.type;
+        this.result = Number(roll.result);
+        this.time = new Date(roll.time);
+        this.id = roll.id;
     }
 }
 
@@ -13,11 +16,24 @@ export class DiceBag {
     __diceList = [];
     __history = [];
     __subscribers = [];
+    __pendingThrows = {};
 
     constructor(diceBag = {}) {
         this.__history = [];
         if (diceBag.history) this.__history = diceBag.history;
         if (diceBag.diceList) this.__diceList = diceBag.diceList;
+        this.ws = connection([], [this.onMessage.bind(this)], [])
+    }
+
+    onMessage(event) {
+        // check if a dice result has arrived
+        const message = JSON.parse(event.data);
+        const toRun = this.__pendingThrows[message.id];
+        if (typeof toRun === 'function') {
+            this.__pendingThrows[message.id](message);
+            delete this.__pendingThrows[message.id];
+        }
+
     }
 
     get diceList() {
@@ -49,12 +65,14 @@ export class DiceBag {
      * @returns {Promise<Roll>}
      */
     throw(sides, type) {
-        // TODO: fetch dice results from server. For now, use a promise in order to keep the API consistent.
+        const diceMessage = `/d${sides}`;
+        const message = this.ws.sendMessage(diceMessage);
         return new Promise((resolve, reject) => {
-            const result = new Roll(sides, type);
-            this.__history.push(result);
-            resolve(result);
-            this.__subscribers.forEach(fn => fn(this.history));
+            this.__pendingThrows[message.id] = (result) => {
+                const roll = new Roll(result);
+                resolve(roll);
+                this.__history.push(roll);
+            };
         });
     }
 }

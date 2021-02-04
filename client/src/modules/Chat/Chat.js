@@ -3,13 +3,7 @@ import {ChatMessage, createMessage} from './Message';
 import './Chat.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
 import {timeAgo} from "../Time/Time";
-
-const config = {
-  ws: {
-    domain: 'localhost',
-    port: 8888
-  }
-}
+import {connection} from "../WSocket/WSocket"
 
 class Chat extends Component {
   static contextType = DiceContext;
@@ -25,26 +19,21 @@ class Chat extends Component {
 
   constructor(props) {
     super(props);
-    this.ws = new WebSocket(`ws://${config.ws.domain}:${config.ws.port}`);
+    this.ws = connection(
+      [],
+      [(e) => this.onMessage(e)],
+      []
+      );
   }
 
   componentDidMount() {
     // Bind the WebSockets events when the component is already mounted
-    this.ws.onopen = this.onOpen.bind(this);
-    this.ws.onmessage = this.onMessage.bind(this);
     this.diceBag = this.context;
     this.diceBag.subscribe(this.changeHistory.bind(this));
   }
 
   changeHistory(history) {
     this.setState({diceHistory: history});
-  }
-
-  /**
-   * Hook executed when the connection with the WS is opened
-   */
-  onOpen() {
-    this.setState({disabled: false});
   }
 
   /**
@@ -65,17 +54,6 @@ class Chat extends Component {
   }
 
   /**
-   * Builds and object chat message for sending text.
-   *
-   * @param text
-   */
-  buildMessage(text) {
-    return JSON.stringify(
-      createMessage(text)
-    );
-  }
-
-  /**
    * Stores the value of the message input in the component state
    * @param {Event} event that changed the value
    */
@@ -87,9 +65,7 @@ class Chat extends Component {
    * Sends a text message with the WebSockets Client.
    */
   sendMessage() {
-    this.ws.send(
-      this.buildMessage(this.state.newMessage)
-    );
+    this.ws.sendMessage(this.state.newMessage);
     this.setState({newMessage: ""});
   }
 
@@ -111,6 +87,11 @@ class Chat extends Component {
     return this.state.messages.concat(diceMessages).sort((a,b) => a.time.getTime() - b.time.getTime())
   }
 
+  isOpen() {
+    return this.ws.getStatus() === 'open';
+  }
+
+
   render() {
     return (
       <div id="chat-box">
@@ -130,7 +111,7 @@ class Chat extends Component {
               placeholder="Message"
               value={this.state.newMessage}
               />
-            <button name="send" disabled={this.state.disabled} onClick={this.sendMessage.bind(this)}>Send</button>
+            <button name="send" disabled={!this.ws.getStatus()} onClick={this.sendMessage.bind(this)}>Send</button>
           </div>
         </div>
       </div>

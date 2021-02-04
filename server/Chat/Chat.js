@@ -2,6 +2,12 @@ const WebSocket = require('ws');
 const { Roll } = require ("../Dice/Dice");
 const { errorMessage, diceRollToMessage, ChatMessage } = require("./Message");
 
+
+function buildChatAnswer(message, answer) {
+  answer.id = message.id;
+  return answer;
+}
+
 function setUpChat() {
   const wsPort = 8888;
   const server = new WebSocket.Server({
@@ -17,15 +23,15 @@ function setUpChat() {
     // When you receive a message, send that message to every socket.
     socket.on('message', function(msg) {
       const message = JSON.parse(msg);
-      console.log(message);
       switch (message.type) {
         case "dice":
           if (!validateDice(message)) {
             socket.send(JSON.stringify(errorMessage("Invalid dice")));
           } else {
             const diceRoll = new Roll(message.sides, message.type, "GM");
+            const answer = buildChatAnswer(message, diceRollToMessage(diceRoll));
             sockets.forEach(s => {
-              s.send(JSON.stringify(diceRollToMessage(diceRoll)));
+              s.send(JSON.stringify(answer));
             })
           }
           break;
@@ -42,6 +48,14 @@ function setUpChat() {
       console.log("Connection closed.")
       sockets = sockets.filter(s => s !== socket);
     });
+
+    //stop listening message
+    socket.off('message', (e) => {console.log("Off message",  e)});
+
+    socket.on('disconnect', function() {
+      socket.removeAllListeners();
+    });
+
   });
 }
 

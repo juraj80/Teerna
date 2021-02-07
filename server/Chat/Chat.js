@@ -3,6 +3,15 @@ const { Roll } = require ("../Dice/Dice");
 const { errorMessage, diceRollToMessage, ChatMessage } = require("./Message");
 
 
+/**
+ * Builds a chat answer.
+ *
+ * Chat answers need to use the same id as the
+ *
+ * @param message
+ * @param answer
+ * @returns {*}
+ */
 function buildChatAnswer(message, answer) {
   answer.id = message.id;
   return answer;

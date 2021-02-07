@@ -1,12 +1,17 @@
 import Chat from "./Chat";
 
+
 export function createMessage(message, author) {
   let regularMessage;
   if (typeof message === 'string') {
     regularMessage =  new ChatMessage(message, author, "story");
     // regular message
-    if (isSpecialMessage(message)) {
-      regularMessage = specialMessage(regularMessage);
+    const cmd = Command.fromText(message);
+    if (cmd) {
+      regularMessage = {
+        ...new ChatMessage(message, author, 'command'),
+        ...cmd
+      }
     }
   } else {
     regularMessage = {
@@ -17,38 +22,124 @@ export function createMessage(message, author) {
   return regularMessage;
 }
 
+/**
+ * Manages commands available for the Chat.
+ *
+ * Provides a register, autocomplete and parse features.
+ */
+export class Command {
+  static pattern = /^\/(?<qty>\d+\s*)?(?<cmd>\w[\w\d]*)(?<arg>(\s+[\w\d]+)*)/;
 
-export function isSpecialMessage(message) {
-  return message.match(/^\/\w/);
-}
+  static commands = [];
 
-export function specialMessageType(message) {
-  if (message.match(/^\/d(2|4|6|8|10|12|20)/)) {
-    return "dice";
+  /**
+   * Registers a new command under the given name.
+   * @param name
+   * @param type
+   */
+  static register(name, type, help) {
+    Command.commands.push({name, type, help});
   }
-  return "story";
-}
 
-const parser = {
-  dice(message) {
-    const match = message.match(/^\/d(?<sides>\d+)/);
-    const sides = match.groups.sides;
-    return {
-      sides,
-      type: 'dice'
+  /**
+   * Returns a registered command name and type.
+   * @param name
+   * @returns {{name: string, type: string}} the registered command.
+   */
+  static isRegistered(name) {
+    return Command.commands.find(c => c.name === name);
+  }
+
+  /**
+   * Returns a list of at most five commands that contain the partial.
+   *
+   * @param partial
+   * @returns {T[]}
+   */
+  static autocomplete(partial) {
+    const p = partial.replace(/^\//, '');
+    return Command.commands
+      .filter( (c) => c.name.includes(p) )
+      .slice(0, 5)
+      .map(c => c.name);
+  }
+
+  /**
+   * Chat parser converts text into an object based in a simple language to be used in the chat.
+   *
+   * The language is as follows:
+   * A slash ("/") is used to start a command and a new line ends it.
+   * The slash may be followed by a number or a command with one or more letters.
+   * The command can receive space separated parameters.
+   */
+  static parse(text) {
+    const match = text.match(Command.pattern);
+    try {
+      return {
+        // the quantity, or 1 if not available
+        quantity: match.groups.qty !== undefined ? Number(match.groups.qty): 1,
+        // the command, it is always available
+        name: match.groups.cmd,
+        // the arguments separated by 1 or more spaces
+        // split the string using spaces
+        // no empty arguments
+        args: match.groups.arg !== undefined ? match.groups.arg
+          .split(/\s+/)
+          .filter(e => e !== ''): [],
+        // the full message is made available in the result
+        message: text,
+        // errors are displayed in the result
+        get error() {
+          return Command.findErrors(text);
+        }
+      }
+    } catch (e) {
+      if (e instanceof TypeError && e.message === "Cannot read property 'groups' of null") {
+        return {
+          get error() {
+            return Command.findErrors(text);
+          }
+        }
+      }
     }
-  },
-  story(message) {
-    return message;
   }
-}
 
-export function specialMessage(message) {
-  const type = specialMessageType(message.message);
-  return {
-    ...message,
-    ...parser[type](message.message)
+  static fromText(text) {
+    const parsed = Command.parse(text);
+    if (!parsed.error) {
+      return new Command(parsed.quantity, parsed.name, parsed.args);
+    } else {
+      return undefined;
+    }
   }
+
+  static findErrors(command) {
+    const errors = {
+      'Should not separate the slash and the command.': /^\/\s+[\w\d]/ ,
+      'Slash should be in the start of the line.': /^[^\/]/,
+      'Command arguments can only use alphanumeric characters.': /^\/(\d+\s*)?\w[\w\d]*(\s+[\d\w]*)*[^\d\w\s].*$/
+    }
+    for (let [k,v] of Object.entries(errors)) {
+      if (command.match(v)) {
+        return k
+      }
+    }
+  }
+
+
+
+  constructor(quantity, name, args) {
+    const registered = Command.isRegistered(name);
+    if (!Command.isRegistered(name)) {
+      throw new TypeError("Only registered commands can be instantiated.");
+    }
+    this.type = Command.commands.find(c => c.name === name).type;
+    this.quantity = quantity;
+    this.args = args;
+    this.name = name;
+  }
+
+
 }
 
 

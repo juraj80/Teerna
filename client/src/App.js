@@ -11,10 +11,13 @@ import {
 } from './contexts';
 import { useDarkMode } from './hooks';
 import { AppWrapper, AppHeader, Spinner } from './components';
+
+
 import { darkTheme, lightTheme } from './shared';
 import { GlobalStyle } from './styles';
 import { Landing } from './pages';
 import ActiveDashboard from './components/ActiveDashboard';
+import UploadGame from './components/UploadGame';
 import { onAuthStateChange } from './contexts';
 
 export default function App() {
@@ -54,6 +57,7 @@ export default function App() {
 													)}
 												/>
 											</Switch>
+										<UploadGame/>
 										</BrowserRouter>
 									</AppWrapper>
 								)}

@@ -2,8 +2,6 @@ import React, { Fragment, useState } from 'react';
 import Message from './Message';
 import Progress from './Progress';
 
-import './UploadGame.css';
-
 import axios from 'axios';
 
 const UploadGame = () => {
@@ -33,7 +31,6 @@ const UploadGame = () => {
               Math.round((progressEvent.loaded * 100) / progressEvent.total)
             )
           );
-
           // Clear percentage
           setTimeout(() => setUploadPercentage(0), 10000);
         }
@@ -41,6 +38,7 @@ const UploadGame = () => {
 
       const { fileName, filePath } = res.data;
 
+      console.log('FilePath: ',filePath);
       setUploadedFile({ fileName, filePath });
 
       setMessage('File Uploaded');
@@ -55,7 +53,7 @@ const UploadGame = () => {
 
   return (
     <Fragment>
-      <div className="col-4 div-scale">
+      <div className="col-12">
       <h4 className="text-center">
         <i className="fas fa-box-open"></i> Upload Zip File
       </h4>
@@ -77,7 +75,7 @@ const UploadGame = () => {
         <input
           type='submit'
           value='Upload Game'
-          className='btn btn-danger btn-block mt-4'
+          className='btn btn-warning btn-block mt-4'
         />
       </form>
       </div>

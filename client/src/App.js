@@ -17,7 +17,15 @@ import { darkTheme, lightTheme } from './shared';
 import { GlobalStyle } from './styles';
 import { Landing } from './pages';
 import ActiveDashboard from './components/ActiveDashboard';
+
 import UploadGame from './components/UploadGame';
+import DownloadGame from './components/DownloadGame';
+import DeleteGame from './components/DeleteGame';
+import LoadGame from './components/LoadGame';
+
+
+
+
 import { onAuthStateChange } from './contexts';
 
 export default function App() {
@@ -56,9 +64,22 @@ export default function App() {
 														/>
 													)}
 												/>
-											</Switch>
-										<UploadGame/>
+											</Switch>		
 										</BrowserRouter>
+
+										<div className="container mt-5">
+											<div className="row justify-content-between">
+												<div className="col-4 div-scale section-border">
+													<UploadGame />
+													<DownloadGame />
+													<DeleteGame />
+												</div>
+												<div className="col-6">
+													<LoadGame />
+												</div>   
+											</div>
+										</div>    
+
 									</AppWrapper>
 								)}
 							</>

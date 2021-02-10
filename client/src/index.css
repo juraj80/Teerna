@@ -20,6 +20,7 @@ h4 {
   transform: scale(0.6);
   /* transform-origin: 0% 0% 0px; */
   background-color: rgb(251, 251, 251);
+  opacity: 0.8;
   border-radius: 25px;
 }
 

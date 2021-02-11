@@ -106,7 +106,6 @@ class Chat extends Component {
    * Sends a typing message at most once every two seconds.
    */
   sendTyping() {
-    console.log(this.state.amITyping)
     if (!this.state.amITyping) {
       this.ws.sendMessage({type: 'typing', message: 'typing'});
       this.setState({amITyping: true});

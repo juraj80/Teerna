@@ -6,6 +6,7 @@
   "scripts": {
     "build-client": "cd ../client && yarn build && cd -",
     "start": "node index.js",
+    "start-dev": "node index.js test",
     "test": "c8 mocha"
   },
   "author": "",

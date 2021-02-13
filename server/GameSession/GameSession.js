@@ -192,14 +192,20 @@ class GameSession {
     });
   }
 
+  /**
+   * Returns a promite to the Player that is the GameMaster of this GameSession.
+   *
+   * @returns {Promise<unknown>} 
+   */
   async gameMaster() {
-    return this.sql(path.join('player', 'getGameMaster.sql'));
+    return this.sql(path.join('player', 'getGameMaster.sql'), 'get');
   }
 
   /**
+   * Creates a new player in the database.
    *
-   * @param playerName
-   * @returns {Promise<unknown>}
+   * @param {string} playerName to be created
+   * @returns {Promise<unknown>} 
    */
   async playerCreate(playerName) {
     const result = await this.sql(path.join('player', 'createPlayer.sql'),  {'$name': playerName}, "all")

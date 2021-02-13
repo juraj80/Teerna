@@ -51,6 +51,7 @@ class GameSession {
   authenticate(credentials) {
     // TODO: validate the credentials received from the frontend.
     this.user = credentials;
+    this.sessionId = credentials.guid;
   }
 
   /**

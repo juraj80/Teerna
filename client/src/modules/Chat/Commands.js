@@ -7,15 +7,15 @@ const crudOptional = "This command accepts create/read/update/delete arguments";
 
 export function registerDiceCommands() {
   [
-    ['d2', 'Throw a 2 sided coin.'],
-    ['coin', 'Throw a 2 sided coin.'],
-    ['d4', 'Throw a 4 sided dice.'],
-    ['d6', 'Throw a 6 sided dice.'],
-    ['d8', 'Throw a 8 sided dice.'],
-    ['d10', 'Throw a 10 sided dice.'],
-    ['d12', 'Throw a 12 sided dice.'],
-    ['d20', 'Throw a 20 sided dice.']
-  ].forEach(d => Command.register(d[0], 'dice', d[1]));
+    ['d2', 'Throw a 2 sided coin.', {sides: 2}],
+    ['coin', 'Throw a 2 sided coin.', {sides: 2}],
+    ['d4', 'Throw a 4 sided dice.', {sides: 4}],
+    ['d6', 'Throw a 6 sided dice.', {sides: 6}],
+    ['d8', 'Throw a 8 sided dice.', {sides: 8}],
+    ['d10', 'Throw a 10 sided dice.', {sides: 10}],
+    ['d12', 'Throw a 12 sided dice.', {sides: 12}],
+    ['d20', 'Throw a 20 sided dice.', {sides: 20}]
+  ].forEach(d => Command.register(d[0], 'dice', d[1], d[2]));
 }
 
 export function registerAccessControlCommands() {
@@ -57,4 +57,13 @@ export function documentCommands() {
     ["docHide", `Hides a given document. ${playerSpecificOptional}`],
     ["docShow", `Displays a given document. ${playerSpecificOptional}`],
   ].forEach(c => Command.register(c[0], 'document', c[1]));
+}
+
+export function allCommands() {
+  registerDiceCommands();
+  registerAccessControlCommands();
+  communicationControlCommands();
+  playerCommands();
+  sceneCommands();
+  documentCommands();
 }

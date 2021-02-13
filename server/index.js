@@ -7,7 +7,7 @@ const port = 8000;
 
 const app = express();
 
-const apiRouter = require('./api.js');
+const apiRouter = require('./API');
 
 /**
  * Serve the Client Application.

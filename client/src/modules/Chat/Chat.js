@@ -4,6 +4,7 @@ import './Chat.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
 import {timeAgo} from "../Time/Time";
 import {connection} from "../WSocket/WSocket"
+import * as Commands from "./Commands.js";
 
 class Chat extends Component {
   static contextType = DiceContext;
@@ -36,6 +37,8 @@ class Chat extends Component {
     // Bind the WebSockets events when the component is already mounted
     this.diceBag = this.context;
     this.diceBag.subscribe(this.changeHistory.bind(this));
+    Commands.allCommands();
+
   }
 
   changeHistory(history) {

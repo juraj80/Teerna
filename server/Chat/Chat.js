@@ -37,7 +37,6 @@ function setUpChat() {
     // When you receive a message, send that message to every socket.
     socket.on('message', function(msg) {
       const message = JSON.parse(msg);
-      console.log("message received ", message);
       switch (message.type) {
         case "dice":
           if (!validateDice(message)) {
@@ -78,7 +77,6 @@ function setUpChat() {
 }
 
 function validateDice(msg) {
-  console.debug("Validating dice message", msg);
   return msg.data && msg.data.sides &&
     parseInt(msg.data.sides, 10) &&
     msg.type &&

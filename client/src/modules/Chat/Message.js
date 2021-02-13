@@ -134,7 +134,6 @@ export class Command {
   constructor(quantity, name, args) {
     const registered = Command.isRegistered(name);
     if (!Command.isRegistered(name)) {
-      console.log(name);
       throw new TypeError("Only registered commands can be instantiated.");
     }
     this.type = registered.type;

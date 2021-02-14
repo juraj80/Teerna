@@ -16,8 +16,8 @@ class GameSession {
 
   static sessions = {};
 
-  static getSession(sessionId) {
-    return GameSession.sessions[sessionId];
+  static getSession(guid) {
+    return GameSession.sessions[guid];
   }
 
   /**
@@ -37,10 +37,19 @@ class GameSession {
     gagged: []
   }
 
-  constructor(credentials) {
-    this.authenticate(credentials);
-    this.setId();
-    GameSession.sessions[this.sessionId] = this;
+  /**
+   * Creates a new instance of a Game Session
+   *
+   * @param {User} the current logged in user
+   * @param {string|undefined} the game id of the session. If this value is not provided, a new database will be created.
+   */
+  constructor(user, guid = undefined) {
+    if (!user.user_id || !user.email) {
+      throw new Error('User should be an authenticated Firebase User.');
+    }
+    this.authenticate(user);
+    this.setId(guid);
+    GameSession.sessions[this.guid] = this;
   }
 
   /**
@@ -51,7 +60,6 @@ class GameSession {
   authenticate(credentials) {
     // TODO: validate the credentials received from the frontend.
     this.user = credentials;
-    this.sessionId = credentials.guid;
   }
 
   /**
@@ -60,10 +68,10 @@ class GameSession {
    * This id uniquely identify the game, allowing the server to host multiple games at the same time.
    * It is also used to name and retrieve the database file.
    *
-   * @param sessionId
+   * @param guid
    */
-  setId(sessionId) {
-    this.sessionId = sessionId || uuid();
+  setId(guid) {
+    this.guid = guid || uuid();
   }
 
   /**
@@ -81,15 +89,43 @@ class GameSession {
    *
    * @returns {sqlite3.Database}
    */
-  async setDatabase() {
+  setDatabase() {
     if (!this.dbFile) {
-      this.dbFile = await this.getDbFile();
-      console.log("Creating a new game database ", this.dbFile);
-    } else {
-      console.log("Accessing game database ", this.dbFile);
+      this.dbFile = this.getDbFile();
     }
     this.db = new sqlite3.Database(this.dbFile);
     return this.db;
+  }
+
+  getFolder() {
+    const folder = process.argv[2] === 'test' ? 'test-teerna': `teerna-${this.guid}`;
+    const gameFolder = path.join(os.tmpdir(), folder);
+    // create new directory
+    try {
+      fs.mkdirSync(gameFolder);
+    } catch (err) {
+      if (err.code !== 'EEXIST') {
+        throw err;
+      }
+    }
+    return gameFolder;
+  }
+
+  /**
+   * Delets a database file
+   *
+   * @returns {Promise<string>}
+   */
+  deleteDbFile(dbPath) {
+    return new Promise( (resolve, reject) => {
+      fs.unlink(dbPath, (err) => {
+        if (err && err.code !== 'ENOENT') {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
   }
 
   /**
@@ -99,20 +135,9 @@ class GameSession {
    * @returns {Promise<string>}
    */
   getDbFile() {
-    const dbFileName = process.argv[2] === 'test' ? 'test-teerna.sqlite': `${this.sessionId}.sqlite`;
-    return new Promise( (resolve, reject) => {
-      const dbPath = path.join(os.tmpdir(), dbFileName);
-      fs.unlink(dbPath, (err) => {
-          if (err) {
-            if (err.code === 'ENOENT') {
-              resolve(dbPath);
-            } else {
-              reject(err);
-            }
-          }
-          else resolve(dbPath);
-      });
-    });
+    const dbFileName = 'db.sqlite';
+    const folder = this.getFolder();
+    return path.join(this.getFolder(), dbFileName);
   }
 
   /**
@@ -207,9 +232,57 @@ class GameSession {
    * @param {string} playerName to be created
    * @returns {Promise<unknown>} 
    */
-  async playerCreate(playerName) {
-    const result = await this.sql(path.join('player', 'createPlayer.sql'),  {'$name': playerName}, "all")
+  async playerCreate(playerName, email) {
+    const result = await this.sql(
+      path.join('player', 'createPlayer.sql'),  {'$name': playerName, '$email': email}, "all"
+    )
     return result;
+  }
+
+  /**
+   * Returns a single player from the database
+   *
+   * @param {string} email the player email
+   * @returns {Promise<unknown>}
+   */
+  getPlayerByEmail(email) {
+    return this.sql(path.join('player', 'getPlayerByEmail.sql'), {
+      '$email': email
+    }, 'all');
+  }
+
+  /**
+   * Updates the name of a player in the game database
+   *
+   * @param {string} email of the player to be updated
+   * @param {string} name to be set to the player
+   * @returns {Promise<unknown>} 
+   */
+  updatePlayerName(email, name) {
+    return this.sql(path.join('player', 'update-player.sql'), {
+      '$email': email,
+      '$name': name
+    }, 'all');
+  }
+
+  /**
+   * Returns a Promise that resolves to the list of pending invitations in this game.
+   */
+  getPendingInvitations() {
+    return this.sql(
+      path.join('player', 'pending-invitations.sql'), {}, 'all'
+    );
+  }
+
+  /**
+   * Invites a player to join the game.
+   */
+  async playerInvite(email) {
+    const invited = await this.sql(
+      path.join('player', 'create-invitation.sql'),
+      {'$email': email}, 'all'
+    );
+    return invited;
   }
 
   /**
@@ -286,8 +359,6 @@ class GameSession {
     });
   }
 
-
-
   /**
    * Closes the database and returns a promise that resolves when the database is closed.
    * Rejects the promise if an error occurs.
@@ -310,15 +381,16 @@ class GameSession {
  *
  * The current user is created from the provided credentials.
  *
+ * @param {User} the current user
+ * @param {string} the game id
  * @returns {Promise<GameSession>} a Promise that resolves to the GameSession instance.
  */
-GameSession.createSession = async function(credentials) {
-  // TODO: validate credentials.
-  const gameSession = new GameSession(credentials);
+GameSession.createSession = async function(user) {
+  const gameSession = new GameSession(user);
   await gameSession.setDatabase();
   await gameSession.initialize();
   gameSession.ready = true;
-  await gameSession.playerCreate(credentials.name);
+  await gameSession.playerCreate(user.name, user.email);
   await gameSession.setGM(1);
   return gameSession;
 }

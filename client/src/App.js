@@ -61,6 +61,19 @@ export default function App() {
 
                       </Switch>
                     </BrowserRouter>
+                  <form method="post" action="/api/game-session">
+                    <input type="hidden" name="test" value="foo"/>
+                    <input type="hidden" name="user" value={user} />
+                    <input type="hidden" name="token" value={user.idToken} />
+                    <button type="button" name="log" onclick={() => console.log(user)}>Log</button>
+                    <button type="submit" name="Submit">New Game</button>
+                  </form>
+                  <form method="post" action="/api/game-session/invitation">
+                    <input type="hidden" name="token" value={user.idToken} />
+                    <div>Game UID: <input type="text" name="guid" /></div>
+                    <div>Email to invite: <input type="text" name="email" /></div>
+                    <button type="submit" name="Submit">Invite</button>
+                  </form>
                     <DiceProvider value={diceBag}>
                       <Chat />
                       <section className="dice">

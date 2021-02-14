@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Dice = require('../Dice/Dice');
-const GameSession = require("../GameSession/GameSession");
 
 /**
  * Game Session API
@@ -12,16 +10,13 @@ const gameSessionRouter = require('./gameSession.js');
 router.use('/game-session', gameSessionRouter);
 
 /**
- * A Dice endpoint.
+ * Dice API
  *
- * This is an example Dice endpoint.
- * In-game dice throws should use the WebSocket method instead so that the results can be broadcast to all interested parties.
+ * This dice API allows one to throw dices through the API.
+ * Please, notice that this does not result in updating all clients in the same game.
+ * For that purpose, use the WebSocket (Chat) commands.
  */
-router.get('/dice/:sides', (req, res) => {
-  const sides = req.params.sides;
-  const roll = new Dice.Roll(sides, "public", "GM");
-  res.json(roll);
-});
-
+const diceRouter = require('./dice.js');
+router.use('/dice', diceRouter);
 
 module.exports = router;

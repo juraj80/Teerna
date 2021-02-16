@@ -15,8 +15,6 @@ app.use(fileUpload());
 const gameFile = 'game.zip';
 
 app.use(express.static('Uploads'));
-//app.use(express.static('client'));
-
 
 //Upload Endpoint
 

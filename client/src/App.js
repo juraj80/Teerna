@@ -22,6 +22,7 @@ import UploadGame from './components/UploadGame';
 import DownloadGame from './components/DownloadGame';
 import DeleteGame from './components/DeleteGame';
 import LoadGame from './components/LoadGame';
+import FileManager from './components/FileBrowser';
 
 
 
@@ -67,17 +68,20 @@ export default function App() {
 											</Switch>		
 										</BrowserRouter>
 
-										<div className="container mt-5">
-											<div className="row justify-content-between">
-												<div className="col-4 div-scale section-border">
+										<div className="row align-items-center mt-5">
+												<div className="col-3 div-scale section-border">
 													<UploadGame />
 													<DownloadGame />
 													<DeleteGame />
+												
 												</div>
-												<div className="col-6">
+												<div className="col-4 div-scale section-border">
+													<FileManager/>
+												</div> 
+												<div className="col-5 div-scale section-border">
 													<LoadGame />
 												</div>   
-											</div>
+												
 										</div>    
 
 									</AppWrapper>

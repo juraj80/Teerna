@@ -19,14 +19,10 @@ h4 {
 .div-scale {
   transform: scale(0.6);
   /* transform-origin: 0% 0% 0px; */
-  background-color: rgb(251, 251, 251);
-  opacity: 0.8;
-  border-radius: 25px;
 }
 
 #story-section-height {
   height: 600px;
-  border: 1px solid rgb(26, 29, 32);
   overflow: auto;
 }
 
@@ -42,4 +38,7 @@ h4 {
 
 .section-border {
   border: 1px solid rgb(26, 29, 32);
+  background-color: rgb(251, 251, 251);
+  opacity: 0.8;
+  border-radius: 25px;
 }

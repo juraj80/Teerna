@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import MarkdownReader from './MarkdownReader';
-import path from 'path';
 
 class LoadGame extends Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class LoadGame extends Component {
     render() { 
         return (
             <Fragment>
-                <div id="story-section-height" className="row div-scale justify-content-center">
+                <div id="story-section-height" className="row justify-content-center">
                     <div className="col-6" >  
                         <h4 className='text-center '>Story Section</h4> {/*  {this.state.input} */}
                         <button type="button" className='btn btn-block btn-info' onClick={this.handleClick}>Load Game</button>

@@ -5,9 +5,6 @@ const chat = require('./Chat/Chat.js');
 const Dice = require('./Dice/Dice');
 const GameSession = require("./GameSession/GameSession");
 
-const port = 8000;
-
-
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const decompress = require('decompress');

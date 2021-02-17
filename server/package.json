@@ -4,8 +4,10 @@
   "description": "Backend for Teerna",
   "main": "index.js",
   "scripts": {
+    "install": "",
     "build-client": "cd ../client && yarn build && cd -",
-    "start": "node index.js",
+    "start": "npm run build-client && npm run start-server",
+    "start-server": "node index.js",
     "test": "c8 mocha"
   },
   "author": "",

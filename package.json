@@ -1,8 +1,23 @@
 {
+  "name": "teerna",
+  "version": "1.0.0",
+  "description": "Teerna is a Game Master tool developed with Node and React",
+  "main": "index.js",
   "dependencies": {
-    "decompress": "^4.2.1",
-    "express-fileupload": "^1.2.1",
-    "fs": "^0.0.1-security",
-    "zip-local": "^0.3.4"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "cd server && npm start",
+    "install": "cd client; yarn install && cd ../server; yarn install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juraj80/Teerna.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juraj80/Teerna/issues"
+  },
+  "homepage": "https://github.com/juraj80/Teerna#readme"
 }

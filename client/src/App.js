@@ -1,5 +1,5 @@
 //import Chat from '../src/modules/Chat/Chat';
-import Chat from './modules/Chat/Chat.js';
+import Chat from './components/Chat/Chat.js';
 import Dice from './modules/Dice/Dice.js';
 import {DiceBag} from './modules/DiceBag/DiceBag';
 import {DiceProvider} from './contexts/DiceContext/DiceContext';
@@ -15,10 +15,22 @@ import {
 } from './contexts';
 import { useDarkMode } from './hooks';
 import { AppWrapper, AppHeader, Spinner } from './components';
+
+
 import { darkTheme, lightTheme } from './shared';
 import { GlobalStyle } from './styles';
 import { Landing } from './pages';
 import ActiveDashboard from './components/ActiveDashboard';
+
+import UploadGame from './components/UploadGame';
+import DownloadGame from './components/DownloadGame';
+import DeleteGame from './components/DeleteGame';
+import LoadGame from './components/LoadGame';
+import FileManager from './components/FileBrowser';
+
+
+
+
 import { onAuthStateChange } from './contexts';
 
 export default function App() {
@@ -61,7 +73,24 @@ export default function App() {
 
                       </Switch>
                     </BrowserRouter>
-                  <form method="post" action="/api/game-session">
+
+
+                    <div className="row align-items-center mt-5">
+                      <div className="col-3 div-scale section-border">
+                        <UploadGame />
+                        <DownloadGame />
+                        <DeleteGame />
+
+                      </div>
+                      <div className="col-4 div-scale section-border">
+                        <FileManager/>
+                      </div>
+                      <div className="col-5 div-scale section-border">
+                        <LoadGame />
+                      </div>
+
+                    </div>
+                    <form method="post" action="/api/game-session">
                     <input type="hidden" name="test" value="foo"/>
                     <input type="hidden" name="user" value={user} />
                     <input type="hidden" name="token" value={user.idToken} />

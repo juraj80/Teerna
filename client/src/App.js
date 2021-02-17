@@ -1,13 +1,17 @@
 //import Chat from '../src/modules/Chat/Chat';
+import Chat from './modules/Chat/Chat.js';
+import Dice from './modules/Dice/Dice.js';
+import {DiceBag} from './modules/DiceBag/DiceBag';
+import {DiceProvider} from './contexts/DiceContext/DiceContext';
 import { useState, useContext, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, match } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import {
-	AlertProvider,
-	ModalProvider,
-	AuthContext,
-	AuthProvider,
-	PlayerProvider,
+  AlertProvider,
+  ModalProvider,
+  AuthContext,
+  AuthProvider,
+  PlayerProvider,
 } from './contexts';
 import { useDarkMode } from './hooks';
 import { AppWrapper, AppHeader, Spinner } from './components';
@@ -30,15 +34,16 @@ import FileManager from './components/FileBrowser';
 import { onAuthStateChange } from './contexts';
 
 export default function App() {
-	const [user, setUser] = useState({ loggedIn: false });
+  const diceBag = new DiceBag();
+  const [user, setUser] = useState({ loggedIn: false });
 
-	const [theme, toggleTheme, componentMounted] = useDarkMode();
-	const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  const [theme, toggleTheme, componentMounted] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-	useEffect(() => {
-		const unsubscribe = onAuthStateChange(setUser);
-		return () => unsubscribe();
-	}, []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange(setUser);
+    return () => unsubscribe();
+  }, []);
 
 	return (
 		<ThemeProvider theme={themeMode}>
@@ -93,4 +98,5 @@ export default function App() {
 			</AuthProvider>
 		</ThemeProvider>
 	);
+
 }

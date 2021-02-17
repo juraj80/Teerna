@@ -20,6 +20,14 @@
     padding: 0.25em;
     font-size: 0.85em
 }
+.message .time-ago {
+    font-size: 0.8em;
+    color: #666;
+    padding: 0.2em;
+}
+.message .time-ago:after {
+    content: ": ";
+}
 
 .action {
     display: flex;
@@ -32,4 +40,22 @@
 }
 .action button{
     width: 100px;
+}
+#who-is-typing.typing:before {
+    content: "typing: ";
+    color: #444444;
+    font-size: 0.7em;
+}
+#who-is-typing {
+    padding-top: 0.5em;
+    height: 1.8em;
+    overflow: hidden;
+}
+
+.typing-user {
+    padding: 0.2em 0.3em;
+    border-radius: 6px;
+    border: solid thin silver;
+    color: #444444;
+    font-size: 0.7em;
 }

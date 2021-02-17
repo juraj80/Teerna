@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {ChatMessage, createMessage} from './Message';
+import {ChatMessage, createMessage} from '../../modules/Chat/Message';
 import './Chat.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
-import {timeAgo} from "../Time/Time";
-import {connection} from "../WSocket/WSocket"
-import * as Commands from "./Commands.js";
+import {timeAgo} from "../../modules/Time/Time";
+import {connection} from "../../modules/WSocket/WSocket"
+import * as Commands from "../../modules/Chat/Commands.js";
 
 class Chat extends Component {
   static contextType = DiceContext;

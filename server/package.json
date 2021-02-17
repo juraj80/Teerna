@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build-client": "cd ../client && yarn build && cd -",
-    "start": "npm run build-client; node index.js",
+    "start": "npm run build-client && npm run swagger-autogen && node index.js",
     "start-dev": "node index.js test",
+    "swagger-autogen": "node swagger.js",
     "test": "c8 mocha */**/*.test.js --ignore 'node_modules/**/*' --exit"
   },
   "author": "",

@@ -2,6 +2,9 @@ const authenticate = require('./auth.js');
 const bodyParser = require('body-parser');
 const chat = require('./Chat/Chat.js');
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
+
 
 
 const port = 8000;
@@ -24,6 +27,11 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 /**
+ * Create API documentation
+ */
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
+/**
  * Backend API
  */
 app.use('/api', authenticate, apiRouter);
@@ -32,6 +40,7 @@ app.use('/api', authenticate, apiRouter);
 app.listen(port, () => {
   console.log(`Teerna Server listening on port`, port, `!`)
 });
+
 
 // Setup the WebSocket server
 chat.setUpChat();

@@ -15,10 +15,22 @@ import {
 } from './contexts';
 import { useDarkMode } from './hooks';
 import { AppWrapper, AppHeader, Spinner } from './components';
+
+
 import { darkTheme, lightTheme } from './shared';
 import { GlobalStyle } from './styles';
 import { Landing } from './pages';
 import ActiveDashboard from './components/ActiveDashboard';
+
+import UploadGame from './components/UploadGame';
+import DownloadGame from './components/DownloadGame';
+import DeleteGame from './components/DeleteGame';
+import LoadGame from './components/LoadGame';
+import FileManager from './components/FileBrowser';
+
+
+
+
 import { onAuthStateChange } from './contexts';
 
 export default function App() {
@@ -33,51 +45,58 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  return (
-    <ThemeProvider theme={themeMode}>
-      <AuthProvider value={user}>
-        <AlertProvider>
-          <PlayerProvider>
-            <ModalProvider>
-              <>
-                <GlobalStyle />
-                {!componentMounted ? (
-                  <Spinner />
-                ) : (
-                  <AppWrapper>
-                    <AppHeader toggleTheme={toggleTheme} />
-                    <BrowserRouter>
-                      <Switch>
-                        <Route path='/' exact component={Landing} />
-                        <Route
-                          path='/:userId'
-                          render={({ match }) => (
-                            <ActiveDashboard
-                              match={match}
-                              userId={match.params.userId}
-                            />
-                          )}
-                        />
+	return (
+		<ThemeProvider theme={themeMode}>
+			<AuthProvider value={user}>
+				<AlertProvider>
+					<PlayerProvider>
+						<ModalProvider>
+							<>
+								<GlobalStyle />
+								{!componentMounted ? (
+									<Spinner />
+								) : (
+									<AppWrapper>
+										<AppHeader toggleTheme={toggleTheme} />
+										<BrowserRouter>
+											<Switch>
+												<Route path='/' exact component={Landing} />
+												<Route
+													path='/:userId'
+													render={({ match }) => (
+														<ActiveDashboard
+															match={match}
+															userId={match.params.userId}
+														/>
+													)}
+												/>
+											</Switch>		
+										</BrowserRouter>
 
-                      </Switch>
-                    </BrowserRouter>
-                    <DiceProvider value={diceBag}>
-                      <Chat />
-                      <section className="dice">
-                        <Dice sides={4}/>
-                        <Dice sides={6}/>
-                        <Dice sides={8}/>
-                        <Dice sides={12}/>
-                        <Dice sides={20}/>
-                      </section>
-                    </DiceProvider>
-                  </AppWrapper>
-                )}
-              </>
-            </ModalProvider>
-          </PlayerProvider>
-        </AlertProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  );
+										<div className="row align-items-center mt-5">
+												<div className="col-3 div-scale section-border">
+													<UploadGame />
+													<DownloadGame />
+													<DeleteGame />
+												
+												</div>
+												<div className="col-4 div-scale section-border">
+													<FileManager/>
+												</div> 
+												<div className="col-5 div-scale section-border">
+													<LoadGame />
+												</div>   
+												
+										</div>    
+
+									</AppWrapper>
+								)}
+							</>
+						</ModalProvider>
+					</PlayerProvider>
+				</AlertProvider>
+			</AuthProvider>
+		</ThemeProvider>
+	);
+
 }

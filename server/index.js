@@ -25,7 +25,9 @@ const apiRouter = require('./API');
  */
 app.use('/', express.static('../client/build'));
 
-// Body parser for handling POST requests.
+/**
+ * Body parser for handling POST requests.
+ */
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
@@ -105,12 +107,10 @@ app.get('/download', function(req, res){
 });
 
 
-
 /**
  * Create API documentation
  */
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-
 
 /**
  * Backend API
@@ -123,8 +123,6 @@ app.listen(port, () => {
   console.log(`Teerna Server listening on port`, port, `!`)
 });
 
+
 // Setup the WebSocket server
 chat.setUpChat();
-
-// Export for testing purposes
-module.exports = app

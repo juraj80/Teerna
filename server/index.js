@@ -108,6 +108,7 @@ app.get('/download', function(req, res){
 /**
  * Backend API
  */
+const port = process.env.PORT || 5000;
 app.use('/api', authenticate, apiRouter);
 
 // Start the HTTP server

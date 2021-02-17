@@ -20,10 +20,13 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "decompress": "^4.2.1",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "firebase-admin": "^9.5.0",
     "sqlite3": "^4.0.0",
     "uuid": "^8.3.2",
-    "ws": "^7.4.2"
+    "ws": "^7.4.2",
+    "zip-local": "^0.3.4"
   }
 }

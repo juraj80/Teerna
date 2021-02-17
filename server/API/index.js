@@ -10,6 +10,14 @@ const gameSessionRouter = require('./gameSession.js');
 router.use('/game-session', gameSessionRouter);
 
 /**
+ * Document API
+ *
+ * Manages Documents
+ */
+const documentRouter = require('./document.js');
+router.use('/document', documentRouter);
+
+/**
  * Dice API
  *
  * This dice API allows one to throw dices through the API.
@@ -18,5 +26,7 @@ router.use('/game-session', gameSessionRouter);
  */
 const diceRouter = require('./dice.js');
 router.use('/dice', diceRouter);
+
+
 
 module.exports = router;

@@ -4,9 +4,19 @@ const GameSession = require("../GameSession/GameSession");
 const authenticate = require("../auth.js");
 
 
+/**
+ * @swagger
+ * tags:
+ *  name: Game Session
+ *  description: Manage game sessions, creating games, inviting, uninviting,
+ *  blocking and gagging players and other game session related services.
+
 
 /**
  * Creates a new game session, making the user its Game Master.
+ *
+ * @swagger
+ *  description: Creates a new game for the current user.
  */
 router.post('/', authenticate, async (req, res) => {
   if (!req.user || !req.user.user_id) {

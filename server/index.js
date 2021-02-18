@@ -5,7 +5,9 @@ const express = require('express');
 const Dice = require('./Dice/Dice');
 const GameSession = require("./GameSession/GameSession");
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger_output.json');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerOptions = require('./swagger.js');
+
 
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
@@ -84,25 +86,25 @@ app.get('/download', function(req, res){
 
 //Delete Endpoint
 
-  app.post('/delete', function(req, res){
-     
-    const file = `${__dirname}/Uploads/${gameFile}`;
-    const folder = `${__dirname}/Uploads/game`;
-    const osxfolder = `${__dirname}/Uploads/__MACOSX`;
+app.post('/delete', function(req, res){
 
-    if(fs.existsSync(file)){
-        fs.unlinkSync(file)
-    } 
-    if(fs.existsSync(folder) ){
-        fs.rmdirSync(folder, { recursive: true })  
-    
-    } 
-    if(fs.existsSync(osxfolder)){
-        fs.rmdirSync(osxfolder, { recursive: true })
-    
-    } else{
-        console.log("Server file doesn't exists!");
-    }
+  const file = `${__dirname}/Uploads/${gameFile}`;
+  const folder = `${__dirname}/Uploads/game`;
+  const osxfolder = `${__dirname}/Uploads/__MACOSX`;
+
+  if(fs.existsSync(file)){
+    fs.unlinkSync(file)
+  } 
+  if(fs.existsSync(folder) ){
+    fs.rmdirSync(folder, { recursive: true })  
+
+  } 
+  if(fs.existsSync(osxfolder)){
+    fs.rmdirSync(osxfolder, { recursive: true })
+
+  } else{
+    console.log("Server file doesn't exists!");
+  }
 
 });
 
@@ -110,8 +112,14 @@ app.get('/download', function(req, res){
 /**
  * Create API documentation
  */
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-
+const specs = swaggerJsDoc(swaggerOptions);
+app.use('/docs', swaggerUi.serve);
+app.get(
+  "/docs",
+  swaggerUi.setup(specs, {
+    explorer: true
+  })
+);
 /**
  * Backend API
  */

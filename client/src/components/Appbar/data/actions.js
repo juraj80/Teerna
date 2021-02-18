@@ -1,0 +1,6 @@
+export const actions = {
+	CREATE_GAME: 'CREATE_GAME',
+	LOAD_GAME: 'LOAD_GAME',
+	INVITE: 'INVITE',
+	REQUEST_JOIN: 'REQUEST_JOIN',
+};

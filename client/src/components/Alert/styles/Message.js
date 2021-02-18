@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { typography } from '../../../styles';
+import { font, space } from '../../../shared';
 
 export default styled.div`
 	display: flex;
 	flex-direction: column;
-	font-weight: ${typography.weight.body.thin};
-	font-size: ${typography.size.popup.subtitle};
-	margin-right: 20px;
+	font-weight: ${font.weight.thin};
+	font-size: ${font.size.small[300]};
+	margin-right: ${space.medium[100]};
 `;

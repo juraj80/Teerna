@@ -1,1 +1,1 @@
-export { default as AlertContainer } from './AlertContainer';
+export { default as AlertsContainer } from './AlertsContainer';

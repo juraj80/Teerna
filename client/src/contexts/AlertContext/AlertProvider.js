@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { any } from 'prop-types';
 import { v4 } from 'uuid';
-import { element, string, oneOfType } from 'prop-types';
-import { AlertContainer } from './styles';
+import { AlertContext } from './AlertContext';
+import { AlertsContainer } from './styles';
 import { Alert } from '../../components';
-import AlertContext from './AlertContext';
 
-export default function AlertProvider({ children }) {
+const AlertProvider = ({ children }) => {
 	const [alerts, updateAlerts] = useState([]);
 
 	const closeAlert = id => {
-		updateAlerts(prevAlerts => prevAlerts.filter(alert => alert.id !== id));
+		updateAlerts(prev => prev.filter(alert => alert.id !== id));
 	};
 
-	const addAlert = ({ type, msg }) => {
+	const addAlert = (type, msg) => {
 		const id = v4();
-		updateAlerts([...alerts, { id, type, msg }]);
+		updateAlerts([...alerts, { id, msg, type }]);
 		setTimeout(() => {
 			closeAlert(id);
-		}, 5000);
+		}, 4000);
 	};
 
 	return (
 		<AlertContext.Provider value={addAlert}>
-			<AlertContainer>
-				{alerts.map(({ id, type, msg }) => (
-					<Alert key={id} id={id} type={type} closeAlert={() => closeAlert(id)}>
+			<AlertsContainer>
+				{alerts.map(({ type, id, msg }) => (
+					<Alert key={id} type={type} id={id} closeAlert={closeAlert}>
 						{msg}
 					</Alert>
 				))}
-			</AlertContainer>
+			</AlertsContainer>
 			{children}
 		</AlertContext.Provider>
 	);
-}
+};
 
 AlertProvider.propTypes = {
-	children: oneOfType([element, string]).isRequired,
+	children: any,
 };
+
+export { AlertProvider };

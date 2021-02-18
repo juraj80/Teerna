@@ -1,1 +1,1 @@
-export { default }  from './DeleteGame';
+export { default as DeleteGame } from './DeleteGame';

@@ -1,27 +1,24 @@
-import { transparentize } from 'polished';
 import styled from 'styled-components';
+import { transparentize } from 'polished';
+import { order, round, space } from '../../../shared';
 
 export default styled.div`
-	width: ${({ size }) => {
-		if (size === 'small') return '360px';
-		if (size === 'large') return '960px';
-		return '600px';
-	}};
-	height: ${({ size }) => {
-		if (size === 'small') return '200px';
-		if (size === 'large') return '960px';
-		return '600px';
-	}};
+	max-width: ${({ size }) => {
+		let width = 400;
+		if (size) {
+			size === 'small' && (width = 300);
+			size === 'large' && (width = 600);
+		}
+		return width;
+	}}px;
+	min-height: 120px;
+	height: 360px;
 	background: ${({ theme }) => theme.modal.background};
-	background-position: left;
-	border-radius: 14px;
-	margin-bottom: 40px;
+	border-radius: ${round.minimal};
+	margin-bottom: ${space.large[100]};
+	margin-top: ${({ state }) => (state === 'entered' ? '-64px' : '-200vh')};
 	box-shadow: 0 0 12px 18px
-		${({ theme }) => transparentize(0.1, theme.app.background)};
-	margin-top: ${({ state }) => {
-		if (state === 'entered') return '0';
-		return '-200vh';
-	}};
+		${({ theme }) => transparentize(0.95, theme.modal.background)};
 	transition: 0.5s;
-	z-index: 975;
+	z-index: ${order.overlay.modal};
 `;

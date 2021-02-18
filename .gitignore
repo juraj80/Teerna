@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /client/node_modules
+/server/node_modules
 /.vscode
 /.pnp
 .pnp.js
@@ -15,6 +16,7 @@
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -26,8 +28,6 @@ yarn-error.log*
 
 .vscode/
 client/.eslintcache
-client/node_modules/
-server/node_modules/
 client/package-lock.json
 client/build/
 client/yarn.lock

@@ -1,1 +1,1 @@
-export { default }  from './UploadGame';
+export { default as UploadGame } from './UploadGame';

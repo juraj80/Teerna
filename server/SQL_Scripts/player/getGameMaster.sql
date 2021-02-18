@@ -1,0 +1,1 @@
+select * from playerList where isGM = true;

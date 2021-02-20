@@ -74,7 +74,7 @@ export const disabledStyles = css`
 	&,
 	&:hover {
 		background: ${colour.status.disabled};
-		color: ${colour.grey[112]};
+		color: ${colour.black[110]};
 		border: none;
 		cursor: not-allowed;
 	}

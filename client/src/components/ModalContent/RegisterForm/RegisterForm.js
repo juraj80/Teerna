@@ -1,14 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
 import { func } from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Form, ButtonGroup } from '../styles';
+import { Form, ButtonGroup, FormTitle } from '../styles';
 import { AuthContext } from '../../../contexts';
 import { colour, space } from '../../../shared';
 import { Button, Input } from '../../../components';
 
 const RegisterForm = ({ updateShow, closeDropdown }) => {
 	const {
-		token,
 		inputs,
 		errors,
 		handleRegister,
@@ -20,7 +19,6 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [disabled, setDisabled] = useState(true);
-	const [redirect, setRedirect] = useState(false);
 
 	useEffect(() => {
 		email && setInputs({ ...inputs, email });
@@ -34,14 +32,13 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 	}, [passwordConfirm]);
 
 	useEffect(() => {
-		token && setRedirect(true);
+		const token = localStorage.getItem('token');
 		token && updateShow();
-	}, [token]);
-
-	if (redirect) return <Redirect to='/dashboard' />;
+	}, [handleRegister, handleGoogleAuth, handleGithubAuth]);
 
 	return (
 		<>
+			<FormTitle>Create Account</FormTitle>
 			<Form>
 				<div>
 					<Input
@@ -77,7 +74,7 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 						style={{
 							maxWidth: '85%',
 							margin: '0 auto',
-							marginBottom: space.medium[200],
+							marginBottom: '0',
 						}}
 					/>
 				</div>
@@ -94,7 +91,12 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 						</p>
 					)}
 				</div>
-				<div>
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'center',
+					}}
+				>
 					<Button
 						fill='fill'
 						colour='blue'
@@ -102,14 +104,10 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 						type='submit'
 						action={() => {
 							handleRegister();
-							closeDropdown();
+							closeDropdown && closeDropdown();
 						}}
 						text='Register'
 						disabled={disabled}
-						style={{
-							margin: '0 auto',
-							minWidth: '50%',
-						}}
 					/>
 				</div>
 			</Form>
@@ -123,7 +121,7 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 					icon='google'
 					action={() => {
 						handleGoogleAuth();
-						closeDropdown();
+						closeDropdown && closeDropdown();
 					}}
 				/>
 				<Button
@@ -135,7 +133,7 @@ const RegisterForm = ({ updateShow, closeDropdown }) => {
 					icon='github'
 					action={() => {
 						handleGithubAuth();
-						closeDropdown();
+						closeDropdown && closeDropdown();
 					}}
 				/>
 			</ButtonGroup>

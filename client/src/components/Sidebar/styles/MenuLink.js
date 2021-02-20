@@ -8,12 +8,12 @@ export default styled.div`
 	padding: ${space.small[300]} 0;
 	padding-left: ${space.large[200]};
 	color: ${({ theme }) => theme.sidebar.text};
-
 	cursor: pointer;
+
 	&:hover {
 		background: ${({ theme }) => theme.sidebar.hover.background};
 		color: ${({ iconColour, theme }) => {
-			let col = iconColour ? darken(0.75, iconColour) : colour.grey[300];
+			let col = iconColour ? darken(0.75, iconColour) : colour.grey[100];
 			if (theme.mode === 'light')
 				col = iconColour ? lighten(0.75, iconColour) : colour.grey[100];
 			return col;
@@ -24,7 +24,7 @@ export default styled.div`
 					? darken(0.75, iconColour)
 					: theme.mode === 'light'
 					? colour.grey[100]
-					: colour.grey[300]};
+					: colour.grey[100]};
 		}
 	}
 

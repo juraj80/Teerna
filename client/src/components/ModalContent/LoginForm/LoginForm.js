@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { func } from 'prop-types';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import { Form, FormTitle, ButtonGroup } from '../styles';
 import { AuthContext } from '../../../contexts';
 import { colour, space } from '../../../shared';
@@ -8,7 +8,6 @@ import { Button, Input } from '../../../components';
 
 const LoginForm = ({ updateShow, closeDropdown }) => {
 	const {
-		token,
 		inputs,
 		errors,
 		setInputs,
@@ -18,7 +17,6 @@ const LoginForm = ({ updateShow, closeDropdown }) => {
 	} = useContext(AuthContext);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [redirect, setRedirect] = useState(false);
 
 	useEffect(() => {
 		email && setInputs({ ...inputs, email });
@@ -26,11 +24,9 @@ const LoginForm = ({ updateShow, closeDropdown }) => {
 	}, [email, password]);
 
 	useEffect(() => {
-		token && setRedirect(true);
+		const token = localStorage.getItem('token');
 		token && updateShow();
-	}, [token]);
-
-	if (redirect) return <Redirect to='/dashboard' />;
+	}, [handleLogin, handleGoogleAuth, handleGithubAuth]);
 
 	return (
 		<>
@@ -75,7 +71,7 @@ const LoginForm = ({ updateShow, closeDropdown }) => {
 						</p>
 					)}
 				</div>
-				<div>
+				<div style={{ display: 'flex', justifyContent: 'center' }}>
 					<Button
 						fill='fill'
 						colour='blue'
@@ -83,13 +79,9 @@ const LoginForm = ({ updateShow, closeDropdown }) => {
 						type='submit'
 						action={() => {
 							handleLogin();
-							closeDropdown();
+							closeDropdown && closeDropdown();
 						}}
 						text='Submit'
-						style={{
-							margin: '0 auto',
-							minWidth: '50%',
-						}}
 					/>
 				</div>
 			</Form>

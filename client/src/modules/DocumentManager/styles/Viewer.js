@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export default styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	flex-grow: 1;
+	width: 65%;
+	max-width: 65%;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;

@@ -5,37 +5,37 @@ export default {
 	mode: 'dark',
 	console: {
 		background: transparentize(0.6, colour.navy[300]),
-		text: transparentize(0.1, colour.navy[300]),
+		text: transparentize(0.1, colour.white[150]),
 	},
 	navbar: {
 		background: transparentize(0.6, colour.navy[250]),
-		text: transparentize(0.05, colour.grey[150]),
-		border: transparentize(0.85, colour.navy[250]),
+		text: transparentize(0.05, colour.white[150]),
+		border: transparentize(0.85, colour.white[150]),
 		hover: {
 			text: transparentize(0.05, colour.grey[130]),
 		},
 	},
 	appbar: {
-		text: transparentize(0.5, colour.navy[250]),
-		border: transparentize(0.85, colour.navy[250]),
+		text: transparentize(0.5, colour.white[150]),
+		border: transparentize(0.85, colour.white[150]),
 		hover: {
-			text: colour.navy[250],
-			border: colour.navy[250],
-			background: transparentize(0.5, colour.white[110]),
+			text: colour.white[160],
+			border: colour.white[160],
+			background: transparentize(0.5, colour.white[100]),
 		},
 	},
 	sidebar: {
-		text: transparentize(0.05, colour.navy[250]),
-		border: transparentize(0.85, colour.navy[250]),
+		text: transparentize(0.05, colour.white[150]),
+		border: transparentize(0.85, colour.white[150]),
 		hover: {
 			text: colour.white[100],
 			background: transparentize(0.85, colour.grey[110]),
 		},
 	},
 	leftSidebar: {
-		text: transparentize(0.05, colour.navy[250]),
-		border: transparentize(0.85, colour.navy[250]),
-		background: transparentize(0.9, colour.navy[250]),
+		text: transparentize(0.05, colour.white[150]),
+		border: transparentize(0.85, colour.white[150]),
+		background: transparentize(0.9, colour.white[150]),
 		hover: {
 			text: colour.white[100],
 			background: transparentize(0.85, colour.grey[110]),

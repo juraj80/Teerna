@@ -28,6 +28,7 @@ export default {
 	sidebar: {
 		background: transparentize(0.69, colour.white[100]),
 		text: transparentize(0.1, colour.white[160]),
+		border: transparentize(0.85, colour.white[150]),
 		hover: {
 			text: colour.white[100],
 			background: transparentize(0.65, colour.grey[140]),

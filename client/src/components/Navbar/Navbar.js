@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { func } from 'prop-types';
+import decode from 'jwt-decode';
 import { AuthContext, ModalContext, PlayerContext } from '../../contexts';
 import { Avatar, Modal, ThemeToggle, GMToggle } from '../';
 import { LoginForm, RegisterForm } from '../ModalContent';
 import { Bar, Section, Menu, Item } from './styles';
 
-const Navbar = ({ toggleTheme }) => {
-	const { token, setErrors, handleLogout } = useContext(AuthContext);
+const Navbar = ({ toggleTheme, user }) => {
+	const { setErrors, handleLogout } = useContext(AuthContext);
 	const { updateShow, updateLocked, updateContent } = useContext(ModalContext);
 	const { isGM, becomeGM } = useContext(PlayerContext);
 
@@ -46,7 +47,7 @@ const Navbar = ({ toggleTheme }) => {
 
 	useEffect(() => {
 		updateDropdownContent(
-			token ? (
+			user ? (
 				<Menu>
 					{/* @TODO */}
 					<Item onClick={() => setModalType('updateProfile')}>
@@ -61,14 +62,14 @@ const Navbar = ({ toggleTheme }) => {
 				</Menu>
 			)
 		);
-	}, [token]);
+	}, [user]);
 
 	return (
 		<Bar>
 			<Section>
 				<ThemeToggle toggleTheme={toggleTheme} />
 			</Section>
-			<Section>{token && <GMToggle isGM={isGM} setIsGM={becomeGM} />}</Section>
+			<Section>{user && <GMToggle isGM={isGM} setIsGM={becomeGM} />}</Section>
 			<Section></Section>
 			<Section></Section>
 			<Section>

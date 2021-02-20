@@ -1,12 +1,12 @@
-import { useSetCentreContent } from '../../hooks';
+import { useConsoleSize, useContent } from '../../hooks';
 import { CentreWrapper } from './styles';
 
-const CentreContent = () => {
-	const { ActiveModule } = useSetCentreContent();
+const CentreContent = ({ currentContent }) => {
+	const { width } = useConsoleSize();
 
 	return (
-		<CentreWrapper>
-			<ActiveModule />
+		<CentreWrapper centreWidth={`${width * 0.55}px`}>
+			{currentContent.content}
 		</CentreWrapper>
 	);
 };

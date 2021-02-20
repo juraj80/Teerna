@@ -10,8 +10,7 @@ export default styled.div`
 	cursor: pointer;
 	padding: calc(${space.medium[100]} - 3px) ${space.large[100]};
 	color: ${({ theme }) => theme.appbar.text};
-	font-weight: ${({ theme }) =>
-		theme.mode === 'dark' ? font.weight.bold : font.weight.regular};
+	font-weight: ${font.weight.bold};
 	border-bottom: 2px solid transparent;
 	transition: 0.3s;
 

@@ -12,7 +12,17 @@ const Button = ({ action, href, icon, text, colour, fill, ...props }) => {
 		);
 
 	return (
-		<ButtonWrapper onClick={action} colour={colour} fill={fill} {...props}>
+		<ButtonWrapper
+			onClick={action}
+			colour={colour}
+			fill={fill}
+			status={status}
+			{...props}
+		>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
 			{icon && <Icon icon={icon} fill='fill' background={colour} />}
 			{text}
 		</ButtonWrapper>

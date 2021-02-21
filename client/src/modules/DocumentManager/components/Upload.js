@@ -1,15 +1,8 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import { AlertContext } from '../../../contexts';
-import { ProgrssBar } from '../../../components';
-import {
-	DragDrop,
-	ScreenTitle,
-	Form,
-	FileLabel,
-	FileInput,
-	SubmitInput,
-} from '../styles';
+import { ProgressBar } from '../../../components';
+import { DragDrop, Form, FileLabel, SubmitInput, HelperText } from '../styles';
 import Dropzone from 'react-dropzone';
 import { space } from '../../../shared';
 
@@ -25,11 +18,6 @@ const Upload = ({ setUploaded }) => {
 		setFile(acceptedFiles[0]);
 		setFilename(acceptedFiles[0].name);
 	};
-
-	// const fileChange = e => {
-	// 	setFile(e.target.files[0]);
-	// 	setFilename(e.target.files[0].name);
-	// };
 
 	const fileSubmit = async e => {
 		e.preventDefault();
@@ -51,7 +39,6 @@ const Upload = ({ setUploaded }) => {
 					setTimeout(() => setUploadPercentage(0), 10000);
 				},
 			});
-
 			const { fileName, filePath } = res.data;
 			setUploadedFile({ fileName, filePath });
 			setMessage('File Uploaded');
@@ -77,9 +64,17 @@ const Upload = ({ setUploaded }) => {
 				width: '90%',
 			}}
 		>
-			{/* <ScreenTitle>Upload Zip File</ScreenTitle> */}
-			{message && <HelperText>{message}</HelperText>}
-			<Form width='100%'>
+			<Form
+				style={{
+					width: '100%',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-around',
+					alignItems: 'center',
+					marginTop: space.medium[100],
+					padding: `0 ${space.medium[200]}`,
+				}}
+			>
 				<Dropzone onDrop={handleDrop}>
 					{({ getRootProps, getInputProps, isDragActive }) => (
 						<DragDrop {...getRootProps()}>
@@ -89,11 +84,13 @@ const Upload = ({ setUploaded }) => {
 						</DragDrop>
 					)}
 				</Dropzone>
-				<div style={{ margin: space.medium[100] }}>
+
+				<div style={{ marginTop: space.medium[100] }}>
 					<FileLabel>{filename ? filename : 'No File Chosen'}</FileLabel>
 					{/* <FileInput type='file' onChange={fileChange} /> */}
 					{/* <ProgressBar percentage={uploadPercentage} /> */}
 				</div>
+				{message && <HelperText>{message}</HelperText>}
 				<SubmitInput
 					type='submit'
 					fill='fill'

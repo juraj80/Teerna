@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
 import { func, string } from 'prop-types';
-import { Upload, Download, Load, Delete } from './';
-import { FileManager } from '../../../components';
+import { Upload, Download, Load, Delete, DocumentList } from './';
 
 const Screen = ({ type, setLoaded, setUploaded }) => {
 	let content = <div />;
-	// const [Content, setContent] = useState(undefined);
 
 	switch (type) {
 		case 'download':
@@ -20,14 +17,12 @@ const Screen = ({ type, setLoaded, setUploaded }) => {
 		case 'upload':
 			content = <Upload setUploaded={setUploaded} />;
 			break;
+		case 'documents':
+			content = <DocumentList />;
+			break;
 	}
 
-	return (
-		<>
-			{type === 'load' && <FileManager />}
-			{content}
-		</>
-	);
+	return <>{content}</>;
 };
 
 Screen.propTypes = {

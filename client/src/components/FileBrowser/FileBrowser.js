@@ -1,5 +1,6 @@
 import Moment from 'moment';
 import FileBrowser from 'react-keyed-file-browser';
+import { useConsoleSize } from '../../hooks';
 
 const FileBrowserComponent = () => {
 	return (

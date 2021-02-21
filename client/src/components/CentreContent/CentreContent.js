@@ -2,10 +2,9 @@ import { useConsoleSize, useContent } from '../../hooks';
 import { CentreWrapper } from './styles';
 
 const CentreContent = ({ currentContent }) => {
-	const { width } = useConsoleSize();
-
+	const { width, height } = useConsoleSize();
 	return (
-		<CentreWrapper centreWidth={`${width * 0.55}px`}>
+		<CentreWrapper height={`${height - 96}px`} centreWidth={`${width * 0.6}px`}>
 			{currentContent.content}
 		</CentreWrapper>
 	);

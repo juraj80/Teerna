@@ -8,7 +8,7 @@ const Appbar = ({ currentScreen, user }) => {
 	const { width } = useConsoleSize();
 
 	return (
-		<Wrapper isFull={!user} barWidth={`${width * 0.55}px`}>
+		<Wrapper isFull={!user} barWidth={`${width * 0.6}px`}>
 			<Menu>
 				<ActionItem action={() => {}}>{currentScreen}</ActionItem>
 			</Menu>

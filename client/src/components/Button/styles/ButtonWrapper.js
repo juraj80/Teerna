@@ -64,8 +64,12 @@ export default styled.button`
 			? colour.blue[100]
 			: props.colour === 'black'
 			? colour.black[100]
-			: props.colour === 'error'
+			: props.status === 'error'
 			? colour.status.error
+			: props.status === 'success'
+			? colour.status.success
+			: props.status === 'info'
+			? colour.status.info
 			: colour.white[100];
 
 		return props.fill === 'outline'
@@ -73,7 +77,7 @@ export default styled.button`
 					border: 1px solid ${transparentize(0.1, currColour)};
 			  `
 			: css`
-					background: ${transparentize(0.8, currColour)};
+					background: ${transparentize(props.status ? 0.1 : 0.8, currColour)};
 			  `;
 	}};
 

@@ -20,9 +20,10 @@ const Load = ({ setLoaded }) => {
 	return (
 		<>
 			<ScreenTitle>{input ? input : 'Story'}</ScreenTitle>
-			<Button action={() => setInput('game/assets/story/story.md')}>
-				Load Game
-			</Button>
+			<Button
+				action={() => setInput('game/assets/story/story.md')}
+				text='Load Game'
+			/>
 			{markdown && (
 				<NestedViewer>
 					<ReactMarkdown source={markdown} />

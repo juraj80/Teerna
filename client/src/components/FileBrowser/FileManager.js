@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Moment from 'moment';
 import FileBrowser, { Icons } from 'react-keyed-file-browser';
 

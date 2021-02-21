@@ -46,8 +46,8 @@ const Sidebar = ({ changeContent, user }) => {
 	};
 
 	return (
-		<Wrapper navWidth={`${width * 0.2}px`} navHeight={`${height - 48}px`}>
-			<Container navWidth={`${width * 0.2}px`}>
+		<Wrapper navWidth={`${width * 0.15}px`} navHeight={`${height - 48}px`}>
+			<Container navWidth={`${width * 0.15}px`}>
 				<Module>
 					<ModuleTitle>Messaging</ModuleTitle>
 					<ModuleMenu>

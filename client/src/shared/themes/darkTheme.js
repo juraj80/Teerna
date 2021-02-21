@@ -1,4 +1,4 @@
-import { transparentize } from 'polished';
+import { lighten, transparentize } from 'polished';
 import { colour } from '../styles';
 
 export default {
@@ -6,6 +6,7 @@ export default {
 	console: {
 		background: transparentize(0.6, colour.navy[300]),
 		text: transparentize(0.1, colour.white[150]),
+		centre: transparentize(0.25, lighten(0.15, colour.navy[230])),
 	},
 	navbar: {
 		background: transparentize(0.6, colour.navy[250]),

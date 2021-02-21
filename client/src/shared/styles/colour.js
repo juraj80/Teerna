@@ -40,6 +40,7 @@ export default {
 		100: rgb(30, 89, 241),
 		140: rgb(57, 109, 240),
 		145: rgb(58, 109, 240),
+		200: rgb(37, 55, 157),
 	},
 	yellow: {
 		100: rgb(253, 236, 106),
@@ -47,6 +48,9 @@ export default {
 	},
 	green: {
 		100: rgb(59, 240, 131),
+	},
+	turquoise: {
+		100: rgb(0, 199, 255),
 	},
 	status: {
 		success: rgb(59, 240, 131),

@@ -17,12 +17,13 @@ export default createGlobalStyle`
  	background-image: url('${images.background.base}');
  	background-size: cover;
  	background-position: center;
+	background-repeat: no-repeat;
 	overflow: hidden;
 	padding:  ${`${space.medium[200]} ${space.medium[100]}`};
  	width: 100%;
  	height: 100vh;
  	@media screen and (${mediaQuery.xsmall}) {
- 		padding: ${`${space.small[200]} ${space.small[100]} `};
+ 		padding: ${`${space.small[200]} ${space.small[100]}`};
  	}
 
      &:before {
@@ -45,8 +46,8 @@ export default createGlobalStyle`
 							`
 						);
 					}};
-     }
- }
+    		 }
+ 		}
 
  img {
  	max-width: 100%;

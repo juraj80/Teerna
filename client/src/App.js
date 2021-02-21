@@ -47,36 +47,38 @@ export default function App() {
 	// const diceBag = new DiceBag();
 
 	return (
-		// <BrowserRouter>
-		<ThemeProvider theme={themeMode}>
-			<AuthProvider>
-				<AlertProvider>
-					<PlayerProvider>
-						<ModalProvider>
-							<>
-								<GlobalStyle />
-								{!componentMounted ? (
-									<Spinner />
-								) : (
-									<Console>
-										<Navbar toggleTheme={toggleTheme} user={user} />
-										<div style={{ display: 'flex' }}>
-											<Sidebar changeContent={changeContent} user={user} />
-											<div style={{ display: 'flex', flexDirection: 'column' }}>
-												<Appbar
-													user={user}
-													currentScreen={
-														currentContent ? currentContent.title : ''
-													}
-												/>
-												<CentreContent
-													user={user}
-													currentContent={currentContent || <div />}
-												/>
+		<BrowserRouter>
+			<ThemeProvider theme={themeMode}>
+				<AuthProvider>
+					<AlertProvider>
+						<PlayerProvider>
+							<ModalProvider>
+								<>
+									<GlobalStyle />
+									{!componentMounted ? (
+										<Spinner />
+									) : (
+										<Console>
+											<Navbar toggleTheme={toggleTheme} user={user} />
+											<div style={{ display: 'flex' }}>
+												<Sidebar changeContent={changeContent} user={user} />
+												<div
+													style={{ display: 'flex', flexDirection: 'column' }}
+												>
+													<Appbar
+														user={user}
+														currentScreen={
+															currentContent ? currentContent.title : ''
+														}
+													/>
+													<CentreContent
+														user={user}
+														currentContent={currentContent || <div />}
+													/>
+												</div>
+												<Chatbar user={user} />
 											</div>
-											<Chatbar user={user} />
-										</div>
-										{/* <Switch>
+											{/* <Switch>
 												{/*<Route exact path='/' component={Landing} />
 												 	<Route path='/dashboard/GM' component={GMDashboard} />
 													<Route
@@ -85,15 +87,15 @@ export default function App() {
 												/> 
 												<Redirect to='/'/>
 											</Switch> */}
-									</Console>
-								)}
-							</>
-						</ModalProvider>
-					</PlayerProvider>
-				</AlertProvider>
-			</AuthProvider>
-		</ThemeProvider>
-		// </BrowserRouter>
+										</Console>
+									)}
+								</>
+							</ModalProvider>
+						</PlayerProvider>
+					</AlertProvider>
+				</AuthProvider>
+			</ThemeProvider>
+		</BrowserRouter>
 	);
 	// <div className='row align-items-center mt-5'>
 	// 							<div className='col-3 div-scale section-border'>

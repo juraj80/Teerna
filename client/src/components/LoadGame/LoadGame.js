@@ -30,6 +30,5 @@ class LoadGame extends Component {
     }
 }
  
-
 export default LoadGame;
 

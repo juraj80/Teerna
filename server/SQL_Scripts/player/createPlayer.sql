@@ -5,5 +5,5 @@
  */
 
 insert into playerList
-    (playerName, isGM)
-     values ($name, FALSE);
+  (playerName, isGM, email)
+  values ($name, FALSE, $email);

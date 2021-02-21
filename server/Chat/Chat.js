@@ -6,10 +6,11 @@ const { errorMessage, diceRollToMessage, ChatMessage } = require("./Message");
 /**
  * Builds a chat answer.
  *
- * Chat answers need to use the same id as the
+ * Chat answers need to use the same id as the request so that the client can
+ * identify a response to the message sent.
  *
- * @param message
- * @param answer
+ * @param message the Message Object lacking answer attributes.
+ * @param answer the Answer Object, which is a message object plus answer attributes.
  * @returns {*}
  */
 function buildChatAnswer(message, answer) {
@@ -17,6 +18,11 @@ function buildChatAnswer(message, answer) {
   return answer;
 }
 
+/**
+ * Prepares the Chat.
+ *
+ * Creates the WebSocket server and implements listeners.
+ */
 function setUpChat() {
   const wsPort = 8888;
   const server = new WebSocket.Server({
@@ -36,7 +42,7 @@ function setUpChat() {
           if (!validateDice(message)) {
             socket.send(JSON.stringify(errorMessage("Invalid dice")));
           } else {
-            const diceRoll = new Roll(message.sides, message.type, "GM");
+            const diceRoll = new Roll(message.data.sides, message.type, "GM");
             const answer = buildChatAnswer(message, diceRollToMessage(diceRoll));
             sockets.forEach(s => {
               s.send(JSON.stringify(answer));
@@ -71,8 +77,8 @@ function setUpChat() {
 }
 
 function validateDice(msg) {
-  return msg.sides &&
-    parseInt(msg.sides, 10) &&
+  return msg.data && msg.data.sides &&
+    parseInt(msg.data.sides, 10) &&
     msg.type &&
     msg.type === "dice"
 }

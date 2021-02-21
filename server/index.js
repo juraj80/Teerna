@@ -1,7 +1,7 @@
-const express = require('express');
+const authenticate = require('./auth.js');
 const bodyParser = require('body-parser');
-
 const chat = require('./Chat/Chat.js');
+const express = require('express');
 const Dice = require('./Dice/Dice');
 const GameSession = require("./GameSession/GameSession");
 
@@ -10,10 +10,16 @@ const fs = require('fs');
 const decompress = require('decompress');
 const zipper = require('zip-local');
 
+// Creates the Express App
 const app = express();
+
+// The API routes
+const apiRouter = require('./API');
 
 /**
  * Serve the Client Application.
+ *
+ * Assumes the client is built to the "/build" directory.
  */
 app.use('/', express.static('../client/build'));
 
@@ -100,31 +106,15 @@ app.get('/download', function(req, res){
 
 
 /**
- * Creates a new game session, making the user its Game Master.
+ * Backend API
  */
-app.post('/game-session', (req, res) => {
-  const gm = req.body.user;
-  const gameSession = GameSession.createSession(gm);
-  res.json(
-    {
-      message: 'Game created',
-      gameId: gameSession.sessionId
-    }
-  );
-});
-
-/**
- * A Dice endpoint.
- */
-app.get('/dice/:sides', (req, res) => {
-    const sides = req.params.sides;
-    const roll = new Dice.Roll(sides, "public", "GM");
-    res.json(roll);
-});
-
-// use port 5000 unless there exists a preconfigured port
 const port = process.env.PORT || 5000;
+app.use('/api', authenticate, apiRouter);
+
+// Start the HTTP server
 app.listen(port, () => {
   console.log(`Teerna Server listening on port`, port, `!`)
 });
+
+// Setup the WebSocket server
 chat.setUpChat();

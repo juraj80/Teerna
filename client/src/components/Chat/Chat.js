@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {ChatMessage, createMessage} from './Message';
+import {ChatMessage, createMessage} from '../../modules/Chat/Message';
 import './Chat.css';
 import DiceContext from "../../contexts/DiceContext/DiceContext";
-import {timeAgo} from "../Time/Time";
-import {connection} from "../WSocket/WSocket"
+import {timeAgo} from "../../modules/Time/Time";
+import {connection} from "../../modules/WSocket/WSocket"
+import * as Commands from "../../modules/Chat/Commands.js";
 
 class Chat extends Component {
   static contextType = DiceContext;
@@ -36,6 +37,8 @@ class Chat extends Component {
     // Bind the WebSockets events when the component is already mounted
     this.diceBag = this.context;
     this.diceBag.subscribe(this.changeHistory.bind(this));
+    Commands.allCommands();
+
   }
 
   changeHistory(history) {
@@ -106,7 +109,6 @@ class Chat extends Component {
    * Sends a typing message at most once every two seconds.
    */
   sendTyping() {
-    console.log(this.state.amITyping)
     if (!this.state.amITyping) {
       this.ws.sendMessage({type: 'typing', message: 'typing'});
       this.setState({amITyping: true});

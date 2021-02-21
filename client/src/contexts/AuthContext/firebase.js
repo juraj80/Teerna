@@ -20,12 +20,20 @@ const githubProvider = new firebase.auth.GithubAuthProvider();
 // const [user, setUser] = useState({ loggedIn: false });
 
 export const onAuthStateChange = callback => {
-	return firebase.auth().onAuthStateChanged(user => {
-		if (user) {
-			const { uid, email, displayName } = user;
-			callback({ loggedIn: true, id: uid, email, username: displayName });
-		} else callback({ loggedIn: false });
-	});
+  return firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      console.log("Full user", user);
+      firebase.auth().currentUser.getIdToken(false).then(function(idToken) {
+        const { uid, email, displayName } = user;
+        callback({ loggedIn: true, id: uid, email, username: displayName, idToken});
+        return;
+      }).catch(function(error) {
+        console.error(error);
+      });
+    } else {
+      callback({ loggedIn: false });
+    }
+  });
 };
 
 export const googleLogin = () => {

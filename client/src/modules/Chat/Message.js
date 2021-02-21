@@ -1,4 +1,4 @@
-import Chat from "./Chat";
+import Chat from "../../components/Chat/Chat";
 
 
 export function createMessage(message, author) {
@@ -34,11 +34,14 @@ export class Command {
 
   /**
    * Registers a new command under the given name.
-   * @param name
-   * @param type
+   *
+   * @param {string} name of the command. This name is used in the chat as /name to execute the command
+   * @param {string} type of the command. This will influence the way the server interprets the command
+   * @param {string} help to be displayed to the user about this particular command
+   * @param {Object} data to be added to the command. These attributes are static. Dinamic attributes are added as arguments, one for each space-separated word after the command.
    */
-  static register(name, type, help) {
-    Command.commands.push({name, type, help});
+  static register(name, type, help = "", data = {}) {
+    Command.commands.push( {name, type, help, data} );
   }
 
   /**
@@ -133,10 +136,11 @@ export class Command {
     if (!Command.isRegistered(name)) {
       throw new TypeError("Only registered commands can be instantiated.");
     }
-    this.type = Command.commands.find(c => c.name === name).type;
+    this.type = registered.type;
     this.quantity = quantity;
     this.args = args;
     this.name = name;
+    this.data = registered.data;
   }
 
 

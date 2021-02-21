@@ -1,7 +1,10 @@
 const express = require('express');
-const chat = require('./Chat/Chat.js');
+const bodyParser = require('body-parser');
 
 const fileSystem = require('./helpers/fileSystem.js')
+const chat = require('./Chat/Chat.js');
+const Dice = require('./Dice/Dice');
+const GameSession = require("./GameSession/GameSession");
 
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
@@ -16,40 +19,18 @@ const osxfolder = `${__dirname}/Uploads/__MACOSX`;
 const app = express();
 
 chat.setUpChat();
+/**
+ * Serve the Client Application.
+ */
+app.use('/', express.static('../client/build'));
+
+/**
+ * Body parser for handling POST requests.
+ */
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
 app.use(fileUpload());
-/*
-const getUploadFiles = dir =>
-    fs.readdirSync(dir).reduce((files, file) => {
-        const name = path.join(dir, file);
-        const isDirectory = fs.statSync(name).isDirectory();
-        return isDirectory ? [...files, ...getUploadFiles(name)] : [...files, name];
-    }, []);
-
-const getFileSize = filename => {
-    let stats = fs.statSync(filename);
-    let sizeInB = stats.size;
-    let sizeInKB = sizeInB / 1024*1024;
-    return  sizeInKB;
-}
-
-const getLastModified = filename => {
-    const stats = fs.statSync(filename);
-    return stats.mtime.getTime();
-}
-
-const getListOfFileObjects =  files => {
-    const listOfFiles = [];
-    for(const file of files){
-
-        listOfFiles.push({
-            key: file,
-            modified: getLastModified(file),
-            size: getFileSize(file)
-        })
-    }
-    return listOfFiles;
-}
-*/
 
 const gameFile = 'game.zip';
 
@@ -136,7 +117,32 @@ app.get('/download', function(req, res){
 });
 
 
-// use port 5000 unless there exists a preconfigured port
-var port = process.env.PORT || 5000;
-app.listen(port, () => console.log('Server Started...'));
+/**
+ * Creates a new game session, making the user its Game Master.
+ */
+app.post('/game-session', (req, res) => {
+  const gm = req.body.user;
+  const gameSession = GameSession.createSession(gm);
+  res.json(
+    {
+      message: 'Game created',
+      gameId: gameSession.sessionId
+    }
+  );
+});
 
+/**
+ * A Dice endpoint.
+ */
+app.get('/dice/:sides', (req, res) => {
+    const sides = req.params.sides;
+    const roll = new Dice.Roll(sides, "public", "GM");
+    res.json(roll);
+});
+
+// use port 5000 unless there exists a preconfigured port
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Teerna Server listening on port`, port, `!`)
+});
+chat.setUpChat();

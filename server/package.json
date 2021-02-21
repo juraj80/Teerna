@@ -4,6 +4,7 @@
   "description": "Backend for Teerna",
   "main": "index.js",
   "scripts": {
+    "build-client": "cd ../client && yarn build && cd -",
     "start": "node index.js",
     "test": "c8 mocha"
   },
@@ -15,8 +16,14 @@
     "mocha": "^8.2.1"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "moment": "^2.29.1",
+=======
+    "sqlite3": "^4.0.0",
+    "uuid": "^8.3.2",
+>>>>>>> 1f15cec1d7d59074c9c4fa787263b013038b2de5
     "ws": "^7.4.2"
   }
 }

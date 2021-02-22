@@ -8,7 +8,6 @@ class FileManager extends Component {
     constructor(props) {
         super(props);
         this.state = { files: []};
-        //this.handleClick = this.handleClick.bind(this);
     }
   
   componentDidMount(){    
@@ -16,55 +15,8 @@ class FileManager extends Component {
         console.log("response",response.data);
         this.setState({ files: response.data });
     });
-
-
 }
-
-
-/*
-    const files =  [
-        {
-          key: 'Uploads/game/assets/old_warrior.jpg',
-          modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 1024 * 1024,
-        },
-        {
-          key: 'Uploads/maps/fantasy_map.png',
-          modified: +Moment().subtract(3, 'days'),
-          size: 545 * 1024,
-        },
-        {
-          key: 'Uploads/story/story.md',
-          modified: +Moment().subtract(3, 'days'),
-          size: 52 * 1024,
-        },
-        {
-          key: 'Uploads/artefacts/funny_fall.gif',
-          modified: +Moment().subtract(2, 'months'),
-          size: 13.2 * 1024 * 1024,
-        },
-        {
-          key: 'Uploads/artefacts/holiday.jpg',
-          modified: +Moment().subtract(25, 'days'),
-          size: 85 * 1024,
-        },
-        {
-          key: 'Uploads/artefacts/letter chunks.doc',
-          modified: +Moment().subtract(15, 'days'),
-          size: 480 * 1024,
-        },
-        {
-          key: 'Uploads/artefacts/export.pdf',
-          modified: +Moment().subtract(15, 'days'),
-          size: 4.2 * 1024 * 1024,
-        },
-      ]
-
-    this.setState({ files: files });
-}
-
-*/
-    
+ 
   handleCreateFolder = (key) => {
     this.setState(state => {
       state.files = state.files.concat([{
@@ -123,6 +75,7 @@ class FileManager extends Component {
       return state
     })
   }
+
   handleRenameFile = (oldKey, newKey) => {
     this.setState(state => {
       const newFiles = []
@@ -177,14 +130,14 @@ class FileManager extends Component {
                     files={this.state.files}
                     icons={Icons.FontAwesome(4)}
 
-                    onCreateFolder={this.handleCreateFolder}
-                    onCreateFiles={this.handleCreateFiles}
+              //      onCreateFolder={this.handleCreateFolder}
+              //      onCreateFiles={this.handleCreateFiles}
                     onMoveFolder={this.handleRenameFolder}
                     onMoveFile={this.handleRenameFile}
-                    onRenameFolder={this.handleRenameFolder}
-                    onRenameFile={this.handleRenameFile}
-                    onDeleteFolder={this.handleDeleteFolder}
-                    onDeleteFile={this.handleDeleteFile}
+               //     onRenameFolder={this.handleRenameFolder}
+               //     onRenameFile={this.handleRenameFile}
+               //     onDeleteFolder={this.handleDeleteFolder}
+               //     onDeleteFile={this.handleDeleteFile}
                 />
         </div>
 

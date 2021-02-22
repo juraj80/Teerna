@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown'
 class MarkdownReader extends Component {
     constructor(props) {
         super(props);
-        this.state = { markdown: '' };
+       // this.state = { markdown: this.props};
+       this.state = { markdown: '' };
       }
-
     componentDidMount() {
         // Get the contents from the Markdown file and put them in the React state, so we can reference it in render() below.
         fetch(this.props.input)
@@ -15,8 +15,10 @@ class MarkdownReader extends Component {
     }
 
     render(){
+        
         return (    
-                <ReactMarkdown  source = {this.state.markdown} />
+             //   <ReactMarkdown  source = {this.props.input} />
+               <ReactMarkdown  source = {this.state.markdown} />
             );
         }
 }

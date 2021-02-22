@@ -18,7 +18,6 @@ const osxfolder = `${__dirname}/Uploads/__MACOSX`;
 
 const app = express();
 
-chat.setUpChat();
 /**
  * Serve the Client Application.
  */
@@ -120,6 +119,7 @@ app.get('/download', function(req, res){
 /**
  * Creates a new game session, making the user its Game Master.
  */
+
 app.post('/game-session', (req, res) => {
   const gm = req.body.user;
   const gameSession = GameSession.createSession(gm);

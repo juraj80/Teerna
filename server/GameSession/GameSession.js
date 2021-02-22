@@ -20,7 +20,7 @@ class GameSession {
    *
    * The current user is created from the provided credentials.
    */
-  async static createSession(credentials) {
+  static async createSession(credentials) {
     const gameSession = new GameSession(credentials);
     await gameSession.playerCreate(credentials.name);
     return gameSession.setGM(1);

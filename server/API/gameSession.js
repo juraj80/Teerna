@@ -43,6 +43,15 @@ router.post('/', authenticate, async (req, res) => {
 /**
  * Creates a valid invitation link to be sent to users
  *
+ * @openapi
+ * /game-session/invitation:
+ *   post:
+ *     summary: Creates an invitation for a provided email
+ *     responses:
+ *       "200":
+ *         description: A list of all pending invitations, including the newly created one.
+ *       "403":
+ *         description: User does not have the propper permissions or is not authenticated.
  */
 router.post('/invitation', authenticate, async (req, res) => {
   if (!req.user || !req.user.user_id) {
@@ -67,6 +76,16 @@ router.post('/invitation', authenticate, async (req, res) => {
  *
  * The user who is joining needs to be authenticated, to provide the auth token
  * and the game id as a parameter in the URL.
+ *
+ * @openapi
+ * /game-session/{guid}:
+ *   get:
+ *     summary: Gets details of a game a player participates or is invited to.
+ *     responses:
+ *       "200":
+ *         description: A message stating that the access was granted
+ *       "403":
+ *         description: User does not have the propper permissions or is not authenticated.
  */
 router.get('/:guid', authenticate, async (req, res) => {
   if (!req.user || !req.user.user_id) {

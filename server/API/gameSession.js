@@ -18,6 +18,8 @@ const authenticate = require("../auth.js");
  * @openapi
  * /game-session:
  *   post:
+ *     tags:
+ *       - Game Session
  *     summary: Creates a new game for the current user.
  *     responses:
  *       "200":
@@ -46,6 +48,8 @@ router.post('/', authenticate, async (req, res) => {
  * @openapi
  * /game-session/invitation:
  *   post:
+ *     tags:
+ *       - Game Session
  *     summary: Creates an invitation for a provided email
  *     responses:
  *       "200":
@@ -80,6 +84,8 @@ router.post('/invitation', authenticate, async (req, res) => {
  * @openapi
  * /game-session/{guid}:
  *   get:
+ *     tags:
+ *       - Game Session
  *     summary: Gets details of a game a player participates or is invited to.
  *     responses:
  *       "200":

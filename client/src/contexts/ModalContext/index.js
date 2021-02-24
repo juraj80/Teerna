@@ -1,2 +1,3 @@
-export { default as ModalContext } from './ModalContext';
-export { default as ModalProvider } from './ModalProvider';
+export { ModalContext } from './ModalContext';
+export { ModalProvider } from './ModalProvider';
+export { ModalBackground } from './styles';

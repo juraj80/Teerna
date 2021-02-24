@@ -1,2 +1,2 @@
-export { default as PlayerContext } from './PlayerContext';
-export { default as PlayerProvider } from './PlayerProvider';
+export { PlayerContext } from './PlayerContext';
+export { PlayerProvider } from './PlayerProvider';

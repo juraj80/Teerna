@@ -1,13 +1,12 @@
 import styled from 'styled-components';
-import { transparentize } from 'polished';
+import { order, round } from '../../../shared';
 
 export default styled.div`
-	display: flex;
-	flex-direction: column;
-
-	background: ${({ theme }) => transparentize(0.3, theme.app.background)};
-	border-radius: 14px;
 	width: 100%;
 	height: 100%;
 	position: relative;
+	right: 0;
+	bottom: 0;
+	border-radius: ${round.minimal};
+	z-index: ${order.overlay.modal};
 `;

@@ -1,6 +1,3 @@
-import Chat from "../../components/Chat/Chat";
-
-
 export function createMessage(message, author) {
   let regularMessage;
   if (typeof message === 'string') {

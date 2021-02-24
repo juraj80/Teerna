@@ -1,43 +1,25 @@
-import styled, { css } from 'styled-components';
-import { element, oneOfType, string, bool, func } from 'prop-types';
+import { bool, func, oneOf, string } from 'prop-types';
+import { AvatarWrapper, Image } from './styles';
+import { images } from '../../shared';
 
-import blankUser from '../../assets/blankUser.png';
-
-const sizes = {
-	small: '40px',
-	medium: '64px',
-	large: '80px',
-};
-
-const Image = styled.img`
-	width: ${({ size }) => sizes[size]};
-	height: ${({ size }) => sizes[size]};
-	border-radius: 50%;
-	object-fit: cover;
-	border: 2px solid ${({ theme }) => theme.app.border};
-	z-index: 999;
-	${({ clickable }) =>
-		clickable &&
-		css`
-			cursor: pointer;
-		`}
-`;
-
-export default function Avatar({ source, size, clickable, action, ...props }) {
+const Avatar = ({ style, status, source, action, clickable, ...props }) => {
 	return (
-		<Image
-			src={source || blankUser}
-			size={size || 'medium'}
+		<AvatarWrapper
+			status={status || null}
+			onClick={action || null}
 			clickable={clickable || false}
-			alt='unidentified user'
-			onClick={action}
-		/>
+			{...props}
+		>
+			<Image src={source || images.avatar.blank} alt='avatar' />
+		</AvatarWrapper>
 	);
-}
+};
 
 Avatar.propTypes = {
-	source: oneOfType([string, element]),
-	size: string,
-	clickable: bool,
+	status: oneOf(['error', 'success', 'info', 'warning']),
+	source: string,
 	action: func,
+	clickable: bool,
 };
+
+export default Avatar;

@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { element, oneOfType, string } from 'prop-types';
-import PlayerContext from './PlayerContext';
+import { any } from 'prop-types';
+import { PlayerContext } from './PlayerContext';
 
-export default function PlayerProvider({ children }) {
+const PlayerProvider = ({ children }) => {
 	const [isGM, setIsGM] = useState(false);
 
-	const togglePlayerMode = () => {
-		isGM ? setIsGM(false) : setIsGM(true);
-	};
+	const becomeGM = () => setIsGM(true);
 
 	return (
-		<PlayerContext.Provider value={{ isGM, togglePlayerMode }}>
+		<PlayerContext.Provider value={{ isGM, becomeGM }}>
 			{children}
 		</PlayerContext.Provider>
 	);
-}
+};
 
 PlayerProvider.propTypes = {
-	children: oneOfType([element, string]).isRequired,
+	children: any.isRequired,
 };
+
+export { PlayerProvider };

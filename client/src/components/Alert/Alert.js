@@ -1,28 +1,32 @@
-import { func, oneOfType, string, element } from 'prop-types';
-import { Card, Message, Heading, MessageIcon, CloseIcon } from './styles';
+import { any, func, string } from 'prop-types';
+import { space } from '../../shared';
+import { Card, Header, Message, StyledIcon } from './styles';
 
-export default function index({ id, type, msg, closeAlert }) {
-	const MIcon = MessageIcon(type);
-	return (
-		<Card type={type}>
-			<MIcon />
-			<Message>
-				<Heading>{type}</Heading>
-				{msg}
-			</Message>
-			<CloseIcon
-				color={({ theme }) => theme.app.text}
-				width='24'
-				height='24'
-				onClick={() => closeAlert(id)}
-			/>
-		</Card>
-	);
-}
+const Alert = ({ id, type, message, closeAlert, children, ...props }) => (
+	<Card type={type} {...props}>
+		<StyledIcon
+			icon={type}
+			style={{
+				position: 'relative',
+				top: 0,
+				left: 0,
+				marginRight: space.small[300],
+			}}
+		/>
+		<Message>
+			<Header>{message}</Header>
+			{children}
+		</Message>
+		<StyledIcon icon='close' onClick={() => closeAlert(id)} />
+	</Card>
+);
 
-index.propTypes = {
+Alert.propTypes = {
+	id: string.isRequired,
 	type: string.isRequired,
-	msg: string.isRequired,
-	children: oneOfType([element, string]).isRequired,
+	children: any.isRequired,
 	closeAlert: func.isRequired,
+	message: string.isRequired,
 };
+
+export default Alert;

@@ -1,1 +1,1 @@
-export { default as DarkBackground } from './DarkBackground';
+export { default as ModalBackground } from './ModalBackground';

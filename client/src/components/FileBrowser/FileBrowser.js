@@ -12,8 +12,7 @@ const FileBrowserComponent = () => {
         <Fragment>
             <div className="col-12 div-scale section-border">
                 <div className="row justify-content-center" >  
-                        <h4>File Browser</h4>
-                      
+                    <h4>File Browser</h4>                    
                 </div>
 
                 <FileBrowser files={[

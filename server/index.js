@@ -1,5 +1,7 @@
 const authenticate = require('./auth.js');
 const bodyParser = require('body-parser');
+
+const fileSystem = require('./helpers/fileSystem.js')
 const chat = require('./Chat/Chat.js');
 const express = require('express');
 const Dice = require('./Dice/Dice');
@@ -11,8 +13,12 @@ const swaggerOptions = require('./swagger.js');
 
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
+const path = require('path');
 const decompress = require('decompress');
 const zipper = require('zip-local');
+const Moment = require('moment');
+
+const osxfolder = `${__dirname}/Uploads/__MACOSX`;
 
 // Creates the Express App
 const app = express();
@@ -34,9 +40,19 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(fileUpload());
+
 const gameFile = 'game.zip';
 
 app.use(express.static('Uploads'));
+
+
+app.get('/get-files',(req, res) => {
+    const folder = 'Uploads';
+    const files = fileSystem.getUploadFiles(folder);
+    const listOfFiles = fileSystem.getListOfFileObjects(files);
+    res.send(listOfFiles);
+});
+
 
 //Upload Endpoint
 
@@ -46,11 +62,14 @@ app.post('/upload', (req,res) => {
         return res.status(400).json({ msg: 'No file uploaded' });
     }
     const file = req.files.file;
-    const path = `${__dirname}/Uploads/${file.name}`
+    const path = `${__dirname}/Uploads/${file.name}`;
 
     file.mv(path, err => {
         decompress(path,'Uploads/').then(files=>{
             fs.unlinkSync(path);
+            if(fs.existsSync(osxfolder)){
+                fs.rmdirSync(osxfolder, {recursive: true});
+            }
             console.log("done!");
         });
         if(err){
@@ -86,25 +105,24 @@ app.get('/download', function(req, res){
 
 //Delete Endpoint
 
-app.post('/delete', function(req, res){
+  app.post('/delete', function(req, res){
+     
+    const file = `${__dirname}/Uploads/${gameFile}`;
+    const folder = `${__dirname}/Uploads/game`;
 
-  const file = `${__dirname}/Uploads/${gameFile}`;
-  const folder = `${__dirname}/Uploads/game`;
-  const osxfolder = `${__dirname}/Uploads/__MACOSX`;
-
-  if(fs.existsSync(file)){
-    fs.unlinkSync(file)
-  } 
-  if(fs.existsSync(folder) ){
-    fs.rmdirSync(folder, { recursive: true })  
-
-  } 
-  if(fs.existsSync(osxfolder)){
-    fs.rmdirSync(osxfolder, { recursive: true })
-
-  } else{
-    console.log("Server file doesn't exists!");
-  }
+    if(fs.existsSync(file)){
+        fs.unlinkSync(file)
+    } 
+    if(fs.existsSync(folder) ){
+        fs.rmdirSync(folder, { recursive: true })  
+    
+    } 
+    if(fs.existsSync(osxfolder)){
+        fs.rmdirSync(osxfolder, { recursive: true })
+    
+    } else{
+        console.log("Server file doesn't exists!");
+    }
 
 });
 

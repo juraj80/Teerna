@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^9.5.0",
+    "moment": "^2.29.1",
     "sqlite3": "^4.0.0",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6",

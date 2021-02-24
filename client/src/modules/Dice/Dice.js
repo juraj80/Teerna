@@ -39,17 +39,6 @@ class Dice extends Component {
 		return roll;
 	}
 
-<<<<<<< HEAD
-    async roll(type = 'public') {
-      const roll = await this.diceBag.throw.bind(this.diceBag)(this.sides, "public");
-      this.setState({history: this.state.history.concat([roll])})
-      this.setState(
-        {roll: roll, rollState: "rolling"},
-        ()=>setTimeout(() => this.setState({rollState: 'idle'}), 10)
-      );
-      return roll;
-    }
-=======
 	/**
 	 * Formats a time to be more human friendly.
 	 *
@@ -61,7 +50,6 @@ class Dice extends Component {
 	rolledWhen(roll) {
 		return timeAgo(roll.time);
 	}
->>>>>>> ui-v2
 
 	/**
 	 * Hook executed when the connection with the WS is opened

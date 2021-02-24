@@ -4,6 +4,7 @@ import decode from 'jwt-decode';
 import { PlayerContext } from '../../contexts';
 import { Container, Wrapper } from './styles';
 import { useConsoleSize } from '../../hooks';
+import { Chat } from '../Chat';
 import { Redirect } from 'react-router-dom';
 
 const Chatbar = ({ user }) => {
@@ -32,7 +33,7 @@ const Chatbar = ({ user }) => {
 	return (
 		<Wrapper navWidth={`${width * 0.25}px`} navHeight={`${height - 48}px`}>
 			<Container navWidth={`${width * 0.25}px`}>
-				{chatView === 'GM' ? <div> GM CHAT </div> : <div>CHAT HERE</div>}
+				{chatView === 'GM' ? <div> GM CHAT </div> : <Chat/>}
 			</Container>
 		</Wrapper>
 	);

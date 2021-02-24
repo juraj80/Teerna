@@ -1,1 +1,1 @@
-export { DiceConsumer, DiceProvider } from './DiceContext';
+export { DiceContext, DiceProvider } from './DiceContext';

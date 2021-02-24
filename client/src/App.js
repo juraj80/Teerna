@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import decode from 'jwt-decode';
-// import { Chat, Dice, DiceBag } from './modules';
+import { Chat, Dice, DiceBag } from './modules';
 import {
 	AlertProvider,
 	AuthProvider,
-	// DiceProvider,
+	DiceProvider,
 	ModalProvider,
 	PlayerProvider,
 } from './contexts';
@@ -28,8 +28,8 @@ import { gameManagementOptions } from './components/Sidebar/data';
 // import DeleteGame from './components/DeleteGame';
 // import LoadGame from './components/LoadGame';
 // import FileManager from './components/FileBrowser';
-// import { onAuthStateChange } from './contexts';
 export default function App() {
+	const diceBag = new DiceBag();
 	const token = localStorage.getItem('token');
 	const [user, setUser] = useState(undefined);
 	const [theme, toggleTheme, componentMounted] = useDarkMode();
@@ -53,6 +53,7 @@ export default function App() {
 					<AlertProvider>
 						<PlayerProvider>
 							<ModalProvider>
+								<DiceProvider value={diceBag}>
 								<>
 									<GlobalStyle />
 									{!componentMounted ? (
@@ -90,6 +91,7 @@ export default function App() {
 										</Console>
 									)}
 								</>
+								</DiceProvider>
 							</ModalProvider>
 						</PlayerProvider>
 					</AlertProvider>

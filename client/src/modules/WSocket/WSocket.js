@@ -1,5 +1,21 @@
+import firebase from 'firebase';
 import { createMessage } from '../Chat';
-import {onAuthStateChange} from "../../contexts";
+
+export const onAuthStateChange = callback => {
+  return firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      console.log("Full user", user);
+      firebase.auth().currentUser.getIdToken(false).then(function(idToken) {
+        const { uid, email, displayName } = user;
+        callback({ loggedIn: true, id: uid, email, username: displayName, idToken});
+      }).catch(function(error) {
+        console.error(error);
+      });
+    } else {
+      callback({ loggedIn: false });
+    }
+  });
+};
 
 const config = {
   ws: {

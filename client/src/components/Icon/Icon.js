@@ -1,20 +1,20 @@
 import { string } from 'prop-types';
 import { icons } from '../../shared';
 
-const Icon = ({ icon, width, height, colour, ...props }) => {
+export default function Icon({ icon, width, height, colour, ...props }) {
 	const { viewBox, d } = icons[icon];
 	return (
 		<svg
 			viewBox={viewBox}
-			width={width || '22px'}
-			height={height || '22px'}
+			width={width || '24px'}
+			height={height || '24px'}
 			xlmns='http://www.w3.org/2000/svg'
 			{...props}
 		>
 			<path fill={colour || 'currentColor'} d={d} />
 		</svg>
 	);
-};
+}
 
 Icon.propTypes = {
 	icon: string.isRequired,
@@ -22,5 +22,3 @@ Icon.propTypes = {
 	height: string,
 	colour: string,
 };
-
-export default Icon;

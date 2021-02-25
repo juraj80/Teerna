@@ -1,22 +1,15 @@
 import { any } from 'prop-types';
+import { Card } from './styles';
 import { useConsoleSize } from '../../hooks';
-import { AppWrapper } from './styles';
 
-const Console = ({ children }) => {
-	const consoleSize = useConsoleSize();
+export default function Console({ children }) {
+	const { width, height } = useConsoleSize();
 
 	return (
-		<AppWrapper
-			consoleWidth={consoleSize.width}
-			consoleHeight={consoleSize.height}
-		>
+		<Card consoleWidth={width} consoleHeight={height}>
 			{children}
-		</AppWrapper>
+		</Card>
 	);
-};
+}
 
-Console.propTypes = {
-	children: any,
-};
-
-export default Console;
+Console.propTypes = { children: any };

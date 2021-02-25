@@ -1,25 +1,19 @@
-import { bool, func, oneOf, string } from 'prop-types';
-import { AvatarWrapper, Image } from './styles';
+import { func, oneOf, string } from 'prop-types';
 import { images } from '../../shared';
 
-const Avatar = ({ style, status, source, action, clickable, ...props }) => {
-	return (
-		<AvatarWrapper
-			status={status || null}
-			onClick={action || null}
-			clickable={clickable || false}
-			{...props}
-		>
-			<Image src={source || images.avatar.blank} alt='avatar' />
-		</AvatarWrapper>
-	);
-};
+export default function Avatar({ action, source, altText, ...props }) {
+	<Image
+		onClick={action}
+		src={source || images.avatar.blank}
+		alt={altText || 'Profile Image'}
+		{...props}
+	/>;
+}
 
 Avatar.propTypes = {
-	status: oneOf(['error', 'success', 'info', 'warning']),
-	source: string,
 	action: func,
-	clickable: bool,
+	source: string,
+	altText: string,
+	status: oneOf('error', 'info', 'success', 'disabled'),
+	size: oneOf(['big', 'small']),
 };
-
-export default Avatar;

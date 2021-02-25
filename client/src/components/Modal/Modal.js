@@ -1,25 +1,23 @@
-import { any, func, string } from 'prop-types';
-import { ContentArea, ModalArea, ModalHeading, CloseButton } from './styles';
+import { node, string } from 'prop-types';
+import { Icon } from '../Icon';
+import { Card, Header, Content, Image } from './styles';
 
-const Modal = ({ children, title, state, size, updateShow, ...props }) => (
-	<ModalArea
-		state={state}
-		onClick={e => e.stopPropagation()}
-		size={size || 'standard'}
-		{...props}
-	>
-		<CloseButton onClick={() => updateShow(false)} />
-		{title && <ModalHeading size={size}>{title}</ModalHeading>}
-		<ContentArea>{children}</ContentArea>
-	</ModalArea>
-);
+export default function Modal({ icon, image, title, children }) {
+	return (
+		<Card>
+			<Header>
+				{icon && <Icon icon={icon} />}
+				{image && <Image src={image} alt={title} />}
+				{title}
+			</Header>
+			<Content>{children}</Content>
+		</Card>
+	);
+}
 
 Modal.propTypes = {
-	children: any.isRequired,
-	title: string,
-	state: string.isRequired,
-	size: string,
-	updateShow: func.isRequired,
+	icon: string,
+	image: string,
+	title: string.isRequired,
+	children: node.isRequired,
 };
-
-export default Modal;

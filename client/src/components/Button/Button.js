@@ -1,49 +1,31 @@
-import { func, oneOf, string, bool } from 'prop-types';
-import { ButtonWrapper, LinkWrapper } from './styles';
-import { Icon } from '../Icon';
+import { bool, func, oneOf, string } from 'prop-types';
+import { ButtonBlock, ButtonLink } from './styles';
 
-const Button = ({ action, href, icon, text, colour, fill, ...props }) => {
-	if (href)
-		return (
-			<LinkWrapper to={href} colour={colour} fill={fill} {...props}>
-				{icon && <Icon icon={icon} fill='fill' background={colour} />}
-				{text}
-			</LinkWrapper>
-		);
+export default function Button(props) {
+	const { label, type, action, href, disabled } = props;
 
-	return (
-		<ButtonWrapper
-			onClick={action}
-			colour={colour}
-			fill={fill}
-			status={status}
+	return href ? (
+		<ButtonLink to={href} disabled={disabled} {...props}>
+			{label}
+		</ButtonLink>
+	) : (
+		<ButtonBlock
+			onClick={() => !disabled && action()}
+			disabled={disabled}
+			type={type}
 			{...props}
 		>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			{icon && <Icon icon={icon} fill='fill' background={colour} />}
-			{text}
-		</ButtonWrapper>
+			{label}
+		</ButtonBlock>
 	);
-};
-
-const bntFills = ['outline', 'fill'];
-const btnBorders = ['minimal', 'regular', 'exaggerated', 'round'];
-const btnTypes = ['button', 'submit', 'cancel'];
-const btnColours = ['blue', 'black', 'white'];
+}
 
 Button.propTypes = {
-	text: string,
-	fill: oneOf(bntFills),
-	border: oneOf(btnBorders),
-	action: func,
-	href: string,
-	type: oneOf(btnTypes),
-	colour: oneOf(btnColours),
-	icon: string,
-	disabled: bool,
-};
-
-export default Button;
+    action: func,
+    href: string,
+    type: string,
+    status: oneOf(['error','success','warning','info', 'disabled']),
+    colour: string,
+    disabled: bool,
+    label: string.isRequired,
+}

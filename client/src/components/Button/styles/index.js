@@ -1,2 +1,2 @@
-export { default as ButtonWrapper } from './ButtonWrapper';
-export { default as LinkWrapper } from './LinkWrapper';
+export { default as ButtonBlock } from './ButtonBlock';
+export { default as ButtonLink } from './ButtonLink';

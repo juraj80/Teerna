@@ -1,4 +1,4 @@
-export { default as CloseButton } from './CloseButton';
-export { default as ContentArea } from './ContentArea';
-export { default as ModalArea } from './ModalArea';
-export { default as ModalHeading } from './ModalHeading';
+export {default as Card } from './Card';
+export {default as Content } from './Content';
+export {default as Heading } from './Heading';
+export {default as Image } from './Image';

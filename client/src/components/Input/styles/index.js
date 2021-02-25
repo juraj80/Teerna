@@ -1,2 +1,3 @@
-export { default as InputWrapper } from './InputWrapper';
-export { default as StyledInput } from './StyledInput';
+export { default as Box } from './Box';
+export { default as Container } from './Container';
+export { default as SubmitButton } from './SubmitButton';

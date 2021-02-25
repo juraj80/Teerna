@@ -1,14 +1,11 @@
-import React from 'react';
-import { StyledSpinner } from './styles';
+import { Border, Box, Core } from './styles';
 
-export const Spinner = () => {
+export default function () {
 	return (
-		<StyledSpinner>
-			<div>
-				<div></div>
-			</div>
-		</StyledSpinner>
+		<Box>
+			<Border>
+				<Core />
+			</Border>
+		</Box>
 	);
-};
-
-export default Spinner;
+}

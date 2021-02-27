@@ -1,0 +1,61 @@
+import { transparentize } from 'polished';
+import { colour } from '../styles';
+
+export default {
+	mode: 'dark',
+	background: {
+		button: colour.blue[0],
+		card: transparentize(0.13, colours.grey[60]),
+		console: transparentize(0.5, colour.grey[260]),
+		centre: transparentize(0.5, colour.grey[280]),
+		navbar: transparentize(0.5, colour.grey[220]),
+		appbar: transparentize(0.5, colour.grey[200]),
+		sidebar: transparentize(0.5, colour.grey[240]),
+		modal: '',
+		input: colour.grey[220],
+		tooltip: colour.grey[300],
+		hover: {
+			navbar: transparentize(0.3, colour.grey[240]),
+			appbar: transparentize(0.3, colour.grey[220]),
+			sidebar: transparentize(0.3, colour.grey[260]),
+			button: '',
+		},
+	},
+	text: {
+		alert: colour.grey[300],
+		console: colour.grey[40],
+		centre: colour.white,
+		navbar: colour.grey[40],
+		appbar: colour.grey[20],
+		sidebar: colour.grey[40],
+		modal: '',
+		button: '',
+		input: colour.grey[20],
+		tooltip: colour.white,
+		hover: {
+			navbar: colour.grey[0],
+			appbar: colour.grey[0],
+			sidebar: colour.grey[0],
+			button: '',
+		},
+	},
+	border: {
+		navbar: colour.grey[40],
+		appbar: colour.grey[20],
+		sidebar: colour.grey[40],
+		modal: '',
+		input: colour.grey[440],
+	},
+	themeToggle: {
+		100: transparentize(0.5, '#DBDBE9'),
+		200: transparentize(0.5, '#A4A4C9'),
+		300: transparentize(0.5, '#6D6DA8'),
+		400: transparentize(0.5, '#494992'),
+		500: transparentize(0.5, '#24247C'),
+		600: transparentize(0.5, '#35353D'),
+		700: transparentize(0.5, '#35355D'),
+		800: transparentize(0.5, '#353553'),
+		900: transparentize(0.5, '#35354B'),
+		1000: transparentize(0.5, '#353544'),
+	},
+};

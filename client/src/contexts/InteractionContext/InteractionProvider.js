@@ -4,7 +4,7 @@ import { allCommands } from '../../utils/commands';
 import { DiceBag } from './DiceBag';
 import { InteactionContext } from './InteactionContext';
 
-const InteractionProvider = ({ children }) => {
+export const InteractionProvider = ({ children }) => {
 	// DICE
 	const [dicebag, setDicebag] = useState(undefined);
 	const [sides, setSides] = useState(null);
@@ -88,4 +88,3 @@ const InteractionProvider = ({ children }) => {
 	);
 };
 
-export { InteractionProvider };

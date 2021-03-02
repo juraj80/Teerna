@@ -18,14 +18,24 @@ const fireBaseAdmin = require('firebase-admin');
  */
 
 // Firebase configuration. TODO: these values shouldn't be visible in GitHub. Should use environment variables instead. 
+// const config = {
+//   apiKey: 'AIzaSyC_A-0aI3bvDES4juu6yaz2Ek9znNzKpJA',
+//   authDomain: 'agile-project-fc4de.firebaseapp.com',
+//   projectId: 'agile-project-fc4de',
+//   storageBucket: 'agile-project-fc4de.appspot.com',
+//   messagingSenderId: '593366118897',
+//   appId: '1:593366118897:web:b85a5891ff06fd60bf9450',
+//   measurementId: 'G-641H7XG0MM',
+// };
 const config = {
-  apiKey: 'AIzaSyC_A-0aI3bvDES4juu6yaz2Ek9znNzKpJA',
-  authDomain: 'agile-project-fc4de.firebaseapp.com',
-  projectId: 'agile-project-fc4de',
-  storageBucket: 'agile-project-fc4de.appspot.com',
-  messagingSenderId: '593366118897',
-  appId: '1:593366118897:web:b85a5891ff06fd60bf9450',
-  measurementId: 'G-641H7XG0MM',
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+	databaseURL: process.env.REACT_APP_BASEURL,
+	projectId: process.env.REACT_APP_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+	appId: process.env.REACT_APP_APP_ID,
+	measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initializ Firebase

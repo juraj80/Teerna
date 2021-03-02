@@ -1,7 +1,10 @@
 import { createGlobalStyle, css } from 'styled-components';
 import { opacify, transparentize } from 'polished';
 import { images } from '../assets';
-import { colour, font, space, mediaQuery } from '../';
+import colour from './colour';
+import font from './font';
+import mediaQuery from './mediaQuery';
+import space from './space';
 
 export default createGlobalStyle`
     html {

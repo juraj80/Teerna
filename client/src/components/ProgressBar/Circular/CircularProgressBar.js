@@ -1,4 +1,5 @@
 import { number } from 'prop-types';
+import { Circle, Pie } from './styles';
 
 export default function CircularProgressBar({ percentDone }) {
 	return (

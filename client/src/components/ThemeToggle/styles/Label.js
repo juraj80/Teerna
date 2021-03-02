@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { order, round } from '../../../shared';
 
 export default styled.label`
@@ -14,7 +14,7 @@ export default styled.label`
 		height: calc(90px * 0.5 / 2);
 		width: calc(90px * 0.5 / 2);
 		background-color: ${({ theme }) => theme.themeToggle[100]};
-		border-radius: ${round.circular};
+		border-radius: 50%;
 		position: relative;
 		top: calc(10px / 2);
 		left: calc(10px / 1.75);
@@ -30,7 +30,7 @@ export default styled.label`
 			height: calc(36px * 0.5 / 2);
 			width: calc(36px * 0.5 / 1.75);
 			background-color: ${({ theme }) => theme.themeToggle[300]};
-			border-radius: ${round.circular};
+			border-radius: 50%;
 			top: 50%;
 			left: 50%;
 			transition: 0.7s;
@@ -43,7 +43,7 @@ export default styled.label`
 				height: calc(14px * 0.5 / 2);
 				width: calc(14px * 0.5 / 2.25);
 				background-color: ${({ theme }) => theme.themeToggle[500]};
-				border-radius: ${round.circular};
+				border-radius: 50%;
 				position: absolute;
 				transition: 0.7s;
 				top: 50%;
@@ -60,7 +60,7 @@ export default styled.label`
 				display: block;
 				height: calc(35px * 0.5 / 2);
 				width: calc(35px * 0.5 / 2);
-				border-radius: ${round.circular};
+				border-radius: 50%;
 				top: 50%;
 				left: 50%;
 				overflow: hidden;
@@ -77,7 +77,7 @@ export default styled.label`
 					display: block;
 					height: calc(6px * 0.5 / 2);
 					width: calc(17px * 0.5 / 2);
-					border-radius: ${round.circular};
+					border-radius: 50%;
 					border: 2px solid ${({ theme }) => theme.themeToggle[800]};
 					position: absolute;
 					transition: 0.7s;
@@ -96,16 +96,16 @@ export default styled.label`
 			height: 100%;
 			width: 100%;
 			display: block;
-			border-radius: ${round.circular};
+			border-radius: 50%;
 			overflow: hidden;
 			position: absolute;
-			z-index: ${order.navbarItems};
+			z-index: ${order.themeToggle};
 			perspective: 70px;
 
 			& span {
 				height: calc(80px * 0.5 / 2);
 				width: calc(80px * 0.5 / 2);
-				border-radius: ${round.circular};
+				border-radius: 50%;
 				background-image: linear-gradient(
 					-135deg,
 					transparent 10%,
@@ -123,7 +123,7 @@ export default styled.label`
 					position: absolute;
 					top: calc(-36px / 2);
 					right: calc(-40px / 2);
-					border-radius: ${round.circular};
+					border-radius: 50%;
 					box-shadow: 4px -2px 0 -3px rgba(255, 255, 255, 0.4);
 					filter: blur(1px);
 					transform: rotate(-10deg);

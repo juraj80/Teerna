@@ -16,6 +16,6 @@ export default styled.div`
 			: colour && theme.card[colour];
 	}};
 	border-radius: ${round.regular};
-	border: 1px solid ${theme.background.console};
+	border: 1px solid ${({ theme }) => theme.background.console};
 	padding: ${space.medium[200]};
 `;

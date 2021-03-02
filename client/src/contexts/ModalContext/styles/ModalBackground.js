@@ -9,7 +9,7 @@ export default styled.div`
 	width: 100vw;
 	top: 0;
 	left: 0;
-	z-index: ${order.overlay.blurBackground};
+	z-index: ${order.modalBackground};
 	display: flex;
 	align-items: center;
 	justify-content: center;

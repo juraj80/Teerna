@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { colour, font, round } from '../../../shared';
+import { colour, font, round, space } from '../../../shared';
 
 export default styled.div`
 	position: relative;

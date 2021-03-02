@@ -24,8 +24,8 @@ export default function useConsoleSize() {
 	useEffect(() => {
 		windowSize &&
 			setConsoleSize({
-				width: windowSize.width - Number(space.medium[300]).replace('px', ''),
-				height: windowSize.height - Number(space.large[100]).replace('px', ''),
+				width: windowSize.width - Number(space.medium[300].replace('px', '')),
+				height: windowSize.height - Number(space.large[100].replace('px', '')),
 			});
 	}, [windowSize]);
 

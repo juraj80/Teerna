@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getTimeAgo } from '../../utils';
-import { allCommands } from '../../utils/commands';
+import { getTimeAgo, allCommands } from '../../utils';
 import { DiceBag } from './DiceBag';
-import { InteactionContext } from './InteactionContext';
+import { InteractionContext } from './InteractionContext';
 
 export const InteractionProvider = ({ children }) => {
 	// DICE
@@ -66,7 +65,7 @@ export const InteractionProvider = ({ children }) => {
 	const updateMessages = (msgs) => setMessages(msgs); 
 
 	return (
-		<InteactionContext.Provider
+		<InteractionContext.Provider
 			value={{
 				onOpen,
 				dicebag,
@@ -84,7 +83,7 @@ export const InteractionProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</InteactionContext.Provider>
+		</InteractionContext.Provider>
 	);
 };
 

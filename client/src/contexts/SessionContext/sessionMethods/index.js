@@ -21,7 +21,7 @@ export const sessionMethods = {
             setSessionGM({ id: user.sub, username: res.username });
         }).catch(err => setSessionErrors(prev => [...prev, err]));
     },
-	joinSession: (guid, setGuid, setSessionErrors) => {
+	joinSession: (guid, setGuid, setMessage, setSessionErrors) => {
         const user = decode(localStorage.getItem('token'));
         joinSession(guid, user)
         .then(async res => {

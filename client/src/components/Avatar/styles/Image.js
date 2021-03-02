@@ -6,14 +6,14 @@ export default styled.img`
         return !size 
             ? '64px'
             :  size === 'small' 
-            ? '44px' 
+            ? '32px' 
             : size === 'large' 
             && '88px'}};
 	height: ${({ size }) => {
         return !size 
             ? '64px'
             :  size === 'small' 
-            ? '44px' 
+            ? '32px' 
             : size === 'large' 
             && '88px'}};
 	border-radius: ${round.circular};

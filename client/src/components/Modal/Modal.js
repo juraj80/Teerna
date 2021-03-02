@@ -1,15 +1,15 @@
 import { node, string } from 'prop-types';
 import { Icon } from '../Icon';
-import { Card, Header, Content, Image } from './styles';
+import { Card, Heading, Content, Image } from './styles';
 
 export default function Modal({ icon, image, title, children }) {
 	return (
 		<Card>
-			<Header>
+			<Heading>
 				{icon && <Icon icon={icon} />}
 				{image && <Image src={image} alt={title} />}
 				{title}
-			</Header>
+			</Heading>
 			<Content>{children}</Content>
 		</Card>
 	);

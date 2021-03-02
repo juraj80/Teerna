@@ -9,6 +9,8 @@ export default {
 		pink: rgb(239, 135, 65),
 		orange: rgb(239,65,92),
 		purple: rgb(120, 60, 174),
+		light: colour.white,
+		dark: colour.grey[280],
 	},
 	card: {
 		blue: colour.blue[0],

@@ -2,7 +2,7 @@ import { any, func, oneOf, string } from 'prop-types';
 import { colour, space } from '../../shared';
 import { Card, Header, Message, StyledIcon } from './styles';
 
-export default function Alert({ id, status, closeAlert, children, ...props }) {
+export default function Alert({ id, status, message, closeAlert, children, ...props }) {
 	return (
 		<Card status={status} {...props}>
 			<StyledIcon
@@ -26,10 +26,8 @@ export default function Alert({ id, status, closeAlert, children, ...props }) {
 
 Alert.propTypes = {
 	id: string.isRequired,
-	status: oneOf('error', 'success', 'info', 'warning'),
+	status: oneOf(['error', 'success', 'info', 'warning']),
 	children: any.isRequired,
 	closeAlert: func.isRequired,
 	message: string.isRequired,
 };
-
-export default Alert;

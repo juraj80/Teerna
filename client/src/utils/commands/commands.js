@@ -1,4 +1,4 @@
-import { Command } from './Message';
+import { Command} from '../messages';
 
 const playerSpecificOptional = "This command can be player specific.";
 const playerSpecific = "This command accepts player names as parameters to restrict the action to them.";

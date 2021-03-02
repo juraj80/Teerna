@@ -1,3 +1,4 @@
+import { Roll } from './Roll';
 import { connection } from '../../WebSocket';
 
 export class DiceBag {

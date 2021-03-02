@@ -1,6 +1,7 @@
 import firebase from 'firebase';
-import 'firebase/auth';
 import 'firebase/app';
+import 'firebase/auth';
+import 'firebase/storage';
 
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_API_KEY,
@@ -16,11 +17,14 @@ const firebaseConfig = {
 // initialize
 firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
-firebase.auth();
+const auth = firebase.auth();
+const firestore = firebase.firestore();
+const storage = firebase.storage();
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.addScope('https://www.googleapis.com/auth/userinfo.profile');
 const githubProvider = new firebase.auth.GithubAuthProvider();
+githubProvider.addScope('user');
 
-export { googleProvider, githubProvider };
+export { firebase, googleProvider, githubProvider, auth, firestore, storage };
 export default firebaseConfig;

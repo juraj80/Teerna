@@ -5,7 +5,7 @@ import { getTimeAgo } from '../../utils';
 import { connection } from '../../WebSocket';
 import { Avatar, Icon } from '../../components';
 import { ChatMessage } from '../../utils';
-import { ChatBox, MessageBoard, Span, ActiveBox, InputBox, Action, Input, Button } from './styles';
+import { ChatBox, MessageBoard, Span, ActiveBox, InputBox, Action, Header, Message, MessageContent } from './styles';
 
 
 

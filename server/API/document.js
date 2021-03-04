@@ -1,4 +1,5 @@
 const express = require('express');
+const authenticate = require("../auth.js");
 const router = express.Router();
 
 
@@ -14,16 +15,19 @@ const router = express.Router();
  * Lists the game documents
  *
  * @openapi
- * /documents/get-files:
+ * /api/documents/get-files:
  *   get:
  *     tags:
  *       - Document manager
  *     summary: Lists the documents uploaded to the game.
+ *     parameters:
+ *       - $ref: '#/components/parameters/guidQuery'
+ *       - $ref: '#/components/parameters/tokenQuery'
  *     responses:
  *       200:
  *         description: the list of files within the game
  */
-router.get('/get-files',(req, res) => {
+router.get('/get-files', authenticate, (req, res) => {
   const folder = 'Uploads';
   const files = fileSystem.getUploadFiles(folder);
   const listOfFiles = fileSystem.getListOfFileObjects(files);
@@ -35,11 +39,14 @@ router.get('/get-files',(req, res) => {
  * Uploads a new document to the game.
  *
  * @openapi
- * /documents/upload:
+ * /api/documents/upload:
  *   post:
  *     tags:
  *       - Document manager
  *     summary: Upload a new document to the game.
+ *     parameters:
+ *       - $ref: '#/components/parameters/guidBody'
+ *       - $ref: '#/components/parameters/tokenBody'
  *     responses:
  *       400:
  *         description: No file uploaded
@@ -47,7 +54,7 @@ router.get('/get-files',(req, res) => {
  *         description: the filename and filepath of the uploaded file.
  *
  */
-router.post('/upload', (req,res) => {
+router.post('/upload', authenticate, (req,res) => {
     console.log('upload called');
     if(req.files === null){
         return res.status(400).json({ msg: 'No file uploaded' });
@@ -75,16 +82,19 @@ router.post('/upload', (req,res) => {
  * Download Endpoint
  *
  * @openapi
- * /document/download:
+ * /api/document/download:
  *   get:
  *     tags:
  *       - Document manager
  *     summary: download the game documents for later use.
+ *     parameters:
+ *       - $ref: '#/components/parameters/guidQuery'
+ *       - $ref: '#/components/parameters/tokenQuery'
  *     responses:
  *       200:
  *         description: the zipped game folder
  */
-router.get('/download', function(req, res){
+router.get('/download', authenticate, function(req, res){
   const folder = `${__dirname}/Uploads/game`;
   if(fs.existsSync(folder) ){
     const file = `${__dirname}/Uploads/${gameFile}`;
@@ -106,18 +116,21 @@ router.get('/download', function(req, res){
  * Delete Endpoint
  *
  * @openapi
- * /document/delete:
+ * /api/document/delete:
  *   post:
  *     tags:
  *       - Document manager
  *     summary: delete a given document from the game folder
+ *     parameters:
+ *       - $ref: '#/components/parameters/guidBody'
+ *       - $ref: '#/components/parameters/tokenBody'
  *     responses:
  *       200:
  *         description: document deleted
  *       400:
  *         description: document does not exist
  */
-router.post('/delete', function(req, res){
+router.post('/delete', authenticate, function(req, res){
   const file = `${__dirname}/Uploads/${gameFile}`;
   const folder = `${__dirname}/Uploads/game`;
   if(fs.existsSync(file)){

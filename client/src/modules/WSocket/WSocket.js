@@ -1,12 +1,28 @@
-import {createMessage} from "../Chat/Message";
-import {onAuthStateChange} from "../../contexts";
+import firebase from 'firebase';
+import { createMessage } from '../Chat';
+
+export const onAuthStateChange = callback => {
+  return firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      console.log("Full user", user);
+      firebase.auth().currentUser.getIdToken(false).then(function(idToken) {
+        const { uid, email, displayName } = user;
+        callback({ loggedIn: true, id: uid, email, username: displayName, idToken});
+      }).catch(function(error) {
+        console.error(error);
+      });
+    } else {
+      callback({ loggedIn: false });
+    }
+  });
+};
 
 const config = {
   ws: {
     domain: 'localhost',
-    port: 8888
-  }
-}
+    port: 8888,
+  },
+};
 
 /**
  * This class configures the Web Socket connections and allows for several different consumers to be notified when WS events occurs.
@@ -14,7 +30,6 @@ const config = {
  * This is a singleton and should not be instantiated directly, therefore, it is not exported.
  */
 class WSConnection {
-
   constructor(onOpen = [], onMessage = [], onClose = []) {
     this.ws = new WebSocket(`ws://${config.ws.domain}:${config.ws.port}`);
     this.ws.onopen = this.onOpen.bind(this);
@@ -23,9 +38,9 @@ class WSConnection {
     this.subscribers = {
       open: onOpen,
       message: onMessage,
-      close: onClose
-    }
-    onAuthStateChange((u) => this.user = u);
+      close: onClose,
+    };
+    onAuthStateChange(u => (this.user = u));
   }
 
   onOpen(msg) {
@@ -67,9 +82,7 @@ class WSConnection {
    */
   sendMessage(text) {
     const message = createMessage(text, this.user);
-    this.ws.send(
-      JSON.stringify(message)
-    );
+    this.ws.send(JSON.stringify(message));
     return message;
   }
 
@@ -82,11 +95,8 @@ class WSConnection {
    * @returns {"open"|"closed"}
    */
   getStatus() {
-    return this.ws.readyState === this.ws.OPEN ? 'open': 'closed';
+    return this.ws.readyState === this.ws.OPEN ? 'open' : 'closed';
   }
-
-
-
 }
 
 let conn;

@@ -1,125 +1,115 @@
-//import Chat from '../src/modules/Chat/Chat';
-import Chat from './components/Chat/Chat.js';
-import Dice from './modules/Dice/Dice.js';
-import {DiceBag} from './modules/DiceBag/DiceBag';
-import {DiceProvider} from './contexts/DiceContext/DiceContext';
-import { useState, useContext, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, match } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import decode from 'jwt-decode';
+import { Chat, Dice, DiceBag } from './modules';
 import {
-  AlertProvider,
-  ModalProvider,
-  AuthContext,
-  AuthProvider,
-  PlayerProvider,
+	AlertProvider,
+	AuthProvider,
+	DiceProvider,
+	ModalProvider,
+	PlayerProvider,
 } from './contexts';
-import { useDarkMode } from './hooks';
-import { AppWrapper, AppHeader, Spinner } from './components';
-
-
-import { darkTheme, lightTheme } from './shared';
-import { GlobalStyle } from './styles';
-import { Landing } from './pages';
-import ActiveDashboard from './components/ActiveDashboard';
-
-import UploadGame from './components/UploadGame';
-import DownloadGame from './components/DownloadGame';
-import DeleteGame from './components/DeleteGame';
-import LoadGame from './components/LoadGame';
-import FileManager from './components/FileBrowser';
-
-
-
-
-import { onAuthStateChange } from './contexts';
-
+import { useContent, useDarkMode } from './hooks';
+import {
+	Spinner,
+	Console,
+	Appbar,
+	Navbar,
+	Sidebar,
+	Chatbar,
+	CentreContent,
+} from './components';
+import { darkTheme, lightTheme, GlobalStyle } from './shared';
+import { gameManagementOptions } from './components/Sidebar/data';
+// import { UploadGame, DeleteGame, DownloadGame, LoadGame, FileManager } from './components';
+// import UploadGame from './components/UploadGame';
+// import DownloadGame from './components/DownloadGame';
+// import DeleteGame from './components/DeleteGame';
+// import LoadGame from './components/LoadGame';
+// import FileManager from './components/FileBrowser';
 export default function App() {
-  const diceBag = new DiceBag();
-  const [user, setUser] = useState({ loggedIn: false });
+	const diceBag = new DiceBag();
+	const token = localStorage.getItem('token');
+	const [user, setUser] = useState(undefined);
+	const [theme, toggleTheme, componentMounted] = useDarkMode();
+	const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-  const [theme, toggleTheme, componentMounted] = useDarkMode();
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+	const { changeContent, currentContent } = useContent(
+		undefined,
+		gameManagementOptions
+	);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChange(setUser);
-    return () => unsubscribe();
-  }, []);
+	useEffect(() => {
+		token && setUser(decode(token));
+	}, [token]);
 
-  return (
-    <ThemeProvider theme={themeMode}>
-      <AuthProvider value={user}>
-        <AlertProvider>
-          <PlayerProvider>
-            <ModalProvider>
-              <>
-                <GlobalStyle />
-                {!componentMounted ? (
-                  <Spinner />
-                ) : (
-                  <AppWrapper>
-                    <AppHeader toggleTheme={toggleTheme} />
-                    <BrowserRouter>
-                      <Switch>
-                        <Route path='/' exact component={Landing} />
-                        <Route
-                          path='/:userId'
-                          render={({ match }) => (
-                            <ActiveDashboard
-                              match={match}
-                              userId={match.params.userId}
-                            />
-                          )}
-                        />
+	// const diceBag = new DiceBag();
 
-                      </Switch>
-                    </BrowserRouter>
-
-
-                    <div className="row align-items-center mt-5">
-                      <div className="col-3 div-scale section-border">
-                        <UploadGame />
-                        <DownloadGame />
-                        <DeleteGame />
-
-                      </div>
-                      <div className="col-4 div-scale section-border">
-                        <FileManager/>
-                      </div>
-                      <div className="col-5 div-scale section-border">
-                        <LoadGame />
-                      </div>
-
-                    </div>
-                    <form method="post" action="/api/game-session">
-                    <input type="hidden" name="test" value="foo"/>
-                    <input type="hidden" name="user" value={user} />
-                    <input type="hidden" name="token" value={user.idToken} />
-                    <button type="button" name="log" onclick={() => console.log(user)}>Log</button>
-                    <button type="submit" name="Submit">New Game</button>
-                  </form>
-                  <form method="post" action="/api/game-session/invitation">
-                    <input type="hidden" name="token" value={user.idToken} />
-                    <div>Game UID: <input type="text" name="guid" /></div>
-                    <div>Email to invite: <input type="text" name="email" /></div>
-                    <button type="submit" name="Submit">Invite</button>
-                  </form>
-                    <DiceProvider value={diceBag}>
-                      <Chat />
-                      <section className="dice">
-                        <Dice sides={4}/>
-                        <Dice sides={6}/>
-                        <Dice sides={8}/>
-                        <Dice sides={12}/>
-                        <Dice sides={20}/>
-                      </section>
-                    </DiceProvider>
-                  </AppWrapper>
-                )}
-              </>
-            </ModalProvider>
-          </PlayerProvider>
-        </AlertProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  );
+	return (
+		<BrowserRouter>
+			<ThemeProvider theme={themeMode}>
+				<AuthProvider>
+					<AlertProvider>
+						<PlayerProvider>
+							<ModalProvider>
+								<DiceProvider value={diceBag}>
+								<>
+									<GlobalStyle />
+									{!componentMounted ? (
+										<Spinner />
+									) : (
+										<Console>
+											<Navbar toggleTheme={toggleTheme} user={user} />
+											<div style={{ display: 'flex' }}>
+												<Sidebar changeContent={changeContent} user={user} />
+												<div
+													style={{ display: 'flex', flexDirection: 'column' }}
+												>
+													<Appbar
+														user={user}
+														currentScreen={
+															currentContent ? currentContent.title : ''
+														}
+													/>
+													<CentreContent
+														user={user}
+														currentContent={currentContent || <div />}
+													/>
+												</div>
+												<Chatbar user={user} />
+											</div>
+											{/* <Switch>
+												{/*<Route exact path='/' component={Landing} />
+												 	<Route path='/dashboard/GM' component={GMDashboard} />
+													<Route
+													path='/dashboard/player'
+													component={PlayerDashboard}
+												/> 
+												<Redirect to='/'/>
+											</Switch> */}
+										</Console>
+									)}
+								</>
+								</DiceProvider>
+							</ModalProvider>
+						</PlayerProvider>
+					</AlertProvider>
+				</AuthProvider>
+			</ThemeProvider>
+		</BrowserRouter>
+	);
+	// <div className='row align-items-center mt-5'>
+	// 							<div className='col-3 div-scale section-border'>
+	// 								<UploadGame />
+	// 								<DownloadGame />
+	// 								<DeleteGame />
+	// 							</div>
+	// 							<div className='col-4 div-scale section-border'>
+	// 								<FileManager />
+	// 							</div>
+	// 							<div className='col-5 div-scale section-border'>
+	// 								<LoadGame />
+	// 							</div>
+	// 						</div>
 }

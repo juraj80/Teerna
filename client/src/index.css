@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -18,7 +18,7 @@ h4 {
 
 .div-scale {
   transform: scale(0.6);
-  /* transform-origin: 0% 0% 0px; */
+  /* transform-origin: 0% 0% 0px; 
 }
 
 #story-section-height {
@@ -41,4 +41,4 @@ h4 {
   background-color: rgb(251, 251, 251);
   opacity: 0.8;
   border-radius: 25px;
-}
+} */

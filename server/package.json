@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-client": "cd ../client && yarn build && cd -",
-    "start": "npm run build-client; node index.js",
+    "start": "npm run build-client && node index.js",
     "start-dev": "node index.js test",
     "test": "c8 mocha */**/*.test.js --ignore 'node_modules/**/*' --exit"
   },
@@ -24,7 +24,10 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^9.5.0",
+    "moment": "^2.29.1",
     "sqlite3": "^4.0.0",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^4.1.6",
     "uuid": "^8.3.2",
     "ws": "^7.4.2",
     "zip-local": "^0.3.4"

@@ -1,3 +1,3 @@
-export { default as AuthContext } from './AuthContext';
-export { default as AuthProvider } from './AuthProvider';
+export { AuthContext } from './AuthContext';
+export { AuthProvider } from './AuthProvider';
 export * from './firebase';

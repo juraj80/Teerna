@@ -1,13 +1,17 @@
 import styled from 'styled-components';
+import { transparentize } from 'polished';
+import { space, round } from '../../../shared';
 
 export default styled.div`
-	background: ${({ theme, type }) => theme.background.status[type]};
-	height: 96px;
-	width: 320px;
-	box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.5);
+	background: ${({ type, theme }) => theme.status[type]};
+	padding: ${space.large[200]} ${space.large[100]};
+	max-width: 480px;
+	border-radius: ${round.minimal};
+	box-shadow: 2px 2px 8px 2px
+		${({ theme }) => transparentize(0.5, theme.console.background)};
 	display: flex;
 	align-items: center;
-	color: white;
+	color: ${({ theme }) => theme.alert.text};
 	position: relative;
-	margin-bottom: 20px;
+	margin-bottom: ${space.medium[200]};
 `;

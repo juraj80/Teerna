@@ -1,2 +1,3 @@
-export { default as icons } from './icons';
-export { darkTheme, lightTheme } from './themes';
+export * from './assets';
+export * from './styles';
+export * from './themes';

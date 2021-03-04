@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 import { order } from '../../../shared';
 
 export default styled.div`
 	position: fixed;
 	background: ${({ state, theme }) =>
-		state === 'entered' ? theme.modal.backdrop : 'transparent'};
+		state === 'entered' ? darken(0.95,theme.background.console) : 'transparent'};
 	height: 100vh;
 	width: 100vw;
 	top: 0;

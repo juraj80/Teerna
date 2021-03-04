@@ -74,6 +74,7 @@ export const InteractionProvider = ({ children }) => {
 				diceHistory,
 				roll,
 				rollState,
+				messages,
 				rolledWhen,
 				updateSides,
 				rollAction,

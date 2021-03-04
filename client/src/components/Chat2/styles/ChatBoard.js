@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export default styled.div`
-    display: flex;
-    justify-content: space-evenly;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 208px);
+    position: absolute;
+    top: 0;
 `;

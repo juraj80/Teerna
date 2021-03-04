@@ -7,7 +7,7 @@ export default styled.div`
 		logo &&
 		css`
 			display: grid;
-			grid: repeat(1, 64px) / 48px repeat(6, 38px);
+			grid: repeat(1, 64px) / 72px repeat(6, 38px);
 			font-weight: ${font.weight.extrabold};
 			font-size: calc(${font.size.large[300]} * 1.25);
 			/* border-bottom: 1px solid ${({ theme }) => theme.border.headerbar}; */
@@ -37,6 +37,9 @@ export default styled.div`
 				}
 				&:first-child{
 					background: transparent;
+					& img {
+						height: 48px;
+					}
 				}
 			}
 		`}

@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { darken, lighten, opacify } from 'polished';
 import { font, space } from '../../../shared';
 
 export default styled.li`
@@ -18,4 +19,21 @@ export default styled.li`
 		border-left: 4px solid ${({ theme }) => theme.border.sidebar};
 	}
 
+	${({chatOption, theme}) => chatOption && css`
+		position: absolute;
+		bottom: ${space.small[200]};
+		font-weight: ${font.weight.bold};
+		color: ${theme.mode === 'dark' ? darken(0.25, theme.text.sidebar) : opacify(0.25, theme.text.sidebar)};
+		&:hover {
+			color: ${({ theme }) => theme.text.hover.sidebar};
+			border-color:  ${theme.mode === 'dark' ? darken(0.25, theme.border.sidebar) : opacify(0.25, theme.border.sidebar)};
+		}
+
+		& svg {
+			fill: ${theme.mode === 'dark' ? darken(0.25, theme.text.sidebar) : opacify(0.25, theme.text.sidebar)};
+			&:hover {
+				fill: ${theme.mode === 'dark' ? darken(0.25, theme.text.sidebar) : opacify(0.25, theme.text.sidebar)};
+			}
+		}
+	`};
 `;

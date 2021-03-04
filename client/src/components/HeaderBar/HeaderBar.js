@@ -100,7 +100,7 @@ export default function HeaderBar({ toggleTheme, user }) {
 				<ThemeToggle toggleTheme={toggleTheme} />
 				<Avatar
                     size='small'
-					source={user.picture || undefined}
+					source={user ? user.picture : undefined}
 					action={() => setShowDropdown(!showDropdown)}
 				/>
 				{showDropdown && menu}

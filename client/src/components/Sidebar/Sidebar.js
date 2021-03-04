@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Appbar, Icon } from '../../components';
 import { SessionContext } from '../../contexts';
 import { useConsoleSize } from '../../hooks';
+import { Chat } from '../Chat2';
 import { Aside, Menu, MenuItem, Label, Badge } from './styles';
 
 const sidebarOptions = [
@@ -53,9 +54,12 @@ const sidebarOptions = [
 export default function Sidebar({ user }) {
 	const { width } = useConsoleSize();
 	const { isGM } = useContext(SessionContext);
+	const [chatDrawerPos, setChatDrawerPos] = useState(0);
 	const [drawerPos, setDrawerPos] = useState(1);
 	const [mainClasses, setMainClasses] = useState([]);
 	const [drawerClasses, setDrawerClasses] = useState([]);
+
+	const openChatDrawer = () => user && setChatDrawerPos(1);
 
 	const handleDrawer = () => {
 		if (user) {
@@ -90,16 +94,39 @@ export default function Sidebar({ user }) {
 							}}
 						>
 							<Label>
-                                <span style={{width: '50px'}}>
-								<Icon icon={opt.icon} width='40px' style={{ paddingRight: '16px', justifyContent: 'center'}}/>
+								<span style={{ width: '50px' }}>
+									<Icon
+										icon={opt.icon}
+										width='40px'
+										style={{ paddingRight: '16px', justifyContent: 'center' }}
+									/>
 								</span>
-                                {opt.label}
-								<span style={{ position: 'relative', right: 0}}>{opt.lockedForGM && <Badge>GM ONLY</Badge>}</span>
+								{opt.label}
+								<span style={{ position: 'relative', right: 0 }}>
+									{opt.lockedForGM && <Badge>GM ONLY</Badge>}
+								</span>
 							</Label>
 						</MenuItem>
 					))}
+					<MenuItem
+						chatOption
+						onClick={() => {setChatDrawerPos(1); console.log(chatDrawerPos);}}
+					>
+						<Label>
+							<span style={{ width: '50px' }}>
+								<Icon
+									icon='chat'
+									width='40px'
+									style={{ paddingRight: '16px', justifyContent: 'center' }}
+								/>
+							</span>
+							Open Chat
+							<span style={{ position: 'relative', right: 0 }} />
+						</Label>
+					</MenuItem>
 				</Menu>
 			</Aside>
+			<Chat chatDrawerPos={chatDrawerPos} closeChatDrawer={() => setChatDrawerPos(0)}/>
 		</>
 	);
 }

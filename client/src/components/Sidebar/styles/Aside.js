@@ -16,6 +16,6 @@ export default styled.aside`
     }
 
     &.drawerOpen {
-        width: 275px;
+        width: 300px;
     }
 `;

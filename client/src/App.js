@@ -20,7 +20,7 @@ export default function App() {
 
 	useConstructor(() => {
 		const token = localStorage.getItem('token');
-		setUser(decode(token));
+		token && setUser(decode(token));
 	});
 	
 

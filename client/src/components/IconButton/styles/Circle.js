@@ -1,3 +1,4 @@
+import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { colour, font, round, space } from '../../../shared';
 
@@ -29,12 +30,13 @@ export default styled.div`
 
 	svg {
 		width: 36px;
-		padding: ${space.small[300]};
+		height: 36px;
+		padding: ${space.medium[100]};
 		flex-shrink: 10px;
 		border-radius: ${round.circular};
 		overflow: visible;
-		background: ${colour.white};
-		color: ${({ theme, colour }) => {
+		background: ${({ theme, status }) => status ? theme.status[status] : transparentize(0.2,colour.white)};
+		fill: ${({ theme, colour }) => {
 			return !colour ? theme.background.button : theme.button[colour];
 		}};
 	}

@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { font, order, round, space } from '../../../shared';
 
 export default styled.div`
-	display: flex;
-	flex-direction: column;
     max-width: 600px;
 	width: 400px;
     min-height: 120px;
@@ -14,10 +12,10 @@ export default styled.div`
 	border: 1px solid ${({theme}) => theme.background.modal};
 	padding: ${space.medium[200]};
 	cursor: pointer;
-    transition: 0.5s ease;
-    z-index: ${order.modal};
+    transition: all 0.5s ease;
+    z-index: ${order.modal - 1};
 
-	svg {
+	/* svg {
 		width: 28px;
 		border-radius: 6px;
 		margin-right: 12px;
@@ -26,5 +24,5 @@ export default styled.div`
 
 	& + & {
 		margin-left: 20px;
-	}
+	} */
 `;

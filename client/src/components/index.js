@@ -4,7 +4,7 @@ export { Avatar } from './Avatar';
 export { AvatarGroup } from './AvatarGroup';
 export { Button } from './Button';
 export { Card } from './Card';  
-export { Chat } from './Chat'; 
+export { Chat } from './Chat2'; 
 export { Console } from './Console';
 export { DragDropZone } from './DragDropZone';
 export { HeaderBar } from './HeaderBar';

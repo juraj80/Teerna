@@ -38,7 +38,10 @@ class GameSession {
   }
 
   /**
-   * Creates a new instance of a Game Session
+   * Creates a new instance of a Game Session.
+   *
+   * This constructor function shouldn't be invoked directly.
+   * Instead the CreateSession and GetSession functions should be used.
    *
    * @param {User} the current logged in user
    * @param {string|undefined} the game id of the session. If this value is not provided, a new database will be created.
@@ -47,19 +50,8 @@ class GameSession {
     if (!user.user_id || !user.email) {
       throw new Error('User should be an authenticated Firebase User.');
     }
-    this.authenticate(user);
     this.setId(guid);
     GameSession.sessions[this.guid] = this;
-  }
-
-  /**
-   * Validates user credentials and set the current user of the Game Session.
-   *
-   * @param credentials
-   */
-  authenticate(credentials) {
-    // TODO: validate the credentials received from the frontend.
-    this.user = credentials;
   }
 
   /**
@@ -385,7 +377,7 @@ class GameSession {
  * @param {string} the game id
  * @returns {Promise<GameSession>} a Promise that resolves to the GameSession instance.
  */
-GameSession.createSession = async function(user) {
+async function createSession(user) {
   const gameSession = new GameSession(user);
   await gameSession.setDatabase();
   await gameSession.initialize();
@@ -395,4 +387,18 @@ GameSession.createSession = async function(user) {
   return gameSession;
 }
 
-module.exports = GameSession;
+async function getSession(user, guid) {
+  const gameSession = new GameSession(user, guid);
+  await gameSession.setDatabase();
+  gameSession.ready = true;
+  const invited = await gameSession.getPlayerByEmail(user.email);
+  if (!invited.length) {
+    throw new Error('The provided user is not a member of this game');
+  }
+  return gameSession;
+}
+
+module.exports = {
+  createSession,
+  getSession
+}

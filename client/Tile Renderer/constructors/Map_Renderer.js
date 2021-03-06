@@ -19,6 +19,9 @@ class Map_Renderer {
 
         //Calculate position
         this.portalPos = (windowWidth - this.portalWidth) / 2;
+        
+        //Obtain reference to background
+        this.map_bg = document.getElementById("map_bg");
 
         //Load maps
         this.maps = [];
@@ -50,7 +53,11 @@ class Map_Renderer {
         //Set up canvas
         this.portal = createCanvas(this.portalWidth, this.portalHeight, WEBGL);
         this.portal.position(this.portalPos, 0);
-        this.portal.background(0);
+        this.portal.background(0,0,0,0);
+        
+        //Resize map_bg
+        this.map_bg.setAttribute("width", this.portalWidth);
+        this.map_bg.setAttribute("height", this.portalHeight);
 
         //Set up camera
         this.map_cam = new Map_Cam(this.map_camRange);
@@ -219,7 +226,7 @@ class Map_Renderer {
     //********//
     draw(){
         //Blank background
-        background(0);
+        background(0,0,0,0);
 
         //Draw map
         this.currentMap.draw(this.portal);
@@ -334,5 +341,9 @@ class Map_Renderer {
         //Resize/Reposition canvas
         resizeCanvas(this.portalWidth, this.portalHeight);
         this.portal.position(this.portalPos, 0);
+        
+        //Resize map_bg
+        this.map_bg.setAttribute("width", this.portalWidth);
+        this.map_bg.setAttribute("height", this.portalHeight);
     }
 }

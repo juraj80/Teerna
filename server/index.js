@@ -71,3 +71,5 @@ app.listen(port, () => {
 
 // Setup the WebSocket server
 chat.setUpChat();
+
+module.exports = app;

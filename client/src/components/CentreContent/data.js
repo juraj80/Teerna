@@ -1,8 +1,0 @@
-export const options = {
-	DOCUMENTS: 'DOCUMENTS',
-	GAME: 'GAME',
-	MAP: 'MAP',
-	PLAYERS: 'PLAYERS',
-	JOIN_REQUESTS: 'JOIN_REQUESTS',
-	LANDING: 'LANDING',
-};

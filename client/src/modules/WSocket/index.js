@@ -1,1 +1,0 @@
-export { connection } from './WSocket';

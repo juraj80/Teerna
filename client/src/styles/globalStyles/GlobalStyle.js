@@ -19,13 +19,11 @@ export default createGlobalStyle`
         background-position: center;
         background-repeat: no-repeat;
         overflow: hidden;
-        /* @TODO change spacing */
-        padding:  ${spacing.medium[200]} ${spacing.medium[100]};
+        padding:  ${spacing[16]} ${spacing[16]};
         width: 100%;
         height: 100vh;
         @media screen and (${mediaQuery.xsmall}) {
-            /* @TODO change spacing */
-            padding: ${spacing.small[200]} ${spacing.small[100]};
+            padding: ${spacing[8]} ${spacing[4]};
         }
 
         ${({ theme }) =>

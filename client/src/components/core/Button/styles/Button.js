@@ -6,15 +6,15 @@ export default styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    ${font(3, 'TITLE', false)};
-    ${elevation(13)};
-	border-radius: ${borderRadius.straight};
+    ${font(2, 'DISPLAY', false)};
+    ${elevation(9)};
+	border-radius: ${borderRadius.round};
 	padding: ${spacing[8]} ${spacing[16]};
     background: ${({isStatusButton, status, accent, disabled}) => { 
         if (disabled) return colours.status.disabled;
         return  isStatusButton ? colours.status[status] : colours.accent[accent]}
     };
-	color: ${colours.white};
+	color: ${colours.black};
     border: none;
     transition: 0.3s;
     white-space: nowrap;
@@ -44,7 +44,8 @@ export default styled.button`
 
 const glowup = colour => css`
 	background: ${colour};
-	${elevation(16)};
+    color: ${colours.white};
+	${elevation(11)};
 `;
 
 const disable = css`

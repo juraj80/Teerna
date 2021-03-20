@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import { colours } from '../styles';
+import { colours, gradients } from '../styles';
 import { images } from '../assets';
 
 export default {
@@ -17,6 +17,7 @@ export default {
 		900: transparentize(0.5, '#35354B'),
 		1000: transparentize(0.5, '#353544'),
 	},
+	icon: gradients.border,
 	modal: 'black',
 };
 

@@ -17,5 +17,6 @@ export default {
 		900: transparentize(0.8, '#FFFFFF'),
 		1000: transparentize(0.8, '#000000'),
 	},
+	icon: transparentize(0.2, colours.grey[300]),
 	modal: 'white',
 };

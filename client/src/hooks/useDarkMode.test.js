@@ -3,17 +3,15 @@ import useDarkMode from './useDarkMode';
 
 
 test('expose initial theme, switch between light and dark mode', () => {
-    const { result } = renderHook(useDarkMode);
-    
-    const localTheme = localStorage.getItem('theme');
+    const { result } = renderHook(() => useDarkMode());
+
     const initialTheme =
-         (matchMedia && matchMedia('(prefers-color-scheme: dark)').matches && !localTheme)
+         (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
          ? 'dark' 
          : 'light';
     const switchedTheme = initialTheme === 'dark' ? 'light' : 'dark';
 
-
-    expect(result.current.theme).toBe(initialTheme);
-    act(() => result.current.toggleTheme());
-    expect(result.current.theme).toBe(switchedTheme);
+    expect(result.current[0]).toBe(initialTheme);
+    act(() => result.current[1]());
+    expect(result.current[0]).toBe(switchedTheme);
 });

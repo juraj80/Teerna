@@ -7,8 +7,8 @@ import { string, oneOfType, func } from 'prop-types';
  * @param {object} - object of JSON parsing function defs, `serialize` (stringify) and `deserialize`(parse)
  * @returns custom hook to set and get the state of item in localstorage
  */
-export default function useLocalStorage(
-    key, defaultValue = '', { serialize = JSON.stringify, deserialize = JSON.parse }
+export default function useLocalStorage( 
+    key, defaultValue = '', { serialize = JSON.stringify, deserialize = JSON.parse } = {}
 ) {
     const [state, setState] = useState(() => {
         const valueInLocalStorage = localStorage.getItem(key);

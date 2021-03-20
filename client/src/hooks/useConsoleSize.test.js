@@ -3,8 +3,8 @@ import useConsoleSize from './useConsoleSize';
 
 test('exposes the initial size of the console based on window size', () => {
     const {result} = renderHook(useConsoleSize);
-    expect(result.current.width).toBeCloseTo(innerWidth - 64);
-    expect(result.current.height).toBeCloseTo(innerHeight - 34);
+    expect(result.current.width).toBeCloseTo(960);
+    expect(result.current.height).toBeCloseTo(736);
 });
 
 test('console size changes proportionately on window resize', () => {
@@ -18,7 +18,7 @@ test('console size changes proportionately on window resize', () => {
         });
         window.dispatchEvent(new Event('resize'));
     });
-    expect(result.current.width).toBeCloseTo(576);
+    expect(result.current.width).toBeGreaterThanOrEqual(560);
     
     // console height
     act(() => {
@@ -29,5 +29,5 @@ test('console size changes proportionately on window resize', () => {
         });
         window.dispatchEvent(new Event('resize'));
     });
-    expect(result.current.height).toBeCloseTo(608);
+    expect(result.current.height).toBeGreaterThanOrEqual(596);
 })

@@ -7,17 +7,17 @@ export default {
     teerna: {
         black: colours.grey[300],
         white: colours.white,
-        orange: colours.accent.orange[100],
-        purple: colours.accent.purple[100],
+        orange: colours.accent.orange,
+        purple: colours.accent.purple,
         pink:  colours.accent.pink,
         mint: colours.accent.mint,
-        aqua: colours.accent.aqua[100],
+        aqua: colours.accent.aqua,
     },
     status: {
         error: colours.status.error,
         info: colours.status.info,
         warning: colours.status.warning,
-        success: colours.warning.success,
+        success: colours.status.success,
     },
     state: {
         disabled: colours.status.disabled,

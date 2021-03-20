@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { spacing } from '../styles';
 
 /**
  * @returns {Object<Number, Number>} - the width and height of the console
@@ -27,8 +26,8 @@ export default function useConsoleSize() {
 	useEffect(() => {
 		windowSize &&
 			setConsoleSize({
-				width: windowSize.width - Number(spacing[32].replace('px', '')),
-				height: windowSize.height - Number(spacing[40].replace('px', '')),
+				width: windowSize.width - 64,
+				height: windowSize.height - 32,
 			});
 	}, [windowSize]);
 

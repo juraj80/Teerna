@@ -6,6 +6,6 @@ import { getElevationShadow } from '../styleUtils';
  * @param {Number} level - [0,24]
  * @returns {import('styled-components').CSSObject} 
  */
- export const elevation = (level) = css`
+ export const elevation = (level) => css`
     box-shadow: ${getElevationShadow(level)};
 `;

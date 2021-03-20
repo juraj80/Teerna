@@ -58,7 +58,7 @@ export const font = (size, setting = 'BODY', italic = false) => {
 			font-size: ${size ? webSizeMap[size] : webSizeMap[6]};
 			text-transform: capitalize;
 			line-height: 1.5;
-			letter-spacing: ${size ? displaySpacing(size) : displaySpacing(6)};
+			letter-spacing: ${size ? displaySpacing[size] : displaySpacing[6]};
 			word-spacing: 0.16;
 			font-style: ${italic ? 'italic' : 'normal'};
 		`;
@@ -69,7 +69,7 @@ export const font = (size, setting = 'BODY', italic = false) => {
 			font-size: ${size ? webSizeMap[size] : webSizeMap[7]};
 			text-transform: uppercase;
 			line-height: 1.5;
-			letter-spacing: ${size ? displaySpacing(size) : displaySpacing(6)};
+			letter-spacing: ${size ? displaySpacing[size] : displaySpacing[6]};
 			word-spacing: 0.16;
 			font-style: ${italic ? 'italic' : 'normal'};
 		`;

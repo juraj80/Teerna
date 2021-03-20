@@ -11,22 +11,17 @@ export const colours = {
 		300: rgb(27, 23, 51),
 	},
 	accent: {
-		orange: {
-			100: rgb(250, 102, 14),
-			200: rgb(253, 90, 39),
-		},
-		purple: {
-			100: rgb(163, 60, 250),
-			200: rgb(118, 74, 197),
-		},
+		orange: rgb(250, 102, 14),
+		// 	200: rgb(253, 90, 39),
+		purple: rgb(163, 60, 250),
+		// 	200: rgb(118, 74, 197),
 		pink: rgb(240, 101, 210),
 		mint: rgb(146, 254, 195),
-		aqua: {
-			100: rgb(96, 238, 252),
-			200: rgb(66, 203, 254),
-			300: rgb(5, 171, 255),
-			300: rgb(0, 142, 254),
-		},
+		aqua: rgb(96, 238, 252),
+			// 200: rgb(66, 203, 254),
+			// 300: rgb(5, 171, 255),
+			// 300: rgb(0, 142, 254),
+		
 	},
 	status: {
 		success:rgb(102, 255, 102),
@@ -46,17 +41,17 @@ export const gradients = {
 			transparentize(0.6, colours.white),
 			transparentize(0.9, colours.white),
 		],
-		fallback: rgba(colours.white, '20%'),
+		fallback: transparentize(0.2, colours.white),
 		toDirection: 'to bottom right',
 	}),
 	border: linearGradient({
 		colorStops: [
 			transparentize(0.5, colours.white),
 			colours.white,
-			colours.accent.aqua[100],
-			transparentize(0.5, colours.accent.aqua[100]),
+			colours.accent.aqua,
+			transparentize(0.5, colours.accent.aqua),
 		],
-		fallback: rgba(colours.white, '50%'),
+		fallback: transparentize(0.5, colours.white),
 		toDirection: 'to bottom right',
 	}),
 };

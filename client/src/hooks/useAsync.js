@@ -1,52 +1,76 @@
-import { useRef, useLayoutEffect, useCallback, useReducer } from 'react';
-import {} from 'prop-types';
+import { useCallback, useLayoutEffect, useReducer, useRef } from 'react';
 
 function useSafeDispatch(dispatch) {
-	const mountedRef = useRef(false);
-
-	useLayoutEffect(() => {
-		mountedRef.current = true;
-		return () => (mountedRef.current = false);
-	}, []);
-
-	return useCallback(
-		(...args) => (mountedRef.current ? dispatch(...args) : void 0),
-		[dispatch]
-	);
+  const mounted = useRef(false)
+  useLayoutEffect(() => {
+    mounted.current = true
+    return () => (mounted.current = false)
+  }, [])
+  return useCallback(
+    (...args) => (mounted.current ? dispatch(...args) : void 0),
+    [dispatch],
+  )
 }
 
-function asyncReducer(state, action) {
-    switch(action.type) {
-        case 'PENDING': return { status: 'PENDING', data: null, error: null };
-        case 'RESOLVED': return { status: 'RESOLVED', data: action.data, error: null };
-        case 'REJECTED': return { status: 'REJECTED', data: null, error: action.error};
-        default: throw new Error(`Unhandled action typ, ${action.type}`);
-    }   
-}
+const defaultInitialState = {status: 'idle', data: null, error: null}
 
-
-/**
- * @param {*} initialState 
- * @returns the result of running the async call
- */
 export default function useAsync(initialState) {
-    const [state, unsafeDispatch] = useReducer(asyncReducer, {
-        status: 'IDLE', data: null, error: null, ...initialState
-    });
+ 
+  const initialStateRef = useRef({
+    ...defaultInitialState,
+    ...initialState,
+  })
+  
+  const [{status, data, error}, setState] = useReducer(
+    (s, a) => ({...s, ...a}),
+    initialStateRef.current,
+  )
 
-    const dispatch = useSafeDispatch(unsafeDispatch);
+  const safeSetState = useSafeDispatch(setState)
 
-    const { status, data, error } = state; 
+  const setData = useCallback(
+    data => safeSetState({data, status: 'resolved'}),
+    [safeSetState],
+  )
+  const setError = useCallback(
+    error => safeSetState({error, status: 'rejected'}),
+    [safeSetState],
+  )
+  const reset = useCallback(() => safeSetState(initialStateRef.current), [
+    safeSetState,
+  ])
 
-    const run = useCallback(
-        promise => {
-            dispatch({type: 'PENDING'});
-            promise.then(
-                data => dispatch({type: 'RESOLVED', data}),
-                error => dispatch({type: 'REJECTED', error}),
-            )
-        }, [dispatch]
-    );
+  const run = useCallback(
+    promise => {
+      if (!promise || !promise.then) {
+        throw new Error(
+          `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`,
+        )
+      }
+      safeSetState({status: 'pending'})
+      return promise.then(
+        data => {
+          setData(data)
+          return data
+        },
+        error => {
+          setError(error)
+          return Promise.reject(error)
+        },
+      )
+    },
+    [safeSetState, setData, setError],
+  )
 
-    return { error, status, data, run};
-};
+  return {
+    isIdle: status === 'idle',
+    isLoading: status === 'pending',
+    isError: status === 'rejected',
+    isSuccess: status === 'resolved',
+    setData, data,
+    setError, error,
+    status,
+    run,
+    reset,
+  }
+}

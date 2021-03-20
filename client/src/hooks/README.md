@@ -4,7 +4,14 @@
 
 
 1. useAsync
-
+usage:
+```javascript
+    const {data, error, status, run} = useAsync()
+    
+    useEffect(() => {
+        run(fetchPlayers(username))
+    }, [username, run])
+```
 2. useConsoleSize
 
 

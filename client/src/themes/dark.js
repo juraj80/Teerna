@@ -18,6 +18,7 @@ export default {
 		1000: transparentize(0.5, '#353544'),
 	},
 	icon: gradients.border,
+	input: colours.grey[200],
 	modal: 'black',
 };
 

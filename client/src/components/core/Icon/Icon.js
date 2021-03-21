@@ -27,5 +27,5 @@ export default function Icon({ icon, size,  status, ...props }) {
 Icon.propTypes = {
     icon: oneOf(iconNames).isRequired,
     size: string,
-    status: oneOf(statuses)
+    status: oneOf([...statuses,'action'])
 }

@@ -23,16 +23,19 @@ export const frostedGlass = (
 	}
 
 	return css`
-		border: 1px solid ${gradients.border};
-		border-radius: 15px;
+		border: 1px solid ${gradients.default};
+		border-radius: 4px;
 		${elevation(12)};
 		position: relative;
+
 		overflow: hidden;
 		&:before {
 			background-color: ${transparentize(0.3, glassColour)};
 			backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);
 			content: '';
 			position: absolute;
+			left: 0;
+			top: 0;
 			height: 100%;
 			width: 100%;
 		}

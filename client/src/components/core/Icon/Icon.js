@@ -19,7 +19,7 @@ export default function Icon({ icon, size,  status, ...props }) {
 			{...props}
 		>
             {status && <title id={`status-alert-${status}`}>{status}</title>}
-			<path fill={({ theme }) => (theme ? theme.icon : 'currentColor')} d={d} />
+			<path fill='currentColor' d={d} />
 		</svg>
 	);
 }

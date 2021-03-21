@@ -1,6 +1,6 @@
 import { transparentize } from 'polished';
 import { images } from '../assets';
-import { colours } from '../styles';
+import { colours, gradients } from '../styles';
 
 export default {
 	backgroundImage: `url('${images.backgrounds.LightBG}')`,
@@ -17,7 +17,7 @@ export default {
 		900: transparentize(0.8, '#FFFFFF'),
 		1000: transparentize(0.8, '#000000'),
 	},
-	icon: transparentize(0.2, colours.grey[300]),
+	icon: gradients.border,
 	input: 'white',
 	modal: 'white',
 };

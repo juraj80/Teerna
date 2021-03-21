@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { cleanup, screen, render } from '@testing-library/react';
+import { cleanup,  render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Input from './Input';
 import { lightTheme } from '../../../themes';

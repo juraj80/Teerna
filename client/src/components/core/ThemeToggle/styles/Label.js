@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { zIndex } from '../../../../styles';
 
 export default styled.label`
-	height: 110px;
+	height: 56px;
 	width: 300px;
 	background-color: ${({ theme }) => theme.bulbToggle[900]};
 	border-radius: 100px;
@@ -11,13 +11,13 @@ export default styled.label`
 		inset 0 0 5px -2px rgba(0, 0, 0, 0.4);
 
 	& .bulb {
-		height: 90px;
-		width: 90px;
+		height: 48px;
+		width: 45px;
 		background-color: ${({ theme }) => theme.bulbToggle[100]};
 		border-radius: 50%;
 		position: relative;
-		top: 10px;
-		left: 10px;
+		top: 4px;
+		left: 4px;
 		display: block;
 		transition: 0.7s;
 		box-shadow: inset 0 0 1px 3px ${({ theme }) => theme.bulbToggle[800]},
@@ -27,8 +27,8 @@ export default styled.label`
 		& .bulb-centre {
 			position: absolute;
 			display: block;
-			height: 36px;
-			width: 36px;
+			height: 12px;
+			width: 10px;
 			background-color: ${({ theme }) => theme.bulbToggle[300]};
 			border-radius: 50%;
 			top: 50%;
@@ -40,8 +40,8 @@ export default styled.label`
 			&:after {
 				content: '';
 				display: block;
-				height: 14px;
-				width: 14px;
+				height: 6px;
+				width: 8px;
 				background-color: ${({ theme }) => theme.bulbToggle[500]};
 				border-radius: 50%;
 				position: absolute;
@@ -58,8 +58,8 @@ export default styled.label`
 			&-2 {
 				position: absolute;
 				display: block;
-				height: 35px;
-				width: 35px;
+				height: 16px;
+				width: 16px;
 				border-radius: 50%;
 				top: 50%;
 				left: 50%;
@@ -75,8 +75,8 @@ export default styled.label`
 				&:before {
 					content: '';
 					display: block;
-					height: 6px;
-					width: 17px;
+					height: 2px;
+					width: 8px;
 					border-radius: 50%;
 					border: 2px solid ${({ theme }) => theme.bulbToggle[800]};
 					position: absolute;
@@ -103,8 +103,8 @@ export default styled.label`
 			perspective: 70px;
 
 			& span {
-				height: 80px;
-				width: 80px;
+				height: 20px;
+				width: 40px;
 				border-radius: 50%;
 				background-image: linear-gradient(
 					-135deg,
@@ -112,14 +112,14 @@ export default styled.label`
 					rgba(255, 255, 255, 0.3)
 				);
 				position: absolute;
-				left: -40px;
+				left: -80px;
 				bottom: -45px;
 
 				&:after {
 					content: '';
 					display: block;
-					height: 35px;
-					width: 20px;
+					height:12px;
+					width: 10px;
 					position: absolute;
 					top: -36px;
 					right: -40px;
@@ -133,8 +133,8 @@ export default styled.label`
 			&:after {
 				content: '';
 				display: block;
-				height: 80px;
-				width: 50px;
+				height: 20px;
+				width: 25px;
 				background-image: linear-gradient(
 					80deg,
 					rgba(255, 255, 255, 0.05) 45%,
@@ -153,7 +153,7 @@ export default styled.label`
 				content: '';
 				display: block;
 				position: absolute;
-				height: 10px;
+				height: 2px;
 				width: 30px;
 				background-image: linear-gradient(
 					to right,
@@ -171,7 +171,7 @@ export default styled.label`
 		lit &&
 		css`
 			.bulb {
-				left: 190px;
+				left: 240px;
 				background-color: #a7694a;
 				box-shadow: inset 0 0 1px 3px #a56758,
 					inset 0 0 6px 8px ${({ theme }) => theme.bulbToggle[800]},

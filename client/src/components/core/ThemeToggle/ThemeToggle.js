@@ -4,10 +4,8 @@ import { useDarkMode } from '../../../hooks';
 import { useEffect, useState } from 'react';
 
 export default function ThemeToggle({ toggleTheme }) {
-	const { theme } = useDarkMode();
+	const [theme] = useDarkMode();
 	const [lit, setLit] = useState(true);
-
-	useEffect(() => setLit(theme === 'light'), [toggleTheme]);
 
 	return (
 		<Switch>

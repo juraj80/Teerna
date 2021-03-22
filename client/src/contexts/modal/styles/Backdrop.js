@@ -13,6 +13,6 @@ export default styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: 0.5s ease;
+	transition: 0.3s ease;
 	pointer-events: auto;
 `;

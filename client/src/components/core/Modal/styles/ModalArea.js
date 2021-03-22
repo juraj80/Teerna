@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { borderRadius, elevation, frostedGlass,  spacing, zIndex } from '../../../../styles';
 
 export default styled.div`
-	max-width: ${({ size }) => {
-		let width = !size ? 480 : size === 'small' ? 320 : 560;
+	width: ${({ size }) => {
+		let width = !size ? 480 : size === 'large' ? 560 : 320;
         return `${width}px`;
 	}};
     min-height: 140px;
@@ -11,6 +11,6 @@ export default styled.div`
     ${({theme}) => frostedGlass(theme.modal)};
     border-radius: ${borderRadius.straight};
     ${elevation(20)};
-    transition: 0.7s;
+    transition: 0.3s;
     ${zIndex('top')};
 `;

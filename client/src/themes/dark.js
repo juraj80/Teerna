@@ -3,7 +3,8 @@ import { colours, gradients } from '../styles';
 import { images } from '../assets';
 
 export default {
-	backgroundImage: `url('${images.backgrounds.DarkBG}')`,
+	mode: 'dark',
+	backgroundImage: images.backgrounds.DarkBG,
 	backdrop: colours.grey[300],
 	bulbToggle: {
 		100: transparentize(0.5, '#DBDBE9'),
@@ -17,7 +18,8 @@ export default {
 		900: transparentize(0.5, '#35354B'),
 		1000: transparentize(0.5, '#353544'),
 	},
-	icon: gradients.border,
+	console: transparentize(0.3, colours.grey[300]),
+	icon: colours.white,
 	input: colours.grey[200],
 	modal: 'black',
 };

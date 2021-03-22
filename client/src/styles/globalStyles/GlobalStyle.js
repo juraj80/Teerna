@@ -14,7 +14,7 @@ export default createGlobalStyle`
     body {
         ${normalize()};
         font-family: ${fontFamily};
-        background-image: ${({ theme }) => theme.backdrop};
+        background-image: url('${({ theme }) => theme.backgroundImage}');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

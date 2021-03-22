@@ -1,12 +1,15 @@
 import { oneOf, string } from 'prop-types';
 import { icons } from '../../../assets';
 import { statuses, iconNames } from '../../../consts';
+import { ThemeContext } from 'styled-components';
+import { useContext } from 'react';
 
 export default function Icon({ icon, size,  status, ...props }) {
 	const { viewBox, d } = icons[icon];
 	const width = size && size === 'large' ? '40px' : '24px';
 	const height = size && size === 'large' ? '40px' : '24px';
-
+	const {theme} = useContext(ThemeContext);
+	console.log(theme);
 	return (
 		<svg
 			viewBox={viewBox}
@@ -19,7 +22,7 @@ export default function Icon({ icon, size,  status, ...props }) {
 			{...props}
 		>
             {status && <title id={`status-alert-${status}`}>{status}</title>}
-			<path fill='currentColor' d={d} />
+			<path fill={theme ? theme.icon : 'currentColor'} d={d} />
 		</svg>
 	);
 }

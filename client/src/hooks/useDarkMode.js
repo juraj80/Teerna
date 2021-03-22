@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 
 /**
- * @returns {Array<string, Function, Boolean>} 
  * - the string `light`/`dark` associated with the current theme
  * - the function which toggle the theme
  * - the bool value of whether the component has mounted yet
  */
-export default function useDarkMode() {
+ export default function () {
 	const [theme, setTheme] = useState('light');
 	const [componentMounted, setComponentMounted] = useState(false);
 
@@ -15,14 +14,16 @@ export default function useDarkMode() {
 		setTheme(mode);
 	};
 
-	const toggleTheme = () => theme === 'light' ? setMode('dark') : setMode('light');
+	const toggleTheme = () => {
+		theme === 'light' ? setMode('dark') : setMode('light');
+	};
 
 	useEffect(() => {
 		const localTheme = window.localStorage.getItem('theme');
-		window.matchMedia 
-        && window.matchMedia('(prefers-color-scheme: dark)').matches 
-        && !localTheme
-		    ? setMode('dark')
+		window.matchMedia &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches &&
+		!localTheme
+			? setMode('dark')
 			: localTheme
 			? setTheme(localTheme)
 			: setMode('light');

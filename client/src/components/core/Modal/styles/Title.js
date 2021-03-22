@@ -10,7 +10,6 @@ export default styled.div`
     height: 15%;
     background: ${({theme}) => theme.modal};
     color: ${({theme}) => invert(theme.modal)};
-    margin-bottom: ${spacing[16]};
     ${({size}) => font(size === 'small' ? 6 : size === 'large' ? 8 : 7,'DISPLAY', false)};
     ${zIndex('above')};
 `;

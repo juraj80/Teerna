@@ -11,6 +11,7 @@ export const colours = {
 		300: rgb(27, 23, 51),
 	},
 	accent: {
+		white: rgb(250,250,250),
 		orange: rgb(250, 102, 14),
 		// 	200: rgb(253, 90, 39),
 		purple: rgb(163, 60, 250),

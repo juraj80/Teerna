@@ -4,13 +4,13 @@ import {  gradients, spacing, colours, elevation } from '../../../../styles';
 
 
 export default styled.div`
-    max-width: 200px;
-    max-height: 48px;
+    max-width: 320px;
+    max-height: 32px;
     position: relative;
     display: flex;
     align-items: center;
 
-    margin: 0;
+    margin: ${spacing[8]};
     padding: 0;
   
     ${({ iconPositions }) => iconPositions && ['start','both'].includes(iconPositions) && startIcon}
@@ -27,8 +27,8 @@ const startIcon = css`
     svg.start {
         position: absolute;
         top: 0;
-        left: ${spacing[16]};
-        height: 48px;
+        left: ${spacing[8]};
+        height: 32px;
         transition: all 0.2s linear;
     }
 `;
@@ -40,6 +40,6 @@ const endIcon = css`
         position: absolute;
         top: 0;
         right: ${spacing[16]};
-        height: 48px;
+        height: 32px;
         transition: all 0.2s linear;
     }`;

@@ -6,7 +6,7 @@ export default styled.input`
   ${font(2, 'BODY', false)};
     padding: ${spacing[8]} ${spacing[16]};
     padding-left: ${({iconPositions}) => (iconPositions === 'both' || iconPositions === 'start') && spacing[48]};
-    height: 48px;
+    height: 32px;
     width: 100%;
     border-radius: 4px;
     outline: none;

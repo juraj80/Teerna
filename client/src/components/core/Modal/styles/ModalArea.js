@@ -10,7 +10,6 @@ export default styled.div`
     height: 400px;
     ${({theme}) => frostedGlass(theme.modal)};
     border-radius: ${borderRadius.straight};
-    margin-bottom: ${spacing[32]};
     ${elevation(20)};
     transition: 0.7s;
     ${zIndex('top')};

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { darken, invert } from 'polished';
-import { borderRadius, colours, elevation, font, spacing } from '../../../../styles';
+import { borderRadius, colours, elevation, font, spacing, zIndex } from '../../../../styles';
 
 export default styled.button`
     display: flex;
@@ -19,6 +19,7 @@ export default styled.button`
     transition: 0.3s;
     white-space: nowrap;
     cursor: pointer;
+    ${zIndex('top')};
 
     // Glow effect
 	${({ isStatusButton, status, accent, glowing, disabled }) => {

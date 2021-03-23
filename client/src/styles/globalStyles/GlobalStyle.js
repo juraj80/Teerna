@@ -36,7 +36,7 @@ export default createGlobalStyle`
 							top: 0;
 							width: 100%;
 							height: 100%;
-							backdrop-filter: saturate(3);
+							backdrop-filter: saturate(1);
 						}
 					`};
     }

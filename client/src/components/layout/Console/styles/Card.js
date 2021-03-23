@@ -11,7 +11,7 @@ export default styled.div`
     flex-direction: column;
     overflow: hidden;
     border-radius: ${borderRadius.slight};
-    backdrop-filter: ${blur.reg};
-    -webkit-backdrop-filter: ${blur.reg};
+    backdrop-filter: ${blur.min};
+    -webkit-backdrop-filter: ${blur.min};
     ${zIndex('bottom')};
 `;

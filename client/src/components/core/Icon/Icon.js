@@ -9,7 +9,6 @@ export default function Icon({ icon, size,  status, ...props }) {
 	const width = size && size === 'large' ? '40px' : '24px';
 	const height = size && size === 'large' ? '40px' : '24px';
 	const {theme} = useContext(ThemeContext);
-	console.log(theme);
 	return (
 		<svg
 			viewBox={viewBox}

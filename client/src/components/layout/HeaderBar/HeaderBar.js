@@ -1,15 +1,14 @@
 import { useState, useContext, useEffect} from 'react';
-import { func, object } from 'prop-types';
+import {  object } from 'prop-types';
 import { AuthenticationForm } from '../../compound';
-import { ThemeToggle, Avatar } from '../../core';
+import { ThemeToggle, Avatar, Modal} from '../../core';
 import { AuthContext, ModalContext } from '../../../contexts';
 import { useConsoleSize } from '../../../hooks';
-import { Modal } from '../../core';
 import { Menu, MenuItem, Bar, Section, Span} from './styles';
 import { images } from '../../../assets';
-import { colours } from '../../../styles';
+import { spacing } from '../../../styles';
 
-export default function HeaderBar({  user }) {
+export default function HeaderBar({  user, toggleTheme }) {
     const { width } = useConsoleSize();
     const { setErrors, handleLogout } = useContext(AuthContext);
     const { updateShow, updateLocked, updateContent } = useContext(ModalContext);
@@ -66,7 +65,7 @@ export default function HeaderBar({  user }) {
             </Section>
             <Section consoleWidth={`${width}px`} middle='middle' />
 			<Section consoleWidth={`${width}px`} end='end'>
-				{/* <ThemeToggle toggleTheme={toggleTheme} /> */}
+                <div style={{marginRight: spacing[8]}}> <ThemeToggle  toggleTheme={toggleTheme} /></div>
 				<Avatar
                     style={{cursor: 'pointer'}}
                     size='small'

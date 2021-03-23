@@ -23,21 +23,18 @@ export const frostedGlass = (
 	}
 
 	return css`
-		border: 1px solid ${gradients.default};
-		border-radius: 4px;
-		${elevation(12)};
-		position: relative;
-
+		background: ${gradients.border};
 		overflow: hidden;
 		&:before {
-			background-color: ${transparentize(0.3, glassColour)};
+			background: ${transparentize(0.3, glassColour)};
 			backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);
 			content: '';
 			position: absolute;
-			left: 0;
-			top: 0;
+			left: 1px;
+			top: 1px;
 			height: 100%;
 			width: 100%;
+			margin: 1px;
 		}
 	`;
 };

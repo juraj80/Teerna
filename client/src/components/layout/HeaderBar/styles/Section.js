@@ -19,7 +19,7 @@ export default styled.div`
 			? css`
 					align-items: center;
 					justify-content: flex-end;
-					width: calc(${consoleWidth/5});
+					width: calc(${consoleWidth/3});
 					margin-right: ${spacing[16]};
 			  `
 			: middle

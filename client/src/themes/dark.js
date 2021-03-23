@@ -22,6 +22,7 @@ export default {
 	icon: colours.white,
 	input: colours.grey[200],
 	modal: 'black',
+	bartext: colours.white,
 };
 
 // @ACCESSIBILITY TIP

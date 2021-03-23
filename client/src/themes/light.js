@@ -5,7 +5,7 @@ import { colours, gradients } from '../styles';
 export default {
 	mode: 'light',
 	backgroundImage: images.backgrounds.LightBG,
-	backdrop: colours.white,
+	backdrop: colours.grey[300],
 	bulbToggle: {
 		100: transparentize(0.8, '#F0E6ED'),
 		200: transparentize(0.8, '#EBCECE'),
@@ -22,4 +22,5 @@ export default {
 	icon: colours.grey[300],
 	input: 'white',
 	modal: 'white',
+	bartext: colours.grey[200],
 };

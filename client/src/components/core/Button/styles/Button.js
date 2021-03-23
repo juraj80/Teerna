@@ -23,7 +23,7 @@ export default styled.button`
 
     // Glow effect
 	${({ isStatusButton, status, accent, glowing, disabled }) => {
-        if (disabled) return;
+        if (disabled) return colours.status.disabled;
 		if (glowing)
 			return isStatusButton
 				? glowup(colours.status[status])
@@ -33,8 +33,8 @@ export default styled.button`
 
     &:hover {
         background: ${({isStatusButton, status, accent, disabled}) => {
-          if (disabled) return;
-          return isStatusButton ? darken(0.1, colours.status[status]) : darken(0.1, colours.accent[accent])
+          if (disabled) return colours.status.disabled;
+          return isStatusButton && !disabled ? darken(0.1, colours.status[status]) : darken(0.1, colours.accent[accent])
         }};
     }
 

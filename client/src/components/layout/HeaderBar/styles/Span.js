@@ -7,9 +7,8 @@ export default styled.div`
 		logo &&
 		css`
 			display: grid;
-			grid: repeat(1, 64px) / 56px repeat(6, 38px);
+			grid: repeat(1, 64px) / 56px repeat(6, 40px);
 			${font(5, 'DISPLAY', false)};
-			/* border-bottom: 1px solid ${({ theme }) => theme.border.headerbar}; */
 			color: ${({theme})=>transparentize(0.4, theme.mode === 'light' ? colours.grey[300] : colours.white)};
 			text-align: center;
 			background: repeating-linear-gradient(

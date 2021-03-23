@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import decode from 'jwt-decode';
 import { ThemeProvider } from 'styled-components';
 import {
+	ActivityProvider,
 	AlertProvider,
 	AuthProvider,
 	// InteractionProvider,
 	ModalProvider,
+	SessionProvider,
 	// SessionProvider,
 } from './contexts';
 import { Layout } from './components/layout';
@@ -28,8 +30,10 @@ export default function App() {
 	return (
 		<ThemeProvider theme={themeMode}>
 			<AuthProvider>
+				<SessionProvider>
 				<AlertProvider>
 					<ModalProvider>
+						<ActivityProvider>
 						<>
 							<GlobalStyle />
 							{!componentMounted ? (
@@ -38,8 +42,10 @@ export default function App() {
 								<Layout user={user} toggleTheme={toggleTheme} />
 							)}
 						</>
+						</ActivityProvider>
 					</ModalProvider>
 				</AlertProvider>
+				</SessionProvider>
 			</AuthProvider>
 		</ThemeProvider>
 	);

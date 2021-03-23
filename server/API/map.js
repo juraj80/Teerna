@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require("../auth.js");
 
 /**
  * Retrieve the current state of the map of a given game.
@@ -20,7 +19,7 @@ const authenticate = require("../auth.js");
  *       "403":
  *         description: User does not have the propper permissions or is not authenticated.
  */
-router.get('/', authenticate, async (req, res) => {
+router.get('/', async (req, res) => {
   res.send({message: 'TODO: this endpoint will return a success message'});
 });
 
@@ -53,7 +52,7 @@ router.get('/', authenticate, async (req, res) => {
  *         description: User does not have the propper permissions or is not authenticated.
  *
  */
-router.post('/', authenticate, async (req, res) => {
+router.post('/', async (req, res) => {
   res.send({message: 'TODO: this endpoint will return a success message'});
 });
 
@@ -75,7 +74,7 @@ router.post('/', authenticate, async (req, res) => {
  *       "403":
  *         description: User does not have the propper permissions or is not authenticated.
  */
-router.put('/', authenticate, async (req, res) => {
+router.put('/', async (req, res) => {
   res.send({message: 'TODO: this endpoint will return a success message'});
 });
 

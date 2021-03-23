@@ -48,6 +48,7 @@ export default function App() {
 
 	return (
 		<BrowserRouter>
+      <form ></form>
 			<ThemeProvider theme={themeMode}>
 				<AuthProvider>
 					<AlertProvider>

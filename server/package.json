@@ -7,18 +7,25 @@
     "build-client": "cd ../client && yarn build && cd -",
     "start": "npm run build-client && node index.js",
     "start-dev": "node index.js test",
-    "test": "c8 mocha */**/*.test.js --ignore 'node_modules/**/*' --exit"
+    "firebase-local:set-emulator-host": "export FIREBASE_AUTH_EMULATOR_HOST='localhost:9099'",
+    "firebase-local:start": "npm run firebase-local:set-emulator-host && ./node_modules/firebase-tools/lib/bin/firebase.js emulators:start",
+    "test": "npm run firebase-local:set-emulator-host && c8 mocha */**/*.test.js --ignore 'node_modules/**/*' --exit"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^1.2.3",
+    "@firebase/testing": "^0.20.11",
+    "@google-cloud/firestore": "^4.9.6",
     "c8": "^7.4.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "firebase-tools": "^9.5.0",
     "jsdoc": "^3.6.6",
     "mocha": "^8.2.1"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "decompress": "^4.2.1",
     "express": "^4.17.1",

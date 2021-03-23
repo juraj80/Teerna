@@ -2,6 +2,7 @@ const WebSocket = require('ws');
 const { Roll } = require ("../Dice/Dice");
 const { errorMessage, diceRollToMessage, ChatMessage } = require("./Message");
 
+let sockets = [];
 
 /**
  * Builds a chat answer.
@@ -19,6 +20,38 @@ function buildChatAnswer(message, answer) {
 }
 
 /**
+ * Sends a message to all sockets connected to the server.
+ *
+ * If a guid parameter is provided, sends the message only to those sockets that belong to this guid..
+ * @param {Object} message to be sent
+ * @param {string} guid: the game id to restrict the players that should receive the message.
+ */
+function broadcast(message, guid) {
+    sockets.forEach(s => {
+      s.send(JSON.stringify(message));
+    })
+}
+
+function handleDiceMessage(socket, sockets, message) {
+  if (!validateDice(message)) {
+    socket.send(JSON.stringify(errorMessage("Invalid dice")));
+  } else {
+    const diceRoll = new Roll(message.data.sides, message.type, "GM");
+    const answer = buildChatAnswer(message, diceRollToMessage(diceRoll));
+    broadcast(answer);
+  }
+}
+
+/**
+ * Verifies that a chat message is authenticated.
+ *
+ * @param {Object} message: the message to be authenticated.
+ * @returns {false|Object} the authenticated author of the message or false, if the authentication failed.
+ */
+function authenticate(message) {
+}
+
+/**
  * Prepares the Chat.
  *
  * Creates the WebSocket server and implements listeners.
@@ -30,27 +63,19 @@ function setUpChat() {
   });
   console.log("Teerna WebSocket Server listening on port", wsPort);
 
-  let sockets = [];
   server.on('connection', function(socket) {
     sockets.push(socket);
 
     // When you receive a message, send that message to every socket.
     socket.on('message', function(msg) {
       const message = JSON.parse(msg);
+      console.log("This was received via WS", message);
       switch (message.type) {
         case "dice":
-          if (!validateDice(message)) {
-            socket.send(JSON.stringify(errorMessage("Invalid dice")));
-          } else {
-            const diceRoll = new Roll(message.data.sides, message.type, "GM");
-            const answer = buildChatAnswer(message, diceRollToMessage(diceRoll));
-            sockets.forEach(s => {
-              s.send(JSON.stringify(answer));
-            })
-          }
+          handleDiceMessage(socket, message);
           break;
         case "story":
-          sockets.forEach(s => s.send(msg));
+          broadcast(message);
           break;
         case "typing":
           sockets.forEach(s => {if (s!==socket) s.send(msg)});

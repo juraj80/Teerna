@@ -1,5 +1,4 @@
 const express = require('express');
-const authenticate = require("../auth.js");
 const router = express.Router();
 
 
@@ -27,7 +26,7 @@ const router = express.Router();
  *       200:
  *         description: the list of files within the game
  */
-router.get('/get-files', authenticate, (req, res) => {
+router.get('/get-files', (req, res) => {
   const folder = 'Uploads';
   const files = fileSystem.getUploadFiles(folder);
   const listOfFiles = fileSystem.getListOfFileObjects(files);
@@ -54,7 +53,7 @@ router.get('/get-files', authenticate, (req, res) => {
  *         description: the filename and filepath of the uploaded file.
  *
  */
-router.post('/upload', authenticate, (req,res) => {
+router.post('/upload', (req,res) => {
     console.log('upload called');
     if(req.files === null){
         return res.status(400).json({ msg: 'No file uploaded' });
@@ -94,7 +93,7 @@ router.post('/upload', authenticate, (req,res) => {
  *       200:
  *         description: the zipped game folder
  */
-router.get('/download', authenticate, function(req, res){
+router.get('/download', function(req, res){
   const folder = `${__dirname}/Uploads/game`;
   if(fs.existsSync(folder) ){
     const file = `${__dirname}/Uploads/${gameFile}`;
@@ -130,7 +129,7 @@ router.get('/download', authenticate, function(req, res){
  *       400:
  *         description: document does not exist
  */
-router.post('/delete', authenticate, function(req, res){
+router.post('/delete', function(req, res){
   const file = `${__dirname}/Uploads/${gameFile}`;
   const folder = `${__dirname}/Uploads/game`;
   if(fs.existsSync(file)){

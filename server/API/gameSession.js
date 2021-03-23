@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const GameSession = require("../GameSession/GameSession");
-const authenticate = require("../auth.js");
-
 
 /**
  * @openapi
@@ -13,7 +11,7 @@ const authenticate = require("../auth.js");
 
 
 /**
- * Creates a new game session, making the user its Game Master.
+ * Creates a new game session, making the u1ser its Game Master.
  *
  * @openapi
  * /api/game-session:
@@ -29,7 +27,7 @@ const authenticate = require("../auth.js");
  *       "403":
  *         description: User does not have the propper permissions or is not authenticated.
  */
-router.post('/', authenticate, async (req, res) => {
+router.post('/', async (req, res) => {
   if (!req.user || !req.user.user_id) {
     res.status(403).send('Forbidden');
   } else {
@@ -62,7 +60,7 @@ router.post('/', authenticate, async (req, res) => {
  *       "403":
  *         description: User does not have the propper permissions or is not authenticated.
  */
-router.post('/invitation', authenticate, async (req, res) => {
+router.post('/invitation', async (req, res) => {
   if (!req.user || !req.user.user_id) {
     res.status(403).send('Forbidden');
   } else {
@@ -101,7 +99,7 @@ router.post('/invitation', authenticate, async (req, res) => {
  *       "403":
  *         description: User does not have the propper permissions or is not authenticated.
  */
-router.get('/:guid', authenticate, async (req, res) => {
+router.get('/:guid', async (req, res) => {
   if (!req.user || !req.user.user_id) {
     res.status(403).send('Forbidden');
     return;
@@ -126,6 +124,21 @@ router.get('/:guid', authenticate, async (req, res) => {
     console.error(e);
     res.status(500).send('Internal Server Error');
   }
+});
+
+/**
+ * Requests to join a particular game.
+ *
+ * The user who is requesting needs to be authenticated, to provide the auth token and the game id as parameters.
+ */
+router.post('/:guid/join', async (req, res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+    return;
+  }
+  const guid = req.params.guid;
+  const user = req.user;
+
 });
 
 module.exports = router;

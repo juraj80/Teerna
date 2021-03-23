@@ -23,7 +23,7 @@ const Dice = require('../Dice/Dice');
  *       200:
  *         description: The dice throw result.
  */
-router.get('/:sides', (req, res) => {
+router.get('/api/:sides', (req, res) => {
   const sides = req.params.sides;
   const roll = new Dice.Roll(sides, "public", "GM");
   res.json(roll);

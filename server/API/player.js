@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require("../auth.js");
 const session = require("../session.js");
 const Player = require('../Player/Player.js');
 
@@ -35,7 +34,7 @@ function isThisAuthenticatedSession(user, session) {
  *       200:
  *         description: the list of players and their status.
  */
-router.get('/list', authenticate, session, (req, res) => {
+router.get('/list', session, (req, res) => {
   if (!isThisAuthenticatedSession(req.user, req.session)) {
     res.status(403).send('Forbidden');
   } else {
@@ -63,7 +62,7 @@ router.get('/list', authenticate, session, (req, res) => {
  *       200:
  *         description: the list of players and their status
  */
-router.post('/gag', authenticate, (req, res) => {
+router.post('/gag', (req, res) => {
   if (!isThisAuthenticatedSession(req.user, req.session)) {
     res.status(403).send('Forbidden');
     return;
@@ -93,7 +92,7 @@ router.post('/gag', authenticate, (req, res) => {
  *       403:
  *         description: Forbidden
  */
-router.post('/ungag', authenticate, (req, res) => {
+router.post('/ungag', (req, res) => {
   res.send({message: 'TODO: this endpoint will return a success message'});
 });
 
@@ -118,7 +117,7 @@ router.post('/ungag', authenticate, (req, res) => {
  *       200:
  *         description: the list of players and their status
  */
-router.post('/block', authenticate, (req, res) => {
+router.post('/block', (req, res) => {
   res.send({message: 'TODO: this endpoint will show the list of players.'});
 });
 
@@ -144,7 +143,7 @@ router.post('/block', authenticate, (req, res) => {
  *       403:
  *         description: Forbidden
  */
-router.post('/unblock', authenticate, (req, res) => {
+router.post('/unblock', (req, res) => {
   res.send({message: 'TODO: this endpoint will return a success message'});
 });
 

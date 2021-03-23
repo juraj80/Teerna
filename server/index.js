@@ -1,4 +1,4 @@
-const authenticate = require('./auth.js');
+const {authenticateHTTP} = require('./auth.js');
 const bodyParser = require('body-parser');
 
 const fileSystem = require('./helpers/fileSystem.js')
@@ -61,7 +61,7 @@ app.get(
  * Backend API
  */
 const port = process.env.PORT || 5000;
-app.use('/api', authenticate, apiRouter);
+app.use('/api', authenticateHTTP, apiRouter);
 
 // Start the HTTP server
 app.listen(port, () => {

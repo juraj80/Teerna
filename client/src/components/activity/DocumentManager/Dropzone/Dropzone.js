@@ -6,8 +6,9 @@ import { DragDrop, Form, FileLabel, SubmitInput, HelperText } from './styles';
 import { AlertContext } from '../../../../contexts';
 // import { ProgressBar } from '../../../../components/feedback';
 import { spacing } from '../../../../styles';
+import { Button } from '../../../core';
 
-export default function CustomDropzone ({ setUploaded }){
+export default function CustomDropzone (){
 	const addAlert = useContext(AlertContext);
 	const [file, setFile] = useState(undefined);
 	const [filename, setFilename] = useState(undefined);
@@ -20,8 +21,8 @@ export default function CustomDropzone ({ setUploaded }){
 		setFilename(acceptedFiles[0].name);
 	};
 
-	const fileSubmit = async e => {
-		e.preventDefault();
+	const fileSubmit = async (e) => {
+		// e.preventDefault();
 		const formData = new FormData();
 		formData.append('file', file);
 
@@ -36,9 +37,9 @@ export default function CustomDropzone ({ setUploaded }){
 					setTimeout(() => setUploadPercentage(0), 10000);
 				},
 			});
+			console.log(res);
 			const { fileName, filePath } = res.data;
 			setUploadedFile({ fileName, filePath });
-			setUploaded(true);
 			setMessage('File Uploaded');
 			addAlert('success', message);
 		} catch (err) {
@@ -46,10 +47,11 @@ export default function CustomDropzone ({ setUploaded }){
 			status === 500
 				? setMessage('There was a problem with the server')
 				: setMessage(data.msg);
-			setUploaded(false);
 			addAlert('error', message);
 		}
 	};
+
+	// uploadedFile ? setUploaded(true) : setUploaded(false);
 
 	return (
 		<div style={{
@@ -70,20 +72,19 @@ export default function CustomDropzone ({ setUploaded }){
 						</DragDrop>
 					)}
 				</Dropzone>
-
-				<div>
-					<FileLabel>{filename ? filename : 'No File Chosen'}</FileLabel>
+				<FileLabel>{filename ? filename : 'No File Chosen'}</FileLabel>
 					{/* <FileInput type='file' onChange={fileChange} /> */}
 					{/* <ProgressBar percentage={uploadPercentage} /> */}
-				</div>
-				{message && <HelperText>{message}</HelperText>}
-				<SubmitInput
+				 <HelperText>{message || ''}</HelperText>
+				<Button
+					style={{ width: '160px'}}
 					type='button'
 					disabled={!file}
+					status='info'
 					action={fileSubmit}
 				>
 					Upload
-				</SubmitInput>
+				</Button>
 			</Form>
 		</div>
 	);

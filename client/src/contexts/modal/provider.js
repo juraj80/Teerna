@@ -12,7 +12,7 @@ export const ModalProvider = ({ children }) => {
 	return (
 		<ModalContext.Provider value={{ updateShow, updateContent, updateLocked }}>
 			{children}
-			<Transition in={show} timeout={{ enter: 1, exit: 400 }} unmountOnExit>
+			<Transition in={show} timeout={{ enter: 1, exit: 10 }} unmountOnExit>
 				{state => (
 					<Backdrop data-testid='backdrop' state={state} onClick={() => !locked && updateShow(false)}>
 						<div onClick={e => e.stopPropagation()}>

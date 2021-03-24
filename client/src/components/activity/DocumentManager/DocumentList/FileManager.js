@@ -103,7 +103,7 @@ export const DocumentList = () => {
     }
 
     return (
-        <div style={{ position: 'absolute', minWidth: '100%', minHeight:'180px', left: 0, bottom: 0, display: 'flex', justifyContent: 'center', background: transparentize(0.8, colours.grey[200]), padding: '16px'}} >
+        <div style={{ position: 'absolute', minWidth: '100%', minHeight:'25%', left: 0, bottom: 0, display: 'flex', justifyContent: 'center', background: transparentize(0.8, colours.grey[200]), padding: '16px'}} >
         <FileBrowser
             files={currFiles}
             onCreateFolder={handleCreateFolder}

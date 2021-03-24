@@ -48,9 +48,9 @@ export const DocumentManager = () => {
 
 	return (
 		<>
-			<Dropzone setUploaded={setUploaded} />
+			<Dropzone />
 			<Previewer setLoaded={setLoaded} uploaded={uploaded}/>
-			<ButtonPanel deleteFile={deleteDoc} availableForDownload={availableForDownload} downloadZip={downloadZip}  />
+			<ButtonPanel deleteFile={deleteDoc} downloadZip={downloadZip}  />
 			<DocumentList />
 		</>
 	);

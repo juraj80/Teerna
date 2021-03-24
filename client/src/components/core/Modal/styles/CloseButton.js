@@ -11,7 +11,7 @@ export default styled.button`
     color: ${colours.accent.aqua};
     position: absolute;
     top: 0;
-    right: 0;
+    right: ${spacing[16]};
     cursor: pointer;
-    ${zIndex('above')};
+    ${zIndex('above') + 1};
 `;

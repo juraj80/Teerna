@@ -13,4 +13,5 @@ export default styled.div`
     ${elevation(20)};
     transition: 0.3s;
     ${zIndex('top')};
+    position: relative;
 `;

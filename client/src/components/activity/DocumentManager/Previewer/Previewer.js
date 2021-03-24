@@ -27,7 +27,6 @@ export const Previewer = ({ setLoaded, uploaded }) => {
 		if (markdown) {
 			setLoaded(true);
 			updateShow(false);
-			updateLocked(true);
 			updateContent(() => ({state}) => (
 				<Modal size='large' state={state} updateShow={updateShow}>
 					<NestedViewer>

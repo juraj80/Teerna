@@ -5,9 +5,9 @@ import { colours, elevation, frostedGlass, zIndex } from '../../../../styles';
 export default styled.aside`
     width: ${({consoleWidth}) => `calc(${consoleWidth} * 0.25)`};
     position: absolute;
-    top: 100px;
-    right: 0px;
-    bottom: 0;
+    top: 96px;
+    right: 2px;
+    bottom: 2px;
     
     ${elevation(16)};
     border-left: 1px solid ${({theme}) => theme.border.sidebar};

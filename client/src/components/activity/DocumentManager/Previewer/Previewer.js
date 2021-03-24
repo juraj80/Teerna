@@ -10,11 +10,16 @@ export const Previewer = ({ setLoaded, uploaded }) => {
 	const [input, setInput] = useState('');
 	const [markdown, setMarkdown] = useState(undefined);
 	const { updateContent, updateLocked, updateShow } = useContext(ModalContext);
+	const [disabled, setDisabled] = useState(true);
+
+	useEffect(() => {
+		uploaded && setDisabled(false);
+	},[uploaded])
 
 	useEffect(() => {
 		input &&
 			fetch(input)
-				.then(res => res.text)
+				.then(res => res.text())
 				.then(text => setMarkdown(text));
 	}, [input]);
 
@@ -24,12 +29,14 @@ export const Previewer = ({ setLoaded, uploaded }) => {
 			updateShow(false);
 			updateLocked(true);
 			updateContent(() => ({state}) => (
-				<Modal state={state} updateShow={updateShow}>
+				<Modal size='large' state={state} updateShow={updateShow}>
 					<NestedViewer>
 						<ReactMarkdown source={markdown} />
 					</NestedViewer>
 				</Modal>
-			))
+			));
+			updateLocked(false);
+			updateShow(true);
 		}
 		setLoaded(false);
 	}, [markdown]);
@@ -38,9 +45,9 @@ export const Previewer = ({ setLoaded, uploaded }) => {
 		<div style={{display: 'flex', justifyContent: 'center'}}>
 			<Button
 				type='button'
-				accent='pink'
-				disabled={!uploaded}
-				action={() => uploaded && setInput('/game/assets/story/story.md')}
+				status='info'
+				// disabled={disabled}
+				action={() => setInput('/game/assets/story/story.md')}
                 style={{ margin: spacing[8], minWidth: '160px'}}
 			>
 				Load Preview

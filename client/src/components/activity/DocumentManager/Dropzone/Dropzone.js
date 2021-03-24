@@ -26,7 +26,7 @@ export default function CustomDropzone ({ setUploaded }){
 		formData.append('file', file);
 
 		try {
-			const res = await axios.post('/upload', formData, {
+			const res = await axios.post('/api/document/upload', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
@@ -38,8 +38,8 @@ export default function CustomDropzone ({ setUploaded }){
 			});
 			const { fileName, filePath } = res.data;
 			setUploadedFile({ fileName, filePath });
-			setMessage('File Uploaded');
 			setUploaded(true);
+			setMessage('File Uploaded');
 			addAlert('success', message);
 		} catch (err) {
 			const { status, data } = err.response;
@@ -78,7 +78,7 @@ export default function CustomDropzone ({ setUploaded }){
 				</div>
 				{message && <HelperText>{message}</HelperText>}
 				<SubmitInput
-					type='submit'
+					type='button'
 					disabled={!file}
 					action={fileSubmit}
 				>

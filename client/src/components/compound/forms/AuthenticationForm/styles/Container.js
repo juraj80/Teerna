@@ -1,12 +1,10 @@
-import { invert } from "polished";
 import styled from "styled-components";
 import { colours, font, spacing, zIndex } from "../../../../../styles";
 
-export default styled.form`
+export default styled.div`
     ${zIndex('above')};
     background: 'transparent';
     width: 100%;
-    max-height: 360px;
     min-height: 320px;
     display: flex;
     flex-direction: column;

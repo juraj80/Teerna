@@ -9,7 +9,7 @@ export default styled.div`
 	width: 100vw;
 	top: 0;
 	left: 0;
-	${zIndex('top')};
+	${zIndex('bottom')};
 	display: flex;
 	align-items: center;
 	justify-content: center;

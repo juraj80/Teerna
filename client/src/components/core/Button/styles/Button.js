@@ -34,7 +34,7 @@ export default styled.button`
     &:hover {
         background: ${({isStatusButton, status, accent, disabled}) => {
           if (disabled) return colours.status.disabled;
-          return isStatusButton && !disabled ? darken(0.1, colours.status[status]) : darken(0.1, colours.accent[accent])
+          return  isStatusButton ? colours.status[status] : colours.accent[accent];
         }};
     }
 

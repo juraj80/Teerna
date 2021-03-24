@@ -24,7 +24,7 @@ export const DocumentManager = () => {
 
 	const deleteDoc = () => {
 		axios
-			.post('http://localhost:5000/delete')
+			.post('/api/document/delete')
 			.then(res => {
 				setResStatus('success');
 			})
@@ -35,7 +35,7 @@ export const DocumentManager = () => {
 	};
 
     const downloadZip = () => {
-        axios.get('http://localhost:5000/download')
+        axios.get('/api/document/download')
              .then(res => {
                 setResStatus('success');
               })

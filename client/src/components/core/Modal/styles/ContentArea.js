@@ -7,5 +7,5 @@ export default styled.div`
     right: 0;
     bottom: 0;
     border-radius: ${borderRadius.straight};
-    ${zIndex('above')};
+    ${zIndex('top')};
 `;

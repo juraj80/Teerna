@@ -1,11 +1,10 @@
 import styled from 'styled-components';
+import { zIndex } from '../../../../../styles';
 
 export default styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	min-height: 200px;
-	overscroll-behavior: scroll;
+	${zIndex('above')};
 	position: relative;
+	text-align: center;
+	overflow-y: scroll;
+	height: 100%;
 `;

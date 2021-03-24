@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import { Form } from '../styles';
+import { useState, useContext, useEffect } from 'react';
+import { Form, Container } from '../styles';
 import { AuthContext } from '../../../../../contexts';
 import { Input, Button, Icon } from '../../../../core';
 
@@ -8,8 +8,11 @@ export default function LoginTab({ switchForms }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordFieldType, setPasswordFieldType] = useState('password');
+	useEffect(() =>
+	console.log(email),[]);
 	
 	return (
+		<Container>
 		<Form role='form' id='login-form' aria-label='login form'>
 			<p className='switch-tab'
 				onClick={() => {
@@ -43,6 +46,7 @@ export default function LoginTab({ switchForms }) {
 				requiredField
 			/>
             {errors.length > 0 && <p className='errortext'>{errors[0]}</p>}
+			</Form>
 			<div style={{ width: '260px', height: '56px', display: 'flex', alignItems: 'center'}}>
 				<Button style={{borderBottomRightRadius: 0, borderTopRightRadius:0, width: '180px'}} type='submit' accent='pink' disabled={password === ''} action={() =>{ 
 					setInputs({email, password});
@@ -57,6 +61,7 @@ export default function LoginTab({ switchForms }) {
 					<Icon icon='github' status='action'/>
 				</Button>
 			</div>
-		</Form>
+		
+		</Container>
 	);
 }

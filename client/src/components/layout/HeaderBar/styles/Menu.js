@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { darken, invert } from 'polished';
-import { spacing } from '../../../../styles';
+import { opacify, invert } from 'polished';
+import { spacing, zIndex } from '../../../../styles';
 
 export default styled.ul`
 	min-width: 160px;
@@ -10,5 +10,6 @@ export default styled.ul`
 	right: 0;
 	list-style-type: none;
 	color: ${({ theme }) => invert(theme.console)};
-	background: ${({ theme }) => darken(0.05,theme.console)};
+	background: ${({ theme }) => opacify(0.5,theme.console)};
+	${zIndex('above')};
 `;

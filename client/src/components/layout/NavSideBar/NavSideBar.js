@@ -55,7 +55,7 @@ const activityOptions = [
 	},
 ];
 
-export default function NavSideBar({ setActivity, drawerPos }) {
+export default function NavSideBar({ setActivity, setCentre, drawerPos }) {
 	const { width } = useConsoleSize();
 	const { isGM } = useContext(SessionContext);
 	const [drawerClasses, setDrawerClasses] = useState([]);
@@ -72,9 +72,7 @@ export default function NavSideBar({ setActivity, drawerPos }) {
 				{mainOptions.map(opt => (
 					<MenuItem
 						key={opt.idx}
-						onClick={() => {
-							/**  change centre content? */
-						}}
+						onClick={() =>	setCentre(opt.value)}
 					>
 						<Label>
 							<span style={{ width: '50px' }}>

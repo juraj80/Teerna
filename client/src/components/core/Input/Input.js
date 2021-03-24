@@ -15,7 +15,7 @@ export default function Input({ type, requiredField, leftIcon, rightIcon, rightI
                 type={type}
                 name={nameAttr}
                 disabled={disabled}
-				onChange={e => !disabled && setValue(e.target.value)}
+				onChange={e => setValue(e.target.value)}
 				value={value}
                 placeholder={placeholder}
 				{...props}

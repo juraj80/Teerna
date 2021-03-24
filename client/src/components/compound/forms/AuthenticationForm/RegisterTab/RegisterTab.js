@@ -1,7 +1,8 @@
 import { useState, useContext } from 'react';
-import { Form } from '../styles';
+import { Form, Container } from '../styles';
 import { AuthContext } from '../../../../../contexts';
 import { Icon, Input, Button } from '../../../../core';
+
 
 export default function RegisterTab({ switchForms }) {
 	const { handleRegister, setInputs, errors, setErrors, handleGoogleAuth, handleGithubAuth } = useContext(AuthContext);
@@ -12,6 +13,7 @@ export default function RegisterTab({ switchForms }) {
 	const [confirmPasswordFieldType, setConfirmPasswordFieldType] = useState('password');
 
 	return (
+		<Container>
 		<Form role='form' id='register-form' aria-label='register form'>
 			<p className='switch-tab'
 				onClick={() => {
@@ -61,6 +63,8 @@ export default function RegisterTab({ switchForms }) {
 				requiredField
 			/>
 			{errors.length > 0 && <p height='64px' className='errortext'>{errors[0]}</p>}
+			
+			</Form>
 			<div style={{ width: '260px', height: '56px', display: 'flex', alignItems: 'center'}}>
 				<Button style={{borderBottomRightRadius: 0, borderTopRightRadius:0, width: '180px'}} type='submit' accent='pink' disabled={password !== confirmPassword || password === ''} action={() =>{ 
 					setInputs({email, password});
@@ -75,6 +79,6 @@ export default function RegisterTab({ switchForms }) {
 					<Icon icon='github' status='action'/>
 				</Button>
 			</div>
-		</Form>
+		</Container>
 	);
 }

@@ -60,6 +60,8 @@ export default function CustomDropzone (){
 				flexDirection: 'column',
 				textAlign: 'center',
 				width: '90%',
+				maxHeight: '72.5%',
+				minHeight: '70%'
 			}}
 		>
 			<Form>

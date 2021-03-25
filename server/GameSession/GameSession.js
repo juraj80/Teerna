@@ -229,7 +229,7 @@ class GameSession {
   }
 
   /**
-   * Returns a promite to the Player that is the GameMaster of this GameSession.
+   * Returns a promise to the Player that is the GameMaster of this GameSession.
    *
    * @returns {Promise<unknown>} 
    */

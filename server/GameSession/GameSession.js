@@ -209,7 +209,7 @@ class GameSession {
    * @returns {Promise<unknown>} 
    */
   async gameMaster() {
-    return this.sql(path.join('player', 'getGameMaster.sql'), 'get');
+    return this.sql(path.join('player', 'getGameMaster.sql'), {}, 'get');
   }
 
   /**

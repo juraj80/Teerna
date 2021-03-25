@@ -48,6 +48,11 @@ describe("Game Session Class", function() {;
   });
 
   describe("Retrieve Game Sessions", function() {
+    it("Should retrieve the game Master.", async () => {
+      const gm = await game.gameMaster();
+      expect(gm.playerName).to.equal('Game Master');
+      const game2 = await GameSession.getSession({user_id: 'gm', email: 'gamemaster@example.com'}, game.guid);
+    });
 
     it("Should retrieve Game Sessions.", async () => {
       const game2 = await GameSession.getSession({user_id: 'gm', email: 'gamemaster@example.com'}, game.guid);

@@ -104,23 +104,6 @@ class GameSession {
   }
 
   /**
-   * Delets a database file
-   *
-   * @returns {Promise<string>}
-   */
-  deleteDbFile(dbPath) {
-    return new Promise( (resolve, reject) => {
-      fs.unlink(dbPath, (err) => {
-        if (err && err.code !== 'ENOENT') {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-
-  /**
    * Deletes the game folder.
    *
    * This method should only be invoked to completely remove the game.
@@ -180,20 +163,16 @@ class GameSession {
     const commands = contents.split(';').filter(c => !c.match(/^\s*$/));
     return new Promise( (resolve, reject) => {
       // And execute all commands
-      try {
-        const r = this.db.serialize(() => {
-            for (const [k, c] of commands.entries()) {
-              if (k !== commands.length - 1 ) {
-                this.db.run(c);
-              } else {
-                this.db.run(c, resolve);
-              }
-            }
+      const r = this.db.serialize(() => {
+        for (const [k, c] of commands.entries()) {
+          if (k !== commands.length - 1 ) {
+            this.db.run(c);
+          } else {
+            this.db.run(c, resolve);
           }
-        );
-      } catch(e) {
-        reject(e);
+        }
       }
+      );
     });
   }
 
@@ -204,12 +183,8 @@ class GameSession {
    */
   async isInitialized() {
     return new Promise( async (resolve, reject) => {
-      try {
-        const row = await this.sqlString("SELECT name FROM sqlite_master WHERE type='table' AND name='battleMap'", {}, "all");
-        resolve(row.length > 0);
-      } catch (e) {
-        reject(e);
-      }
+      const row = await this.sqlString("SELECT name FROM sqlite_master WHERE type='table' AND name='battleMap'", {}, "all");
+      resolve(row.length > 0);
     });
   }
 
@@ -379,25 +354,7 @@ class GameSession {
     return new Promise( (resolve, reject) => {
       this.db[op](sql, parameters, (err, rows) => {
         if (err === null) resolve(rows);
-        else {
-          console.log('error sql string', err);
-          reject(err);
-        }
-      });
-    });
-  }
-
-  /**
-   * Closes the database and returns a promise that resolves when the database is closed.
-   * Rejects the promise if an error occurs.
-   *
-   * @returns {Promise<unknown>}
-   */
-  close() {
-    return new Promise( (resolve, reject) => {
-      this.db.close((err) => {
-        if (err) reject(err);
-        else resolve();
+        else reject(err);
       });
     });
   }
@@ -427,12 +384,7 @@ async function getSession(user, guid) {
   const gameSession = new GameSession(user, guid);
   await gameSession.setDatabase();
   gameSession.ready = true;
-  let invited;
-  try {
-    invited = await gameSession.getPlayerByEmail(user.email);
-  } catch(e) {
-    console.error('Something went wrong when getting the player', e);
-  }
+  const invited = await gameSession.getPlayerByEmail(user.email);
   if (!invited.length) {
     throw new Error('The provided user is not a member of this game');
   }

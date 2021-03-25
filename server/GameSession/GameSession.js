@@ -355,6 +355,7 @@ class GameSession {
 
   async sql(file, parameters, op = 'run' ) {
     if (!['run', 'all', 'get'].includes(op)) {
+      console.error('Operation should be one of run, all or get');
       throw new TypeError("Invalid operation.");
     }
     const sql = await this.fileContents(this.dbFilePath(file));
@@ -410,7 +411,12 @@ async function getSession(user, guid) {
   const gameSession = new GameSession(user, guid);
   await gameSession.setDatabase();
   gameSession.ready = true;
-  const invited = await gameSession.getPlayerByEmail(user.email);
+  let invited;
+  try {
+    invited = await gameSession.getPlayerByEmail(user.email);
+  } catch(e) {
+    console.error('Something went wrong when getting the player', e);
+  }
   if (!invited.length) {
     throw new Error('The provided user is not a member of this game');
   }

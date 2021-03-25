@@ -310,31 +310,44 @@ class GameSession {
     });
   }
 
+  async gagPrepareTable() {
+    return await this.sql(path.join('gagged', 'gagged.sql'));
+  }
+
   /**
    * Gag a player by name
    *
    * @param name
    * @returns {Promise<any>}
    */
-  async gag(name) {
-    await this.sql(path.join('gagged', 'gagged.sql'));
+  async gag(playerId) {
+    await this.gagPrepareTable();
     return this.sql(
       path.join('gagged', 'gaggedCreate.sql'),
-      {'$player': name}
+      {'$player': playerId}
     );
   }
 
   /**
-   * Ungag a player by name
+   * Ungag a player by id
    *
-   * @param name
+   * @param playerId
    * @returns {Promise<any>}
    */
-  async ungag(name) {
-    await this.sql(path.join('gagged', 'gagged.sql'));
+  async ungag(playerId) {
+    await this.gagPrepareTable();
     return this.sql(
       path.join('gagged', 'gaggedFinish.sql'),
-      {'$player': name}
+      {'$player': playerId}
+    );
+  }
+
+  async isGagged(playerId) {
+    await this.gagPrepareTable();
+    return this.sql(
+      path.join('gagged', 'gaggedIsGagged.sql'),
+      {'$player': playerId},
+      'get'
     );
   }
 

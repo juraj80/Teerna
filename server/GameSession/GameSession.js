@@ -121,6 +121,25 @@ class GameSession {
   }
 
   /**
+   * Deletes the game folder.
+   *
+   * This method should only be invoked to completely remove the game.
+   * The user should be previously warned about the effects of this.
+   *
+   * It will not be possible to retrieve the game afterwards.
+   */
+  deleteGame() {
+    return fs.rmdir(this.getFolder(), { recursive: true }, (err) => {
+      if (err) {
+        throw err;
+      } else {
+        this.ready = false;
+        console.log(`Game ${this.guid} removed.`);
+      }
+    });
+  }
+
+  /**
    * Creates a new filename for the database, clearing the path for that file.
    *
    * If the application is running in test mode, always use the filename "test-teerna.sqlite"

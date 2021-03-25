@@ -379,7 +379,10 @@ class GameSession {
     return new Promise( (resolve, reject) => {
       this.db[op](sql, parameters, (err, rows) => {
         if (err === null) resolve(rows);
-        else reject(err);
+        else {
+          console.log('error sql string', err);
+          reject(err);
+        }
       });
     });
   }

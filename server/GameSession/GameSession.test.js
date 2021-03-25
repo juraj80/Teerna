@@ -8,13 +8,13 @@ let game;
 describe("Game Session Class", function() {;
   beforeEach(
     async function () {
-      game = await GameSession.createSession({user_id: 'gm', email: 'gamemaster@example.com'});
+      game = await GameSession.createSession({user_id: 'gm', name: 'Game Master', email: 'gamemaster@example.com'});
     }
   );
 
   afterEach(
     function () {
-      game.deleteGame();
+      //game.deleteGame();
     }
   );
 
@@ -59,15 +59,63 @@ describe("Game Session Class", function() {;
 
   describe("Game Invitations", function (){
 
-    it("Should be able to create invitations.", function () {
-      
+    it("Should be able to create invitations.", async function () {
+      let pending = await game.getPendingInvitations();
+      expect(pending.length).to.equal(0);
+      const invitedEmail = 'foo@example.com';
+      await game.playerInvite(invitedEmail);
+      pending = await game.getPendingInvitations();
+      expect(pending.find(e => e.email === invitedEmail).email).to.equal(invitedEmail);
     });
-    it("Should be able to retrieve invitations.");
-    it("Invited users should be able to retrieve the game.");
-    it("Uninvited users should not be able to retrieve the game.");
+
+    it("Should be able to retrieve invitations.", async function (){
+      const invitationList = [
+        'foo@example.com',
+        'bar@example.com',
+        'baz@example.com'
+      ];
+      for (let i of invitationList) {
+        await game.playerInvite(i);
+      }
+      const pending = await game.getPendingInvitations();
+      expect(pending.length).to.equal(invitationList.length);
+    });
+
+    describe("Only invited users should be able to retrieve the game.", async function() {
+      const invited = 'foo@example.com';
+      const uninvited = 'baf@example.com';
+
+      it("Invited users should be able to retrieve the game.", async function () {
+        await game.playerInvite(invited);
+        const game2 = await GameSession.getSession({name: 'invited', user_id: 'invited', email: invited}, game.guid);
+        expect(game2.guid).to.equal(game.guid);
+      });
+
+      it("Uninvited users should not be able to retrieve the game.", async function (){
+        await game.playerInvite(invited);
+        let game2;
+        try {
+          game2 = await GameSession.getSession({name: 'uninvited', user_id: 'uninvited', email: uninvited}, game.guid);
+          expect(true).to.equal(false);
+        } catch (e) {
+          expect(e.message).to.equal('The provided user is not a member of this game');
+        }
+      });
+    });
+
   });
 
+  describe("Gagging players",  async function (){
+    it("Game Master should be able to gag and ungag players", async function (){
+      await game.playerInvite('foo@example.com');
+      await game.gag(2);
+      let gagged;
+      gagged = await game.isGagged(2);
+      expect(gagged.playerId).to.equal(2);
+      await game.ungag(2);
+      gagged = await game.isGagged(2);
+      expect(gagged).not.to.exist;
+    });
+  });
 
 });
-
-

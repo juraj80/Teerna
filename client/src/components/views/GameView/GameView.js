@@ -47,7 +47,9 @@ export default function GameView() {
 										handleSelect();
 									}}
 								>
-									Story {idx + 1}{' '}
+									<p>
+										Story {idx + 1}
+									</p>
 								</FileBlock>
 							);
 					  })

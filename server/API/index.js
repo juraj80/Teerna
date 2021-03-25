@@ -6,7 +6,7 @@ const router = express.Router();
  *
  * Manages Games, creating and ending sessions, creating and revoking invite links, retrieving sessions.
  */
-const gameSessionRouter = require('./gameSession.js');
+const gameSessionRouter = require('./gameSession.js').router;
 router.use('/game-session', gameSessionRouter);
 
 /**

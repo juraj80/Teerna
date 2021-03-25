@@ -2,6 +2,25 @@ const express = require('express');
 const router = express.Router();
 const GameSession = require("../GameSession/GameSession");
 
+const controller = {
+
+  create: async (req, res) => {
+    if (!req.user || !req.user.user_id) {
+      res.status(403).send('Forbidden');
+    } else {
+      const gameSession = await GameSession.createSession(req.user);
+      res.json(
+        {
+          message: 'Game created',
+          gameId: gameSession.guid,
+          gm: req.user.name
+        }
+      );
+    }
+  }
+
+}
+
 /**
  * @openapi
  * tags:
@@ -27,20 +46,7 @@ const GameSession = require("../GameSession/GameSession");
  *       "403":
  *         description: User does not have the propper permissions or is not authenticated.
  */
-router.post('/', async (req, res) => {
-  if (!req.user || !req.user.user_id) {
-    res.status(403).send('Forbidden');
-  } else {
-    const gameSession = await GameSession.createSession(req.user);
-    res.json(
-      {
-        message: 'Game created',
-        gameId: gameSession.guid,
-        gm: req.user.name
-      }
-    );
-  }
-});
+router.post('/', controller.create);
 
 /**
  * Creates a valid invitation link to be sent to users
@@ -141,4 +147,8 @@ router.post('/:guid/join', async (req, res) => {
 
 });
 
-module.exports = router;
+
+module.exports = {
+  router,
+  controller
+}

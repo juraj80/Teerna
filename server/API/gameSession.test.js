@@ -5,6 +5,8 @@ const firebase = require('firebase-admin');
 const expect = chai.expect;
 const axios = require('axios');
 
+const gameSession = require('./gameSession.js');
+
 // Firebase configuration.
 const config = {
   apiKey: process.env['REACT_APP_API_KEY'],
@@ -35,24 +37,15 @@ async function mockUser() {
 }
 
 async function createMockUser() {
-  const tokenRes = await axios.post(
-    `http://localhost:9099/www.googleapis.com/identitytoolkit/v3/accounts:signUp?key=${process.env['REACT_APP_API_KEY']}`,
-    {email: 'foo@example.com', password: 'foobar', returnSecureToken: true}
-  );
-  return tokenRes;
-}
-
-async function convertCustomTokenToIdToken(customToken) {
-  const tokenRes = await axios.post(
-    `http://localhost:9099/www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=${process.env['REACT_APP_API_KEY']}`,
-    {token: customToken, returnSecureToken: true}
-  );
-  const res = await chai.request(app)
-    .post('/api/game-session')
-    .send({
-      token: tokenRes.data.idToken
-    }) ;
-  return tokenRes.data.idToken;
+  try {
+    const tokenRes = await axios.post(
+      `http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env['REACT_APP_API_KEY']}`,
+      {email: 'foo@example.com', password: 'foobar'}
+    );
+    return tokenRes.data;
+  } catch(e) {
+    console.error("Is the user already created?");
+  }
 }
 
 chai.use(chaiHttp);
@@ -63,16 +56,16 @@ describe("Game Session API", function() {;
   let idToken;
 
   before(async function() {
-    console.log("Mock User", await createMockUser());
-    const u = await mockUser();
-    user = await firebaseApp.auth().getUserByEmail('nelson@example.com');
-    console.debug(firebaseApp.auth());
-    customToken = await firebaseApp.auth().createCustomToken(user.uid);
-    idToken = await convertCustomTokenToIdToken(customToken);
+    user = await createMockUser();
+    idToken = user.idToken;
   });
 
   after(async function() {
-    await firebaseApp.auth().deleteUser(user.uid);
+    // Remove user created locally for testing purposes
+    await axios.post(
+      `http://localhost:9099/identitytoolkit.googleapis.com/v1/accounts:delete?key=${process.env['REACT_APP_API_KEY']}`,
+      user
+    );
   });
 
   describe("POST game-session", function() {

@@ -29,8 +29,10 @@ const config = {
 };
 
 
-// Initializ Firebase
-const firebaseApp = !fireBaseAdmin.apps.length ? fireBaseAdmin.initializeApp(config): fireBaseAdmin.app();
+// Initialize Firebase
+const firebaseApp = !fireBaseAdmin.apps.length ?
+  fireBaseAdmin.initializeApp(config):
+  fireBaseAdmin.app();
 
 /**
  * A Firebase JWT token validation middleware
@@ -49,7 +51,6 @@ async function authenticateHTTP(req, res, next) {
     next();
   } else {
     req.user = await authenticateToken(token);
-    console.log('AUTHENTICATED', req.user);
     next();
   }
 }
@@ -79,10 +80,8 @@ async function authenticateToken(token) {
   const auth = firebaseApp.auth();
   try {
     const decoded = await auth.verifyIdToken(token);
-    console.log(decoded);
     return decoded;
   } catch (e) {
-    console.log(e);
     return null;
   }
 }

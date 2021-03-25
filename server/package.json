@@ -9,7 +9,7 @@
     "start-dev": "node index.js test",
     "firebase-local:set-emulator-host": "export FIREBASE_AUTH_EMULATOR_HOST='localhost:9099'",
     "firebase-local:start": "npm run firebase-local:set-emulator-host && ./node_modules/firebase-tools/lib/bin/firebase.js emulators:start",
-    "test": "npm run firebase-local:set-emulator-host && c8 mocha */**/*.test.js --ignore 'node_modules/**/*' --exit"
+    "test": "npm run firebase-local:set-emulator-host && c8 mocha './{,!(node_modules)/**/}*.test.js' --exit"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +32,7 @@
     "express-fileupload": "^1.2.1",
     "firebase-admin": "^9.5.0",
     "moment": "^2.29.1",
+    "rewire": "^5.0.0",
     "sqlite3": "^4.0.0",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6",

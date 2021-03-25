@@ -44,7 +44,7 @@ const activityOptions = [
 		label: 'Switch to Player List View',
 		value: 'player-list',
 		icon: 'players',
-		lockedForGM: true,
+		lockedForGM: false,
 	},
 	{
 		idx: 3,

@@ -5,7 +5,7 @@ export const joinSession = (guid, user) => {
 		method: 'POST',
 		headers: { 'content-type': 'application/json' },
 		data: JSON.stringify(user),
-		url: `/game-session/${guid}`,
+		url: `/api/game-session/${guid}`,
 	};
 
 	return axios(options);

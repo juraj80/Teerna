@@ -5,7 +5,7 @@ export const createSession = (user) => {
 		method: 'POST',
 		headers: { 'content-type': 'application/json' },
 		data: JSON.stringify(user),
-		url: '/game-session',
+		url: '/api/game-session/',
 	};
 
 	return axios(options);

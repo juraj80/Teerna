@@ -65,7 +65,7 @@ export default function HeaderBar({  user, toggleTheme }) {
             </Section>
             <Section consoleWidth={`${width}px`} middle='middle' />
 			<Section consoleWidth={`${width}px`} end='end'>
-                <div style={{marginRight: spacing[8]}}> <ThemeToggle  toggleTheme={toggleTheme} /></div>
+                <div style={{marginRight: spacing[8]}}> <ThemeToggle toggleTheme={toggleTheme} /></div>
 				<Avatar
                     style={{cursor: 'pointer'}}
                     size='small'

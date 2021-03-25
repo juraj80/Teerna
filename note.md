@@ -1,7 +1,7 @@
 - will delete this,
+- uploading env file for prod purposes?
 - TODO BY TONIGHT:
 -   fully integrate chat
--   fully integrate map
 -   show player list
 -   change landing if not authenticated
 -   invitation and join game modals

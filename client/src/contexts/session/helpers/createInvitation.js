@@ -6,7 +6,7 @@ export const createInvitation = (user, guid, email) => {
         method: 'POST',
         headers: { 'content-type' : 'application/json'},
         data, 
-        url: '/game-session/invitation'
+        url: '/api/game-session/invitation'
     }
 
     return axios(options);

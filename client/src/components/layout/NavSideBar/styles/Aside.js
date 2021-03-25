@@ -9,7 +9,7 @@ export default styled.aside`
 	left: -1px;
 	bottom:0;
 	background: ${({theme}) => transparentize(0.8,invert(theme.bartext))};
-	transition: width 0.5s ease-in-out;
+	transition: width 0.2s ease-in-out;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

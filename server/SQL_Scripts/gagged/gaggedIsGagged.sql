@@ -1,4 +1,4 @@
-select startTime
+select *
     from gagged
     where endTime is null
-    and playerId = $player;
+    and playerId=$player;

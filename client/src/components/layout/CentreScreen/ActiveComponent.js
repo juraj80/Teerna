@@ -1,6 +1,6 @@
 import { oneOf } from "prop-types";
 import { useConsoleSize } from "../../../hooks";
-import { GameView } from "../../views";
+import { GameView, MapView } from "../../views";
 import { Container } from './styles';
 
 export default function ActiveComponent({ viewType, drawerPos }) {
@@ -9,7 +9,7 @@ export default function ActiveComponent({ viewType, drawerPos }) {
 	return (
 		<Container offset={`${offset}px`}>
 			{viewType === 'story-view' && <GameView />}
-            {viewType === 'map-view' && <div />}
+            {viewType === 'map-view' && <MapView />}
 		</Container>
 	);
 }

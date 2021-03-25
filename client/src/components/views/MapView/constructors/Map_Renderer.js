@@ -1,41 +1,47 @@
 //*********************//
 //    MAP RENDERER     //
 //*********************//
+import { images } from '../../../../assets';
+import { Map } from './Map';
+import { Map_Cam } from './Map_Cam';
+
 //Defines the map renderer
-class Map_Renderer {
+export class Map_Renderer {
     //***********//
     //CONSTRUCTOR//
     //***********//
-    constructor(widthPercentage, heightPercentage, range){
+    constructor(p, widthPercentage, heightPercentage, range){
         //Import variables
+        this.p = p;
         this.portalWidthPercentage  = widthPercentage;
         this.portalHeightPercentage = heightPercentage;
         this.map_camRange           = range;
         this.focus                  = true;
+        this.selected               = 0;
 
         //Calculate dimensions
-        this.portalWidth = (windowWidth / 100) * this.portalWidthPercentage;
-        this.portalHeight = (windowHeight / 100) * this.portalHeightPercentage;
+        this.portalWidth = (p.windowWidth / 100) * this.portalWidthPercentage;
+        this.portalHeight = (p.windowHeight / 100) * this.portalHeightPercentage;
 
         //Calculate position
-        this.portalPos = (windowWidth - this.portalWidth) / 2;
+        this.portalPos = (p.windowWidth - this.portalWidth) / 2;
 
         //Load maps
         this.maps = [];
-        this.maps.push(new Map("/resources/maps/testmap1.png", 45, 2));
-        this.maps.push(new Map("/resources/maps/testmap2.png", 33, 2));
-        this.maps.push(new Map("/resources/maps/testmap3.png", 36, 2));
-        this.currentMap = this.maps[0];
+        this.maps.push(new Map(this.p, images.map.TestMap1, 45, 2));
+        this.maps.push(new Map(this.p, images.map.TestMap2, 33, 2));
+        this.maps.push(new Map(this.p, images.map.TestMap3, 36, 2));
+        this.currentMap = this.maps[this.selected];
 
         //Load graphics
         this.graphics = [];
-        this.graphics.push(loadImage("/resources/graphics/Wall.png"));          //0
-        this.graphics.push(loadImage("/resources/graphics/Door_Closed.png"));   //1
-        this.graphics.push(loadImage("/resources/graphics/Door_Open.png"));     //2
-        this.graphics.push(loadImage("/resources/graphics/L_Corner.png"));      //3
-        this.graphics.push(loadImage("/resources/graphics/T_Corner.png"));      //4
-        this.graphics.push(loadImage("/resources/graphics/X_Corner.png"));      //5
-        this.graphics.push(loadImage("/resources/graphics/Pillar.png"));        //6
+        this.graphics.push(this.p.loadImage(images.map.Wall));          //0
+        this.graphics.push(this.p.loadImage(images.map.DoorClosed));   //1
+        this.graphics.push(this.p.loadImage(images.map.DoorOpen));     //2
+        this.graphics.push(this.p.loadImage(images.map.LCorner));      //3
+        this.graphics.push(this.p.loadImage(images.map.TCorner));      //4
+        this.graphics.push(this.p.loadImage(images.map.XCorner));      //5
+        this.graphics.push(this.p.loadImage(images.map.Pillar));        //6
     }
 
     //*******************//
@@ -48,110 +54,110 @@ class Map_Renderer {
         }
 
         //Set up canvas
-        this.portal = createCanvas(this.portalWidth, this.portalHeight, WEBGL);
+        this.portal = this.p.createCanvas(this.portalWidth, this.portalHeight, this.p.WEBGL);
         this.portal.position(this.portalPos, 0);
         this.portal.background(0);
 
         //Set up camera
-        this.map_cam = new Map_Cam(this.map_camRange);
+        this.map_cam = new Map_Cam(this.p, this.map_camRange);
 
         //Create entities
         //Top doors
         this.maps[0].addEntity(this.graphics[2],
-                               createVector(7, 0),
+                               this.p.createVector(7, 0),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[2],
-                               createVector(8, 0),
+                               this.p.createVector(8, 0),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         //Bottom Doors
         this.maps[0].addEntity(this.graphics[1],
-                               createVector(7, 23),
+                               this.p.createVector(7, 23),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[1],
-                               createVector(8, 23),
+                               this.p.createVector(8, 23),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         //Pillars
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(2, 5),
+                               this.p.createVector(2, 5),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(2, 9),
+                               this.p.createVector(2, 9),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(2, 14),
+                               this.p.createVector(2, 14),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(2, 18),
+                               this.p.createVector(2, 18),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(13, 5),
+                               this.p.createVector(13, 5),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(13, 9),
+                               this.p.createVector(13, 9),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(13, 14),
+                               this.p.createVector(13, 14),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[6],
-                               createVector(13, 18),
+                               this.p.createVector(13, 18),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         //Corners
         this.maps[0].addEntity(this.graphics[3],
-                               createVector(0, 0),
+                               this.p.createVector(0, 0),
                                "W",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[3],
-                               createVector(15, 0),
+                               this.p.createVector(15, 0),
                                "N",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[3],
-                               createVector(0, 23),
+                               this.p.createVector(0, 23),
                                "S",
                                this.maps[0].minX,
                                this.maps[0].minY,
                                this.maps[0].tileSize);
         this.maps[0].addEntity(this.graphics[3],
-                               createVector(15, 23),
+                               this.p.createVector(15, 23),
                                "E",
                                this.maps[0].minX,
                                this.maps[0].minY,
@@ -159,13 +165,13 @@ class Map_Renderer {
         //Side walls
         for(let i = 1; i < 23; i++){
             this.maps[0].addEntity(this.graphics[0],
-                                   createVector(0, i),
+                                   this.p.createVector(0, i),
                                    "E",
                                    this.maps[0].minX,
                                    this.maps[0].minY,
                                    this.maps[0].tileSize);
             this.maps[0].addEntity(this.graphics[0],
-                                   createVector(15, i),
+                                   this.p.createVector(15, i),
                                    "E",
                                    this.maps[0].minX,
                                    this.maps[0].minY,
@@ -174,13 +180,13 @@ class Map_Renderer {
         //Left walls
         for(let i = 1; i < 7; i++){
             this.maps[0].addEntity(this.graphics[0],
-                                   createVector(i, 0),
+                                   this.p.createVector(i, 0),
                                    "N",
                                    this.maps[0].minX,
                                    this.maps[0].minY,
                                    this.maps[0].tileSize);
             this.maps[0].addEntity(this.graphics[0],
-                                   createVector(i, 23),
+                                   this.p.createVector(i, 23),
                                    "M",
                                    this.maps[0].minX,
                                    this.maps[0].minY,
@@ -189,13 +195,13 @@ class Map_Renderer {
         //Right walls
         for(let i = 9; i < 15; i++){
             this.maps[0].addEntity(this.graphics[0],
-                                   createVector(i, 0),
+                                   this.p.createVector(i, 0),
                                    "N",
                                    this.maps[0].minX,
                                    this.maps[0].minY,
                                    this.maps[0].tileSize);
             this.maps[0].addEntity(this.graphics[0],
-                                   createVector(i, 23),
+                                   this.p.createVector(i, 23),
                                    "M",
                                    this.maps[0].minX,
                                    this.maps[0].minY,
@@ -219,7 +225,7 @@ class Map_Renderer {
     //********//
     draw(){
         //Blank background
-        background(0);
+        this.p.background(0);
 
         //Draw map
         this.currentMap.draw(this.portal);
@@ -246,29 +252,29 @@ class Map_Renderer {
         }
         
         //Translation
-        if(keyIsDown(UP_ARROW) && !keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.UP_ARROW) && !this.p.keyIsDown(16)){
             this.map_cam.translate("UP");
         }
-        if(keyIsDown(DOWN_ARROW) && !keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.DOWN_ARROW) && !this.p.keyIsDown(16)){
             this.map_cam.translate("DOWN");
         }
-        if(keyIsDown(LEFT_ARROW) && !keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.LEFT_ARROW) && !this.p.keyIsDown(16)){
             this.map_cam.translate("LEFT");
         }
-        if(keyIsDown(RIGHT_ARROW) && !keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.RIGHT_ARROW) && !this.p.keyIsDown(16)){
             this.map_cam.translate("RIGHT");
         }
 
         //Rotation
-        if(keyIsDown(LEFT_ARROW) && keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.LEFT_ARROW) && this.p.keyIsDown(16)){
             this.map_cam.viewerAngle -= this.map_cam.viewerRotSpeed;
         }
-        if(keyIsDown(RIGHT_ARROW) && keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.RIGHT_ARROW) && this.p.keyIsDown(16)){
             this.map_cam.viewerAngle += this.map_cam.viewerRotSpeed;
         }
 
         //Scale
-        if(keyIsDown(UP_ARROW) && keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.UP_ARROW) && this.p.keyIsDown(16)){
             //Scale down
             this.map_cam.viewerRange -= this.map_cam.viewerScaleSpeed;
 
@@ -277,7 +283,7 @@ class Map_Renderer {
                 this.map_cam.viewerRange = this.map_cam.minScale;
             }
         }
-        if(keyIsDown(DOWN_ARROW) && keyIsDown(16)){
+        if(this.p.keyIsDown(this.p.DOWN_ARROW) && this.p.keyIsDown(16)){
             //Scale up
             this.map_cam.viewerRange += this.map_cam.viewerScaleSpeed;
 
@@ -288,15 +294,15 @@ class Map_Renderer {
         }
 
         //Change map
-        if(keyIsDown(49)){
+        if(this.p.keyIsDown(49)){
             //Switch to map 1
             this.currentMap = this.maps[0];
         }
-        if(keyIsDown(50)){
+        if(this.p.keyIsDown(50)){
             //Switch to map 2
             this.currentMap = this.maps[1];
         }
-        if(keyIsDown(51)){
+        if(this.p.keyIsDown(51)){
             //Switch to map 3
             this.currentMap = this.maps[2];
         }
@@ -304,11 +310,11 @@ class Map_Renderer {
         //Currently not working
         //Orthographic mode has clipping problems
         //Change perspective
-        //        if(keyIsDown(79)){
+        //        if(this.p.keyIsDown(79)){
         //            //Switch to orthographic mode
         //            ortho();
         //        }
-        //        if(keyIsDown(80)){
+        //        if(this.p.keyIsDown(80)){
         //            //Switch to perspectival mode
         //            perspective();
         //        }
@@ -325,14 +331,14 @@ class Map_Renderer {
     //*****************//
     resize(){
         //Recalculate dimensions
-        this.portalWidth = (windowWidth / 100) * this.portalWidthPercentage;
-        this.portalHeight = (windowHeight / 100) * this.portalHeightPercentage;
+        this.portalWidth = (this.p.windowWidth / 100) * this.portalWidthPercentage;
+        this.portalHeight = (this.p.windowHeight / 100) * this.portalHeightPercentage;
 
         //Recalculate position
-        this.portalPos = (windowWidth - this.portalWidth) / 2;
+        this.portalPos = (this.p.windowWidth - this.portalWidth) / 2;
 
         //Resize/Reposition canvas
-        resizeCanvas(this.portalWidth, this.portalHeight);
+        this.p.resizeCanvas(this.portalWidth, this.portalHeight);
         this.portal.position(this.portalPos, 0);
     }
 }

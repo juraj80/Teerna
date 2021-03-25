@@ -2,12 +2,14 @@
 //    MAP CAM     //
 //****************//
 //Defines the camera used by the map renderer
-class Map_Cam {
+
+export class Map_Cam {
     //***********//
     //CONSTRUCTOR//
     //***********//
-    constructor(range){
+    constructor(p, range){
         //Initial variables
+        this.p = p;
         this.viewerRange        = range;
         this.viewerTransSpeed   = 5;
         this.viewerRotSpeed     = 2;
@@ -16,17 +18,17 @@ class Map_Cam {
         this.maxScale           = 1000;
 
         //Calculate positions
-        this.focusPos = createVector(0,
+        this.focusPos = this.p.createVector(0,
                                      0,
                                      0);
-        this.viewerPos = createVector(this.focusPos.x - this.viewerRange,
+        this.viewerPos = this.p.createVector(this.focusPos.x - this.viewerRange,
                                       this.focusPos.y - this.viewerRange,
                                       this.focusPos.z - this.viewerRange);
         this.viewerAngle = 225;
 
         //Create camera
-        this.viewer = createCamera();
-        setCamera(this.viewer);
+        this.viewer = this.p.createCamera();
+        this.p.setCamera(this.viewer);
         this.viewer.camera(this.viewerPos.x,
                            this.viewerPos.y,
                            this.viewerPos.z,
@@ -60,17 +62,17 @@ class Map_Cam {
     //FIND CAMERA POSITION//
     //********************//
     calcPos(){
-        push();
+        this.p.push();
             //Calculate x and y
-            angleMode(DEGREES);
-            let viewerX = this.focusPos.x + (sin(this.viewerAngle) * this.viewerRange);
-            let viewerY = this.focusPos.y + (cos(this.viewerAngle) * this.viewerRange);
+            this.p.angleMode(this.p.DEGREES);
+            let viewerX = this.focusPos.x + (this.p.sin(this.viewerAngle) * this.viewerRange);
+            let viewerY = this.focusPos.y + (this.p.cos(this.viewerAngle) * this.viewerRange);
             
             //Set position
             this.viewerPos.x = viewerX;
             this.viewerPos.y = viewerY;
             this.viewerPos.z = this.viewerRange;
-        pop();
+        this.p.pop();
     }
 
     //****************//
@@ -80,20 +82,20 @@ class Map_Cam {
         //Filter by direction
         switch(direction){
             case "UP":
-                this.focusPos.x -= this.viewerTransSpeed * sin(this.viewerAngle);
-                this.focusPos.y -= this.viewerTransSpeed * cos(this.viewerAngle);
+                this.focusPos.x -= this.viewerTransSpeed * this.p.sin(this.viewerAngle);
+                this.focusPos.y -= this.viewerTransSpeed * this.p.cos(this.viewerAngle);
                 break;
             case "DOWN":
-                this.focusPos.x += this.viewerTransSpeed * sin(this.viewerAngle);
-                this.focusPos.y += this.viewerTransSpeed * cos(this.viewerAngle);
+                this.focusPos.x += this.viewerTransSpeed * this.p.sin(this.viewerAngle);
+                this.focusPos.y += this.viewerTransSpeed * this.p.cos(this.viewerAngle);
                 break;
             case "LEFT":
-                this.focusPos.x -= this.viewerTransSpeed * cos(this.viewerAngle);
-                this.focusPos.y += this.viewerTransSpeed * sin(this.viewerAngle);
+                this.focusPos.x -= this.viewerTransSpeed * this.p.cos(this.viewerAngle);
+                this.focusPos.y += this.viewerTransSpeed * this.p.sin(this.viewerAngle);
                 break;
             case "RIGHT":
-                this.focusPos.x += this.viewerTransSpeed * cos(this.viewerAngle);
-                this.focusPos.y -= this.viewerTransSpeed * sin(this.viewerAngle);
+                this.focusPos.x += this.viewerTransSpeed * this.p.cos(this.viewerAngle);
+                this.focusPos.y -= this.viewerTransSpeed * this.p.sin(this.viewerAngle);
                 break;
             default:
                 break;

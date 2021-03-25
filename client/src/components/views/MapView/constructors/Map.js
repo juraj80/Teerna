@@ -1,14 +1,17 @@
+import { Map_Entity} from './Map_Entity';
 //************//
 //    MAP     //
 //************//
+
 //Defines maps available to the renderer
-class Map {
+export class Map {
     //***********//
     //CONSTRUCTOR//
     //***********//
-    constructor(filePath, gridsize, scale){
+    constructor(p, filePath, gridsize, scale){
+        this.p = p;
         //Import data
-        this.map_image = loadImage(filePath);
+        this.map_image = this.p.loadImage(filePath);
         this.gridsize = gridsize;
         this.scale = scale;
         this.entities = [];
@@ -30,8 +33,8 @@ class Map {
         
         //Calculate grid
         this.tileSize = this.gridsize * this.scale;
-        this.rows = floor(this.yScale / this.tileSize);
-        this.columns = floor(this.xScale / this.tileSize);
+        this.rows = this.p.floor(this.yScale / this.tileSize);
+        this.columns = this.p.floor(this.xScale / this.tileSize);
     }
 
     //********//
@@ -39,7 +42,7 @@ class Map {
     //********//
     draw(target_canvas){
         //Render map
-        image(this.map_image,
+        this.p.image(this.map_image,
               this.minX,
               this.minY,
               this.xScale,
@@ -55,6 +58,6 @@ class Map {
     //ADD ENTITY//
     //**********//
     addEntity(graphic, coords, orientation, minX, minY, tileSize){
-        this.entities.push(new Map_Entity(graphic, coords, orientation, minX, minY, tileSize));
+        this.entities.push(new Map_Entity(this.p, graphic, coords, orientation, minX, minY, tileSize));
     }
 }

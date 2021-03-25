@@ -3,8 +3,20 @@ const GameSession = require('./GameSession.js');
 
 const expect = chai.expect;
 
+let game;
 
 describe("Game Session Class", function() {;
+  beforeEach(
+    async function () {
+      game = await GameSession.createSession({user_id: 'gm', email: 'gamemaster@example.com'});
+    }
+  );
+
+  afterEach(
+    function () {
+      game.deleteGame();
+    }
+  );
 
   describe("Create Game Sessions", function() {
     it("Should require user_id and email to create a session.", async function() {

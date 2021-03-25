@@ -1,1 +1,2 @@
-select * from playerList where isGM = true;
+
+select * from playerList where isGM=1;

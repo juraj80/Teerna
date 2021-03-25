@@ -64,6 +64,22 @@ describe("Game Session Class", function() {;
 
   describe("Game Invitations", function (){
 
+    it("Should be able to list the players.", async function (){
+      const invitationList = [
+        ['foo@example.com', 'foo'],
+        ['bar@example.com', 'bar'],
+        ['baz@example.com', 'baz']
+      ];
+      for (let i of invitationList) {
+        await game.playerInvite(i[0]);
+        await game.updatePlayerName(i[0], i[1]);
+      }
+      const players = await game.playerList('ba');
+      console.log('UID', game.guid);
+      expect(players.length).to.equal(2);
+
+    });
+
     it("Should be able to create invitations.", async function () {
       let pending = await game.getPendingInvitations();
       expect(pending.length).to.equal(0);

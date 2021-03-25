@@ -278,11 +278,12 @@ class GameSession {
    * @param {number} limit
    * @returns {Promise<unknown>}
    */
-  playerList(offset = 0, limit = 50) {
+  playerList(playerName = '', offset = 0, limit = 50) {
     return this.sql(path.join('player', 'getPlayers.sql'), {
+      '$partialName': '%'+playerName+'%',
       '$offset': offset,
       '$limit': limit
-    });
+    }, 'all');
   }
 
   async gagPrepareTable() {

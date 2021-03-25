@@ -8,7 +8,7 @@
  */
 
 select * from playerList
-    where playerName like '%$partialName%'
-    limit $offset, $limit
+    where playerName like $partialName
     order by playerName
+    limit $offset, $limit
 ;

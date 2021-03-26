@@ -21,28 +21,38 @@ export const DocumentManager = () => {
 		if (loaded) setAvailableForDownload(true);
 		else setAvailableForDownload(false);
 	}, [loaded]);
-
+	
 	const deleteDoc = () => {
-		axios
-			.post('/api/document/delete')
-			.then(res => {
-				setResStatus('success');
-			})
-			.catch(err => {
-				addAlert('error', 'Could not delete game at this time.');
-				setResStatus('error');
-			});
+		axios({
+			method: 'post',
+			url: '/api/document/delete',
+			data: {
+			  token: localStorage.getItem('token'),
+			}
+		})
+		.then(res => {
+			setResStatus('success');
+		}).catch(err => {
+			addAlert('error', 'Could not delete game at this time.');
+			setResStatus('error');
+		});
 	};
 
     const downloadZip = () => {
-        axios.get('/api/document/download')
-             .then(res => {
-                setResStatus('success');
-              })
-             .catch(err => {
-                addAlert('error', 'Could not download game at this time.');
-                setResStatus('error');
-            });
+        axios({
+			method: 'get',
+			url: '/api/document/download',
+			data: {
+				token: localStorage.getItem('token'),
+			}
+		})
+		.then(res => {
+			setResStatus('success');
+		})
+		.catch(err => {
+			addAlert('error', 'Could not download game at this time.');
+			setResStatus('error');
+		});
     };
     
 

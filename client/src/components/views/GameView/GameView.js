@@ -12,10 +12,15 @@ export default function GameView() {
 	const [displayMD, setDisplayMD] = useState(false);
 
 	useEffect(() => {
-		axios
-			.get('/api/document/get-files')
-			.then(res => setFiles(res.data))
-			.catch(err => addAlert('error', 'Could not retrieve files right now.'));
+		axios({
+			method: 'get',
+			url: '/api/document/get-files',
+			data: {
+				token: localStorage.getItem('token')
+			},
+		})
+		.then(res => setFiles(res.data))
+		.catch(err => addAlert('error', 'Could not retrieve files right now.'));
 	}, []);
 
 	useEffect(() => {

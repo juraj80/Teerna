@@ -1,4 +1,6 @@
 const fireBaseAdmin = require('firebase-admin');
+const serviceAcc = require(`./${process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
+
 
 /** 
  * @typedef {
@@ -17,19 +19,14 @@ const fireBaseAdmin = require('firebase-admin');
  * } User
  */
 
-// Firebase configuration. TODO: these values shouldn't be visible in GitHub. Should use environment variables instead. 
-const config = {
-  apiKey: "AIzaSyBQNSwu-qJ9SqCH_jSV7GpCTBmNTjaGlck",
-  authDomain: "agile-teerna.firebaseapp.com",
-  projectId: "agile-teerna",
-  storageBucket: "agile-teerna.appspot.com",
-  messagingSenderId: "196688538962",
-  appId: "1:196688538962:web:ad5931f45b1d192048de8b",
-  measurementId: "G-9BBM4JGWZT"
-};
 
-// Initializ Firebase
-fireBaseAdmin.initializeApp(config);
+
+
+// Initialize Firebase
+fireBaseAdmin.initializeApp({
+  credential: fireBaseAdmin.credential.cert(serviceAcc),
+  databaseURL: process.env.REACT_APP_BASEURL,
+});
 
 /**
  * A Firebase JWT token validation middleware

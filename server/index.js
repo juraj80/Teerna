@@ -1,6 +1,6 @@
+require('dotenv').config()
 const authenticate = require('./auth.js');
 const bodyParser = require('body-parser');
-
 const fileSystem = require('./helpers/fileSystem.js')
 const chat = require('./Chat/Chat.js');
 const express = require('express');

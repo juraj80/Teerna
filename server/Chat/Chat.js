@@ -1,6 +1,8 @@
 const WebSocket = require('ws');
 const { Roll } = require ("../Dice/Dice");
 const { errorMessage, diceRollToMessage, ChatMessage } = require("./Message");
+const { authenticateWS } = require("../auth");
+const GameSession = require("../GameSession/GameSession");
 
 let sockets = [];
 
@@ -22,12 +24,13 @@ function buildChatAnswer(message, answer) {
 /**
  * Sends a message to all sockets connected to the server.
  *
- * If a guid parameter is provided, sends the message only to those sockets that belong to this guid..
+ * If message has a guid field sends the message only to those sockets that belong to this guid..
  * @param {Object} message to be sent
- * @param {string} guid: the game id to restrict the players that should receive the message.
  */
-function broadcast(message, guid) {
-    sockets.forEach(s => {
+function broadcast(message) {
+  sockets
+    .filter(s => s.teernaGuid === message.guid)
+    .forEach(s => {
       s.send(JSON.stringify(message));
     })
 }
@@ -67,8 +70,15 @@ function setUpChat() {
     sockets.push(socket);
 
     // When you receive a message, send that message to every socket.
-    socket.on('message', function(msg) {
+    socket.on('message', async function(msg) {
       const message = JSON.parse(msg);
+      const author = authenticateWS(message);
+      let game = null;
+      message.authenticated = !!author;
+      if (message.authenticated && message.guid && message.guid.length == 36) {
+        game = GameSession.getSession(author, message.guid); 
+        socket.teernaGuid = message.guid; // once an authenticated game message is received mark the socket with the guid
+      }
       console.log("This was received via WS", message);
       switch (message.type) {
         case "dice":
@@ -109,5 +119,6 @@ function validateDice(msg) {
 }
 
 module.exports = {
-  setUpChat
+  setUpChat,
+  broadcast
 }

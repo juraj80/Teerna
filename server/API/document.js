@@ -1,6 +1,30 @@
 const express = require('express');
+const decompress = require('decompress');
+const fileSystem = require('./helpers/fileSystem.js')
 const router = express.Router();
+const GameSession = require("../GameSession/GameSession");
+const path = require('path');
+const zipper = require('zip-local');
 
+/** Returns the current game for the request, if available
+ *
+ * @param {Request} req: the current request
+ * @param {string} guid: the game id.
+ */
+async function getGame(req, guid=null) {
+  let game = null;
+  if (req.user && req.user.user_id) {
+    if (guid == null) {
+      guid = req.query.guid;
+    }
+    try {
+      game = await GameSession.getSession(req.user, guid);
+    } catch(e) {
+      console.error(e);
+    }
+  }
+  return game; 
+}
 
 
 /**
@@ -26,8 +50,12 @@ const router = express.Router();
  *       200:
  *         description: the list of files within the game
  */
-router.get('/get-files', (req, res) => {
-  const folder = 'Uploads';
+router.get('/get-files', async (req, res) => {
+  const game = getGame(req, req.query.guid);
+  if (!game) {
+    res.status(403).send('Forbidden');
+  }
+  const folder = game.getFolder();
   const files = fileSystem.getUploadFiles(folder);
   const listOfFiles = fileSystem.getListOfFileObjects(files);
   res.send(listOfFiles);
@@ -54,27 +82,27 @@ router.get('/get-files', (req, res) => {
  *
  */
 router.post('/upload', (req,res) => {
-    console.log('upload called');
-    if(req.files === null){
-        return res.status(400).json({ msg: 'No file uploaded' });
+  if(req.files === null){
+    return res.status(400).json({ msg: 'No file uploaded' });
+  }
+  const game = getGame(req, req.query.guid);
+  if (!game) {
+    res.status(403).send('Forbidden');
+  }
+  const folder = game.getFolder();
+  const file = req.files.file;
+  const filePath = path.join(folder, file.name);
+  file.mv(path, err => {
+    if(err){
+      console.log(err);
+      return res.status(500).send(err);
+    } else {
+      decompress(path, folder).then(files=>{
+        fs.unlinkSync(path); // remove compressed file
+      });
     }
-    const file = req.files.file;
-    const path = `${__dirname}/Uploads/${file.name}`;
-    file.mv(path, err => {
-        decompress(path,'Uploads/').then(files=>{
-            fs.unlinkSync(path);
-            if(fs.existsSync(osxfolder)){
-                fs.rmdirSync(osxfolder, {recursive: true});
-            }
-            console.log("done!");
-        });
-        if(err){
-            console.log(err);
-            return res.status(500).send(err);
-        }
-    //    res.json({ fileName: file.name, filePath: `./Uploads/${file.name}`});
-        res.json({ fileName: file.name, filePath: path});
-    });
+    res.json({ fileName: file.name, filePath: path});
+  });
 });
 
 /**
@@ -94,17 +122,22 @@ router.post('/upload', (req,res) => {
  *         description: the zipped game folder
  */
 router.get('/download', function(req, res){
-  const folder = `${__dirname}/Uploads/game`;
+  const game = getGame(req, req.query.guid);
+  const gameFile = 'game.zip';
+  if (!game) {
+    res.status(403).send('Forbidden');
+  }
+  const folder = game.getFolder();
   if(fs.existsSync(folder) ){
-    const file = `${__dirname}/Uploads/${gameFile}`;
+    const file = path.join(folder, gameFile);
     zipper.sync.zip(folder).compress().save(file);
     if(fs.existsSync(file)){
-      console.log("File exists: ", file);
       res.download(file, function(error){ 
         console.log("Error : ", error) 
       });
     } else {
-      console.log("Server file doesn't exists!", res.status);
+      console.error('Could not create the zip file');
+      res.status(500).send('Internal Server Error');
     }  
   }  else {
     console.log("Server folder doesn't exists!", res.status);
@@ -123,6 +156,7 @@ router.get('/download', function(req, res){
  *     parameters:
  *       - $ref: '#/components/parameters/guidBody'
  *       - $ref: '#/components/parameters/tokenBody'
+ *       - file: the file path to be deleted
  *     responses:
  *       200:
  *         description: document deleted
@@ -130,20 +164,24 @@ router.get('/download', function(req, res){
  *         description: document does not exist
  */
 router.post('/delete', function(req, res){
-  const file = `${__dirname}/Uploads/${gameFile}`;
-  const folder = `${__dirname}/Uploads/game`;
-  if(fs.existsSync(file)){
-    fs.unlinkSync(file)
-  } 
+  const game = getGame(req, req.query.guid);
+  const gameFile = 'game.zip';
+  if (!game) {
+    res.status(403).send('Forbidden');
+  }
+  if (!req.body.file) {
+    res.status(400).send('Bad Request');
+  }
+  const folder = game.getFolder();
   if(fs.existsSync(folder) ){
-    fs.rmdirSync(folder, { recursive: true })  
-  } 
-  if(fs.existsSync(osxfolder)){
-    fs.rmdirSync(osxfolder, { recursive: true })
-    res.send(200, {message: 'File deleted'});
-  } else{
-    console.log("Server file doesn't exists!");
-    res.send(400, {message: 'File does not exist'});
+    const file = path.join(folder, req.body.file);
+    if(fs.existsSync(file)){
+      fs.unlinkSync(file)
+      res.status(200).send("Document successfuly deleted");
+    } else{
+      console.log("Server file doesn't exists!");
+      res.send(400, {message: 'File does not exist'});
+    }
   }
 });
 

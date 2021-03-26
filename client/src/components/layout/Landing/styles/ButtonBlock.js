@@ -1,10 +1,11 @@
+import { transparentize } from "polished";
 import styled from "styled-components";
 import { colours, elevation, font, frostedGlass, spacing } from "../../../../styles";
 
 export default styled.div`
     top: 40px;
     position: relative;
-    ${frostedGlass(undefined, 'accent', 'white')};
+    ${frostedGlass(undefined, 'accent', 'purple')};
     padding: ${spacing[8]} ${spacing[16]};
     min-width: 50%;
     max-width: 52%;
@@ -25,7 +26,7 @@ export default styled.div`
     }
     
     &:hover {
-        background: transparent;
+        background: ${transparentize(0.3, colours.accent.purple)};
         color: ${colours.grey[300]};
         font-weight: bolder;
         ${elevation(21)};

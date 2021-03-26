@@ -4,7 +4,8 @@ import { AuthenticationForm } from '../../compound';
 import { Modal } from '../../core';
 import { ScreenText, ButtonBlock, Container }from './styles';
 
-export default function Landing() {
+export default function Landing({ updateScreen }) {
+    const { user } = useContext(AuthContext);
     const { setErrors } = useContext(AuthContext);
     const { updateShow, updateLocked, updateContent } = useContext(ModalContext);
     const [modalContent, setModalContent] = useState(undefined);
@@ -15,7 +16,7 @@ export default function Landing() {
             setErrors([]);
             updateContent(() => ({state}) => (
                 <Modal size='large' title={modalContent} state={state} updateShow={updateShow}>
-                    {modalContent === 'login' && (<AuthenticationForm initialState='login'/>)}
+                    {modalContent === 'login' && (<AuthenticationForm initialState='login' />)}
                     {modalContent === 'register' && (<AuthenticationForm initialState='register'/>)}
                 </Modal>
             ));
@@ -24,6 +25,8 @@ export default function Landing() {
             setModalContent(undefined);
         }
     }, [modalContent]);
+
+    useEffect(() => user && updateScreen(true), [user]);
 	
     return (
 		<Container>

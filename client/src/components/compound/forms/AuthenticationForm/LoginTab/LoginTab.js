@@ -8,9 +8,8 @@ export default function LoginTab({ switchForms }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordFieldType, setPasswordFieldType] = useState('password');
-	useEffect(() =>
-	console.log(email),[]);
-	
+
+
 	return (
 		<Container>
 		<Form role='form' id='login-form' aria-label='login form'>

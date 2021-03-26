@@ -1,4 +1,4 @@
-import { transparentize } from 'polished';
+import { transparentize, darken } from 'polished';
 import { css } from 'styled-components';
 import { colours, gradients } from '../styleMaps';
 import { elevation } from '../cssObjects';
@@ -14,13 +14,16 @@ import { oneOf, string } from 'prop-types';
 export const frostedGlass = (
 	colour = 'white',
 	type = undefined,
-	payload = undefined
+	payload = undefined,
+	dark = false,
 ) => {
 	let glassColour = colour;
 	if (type && payload) {
 		if (type === 'status') glassColour = colours.status[payload];
 		else if (type === 'accent') glassColour = colours.accent[payload];
 	}
+
+	if (dark) glassColour = darken(0.5, glassColour);
 
 	return css`
 		background: ${gradients.border};

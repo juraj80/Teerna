@@ -7,7 +7,7 @@ export default styled.div`
         return `${width}px`;
 	}};
     min-height: 140px;
-    height: 400px;
+    height: 480px;
     ${({theme}) => frostedGlass(theme.modal)};
     border-radius: ${borderRadius.straight};
     ${elevation(20)};

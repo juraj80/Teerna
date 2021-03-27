@@ -42,8 +42,7 @@ export default function GameView() {
 	return (
 		<Container>
 			<FileList>
-				{files ? files.map 
-					? files.map((file, idx) => {
+				{ (files && files.map) ? files.map((file, idx) => {
 							return (
 								<FileBlock
 									idx={idx}

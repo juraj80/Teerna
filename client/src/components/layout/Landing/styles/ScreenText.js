@@ -1,5 +1,6 @@
+import { transparentize } from "polished";
 import styled from "styled-components";
-import { elevation, font, spacing } from "../../../../styles";
+import { borderRadius, colours, elevation, font, spacing } from "../../../../styles";
 
 export default styled.div`
     top: 50px;
@@ -11,7 +12,8 @@ export default styled.div`
     min-width: 480px;
     max-width: 800px;
     ${elevation(18)};
-
+    color: ${({theme}) => theme.mode === 'light' ? colours.grey[300] : transparentize(0.35,colours.white)};
+    border-radius: ${borderRadius.slight};
     & h1 {
         ${font(5, 'DISPLAY', false)};
     }

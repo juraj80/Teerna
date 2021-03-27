@@ -1,16 +1,17 @@
 import { transparentize } from "polished";
 import styled from "styled-components";
-import { colours, elevation, font, frostedGlass, spacing } from "../../../../styles";
+import { borderRadius, colours, elevation, font, frostedGlass, spacing } from "../../../../styles";
 
 export default styled.div`
     top: 40px;
     position: relative;
-    ${frostedGlass(undefined, 'accent', 'purple')};
+    border-radius: ${borderRadius.slight};
+    ${({ theme }) => frostedGlass(undefined, 'accent', 'purple', theme.mode === 'dark')};
     padding: ${spacing[8]} ${spacing[16]};
     min-width: 50%;
     max-width: 52%;
     height: 140px;
-    color: ${colours.grey[300]};
+    color: ${({theme}) => theme.mode === 'light' ? colours.grey[300] : transparentize(0.35,colours.white)};
     cursor: pointer;
     ${elevation(18)};
 
@@ -27,7 +28,6 @@ export default styled.div`
     
     &:hover {
         background: ${transparentize(0.3, colours.accent.purple)};
-        color: ${colours.grey[300]};
         font-weight: bolder;
         ${elevation(21)};
     }

@@ -1,6 +1,6 @@
 import { transparentize, darken } from 'polished';
 import { css } from 'styled-components';
-import { colours, gradients } from '../styleMaps';
+import { borderRadius, colours, gradients } from '../styleMaps';
 import { oneOf, string } from 'prop-types';
 
 /**
@@ -27,6 +27,7 @@ export const frostedGlass = (
 	return css`
 		background: ${gradients.border};
 		overflow: hidden;
+		border-radius: ${borderRadius.slight};
 		&:before {
 			background: ${transparentize(0.3, glassColour)};
 			backdrop-filter: blur(20px) saturate(100%) contrast(45%) brightness(130%);

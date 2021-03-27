@@ -3,8 +3,8 @@ import { borderRadius, blur, zIndex } from '../../../../styles';
 
 export default styled.div`
     background: ${({theme}) => theme.console};
-    width: 95vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
     max-width: ${({consoleWidth}) => consoleWidth}px;
     max-height: ${({consoleHeight}) => consoleHeight}px;
     display: flex;

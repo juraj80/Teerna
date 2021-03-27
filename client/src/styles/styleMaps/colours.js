@@ -47,12 +47,12 @@ export const gradients = {
 	}),
 	border: linearGradient({
 		colorStops: [
-			transparentize(0.5, colours.white),
-			colours.white,
-			colours.accent.aqua,
-			transparentize(0.5, colours.accent.aqua),
+			transparentize(0.5, colours.grey[200]),
+			colours.grey[200],
+			colours.accent.purple,
+			transparentize(0.5, colours.accent.purple),
 		],
-		fallback: transparentize(0.5, colours.white),
+		fallback: transparentize(0.5, colours.grey[200]),
 		toDirection: 'to bottom right',
 	}),
 };

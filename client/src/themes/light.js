@@ -5,7 +5,7 @@ import { colours } from '../styles';
 export default {
 	mode: 'light',
 	backgroundImage: images.backgrounds.LightBG,
-	backdrop: colours.grey[300],
+	backdrop: colours.grey[100],
 	bulbToggle: {
 		100: transparentize(0.8, '#F0E6ED'),
 		200: transparentize(0.8, '#EBCECE'),
@@ -18,7 +18,7 @@ export default {
 		900: transparentize(0.8, '#FFFFFF'),
 		1000: transparentize(0.8, '#000000'),
 	},
-	console: transparentize(0.5, colours.grey[300]),
+	console: transparentize(0.5, colours.white),
 	icon: colours.grey[300],
 	input: 'white',
 	modal: 'white',

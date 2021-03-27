@@ -8,6 +8,6 @@ export default styled.div`
     top: 30px;
     right: 0;
     bottom: 0;
-    border-radius: ${borderRadius.straight};
+    border-radius: ${borderRadius.slight};
     ${zIndex('top')};
 `;

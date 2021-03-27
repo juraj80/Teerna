@@ -9,7 +9,7 @@ export default styled.div`
     min-height: 360px;
     max-height: 480px;
     ${({theme}) => frostedGlass(theme.modal)};
-    border-radius: ${borderRadius.straight};
+    border-radius: ${borderRadius.slight};
     ${elevation(20)};
     transition: 0.3s;
     ${zIndex('top')};

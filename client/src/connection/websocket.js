@@ -32,7 +32,7 @@ const config = { ws: { domain: 'www.teerna-project.com', port: 8888 } };
  */
 class WSConnection {
 	constructor(onOpen = [], onMessage = [], onClose = []) {
-		this.ws = new WebSocket(`ws://${config.ws.domain}:${config.ws.port}`);
+		this.ws = new WebSocket(`wss://${config.ws.domain}:${config.ws.port}`);
 		this.ws.onopen = this.onOpen.bind(this);
 		this.ws.onmessage = this.onMessage.bind(this);
 		this.ws.onclose = this.onClose.bind(this);

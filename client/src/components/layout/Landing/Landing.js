@@ -4,8 +4,7 @@ import { AuthenticationForm } from '../../compound';
 import { Modal } from '../../core';
 import { ScreenText, ButtonBlock, Container }from './styles';
 
-export default function Landing({ updateScreen }) {
-    const { user } = useContext(AuthContext);
+export default function Landing() {
     const { setErrors } = useContext(AuthContext);
     const { updateShow, updateLocked, updateContent } = useContext(ModalContext);
     const [modalContent, setModalContent] = useState(undefined);
@@ -26,7 +25,6 @@ export default function Landing({ updateScreen }) {
         }
     }, [modalContent]);
 
-    useEffect(() => user && updateScreen(true), [user]);
 	
     return (
 		<Container>

@@ -17,15 +17,15 @@ import { GlobalStyle } from './styles';
 import { Spinner } from './components/feedback';
 
 export default function App() {
-	const [user, setUser] = useState(undefined);
+	// const [user, setUser] = useState(undefined);
 	const [theme, toggleTheme, componentMounted] = useDarkMode();
 	
 	const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-	useConstructor(() => {
-		const token = localStorage.getItem('token');
-		token && setUser(decode(token));
-	});
+	// useConstructor(() => {
+	// 	const token = localStorage.getItem('token');
+	// 	token && setUser(decode(token));
+	// });
 
 	return (
 		<ThemeProvider theme={themeMode}>
@@ -39,7 +39,7 @@ export default function App() {
 							{!componentMounted ? (
 								<Spinner />
 							) : (
-								<Layout user={user} toggleTheme={toggleTheme} />
+								<Layout toggleTheme={toggleTheme} />
 							)}
 						</>
 						</ActivityProvider>

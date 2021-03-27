@@ -19,6 +19,10 @@ export const SessionProvider = ({ children }) => {
 		}
 	}, [sessionGM]);
 
+	useEffect(() => {
+		if (message) setTimeout(setMessage(undefined), 5000);
+	}, [message]);
+
 	const { createInvitation, createSession, joinSession } = sessionMethods;
 
 	const handleCreateInvitation = () => createInvitation(guid, setMessage, sessionInputs, setSessionErrors);

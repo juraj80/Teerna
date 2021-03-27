@@ -3,7 +3,7 @@ import { AlertContext, ModalContext, SessionContext } from '../../../contexts';
 import { Input, Modal, Button } from '../../core';
 import { Container, Form, Title,  Errors, ButtonBlock } from './styles';
 
-export default function SessionActions({ updateScreen }) {
+export default function SessionActions() {
 	const { 
         user, setSessionErrors, sessionErrors, guid, message, setSessionInputs, handleCreateSession, handleJoinSession
 	} = useContext(SessionContext);
@@ -16,7 +16,6 @@ export default function SessionActions({ updateScreen }) {
 		if (message) sessionErrors ? addAlert('error', message) : addAlert('success', message);
 	}, [sessionErrors, message]);
 
-    if (user && guid) updateScreen(true);
 
 	useEffect(() => {
 		if (modal) {

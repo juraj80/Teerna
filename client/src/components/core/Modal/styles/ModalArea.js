@@ -6,8 +6,8 @@ export default styled.div`
 		let width = !size ? 480 : size === 'large' ? 560 : 320;
         return `${width}px`;
 	}};
-    min-height: 140px;
-    height: 480px;
+    min-height: 360px;
+    max-height: 480px;
     ${({theme}) => frostedGlass(theme.modal)};
     border-radius: ${borderRadius.straight};
     ${elevation(20)};

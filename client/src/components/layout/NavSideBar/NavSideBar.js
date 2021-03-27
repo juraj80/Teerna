@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from 'react';
 import { func, number } from 'prop-types';
-import { SessionContext } from '../../../contexts';
+import { ModalContext, SessionContext } from '../../../contexts';
 import { Icon } from '../../core';
-// import {} from '../../activity';
-// import { AppBar } from '../AppBar';
+import { InvitationForm } from '../../compound/forms';
+import { Modal } from '../../core';
 import { useConsoleSize } from '../../../hooks';
 import { Aside, Badge, Label, Menu, MenuItem } from './styles';
 
@@ -45,20 +45,15 @@ const activityOptions = [
 		value: 'player-list',
 		icon: 'players',
 		lockedForGM: false,
-	},
-	{
-		idx: 3,
-		label: 'Switch to View Join Requests',
-		value: 'requests',
-		icon: 'joinreq',
-		lockedForGM: true,
-	},
+	}
 ];
 
 export default function NavSideBar({ setActivity, setCentre, drawerPos }) {
 	const { width } = useConsoleSize();
 	const { isGM } = useContext(SessionContext);
+	const {updateShow, updateLocked, updateContent} = useContext(ModalContext);
 	const [drawerClasses, setDrawerClasses] = useState([]);
+	const [openModal, setOpenModal] = useState(false);
 
 	useEffect(() => {
 		if (drawerPos === 0) setDrawerClasses([]);
@@ -66,9 +61,38 @@ export default function NavSideBar({ setActivity, setCentre, drawerPos }) {
 		else if (drawerPos === 2) setDrawerClasses(['drawerOpen']);
 	}, [drawerPos]);
 
+	useEffect(() => {
+		if (openModal) {
+            updateShow(false);
+            updateContent(() => ({state}) => (
+                <Modal title="Generate Invite" state={state} updateShow={() => updateShow(false)}>
+                   <InvitationForm />
+                </Modal>
+            ));
+            updateLocked(false);
+            updateShow(true);
+            setOpenModal(false);
+        }
+    }, [openModal]);
+
 	return (
 		<Aside consoleWidth={`${width}px`} className={drawerClasses.join(' ')}>
 			<Menu top>
+				<MenuItem onClick={() => isGM && setOpenModal(true)}>
+					<Label>
+						<span style={{ width: '50px' }}>
+							<Icon
+								icon='plus'
+								width='40px'
+								style={{ paddingRight: '16px', justifyContent: 'center' }}
+							/>
+						</span>
+						Create Invitation Link
+						<span style={{ position: 'relative', right: 0 }}>
+								<Badge>GM ONLY</Badge>
+						</span>
+					</Label>
+				</MenuItem>
 				{mainOptions.map(opt => (
 					<MenuItem
 						key={opt.idx}

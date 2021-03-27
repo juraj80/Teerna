@@ -12,6 +12,9 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased;
     }
     body {
+        position: position;
+        bottom: 0;
+        right: 0;
         ${normalize()};
         font-family: ${fontFamily};
         background-image: url('${({ theme }) => theme.backgroundImage}');

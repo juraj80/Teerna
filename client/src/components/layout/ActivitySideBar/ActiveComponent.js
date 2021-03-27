@@ -8,7 +8,6 @@ export default function ActiveComponent({ activityType }) {
 			{activityType === 'chat' && <div />}
 			{activityType === 'doc-manager' && <DocumentManager />}
 			{activityType === 'player-list' && <div />}
-			{activityType === 'requests' && <div />}
 		</ActivitySideBar>
 	);
 }

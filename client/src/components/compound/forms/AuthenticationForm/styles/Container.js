@@ -4,8 +4,6 @@ import { colours, font, spacing, zIndex } from "../../../../../styles";
 export default styled.div`
     ${zIndex('above')};
     background: 'transparent';
-    width: 100%;
-    min-height: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;

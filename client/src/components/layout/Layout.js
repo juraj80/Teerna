@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import { SessionContext } from '../../contexts';
+import decode from 'jwt-decode';
+import { AlertContext, SessionContext } from '../../contexts';
 import { Console } from './Console';
 import { AppBar } from './AppBar';
 import { HeaderBar } from './HeaderBar';
@@ -8,39 +9,42 @@ import { ActivitySideBar } from './ActivitySideBar';
 import { CentreScreen } from './CentreScreen';
 import { Landing } from './Landing';
 import { SessionActions } from './SessionActions';
+import { useConstructor } from '../../hooks';
 
-export default function Layout({ user, toggleTheme }) {
-	const { isGM, guid } = useContext(SessionContext);
+export default function Layout({ toggleTheme }) {
+	const [user, setUser] = useState(undefined);
+	const addAlert = useContext(AlertContext);
+	const session = useContext(SessionContext);
 	const [drawerPos, setDrawerPos] = useState(1);
 	const [activity, setActivity] = useState('doc-manager');
 	const [centre, setCentre] = useState('story-view');
-	const [updateScreen, setUpdateScreen] = useState(false);
 	const [availableContent, setAvailableContent] = useState(
-		user && isGM 
+		user && session.isGM 
 		? 'gm-content' 
-		: user && !isGM && guid 
+		: user && !session.isGM && session.guid 
 		? 'player-content' 
-		: user && !isGM && !guid 
+		: user && !session.isGM && !session.guid 
 		? 'authed-content' 
 		: 'landing-content'
 	);
 
-	useEffect(() => {
-		if (updateScreen) {
-			if (user && isGM) setAvailableContent('gm-content');
-			else if (user && !isGM && guid) setAvailableContent('player-content');
-			else if (user && !isGM && !guid) setAvailableContent('authed-content');
-			else setAvailableContent('landing-content');
-		}
-		console.log(`PROB: updateScreen`);
-		return () => setUpdateScreen(false);
-	},[updateScreen])
+	useConstructor(() => {
+		const token = localStorage.getItem('token');
+		token && setUser(decode(token));
+	});
 
 	useEffect(() => {
-		if (centre === 'story-view') setActivity('doc-manager');
-		if (activity === 'doc-manager') setCentre('story-view');
-		console.log(`PROB: setActivity,setCentre`);
-	}, [centre, activity])
+		const { isGM, guid } = session; 
+		if (user && isGM) setAvailableContent('gm-content');
+		else if (user && !isGM && guid) setAvailableContent('player-content');
+		else if (user && !isGM && !guid) setAvailableContent('authed-content');
+		else setAvailableContent('landing-content');
+		console.log(availableContent);
+	},[session, user]);
+	
+	useEffect(() => {
+		if (session.sessionErrors.length > 0) addAlert('error', session.sessionErrors.join('\n'));
+	},[session.sessionErrors]);
 
 	const handleDrawer = () => {
 		if (user) {
@@ -48,19 +52,21 @@ export default function Layout({ user, toggleTheme }) {
 		} else setDrawerPos(0);
 	};
 
+	if (['gm-content','player-content'].includes(availableContent)) return (
+		<Console>
+			<HeaderBar user={user} toggleTheme={toggleTheme} />	
+			<AppBar handleDrawer={handleDrawer} />
+			<NavSideBar drawerPos={drawerPos} setActivity={setActivity} setCentre={setCentre}/>
+			<CentreScreen viewType={centre} drawerPos={drawerPos} />
+			<ActivitySideBar activityType={activity} />
+		</Console>
+	);
+
 	return (
 		<Console>
 			<HeaderBar user={user} toggleTheme={toggleTheme} />
-			{availableContent === 'landing-content' && <Landing updateScreen={() => setUpdateScreen(true)} />}
-			{availableContent === 'gm-content' || availableContent === 'player-content' && (
-				<>
-					<AppBar handleDrawer={handleDrawer} />
-					<NavSideBar drawerPos={drawerPos} setActivity={setActivity} setCentre={setCentre}/>
-					<CentreScreen viewType={centre} drawerPos={drawerPos} />
-					<ActivitySideBar activityType={activity} />
-				</>
-			)}
-			{availableContent === 'authed-content' && <SessionActions user={user} updateScreen={() => setUpdateScreen(true)} />}
+			{availableContent === 'landing-content' && <Landing user={user} />}
+			{availableContent === 'authed-content' && <SessionActions user={user} />}
 		</Console>
 	);
 }

@@ -1,24 +1,38 @@
-import { Icon } from '../components';
-import { colour } from '../shared';
+import styled from 'styled-components';
+import { Icon } from '../components/core';
+import { iconNames, statuses } from '../consts';
+
+const Wrapper = styled.div`
+	width: 600px;
+	height: 400px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	background: transparent;
+	border: none;
+`;
 
 export default {
 	component: Icon,
 	title: 'Icon',
 };
 
-export const basic = <Icon icon='notification' />;
-
-export const sizes = (
-	<>
-		<Icon icon='notification' />
-		<Icon icon='notification' width='32px' height='32px' />
-	</>
+export const allSizes = () => (
+	<Wrapper>
+		<Icon icon='close' />
+		<Icon icon='close' size='large' />
+	</Wrapper>
 );
 
-export const customColour = (
-	<>
-		<Icon icon='notification' colour={colour.blue[200]} />
-		<Icon icon='notification' colour={colour.white[300]} />
-		<Icon icon='notification' colour={colour.black} />
-	</>
+export const allIcons = () => (
+	<Wrapper>
+		{iconNames.map(name => {
+			if (statuses.includes(name)) {
+				return <Icon icon={name} status={name} />;
+			} else {
+				return <Icon icon={name} />;
+			}
+		})}
+	</Wrapper>
 );

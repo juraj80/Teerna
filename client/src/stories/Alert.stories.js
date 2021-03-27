@@ -1,22 +1,26 @@
 import React, { useContext } from 'react';
-import { Alert } from '../components';
-import { AlertContext } from '../contexts';
+import { Alert } from '../components/feedback';
+import { AlertContext, AlertProvider } from '../contexts';
+import { withContexts } from '@storybook/addon-contexts/react';
+
+const decorators = [
+    (Story) => (
+      <AlertProvider>
+        <Story />
+      </AlertProvider>
+    ),
+  ];
 
 export default {
 	title: 'Alerts',
 	component: Alert,
+    decorators
 };
 
-export const all = () => {
+export const StatusAlerts = () => {
 	const addAlert = useContext(AlertContext);
 	return (
 		<div>
-			<button
-				onClick={() => addAlert('notification', 'Notification Message')}
-				type='button'
-			>
-				Notification Type
-			</button>
 			<button
 				onClick={() => addAlert('success', 'Success Message')}
 				type='button'

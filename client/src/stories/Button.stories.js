@@ -1,123 +1,84 @@
-import { Button } from '../components';
+import React from 'react';
+import styled from 'styled-components';
+import { Button } from '../components/core';
+import { accents, statuses } from '../consts';
+
+const alertOnClick = e => {
+	e.preventDefault();
+	alert('You clicked the button.');
+};
+
+const statusAlertOnClick = e => {
+	e.preventDefault();
+	alert('You triggered a status button.');
+};
+
+const Wrapper = styled.div`
+	width: 600px;
+	height: 400px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	background: transparent;
+	border: none;
+`;
 
 export default {
 	component: Button,
 	title: 'Button',
-	decorators: [story => <div style={{ padding: '12px 16px' }}>{story()}</div>],
 };
 
-export const standard = () => (
-	<Button
-		type='button'
-		text='Button'
-		fill='fill'
-		border='minimal'
-		colour='blue'
-		action={() => {}}
-	/>
+// accent colours
+export const colourButtons = () => (
+	<Wrapper>
+		{accents.map(a => (
+			<Button type='button' accent={a} action={alertOnClick}>
+				{a}
+			</Button>
+		))}
+	</Wrapper>
 );
 
-export const colours = () => (
-	<>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='minimal'
-			colour='blue'
-		/>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='minimal'
-			colour='black'
-		/>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='minimal'
-			colour='white'
-		/>
-	</>
+// status colours
+export const statusButtons = () => (
+	<Wrapper>
+		{statuses.map(s => (
+			<Button type='button' status={s} action={statusAlertOnClick}>
+				{s}
+			</Button>
+		))}
+	</Wrapper>
 );
 
-export const outlined = () => {
-	<Button type='button' text='Outline' />;
-};
-
-export const shapes = () => (
-	<>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='minimal'
-			colour='blue'
-		/>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='regular'
-			colour='blue'
-		/>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='round'
-			colour='blue'
-		/>
-		<Button
-			action={() => {}}
-			type='button'
-			text='Button'
-			fill='fill'
-			border='exaggerated'
-			colour='blue'
-		/>
-	</>
+// disabled/enabled
+export const disabledButton = () => (
+	<Button type='button' accent='purple' action={alertOnClick} disabled>
+		Disabled Button
+	</Button>
 );
 
-export const withIcon = () => (
-	<>
-		<Button
-			action={() => {}}
-			type='button'
-			fill='fill'
-			border='round'
-			colour='blue'
-			icon='document'
-		/>
-		<Button
-			action={() => {}}
-			type='button'
-			fill='fill'
-			text='doc'
-			border='minimal'
-			colour='blue'
-			icon='document'
-		/>
-	</>
+// glowing
+export const glowingButton = () => (
+	<Button type='button' accent='purple' action={alertOnClick} glowing>
+		Glowup Button
+	</Button>
 );
 
-export const disabled = () => (
-	<Button
-		action={() => {}}
-		type='button'
-		fill='fill'
-		text='doc'
-		border='minimal'
-		colour='blue'
-		icon='document'
-		disabled
-	/>
-);
+// icon variants
+//@TODO - uncomment when Icon Done
+// export const iconButtons = () => (
+// 	<Wrapper>
+// 		<Button type='button' accent='mint' action={alertOnClick}>
+// 			<Icon icon='google' />
+// 		</Button>
+// 		<Button type='button' accent='mint' action={alertOnClick}>
+// 			<Icon icon='google' />
+// 			Google
+// 		</Button>
+// 		<Button type='button' accent='mint' action={alertOnClick} disabled>
+// 			<Icon icon='google' />
+// 			Disabled Google
+// 		</Button>
+// 	</Wrapper>
+// );

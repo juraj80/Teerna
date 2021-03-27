@@ -5,7 +5,7 @@ const authenticate = require("../auth.js");
 
 
 /**
- * @swagger
+ * @openapi
  * tags:
  *   name: Game Session
  *   description: Manage game sessions, creating games, inviting, uninviting, blocking and gagging players and other game session related services.
@@ -16,11 +16,13 @@ const authenticate = require("../auth.js");
  * Creates a new game session, making the user its Game Master.
  *
  * @openapi
- * /game-session:
+ * /api/game-session:
  *   post:
+ *     summary: Creates a new game for the current user.
+ *     parameters:
+ *      - $ref: '#/components/parameters/tokenBody'
  *     tags:
  *       - Game Session
- *     summary: Creates a new game for the current user.
  *     responses:
  *       "200":
  *         description: Details of the created game.
@@ -46,11 +48,14 @@ router.post('/', authenticate, async (req, res) => {
  * Creates a valid invitation link to be sent to users
  *
  * @openapi
- * /game-session/invitation:
+ * /api/game-session/invitation:
  *   post:
  *     tags:
  *       - Game Session
  *     summary: Creates an invitation for a provided email
+ *     parameters:
+ *      - $ref: '#/components/parameters/guidBody'
+ *      - $ref: '#/components/parameters/tokenBody'
  *     responses:
  *       "200":
  *         description: A list of all pending invitations, including the newly created one.
@@ -63,7 +68,7 @@ router.post('/invitation', authenticate, async (req, res) => {
   } else {
     const guid = req.body.guid;
     const email = req.body.email;
-    const gameSession = await GameSession.getSession(guid); 
+    const gameSession = await GameSession.getSession(req.user, guid); 
     try {
       await gameSession.playerInvite(email);
       const invited = await gameSession.getPendingInvitations();
@@ -82,11 +87,14 @@ router.post('/invitation', authenticate, async (req, res) => {
  * and the game id as a parameter in the URL.
  *
  * @openapi
- * /game-session/{guid}:
+ * /api/game-session/{guid}:
  *   get:
  *     tags:
  *       - Game Session
  *     summary: Gets details of a game a player participates or is invited to.
+ *     parameters:
+ *      - $ref: '#/components/parameters/guidQuery'
+ *      - $ref: '#/components/parameters/tokenQuery'
  *     responses:
  *       "200":
  *         description: A message stating that the access was granted
@@ -100,9 +108,10 @@ router.get('/:guid', authenticate, async (req, res) => {
   }
   const guid = req.params.guid;
   const user = req.user;
-  const gameSession = await GameSession.getSession(guid);
-  const invited = await gameSession.getPlayerByEmail(user.email);
-  if (!invited.length) {
+  let gameSession;
+  try {
+    gameSession = await GameSession.getSession(user, guid);
+  } catch {
     res.status(403).send('Forbidden');
     return;
   }
@@ -118,6 +127,5 @@ router.get('/:guid', authenticate, async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
 
 module.exports = router;

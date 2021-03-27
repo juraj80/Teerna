@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
-import { space } from '../shared';
+import { useState, useEffect } from 'react';
 
+/**
+ * @returns {Object<Number, Number>} - the width and height of the console
+ */
 export default function useConsoleSize() {
 	const [windowSize, setWindowSize] = useState({
 		width: undefined,
@@ -13,26 +15,19 @@ export default function useConsoleSize() {
 
 	useEffect(() => {
 		function handleResize() {
-			setWindowSize({
-				width: window.innerWidth,
-				height: window.innerHeight,
-			});
+			const { innerWidth, innerHeight } = window;
+			setWindowSize({ width: innerWidth, height: innerHeight });
 		}
-
 		window.addEventListener('resize', handleResize);
-
 		handleResize();
-
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
 	useEffect(() => {
 		windowSize &&
 			setConsoleSize({
-				width:
-					windowSize.width - Number(space.medium[300].replace('px', '')) * 2,
-				height:
-					windowSize.height - Number(space.large[100].replace('px', '')) * 2,
+				width: windowSize.width - 64,
+				height: windowSize.height - 32,
 			});
 	}, [windowSize]);
 

@@ -1,34 +1,87 @@
-import { useState } from 'react';
-import { Input } from '../components';
+import React, { useState } from 'react';
+import { Input } from '../components/core';
 
 export default {
 	title: 'Input',
 	component: Input,
 };
 
+let value = '';
+const setValue = (val) => value=val; 
+
 export const basic = () => {
-	const [value, setValue] = useState('');
 	return (
 		<Input
-			name='name'
 			type='text'
-			withIcon={false}
-			placeholder='First Name'
-			value={value}
+			requiredField
+			nameAttr='username'
 			setValue={setValue}
+			value={value}
+			placeholder='Username'
 		/>
 	);
 };
 
-export const withIcon = () => {
-	const [value, setValue] = useState('');
-	<Input
-		name='password'
-		type='password'
-		icon='eye'
-		withIcon={true}
-		placeholder='Password'
-		value={value}
-		setValue={setValue}
-	/>;
+export const withStartIcon= () => {
+    
+    return (
+		<Input
+			type='password'
+			requiredField
+			nameAttr='password'
+			setValue={setValue}
+			value={value}
+			placeholder='Password'
+            leftIcon='key'
+		/>
+    );
+}
+
+let inputType = 'password';
+const setInputType = val => inputType = val;
+
+export const withEndIcon = () => {
+    return (
+        <Input
+            type={inputType}
+            requiredField
+            nameAttr='password'
+            setValue={setValue}
+            value={value}
+            placeholder='Password'
+            rightIcon='eye'
+            rightIconAction={() => inputType === 'password' ? setInputType('text') : setInputType('password')}
+        />
+    )
+}
+
+export const withIcons = () => {
+
+    return (
+        <Input
+            type={inputType}
+            requiredField
+            nameAttr='password'
+            setValue={setValue}
+            value={value}
+            placeholder='Password'
+            leftIcon='key'
+            rightIcon='eye'
+            rightIconAction={() => inputType === 'password' ? setInputType('text') : setInputType('password')}
+        />
+    )
+}
+
+export const disabled = () => {
+	return (
+		<Input
+			type='email'
+			requiredField
+			nameAttr='email'
+			setValue={setValue}
+			value={value}
+			placeholder='Email'
+            disabled
+		/>
+	);
 };

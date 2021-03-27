@@ -1,1 +1,0 @@
-export { timeAgo } from './Time';

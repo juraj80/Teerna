@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 
-export default function () {
+/**
+ * - the string `light`/`dark` associated with the current theme
+ * - the function which toggle the theme
+ * - the bool value of whether the component has mounted yet
+ */
+ export default function () {
 	const [theme, setTheme] = useState('light');
 	const [componentMounted, setComponentMounted] = useState(false);
 

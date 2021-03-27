@@ -1,8 +1,13 @@
 import { useEffect, useRef } from 'react';
 
+/**
+ * @name useDOMControl
+ * @description enables instance use of p5.js
+ * @param {*} domFn 
+ * @returns {Element} - returns div tag attached to p5 instance ref
+ */
 export default function (domFn) {
 	const domRef = useRef();
-
 	useEffect(() => domFn(domFn.current));
 
 	return <div ref={domRef} />;

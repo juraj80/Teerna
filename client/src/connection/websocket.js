@@ -23,7 +23,7 @@ export const onAuthStateChange = callback => {
 	});
 };
 
-const config = { ws: { domain: 'www.teerna-project.com', port: 8888 } };
+const config = { ws: { domain: 'teerna-project.com', port: 8888 } };
 
 /**
  * This class configures the Web Socket connections and allows for several different consumers to be notified when WS events occurs.

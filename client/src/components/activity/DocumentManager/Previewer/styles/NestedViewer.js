@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {
 	colours,
 	elevation,
-	gradients,
 	spacing,
 	zIndex,
 } from '../../../../../styles';

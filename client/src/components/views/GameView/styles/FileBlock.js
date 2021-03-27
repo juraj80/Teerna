@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colours, elevation, font, frostedGlass, spacing, zIndex } from "../../../../styles";
+import { colours, elevation, font, frostedGlass, spacing } from "../../../../styles";
 
 export default styled.div`
     max-width: 100%;

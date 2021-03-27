@@ -1,6 +1,6 @@
 import { transparentize } from 'polished';
 import { images } from '../assets';
-import { colours, gradients } from '../styles';
+import { colours } from '../styles';
 
 export default {
 	mode: 'light',

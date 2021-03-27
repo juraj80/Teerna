@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { spacing, font, colours, zIndex } from '../../../../styles';
+import { spacing, font, zIndex } from '../../../../styles';
 export default styled.div`
 	display: flex;
 	flex-direction: column;

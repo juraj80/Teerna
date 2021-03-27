@@ -1,10 +1,8 @@
+import { useState } from 'react';
 import { func } from 'prop-types';
 import { Checkbox, Label, Switch } from './styles';
-import { useDarkMode } from '../../../hooks';
-import { useEffect, useState } from 'react';
 
 export default function ThemeToggle({ toggleTheme }) {
-	const [theme] = useDarkMode();
 	const [lit, setLit] = useState(true);
 
 	return (

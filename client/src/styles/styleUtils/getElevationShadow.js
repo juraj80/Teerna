@@ -96,7 +96,7 @@ const ambientMap = {
  * @param {String} easing
  * @return {String}
  */
-const getTransitionString = (duration = '280ms', easing='ease-in-out') => `box-shadow ${duration} ${easing}`;
+// const getTransitionString = (duration = '280ms', easing='ease-in-out') => `box-shadow ${duration} ${easing}`;
 
 /**
  * returns the elevation overlay transition value
@@ -104,7 +104,7 @@ const getTransitionString = (duration = '280ms', easing='ease-in-out') => `box-s
  * @param {String} easing
  * @return {String}
  */
-const getOverlayTransitionString = (duration = '280ms', easing='ease-in-out') => `opacity ${duration} ${easing}`;
+// const getOverlayTransitionString = (duration = '280ms', easing='ease-in-out') => `opacity ${duration} ${easing}`;
 
 /**
  * returns the correct box-shadow determined by supplied z-value

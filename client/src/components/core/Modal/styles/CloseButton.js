@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { invert } from 'polished';
 import { colours, font, spacing, zIndex } from '../../../../styles';
 
 export default styled.button`

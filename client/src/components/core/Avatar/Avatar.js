@@ -1,6 +1,5 @@
 import { func, oneOf, string } from 'prop-types';
 import { Image, Circle } from './styles';
-import { images } from '../../../assets';
 import { statuses } from '../../../consts';
 import { AvatarBlue, AvatarGreen, AvatarGrey, AvatarOrange, AvatarPurple, AvatarRed, AvatarYellow } from '../../../assets/mediaAssets/avatars';
 
@@ -14,16 +13,18 @@ export default function Avatar({
 }) {
 	const getSrc = () => {
 		const rand = Math.random() * 6;
+		let rsrc;
 		switch (rand) {
-			case 0: return AvatarGreen; break;
-			case 1: return AvatarGrey; break;
-			case 2: return AvatarOrange; break;
-			case 3: return AvatarYellow; break;
-			case 4: return AvatarPurple; break;
-			case 5: return AvatarRed; break;
+			case 0: rsrc = AvatarGreen; break;
+			case 1: rsrc = AvatarGrey; break;
+			case 2: rsrc = AvatarOrange; break;
+			case 3: rsrc = AvatarYellow; break;
+			case 4: rsrc = AvatarPurple; break;
+			case 5: rsrc = AvatarRed; break;
 			case 6: 
-			default: return AvatarBlue;
+			default: rsrc = AvatarBlue; break;
 		}
+		return rsrc;
 	}
 
 	return source ? (

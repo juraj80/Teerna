@@ -1,7 +1,6 @@
 import { transparentize, darken } from 'polished';
 import { css } from 'styled-components';
 import { colours, gradients } from '../styleMaps';
-import { elevation } from '../cssObjects';
 import { oneOf, string } from 'prop-types';
 
 /**

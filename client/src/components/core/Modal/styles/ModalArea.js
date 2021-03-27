@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { borderRadius, elevation, frostedGlass,  spacing, zIndex } from '../../../../styles';
+import { borderRadius, elevation, frostedGlass, zIndex } from '../../../../styles';
 
 export default styled.div`
 	width: ${({ size }) => {

@@ -1,6 +1,6 @@
-import { lighten, opacify, transparentize } from 'polished';
+import { opacify, transparentize } from 'polished';
 import styled from 'styled-components';
-import { gradients, mediaQuery, spacing } from '../../../../styles';
+import { mediaQuery, spacing } from '../../../../styles';
 
 export default styled.div`
 	display: flex;

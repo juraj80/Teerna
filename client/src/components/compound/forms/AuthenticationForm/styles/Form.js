@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colours, font, spacing, zIndex } from "../../../../../styles";
+import { colours, font, zIndex } from "../../../../../styles";
 
 export default styled.form`
     ${zIndex('above')};

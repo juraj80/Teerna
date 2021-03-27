@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { darken, invert } from 'polished';
+import { invert } from 'polished';
 import { borderRadius, colours, elevation, font, spacing, zIndex } from '../../../../styles';
 
 export default styled.button`

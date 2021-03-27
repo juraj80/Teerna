@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { spacing } from "../../../../../styles";
 
 export default styled.div`
 	width: 100%;

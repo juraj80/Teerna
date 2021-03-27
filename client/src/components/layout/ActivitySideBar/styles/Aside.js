@@ -1,6 +1,5 @@
-import { opacify, transparentize } from 'polished';
-import styled, { css } from 'styled-components';
-import { colours, elevation, frostedGlass, zIndex } from '../../../../styles';
+import styled from 'styled-components';
+import { elevation, frostedGlass, zIndex } from '../../../../styles';
 
 export default styled.aside`
     width: ${({consoleWidth}) => `calc(${consoleWidth} * 0.25)`};

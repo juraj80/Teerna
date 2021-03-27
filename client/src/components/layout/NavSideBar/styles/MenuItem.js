@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { darken, invert, opacify } from 'polished';
-import { colours, font, gradients, spacing } from '../../../../styles';
+import { colours, font, spacing } from '../../../../styles';
 
 export default styled.li`
 	display: flex;

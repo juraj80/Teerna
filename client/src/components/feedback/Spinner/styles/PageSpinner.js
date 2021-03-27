@@ -1,6 +1,5 @@
-import { radialGradient, transparentize } from 'polished';
 import styled from 'styled-components';
-import { colours, gradients, spin } from '../../../../styles';
+import { colours, spin } from '../../../../styles';
 
 export default styled.div`
     ${spin};

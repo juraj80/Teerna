@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { images } from '../../../../assets';
-import { colours, elevation, zIndex } from '../../../../styles';
+import { colours, elevation } from '../../../../styles';
 
 export default styled.div`
 

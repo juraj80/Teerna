@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { borderRadius, elevation, font, spacing } from "../../../../styles";
+import { elevation, font, spacing } from "../../../../styles";
 
 export default styled.div`
     top: 50px;

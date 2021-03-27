@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { func } from 'prop-types';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
-import { DragDrop, Form, FileLabel, SubmitInput, HelperText } from './styles';
+import { DragDrop, Form, FileLabel, HelperText } from './styles';
 import { AlertContext } from '../../../../contexts';
 // import { ProgressBar } from '../../../../components/feedback';
 import { spacing } from '../../../../styles';

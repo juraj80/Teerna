@@ -244,7 +244,7 @@ export class Map_Renderer {
     //******************//
     checkInput(){
         //Check focus
-        if(this.focus == false){
+        if(this.focus === false){
             //If we don't have focus don't accept input
             //Just exit the function
             return;

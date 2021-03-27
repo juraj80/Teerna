@@ -6,15 +6,10 @@ import { NestedViewer } from './styles';
 import { spacing } from '../../../../styles';
 import { ModalContext } from '../../../../contexts';
 
-export const Previewer = ({ setLoaded, uploaded }) => {
+export const Previewer = ({ setLoaded }) => {
 	const [input, setInput] = useState('');
 	const [markdown, setMarkdown] = useState(undefined);
 	const { updateContent, updateLocked, updateShow } = useContext(ModalContext);
-	const [disabled, setDisabled] = useState(true);
-
-	useEffect(() => {
-		uploaded && setDisabled(false);
-	},[uploaded])
 
 	useEffect(() => {
 		input &&
@@ -45,7 +40,6 @@ export const Previewer = ({ setLoaded, uploaded }) => {
 			<Button
 				type='button'
 				status='info'
-				// disabled={disabled}
 				action={() => setInput('/game/assets/story/story.md')}
                 style={{ margin: spacing[8], minWidth: '160px'}}
 			>

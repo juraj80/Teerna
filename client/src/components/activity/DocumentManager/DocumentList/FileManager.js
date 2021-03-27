@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Moment from 'moment';
 import FileBrowser  from 'react-keyed-file-browser';
-import { colours, spacing } from '../../../../styles';
-import { darken, transparentize } from 'polished';
+import { colours } from '../../../../styles';
+import { transparentize } from 'polished';
 
 const customFiles = [
 	{

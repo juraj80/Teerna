@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colours, font } from "../../../../styles";
+import { font } from "../../../../styles";
 
 export default styled.div`
     ${font(7, 'DISPLAY', false)};

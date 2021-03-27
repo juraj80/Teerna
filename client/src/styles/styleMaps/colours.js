@@ -1,4 +1,4 @@
-import { rgb, rgba, transparentize, linearGradient } from 'polished';
+import { rgb, transparentize, linearGradient } from 'polished';
 
 /**
  * @object rgb values corresponding to common colours used

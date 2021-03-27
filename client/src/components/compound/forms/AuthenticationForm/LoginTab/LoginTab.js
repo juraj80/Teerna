@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Form, Container } from '../styles';
 import { AuthContext } from '../../../../../contexts';
 import { Input, Button, Icon } from '../../../../core';

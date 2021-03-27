@@ -1,5 +1,5 @@
 import { transparentize } from 'polished';
-import { colours, gradients } from '../styles';
+import { colours } from '../styles';
 import { images } from '../assets';
 
 export default {

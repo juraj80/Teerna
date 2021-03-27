@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { elevation, frostedGlass, spacing } from "../../../../../styles";
+import { spacing } from "../../../../../styles";
 
 export default styled.div`
     width: 100%;

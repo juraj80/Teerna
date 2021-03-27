@@ -1,6 +1,5 @@
-import { transparentize } from 'polished';
 import styled from 'styled-components';
-import { colours, elevation, frostedGlass, spacing } from '../../../../../styles';
+import { colours, elevation } from '../../../../../styles';
 
 export default styled.div`
 	color: ${colours.status.info};

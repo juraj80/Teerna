@@ -1,6 +1,6 @@
 import { invert } from 'polished';
 import styled, { css } from 'styled-components';
-import { borderRadius, colours, elevation, spacing, font } from '../../../../styles';
+import { colours, elevation, spacing, font } from '../../../../styles';
 
 export default styled.input`
   ${font(2, 'BODY', false)};

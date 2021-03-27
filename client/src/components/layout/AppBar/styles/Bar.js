@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { invert, lighten, opacify, transparentize } from 'polished';
-import { colours, gradients, spacing } from '../../../../styles';
+import { lighten } from 'polished';
+import { gradients } from '../../../../styles';
 
 export default styled.div`
 	max-width: 100%;

@@ -3,7 +3,6 @@ import { Form, Container } from '../styles';
 import { AuthContext } from '../../../../../contexts';
 import { Icon, Input, Button } from '../../../../core';
 
-
 export default function RegisterTab({ switchForms }) {
 	const { handleRegister, setInputs, errors, setErrors, handleGoogleAuth, handleGithubAuth } = useContext(AuthContext);
 	const [email, setEmail] = useState('');

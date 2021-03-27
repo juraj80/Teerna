@@ -1,18 +1,14 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { AlertContext, SessionContext } from '../../../contexts';
+import { AlertContext } from '../../../contexts';
 // import { Container } from '../styles';
 import { ButtonPanel } from './ButtonPanel';
-import { DocumentList } from './DocumentList';
 import { Dropzone } from './Dropzone';
-import { Previewer } from './Previewer';
 
 export const DocumentManager = () => {
-	const { isGM } = useContext(SessionContext);
 	const addAlert = useContext(AlertContext);
 
     const [resStatus, setResStatus] = useState(undefined);
-	const [uploaded, setUploaded] = useState(false);
 	const [loaded, setLoaded] = useState(false);
 	const [availableForDownload, setAvailableForDownload] = useState(false);
 
@@ -59,9 +55,7 @@ export const DocumentManager = () => {
 	return (
 		<>
 			<Dropzone />
-			{/* <Previewer setLoaded={setLoaded} uploaded={uploaded}/> */}
 			<ButtonPanel deleteFile={deleteDoc} downloadZip={downloadZip}  />
-			{/* <DocumentList /> */}
 		</>
 	);
 };

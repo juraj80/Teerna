@@ -2,6 +2,11 @@ const express = require('express');
 const authenticate = require("../auth.js");
 const router = express.Router();
 const fileSystem = require('../helpers/fileSystem');
+const decompress = require('decompress');
+
+const DocumentManager = require('../DocumentManager/DocumentManager.js');
+const GameSession = require('../GameSession/GameSession.js');
+
 
 
 
@@ -48,6 +53,11 @@ router.get('/get-files', authenticate, (req, res) => {
  *     parameters:
  *       - $ref: '#/components/parameters/guidBody'
  *       - $ref: '#/components/parameters/tokenBody'
+ *       - in: body
+ *         name: file
+ *         description: The file to be uploaded
+ *         schema:
+ *           type: string
  *     responses:
  *       400:
  *         description: No file uploaded
@@ -55,28 +65,24 @@ router.get('/get-files', authenticate, (req, res) => {
  *         description: the filename and filepath of the uploaded file.
  *
  */
-router.post('/upload', authenticate, (req,res) => {
-    console.log('upload called');
-    if(req.files === null){
-        return res.status(400).json({ msg: 'No file uploaded' });
+router.post('/upload', authenticate, async (req,res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+
+  } else if (!req.body.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else if(req.files === null){
+    return res.status(400).json({ msg: 'No file uploaded' });
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.body.guid);
+    const documentManager = new DocumentManager(gameSession, fileSystem);
+    const uploaded = await documentManager.upload(req.files.file);
+    if (uploaded === null) {
+      res.status(500).send(err);
+    } else {
+      res.json(uploaded);
     }
-    const file = req.files.file;
-    const path = `${__dirname}/Uploads/${file.name}`;
-    file.mv(path, err => {
-        decompress(path,'Uploads/').then(files=>{
-            fs.unlinkSync(path);
-            if(fs.existsSync(osxfolder)){
-                fs.rmdirSync(osxfolder, {recursive: true});
-            }
-            console.log("done!");
-        });
-        if(err){
-            console.log(err);
-            return res.status(500).send(err);
-        }
-    //    res.json({ fileName: file.name, filePath: `./Uploads/${file.name}`});
-        res.json({ fileName: file.name, filePath: path});
-    });
+  }
 });
 
 /**

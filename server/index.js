@@ -18,7 +18,6 @@ const decompress = require('decompress');
 const zipper = require('zip-local');
 const Moment = require('moment');
 
-const osxfolder = `${__dirname}/Uploads/__MACOSX`;
 
 // Creates the Express App
 const app = express();

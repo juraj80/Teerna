@@ -3,7 +3,7 @@ import { func } from 'prop-types';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { DragDrop, Form, FileLabel, HelperText } from './styles';
-import { AlertContext } from '../../../../contexts';
+import { AlertContext, SessionContext } from '../../../../contexts';
 // import { ProgressBar } from '../../../../components/feedback';
 import { spacing } from '../../../../styles';
 import { Button } from '../../../core';
@@ -14,8 +14,8 @@ export default function CustomDropzone (){
 	const [filename, setFilename] = useState(undefined);
 	const [uploadedFile, setUploadedFile] = useState(undefined);
 	const [message, setMessage] = useState(undefined);
+	const {guid} = useContext(SessionContext);
 	const [uploadPercentage, setUploadPercentage] = useState(0);
-
 	const handleDrop = acceptedFiles => {
 		setFile(acceptedFiles[0]);
 		setFilename(acceptedFiles[0].name);
@@ -25,7 +25,8 @@ export default function CustomDropzone (){
 		// e.preventDefault();
 		const formData = new FormData();
 		formData.append('file', file);
-
+		formData.append('token', localStorage.getItem('token'));
+		formData.append('guid', guid);
 		try {
 			const res = await axios({
 				method: 'post',

@@ -23,7 +23,7 @@ export const onAuthStateChange = callback => {
 	});
 };
 
-const config = { ws: { domain: 'teerna-project.com', port: 8888 } };
+const config = { ws: { domain: 'localhost', port: 8888 } };
 
 /**
  * This class configures the Web Socket connections and allows for several different consumers to be notified when WS events occurs.
@@ -32,7 +32,7 @@ const config = { ws: { domain: 'teerna-project.com', port: 8888 } };
  */
 class WSConnection {
 	constructor(onOpen = [], onMessage = [], onClose = []) {
-		this.ws = new WebSocket(`wss://${config.ws.domain}:${config.ws.port}`);
+		this.ws = new WebSocket(`ws://${config.ws.domain}:${config.ws.port}`);
 		this.ws.onopen = this.onOpen.bind(this);
 		this.ws.onmessage = this.onMessage.bind(this);
 		this.ws.onclose = this.onClose.bind(this);

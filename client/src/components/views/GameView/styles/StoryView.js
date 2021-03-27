@@ -9,16 +9,13 @@ export default styled.div`
 	right: 0;
 	bottom: 48px;
 	top: 0;
-	background-image: ${({ theme }) =>
-		theme.mode === 'light'
-			? `url('${images.backgrounds.TeernaBG}'), ${theme.console}`
-			: `url('${images.backgrounds.TeernaBG}'), ${theme.console}`},
-	;
+
+	background-image: ${({ theme }) => theme.console};
+	color: ${({theme}) => theme.bartext};
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 	text-align: center;
-	/* padding: 24px; */
 	width: 800px;
 	max-width: 74%;
 	max-height: 600px;

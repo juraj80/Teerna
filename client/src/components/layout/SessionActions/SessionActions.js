@@ -35,15 +35,15 @@ export default function SessionActions() {
 							</Errors>
 						)}
 						<Input
-							nameAttr='invitation-code'
-							requiredField
+							type='text'
+							nameAttr='text'
 							placeholder='Invitation Code'
 							value={gameIdInput}
 							setValue={setGameIdInput}
+							requiredField
 						/>
 						<Button
 							style={{ marginTop: '24px'}}
-							glowing
 							type='button'
 							status='info'
 							action={() => {

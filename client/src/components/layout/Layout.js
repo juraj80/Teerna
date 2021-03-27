@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import decode from 'jwt-decode';
-import { AlertContext, SessionContext } from '../../contexts';
+import { AlertContext, ModalContext, SessionContext } from '../../contexts';
 import { Console } from './Console';
 import { AppBar } from './AppBar';
 import { HeaderBar } from './HeaderBar';
@@ -10,9 +10,12 @@ import { CentreScreen } from './CentreScreen';
 import { Landing } from './Landing';
 import { SessionActions } from './SessionActions';
 import { useConstructor } from '../../hooks';
+import { Modal } from '../core';
+import { CodeText, Form, MsgText } from '../compound/forms/Invitation/styles';
 
 export default function Layout({ toggleTheme }) {
 	const [user, setUser] = useState(undefined);
+	const { updateContent, updateShow } = useContext(ModalContext);
 	const addAlert = useContext(AlertContext);
 	const session = useContext(SessionContext);
 	const [drawerPos, setDrawerPos] = useState(1);
@@ -39,12 +42,22 @@ export default function Layout({ toggleTheme }) {
 		else if (user && !isGM && guid) setAvailableContent('player-content');
 		else if (user && !isGM && !guid) setAvailableContent('authed-content');
 		else setAvailableContent('landing-content');
-		console.log(availableContent);
 	},[session, user]);
 	
 	useEffect(() => {
+		session.isGM && session.guid && updateContent(() => ({state}) => 
+		<Modal state={state} updateShow={() => updateShow(false)}>
+			<Form>
+				<CodeText>
+					Invitation code generated: <div>{session.guid}</div>
+				</CodeText>
+			</Form>
+		</Modal>);
+	},[session.handleCreateInvitation]);
+
+	useEffect(() => {
 		if (session.sessionErrors.length > 0) addAlert('error', session.sessionErrors.join('\n'));
-	},[session.sessionErrors]);
+	},[session.setSessionErrors]);
 
 	const handleDrawer = () => {
 		if (user) {

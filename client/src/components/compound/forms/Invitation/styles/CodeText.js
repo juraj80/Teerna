@@ -1,9 +1,16 @@
 import styled from "styled-components";
-import { colours, font } from "../../../../../styles";
+import { colours, font, spacing } from "../../../../../styles";
 
 export default styled.h1`
     ${font(3, 'DISPLAY', false)};
-    color: ${colours.accent.orange};
+    color: ${({theme}) => theme.bartext};
     text-align: center;
-    width: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & div {
+        color: ${colours.accent.orange};
+    }
 `;

@@ -6,7 +6,7 @@ export default styled.div`
     min-height: 60px;
     ${font(3, 'DISPLAY', false)};
     ${({idx}) => {
-        if ([0, 4, 8].includes(idx)) return frostedGlass('black', 'accent', 'pink');
+        if ([0, 4, 8].includes(idx)) return frostedGlass('black', 'accent', 'aqua');
         else if ([1, 5, 9].includes(idx)) return frostedGlass('black', 'accent', 'purple');
         else if ([2, 6, 10].includes(idx)) return frostedGlass('black', 'accent', 'mint');
         else if ([3, 7, 11].includes(idx)) return frostedGlass('black', 'accent', 'orange');

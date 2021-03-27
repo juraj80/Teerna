@@ -7,7 +7,7 @@ export default styled.div`
 		logo &&
 		css`
 			display: grid;
-			grid: repeat(1, 64px) / 56px repeat(6, 40px);
+			grid: repeat(1, 64px) / 72px repeat(6, 40px);
 			${font(5, 'DISPLAY', false)};
 			color: ${({theme})=>transparentize(0.4, theme.mode === 'light' ? colours.grey[300] : colours.white)};
 			text-align: center;

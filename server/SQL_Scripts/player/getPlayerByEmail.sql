@@ -3,6 +3,6 @@
  */
 
 select * from playerList
-    where email =  $email
+    where email=$email
     limit 1
 ;

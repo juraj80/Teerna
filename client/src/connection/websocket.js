@@ -4,7 +4,6 @@ import { createMessage } from './utils';
 export const onAuthStateChange = callback => {
 	return firebase.auth().onAuthStateChanged(user => {
 		if (user) {
-			console.log('Full user:', user);
 			firebase
 				.auth()
 				.currentUser.getIdToken(false)

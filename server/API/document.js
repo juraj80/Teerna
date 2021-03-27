@@ -9,7 +9,6 @@ const GameSession = require('../GameSession/GameSession.js');
 
 
 
-
 /**
  * @swagger
  * tags:
@@ -68,14 +67,13 @@ router.get('/get-files', authenticate, (req, res) => {
 router.post('/upload', authenticate, async (req,res) => {
   if (!req.user || !req.user.user_id) {
     res.status(403).send('Forbidden');
-
   } else if (!req.body.guid) {
     res.status(400).json({msg: 'There is no game session.'});
   } else if(req.files === null){
     return res.status(400).json({ msg: 'No file uploaded' });
   } else {
     const gameSession = await GameSession.getSession(req.user, req.body.guid);
-    const documentManager = new DocumentManager(gameSession, fileSystem);
+    const documentManager = new DocumentManager(gameSession);
     const uploaded = await documentManager.upload(req.files.file);
     if (uploaded === null) {
       res.status(500).send(err);
@@ -101,21 +99,23 @@ router.post('/upload', authenticate, async (req,res) => {
  *       200:
  *         description: the zipped game folder
  */
-router.get('/download', authenticate, function(req, res){
-  const folder = `${__dirname}/Uploads/game`;
-  if(fs.existsSync(folder) ){
-    const file = `${__dirname}/Uploads/${gameFile}`;
-    zipper.sync.zip(folder).compress().save(file);
-    if(fs.existsSync(file)){
-      console.log("File exists: ", file);
-      res.download(file, function(error){ 
-        console.log("Error : ", error) 
+router.get('/download', authenticate, async function(req, res){
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.query.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.query.guid);
+    const documentManager = new DocumentManager(gameSession);
+    const download = documentManager.download();
+    if (download) {
+      res.download(download, function(error){ 
+        if (error != undefined) console.error("Error : ", error) 
       });
     } else {
-      console.log("Server file doesn't exists!", res.status);
-    }  
-  }  else {
-    console.log("Server folder doesn't exists!", res.status);
+      res.status(500).json({msg: 'Error when creating download file'});
+      console.error("Error : ", error) 
+    }
   }  
 });
 
@@ -150,7 +150,6 @@ router.post('/delete', authenticate, function(req, res){
     fs.rmdirSync(osxfolder, { recursive: true })
     res.send(200, {message: 'File deleted'});
   } else{
-    console.log("Server file doesn't exists!");
     res.send(400, {message: 'File does not exist'});
   }
 });

@@ -32,11 +32,17 @@ const GameSession = require('../GameSession/GameSession.js');
  *       200:
  *         description: the list of files within the game
  */
-router.get('/get-files', authenticate, (req, res) => {
-  const folder = 'Uploads';
-  const files = fileSystem.getUploadFiles(folder);
-  const listOfFiles = fileSystem.getListOfFileObjects(files);
-  res.send(listOfFiles);
+router.get('/get-files', authenticate, async (req, res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.query.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.query.guid);
+    const documentManager = new DocumentManager(gameSession);
+    const listOfFiles = await documentManager.getFiles();
+    res.send(listOfFiles);
+  }
 });
 
 
@@ -82,6 +88,49 @@ router.post('/upload', authenticate, async (req,res) => {
     }
   }
 });
+
+/**
+ * Get contents endpoint
+ *
+ * @openapi
+ * /api/document/content:
+ *   get:
+ *     tags:
+ *       - Document manager
+ *     summary: fetches the content of a given file
+ *     parameters:
+ *       - $ref: '#/components/parameters/guidQuery'
+ *       - $ref: '#/components/parameters/tokenQuery'
+ *       - in: query
+ *         name: file
+ *         description: The file to be fetched
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: the string content of the fetched file
+ */
+router.get('/content', authenticate, async function(req, res){
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.query.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else if (!req.query.file) {
+    res.status(400).json({msg: 'There is no file to be fetched.'});
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.query.guid);
+    const documentManager = new DocumentManager(gameSession);
+    try {
+      console.log(req.query.file);
+      const contents = await documentManager.getContent(req.query.file);
+      res.status(200).send(contents);
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({msg: 'Error fetching the file.'});
+    }
+  }  
+});
+
 
 /**
  * Download Endpoint

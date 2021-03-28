@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
 	const [inputs, setInputs] = useState({ username: '', email: '', password: '', picture: '' });
 	const [errors, setErrors] = useState([]);
 	const [token, setToken] = useState(null);
-	const [user, setUser] = useState(undefined);
+	const [user, setUser] = useState(localStorage.getItem('authUser'));
 
 	const { register, login, logout, google, github } = authMethods;
 	const { email, password, username, picture } = inputs;

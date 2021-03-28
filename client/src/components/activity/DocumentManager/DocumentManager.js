@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { AlertContext } from '../../../contexts';
+import { AlertContext, SessionContext } from '../../../contexts';
 // import { Container } from '../styles';
 import { ButtonPanel } from './ButtonPanel';
 import { Dropzone } from './Dropzone';
+import querystring from 'querystring';
 
 export const DocumentManager = () => {
 	const addAlert = useContext(AlertContext);
 
     const [resStatus, setResStatus] = useState(undefined);
 	const [loaded, setLoaded] = useState(false);
+  const {guid} = useContext(SessionContext);
 	const [availableForDownload, setAvailableForDownload] = useState(false);
 
 
@@ -24,6 +26,7 @@ export const DocumentManager = () => {
 			url: '/api/document/delete',
 			data: {
 			  token: localStorage.getItem('token'),
+			  guid
 			}
 		})
 		.then(res => {
@@ -34,23 +37,9 @@ export const DocumentManager = () => {
 		});
 	};
 
-    const downloadZip = () => {
-        axios({
-			method: 'get',
-			url: '/api/document/download',
-			data: {
-				token: localStorage.getItem('token'),
-			}
-		})
-		.then(res => {
-			setResStatus('success');
-		})
-		.catch(err => {
-			addAlert('error', 'Could not download game at this time.');
-			setResStatus('error');
-		});
-    };
-    
+		const downloadZip = () => {
+			window.open(`/api/document/download?${querystring.stringify({token: localStorage.getItem('token'), guid})}`);
+		};
 
 	return (
 		<>

@@ -53,10 +53,9 @@ router.get('/list', authenticate, session, (req, res) => {
  *     parameters:
  *       - in: body
  *         name: player
+ *         required: true
  *         schema:
- *           required: true
- *           schema:
- *             type: string
+ *           type: string
  *       - $ref: '#/components/parameters/guidBody'
  *       - $ref: '#/components/parameters/tokenBody'
  *     responses:

@@ -44,13 +44,17 @@ async function authenticate(req, res, next) {
   if (!token) {
     next();
   } else {
-    const auth = fireBaseAdmin.auth();
-    const decoded = await auth.verifyIdToken(token);
-    /**
-     * @type User
-     */
-    req.user = decoded;
-    next();
+    try {
+      const auth = fireBaseAdmin.auth();
+      const decoded = await auth.verifyIdToken(token);
+      /**
+       * @type User
+       */
+      req.user = decoded;
+      next();
+    } catch (e) {
+      res.status(400).send({msg: 'Error autheticating the user. Has the token expired?'});
+    }
   }
 }
 

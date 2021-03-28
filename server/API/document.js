@@ -2,6 +2,10 @@ const express = require('express');
 const authenticate = require("../auth.js");
 const router = express.Router();
 const fileSystem = require('../helpers/fileSystem');
+const decompress = require('decompress');
+
+const DocumentManager = require('../DocumentManager/DocumentManager.js');
+const GameSession = require('../GameSession/GameSession.js');
 
 
 
@@ -28,11 +32,17 @@ const fileSystem = require('../helpers/fileSystem');
  *       200:
  *         description: the list of files within the game
  */
-router.get('/get-files', authenticate, (req, res) => {
-  const folder = 'Uploads';
-  const files = fileSystem.getUploadFiles(folder);
-  const listOfFiles = fileSystem.getListOfFileObjects(files);
-  res.send(listOfFiles);
+router.get('/get-files', authenticate, async (req, res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.query.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.query.guid);
+    const documentManager = new DocumentManager(gameSession);
+    const listOfFiles = await documentManager.getFiles();
+    res.send(listOfFiles);
+  }
 });
 
 
@@ -48,6 +58,11 @@ router.get('/get-files', authenticate, (req, res) => {
  *     parameters:
  *       - $ref: '#/components/parameters/guidBody'
  *       - $ref: '#/components/parameters/tokenBody'
+ *       - in: body
+ *         name: file
+ *         description: The file to be uploaded
+ *         schema:
+ *           type: string
  *     responses:
  *       400:
  *         description: No file uploaded
@@ -55,29 +70,67 @@ router.get('/get-files', authenticate, (req, res) => {
  *         description: the filename and filepath of the uploaded file.
  *
  */
-router.post('/upload', authenticate, (req,res) => {
-    console.log('upload called');
-    if(req.files === null){
-        return res.status(400).json({ msg: 'No file uploaded' });
+router.post('/upload', authenticate, async (req,res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.body.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else if(req.files === null){
+    return res.status(400).json({ msg: 'No file uploaded' });
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.body.guid);
+    const documentManager = new DocumentManager(gameSession);
+    const uploaded = await documentManager.upload(req.files.file);
+    if (uploaded === null) {
+      res.status(500).send(err);
+    } else {
+      res.json(uploaded);
     }
-    const file = req.files.file;
-    const path = `${__dirname}/Uploads/${file.name}`;
-    file.mv(path, err => {
-        decompress(path,'Uploads/').then(files=>{
-            fs.unlinkSync(path);
-            if(fs.existsSync(osxfolder)){
-                fs.rmdirSync(osxfolder, {recursive: true});
-            }
-            console.log("done!");
-        });
-        if(err){
-            console.log(err);
-            return res.status(500).send(err);
-        }
-    //    res.json({ fileName: file.name, filePath: `./Uploads/${file.name}`});
-        res.json({ fileName: file.name, filePath: path});
-    });
+  }
 });
+
+/**
+ * Get contents endpoint
+ *
+ * @openapi
+ * /api/document/content:
+ *   get:
+ *     tags:
+ *       - Document manager
+ *     summary: fetches the content of a given file
+ *     parameters:
+ *       - $ref: '#/components/parameters/guidQuery'
+ *       - $ref: '#/components/parameters/tokenQuery'
+ *       - in: query
+ *         name: file
+ *         description: The file to be fetched
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: the string content of the fetched file
+ */
+router.get('/content', authenticate, async function(req, res){
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.query.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else if (!req.query.file) {
+    res.status(400).json({msg: 'There is no file to be fetched.'});
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.query.guid);
+    const documentManager = new DocumentManager(gameSession);
+    try {
+      console.log(req.query.file);
+      const contents = await documentManager.getContent(req.query.file);
+      res.status(200).send(contents);
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({msg: 'Error fetching the file.'});
+    }
+  }  
+});
+
 
 /**
  * Download Endpoint
@@ -95,21 +148,23 @@ router.post('/upload', authenticate, (req,res) => {
  *       200:
  *         description: the zipped game folder
  */
-router.get('/download', authenticate, function(req, res){
-  const folder = `${__dirname}/Uploads/game`;
-  if(fs.existsSync(folder) ){
-    const file = `${__dirname}/Uploads/${gameFile}`;
-    zipper.sync.zip(folder).compress().save(file);
-    if(fs.existsSync(file)){
-      console.log("File exists: ", file);
-      res.download(file, function(error){ 
-        console.log("Error : ", error) 
+router.get('/download', authenticate, async function(req, res){
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else if (!req.query.guid) {
+    res.status(400).json({msg: 'There is no game session.'});
+  } else {
+    const gameSession = await GameSession.getSession(req.user, req.query.guid);
+    const documentManager = new DocumentManager(gameSession);
+    const download = documentManager.download();
+    if (download) {
+      res.download(download, function(error){ 
+        if (error != undefined) console.error("Error : ", error) 
       });
     } else {
-      console.log("Server file doesn't exists!", res.status);
-    }  
-  }  else {
-    console.log("Server folder doesn't exists!", res.status);
+      res.status(500).json({msg: 'Error when creating download file'});
+      console.error("Error : ", error) 
+    }
   }  
 });
 
@@ -144,7 +199,6 @@ router.post('/delete', authenticate, function(req, res){
     fs.rmdirSync(osxfolder, { recursive: true })
     res.send(200, {message: 'File deleted'});
   } else{
-    console.log("Server file doesn't exists!");
     res.send(400, {message: 'File does not exist'});
   }
 });

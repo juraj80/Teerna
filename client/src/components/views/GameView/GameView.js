@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import { Container, FileBlock, FileList, StoryView, Dropzone } from './styles';
-import { AlertContext } from '../../../contexts';
+import { AlertContext, SessionContext } from '../../../contexts';
 
 export default function GameView() {
 	const addAlert = useContext(AlertContext);
@@ -10,13 +10,15 @@ export default function GameView() {
 	const [story, setStory] = useState(undefined);
 	const [markdown, setMarkdown] = useState(undefined);
 	const [displayMD, setDisplayMD] = useState(false);
+	const {guid} = useContext(SessionContext);
 
 	useEffect(() => {
 		axios({
 			method: 'get',
 			url: '/api/document/get-files',
-			data: {
-				token: localStorage.getItem('token')
+			params: {
+				token: localStorage.getItem('token'),
+				guid
 			},
 		})
 		.then(res => setFiles(res.data))
@@ -25,8 +27,16 @@ export default function GameView() {
 
 	useEffect(() => {
 		story &&
-			fetch(story)
-				.then(res => res.text())
+		axios({
+			method: 'get',
+			url: '/api/document/content',
+			params: {
+				token: localStorage.getItem('token'),
+				guid,
+				file: story
+			},
+		})
+				.then(res => {console.log(res.data); return res.data})
 				.then(text => setMarkdown(text));
 	}, [story]);
 
@@ -42,13 +52,12 @@ export default function GameView() {
 	return (
 		<Container>
 			<FileList>
-				{files
-					? files.map((file, idx) => {
+				{ (files && files.map) ? files.map((file, idx) => {
 							return (
 								<FileBlock
 									idx={idx}
 									onClick={() => {
-										setStory(`/game/assets/story/story.md`);
+										setStory(file.key);
 										handleSelect();
 									}}
 								>

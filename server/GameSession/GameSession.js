@@ -93,12 +93,12 @@ class GameSession {
     const folder = process.argv[2] === 'test' ? 'test-teerna': `teerna-${this.guid}`;
     const gameFolder = path.join(os.tmpdir(), folder);
     // create new directory
-    try {
+    if (!fs.existsSync(gameFolder)) {
       fs.mkdirSync(gameFolder);
-    } catch (err) {
-      if (err.code !== 'EEXIST') {
-        throw err;
-      }
+    }
+    const uploads = path.join(gameFolder, 'Uploads');
+    if (!fs.existsSync(uploads)) {
+      fs.mkdirSync(uploads);
     }
     return gameFolder;
   }
@@ -146,7 +146,7 @@ class GameSession {
         const created = await this.createTables();
         return true;
       } catch(e) {
-        console.error(e);
+        console.error('Could not create tables', e);
         return false;
       }
     }

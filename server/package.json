@@ -4,8 +4,8 @@
   "description": "Backend for Teerna",
   "main": "index.js",
   "scripts": {
-    "build-client": "cd ../client && yarn build & cd ../server",
-    "start": "npm run build-client && node index.js",
+    "build-client": "cd ../client && yarn build && cd ../server",
+    "start": "node index.js",
     "start-dev": "node index.js test",
     "test": "c8 mocha */**/*.test.js --ignore 'node_modules/**/*' --exit"
   },

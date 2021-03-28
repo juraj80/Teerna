@@ -7,8 +7,9 @@
  * @returns {string} how much time ago.
  */
 export const getTimeAgo = time => {
+	const t = new Date(time);
 	const now = new Date().getTime() / 1000;
-	const seconds = Math.floor(now - time.getTime() / 1000);
+	const seconds = Math.floor(now - t / 1000);
 	const minutes = Math.floor(seconds / 60);
 	const hours = Math.floor(minutes / 60);
 	const days = Math.floor(hours / 24);

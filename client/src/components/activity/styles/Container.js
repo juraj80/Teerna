@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { elevation, zIndex } from "../../../styles";
 
 export default styled.div`
     width: 100%;

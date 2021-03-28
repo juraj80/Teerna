@@ -27,6 +27,9 @@ export const sessionMethods = {
 				setMessage(res.data.message);
 				setGuid(res.data.gameId);
 			})
-			.catch(err => setSessionErrors(prev => [...prev, 'Forbidden']));
+			.catch(err => {
+				console.log(err);
+				setSessionErrors(prev => [...prev, 'Forbidden'])
+			});
 	},
 };

@@ -48,7 +48,7 @@ router.get('/:guid', authenticate, async (req, res) => {
   }
   try {
     const updated = await gameSession.updatePlayerName(user.email, user.name);
-    res.json(
+    res.status(200).json(
       {
         message: 'Access granted. You are now a player of this game',
         gameId: gameSession.guid

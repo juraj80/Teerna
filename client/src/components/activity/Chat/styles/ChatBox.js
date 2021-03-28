@@ -7,6 +7,7 @@ export default styled.div`
 	height: 45%;
 	max-height: 55%;
 	position: relative;
+	top: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

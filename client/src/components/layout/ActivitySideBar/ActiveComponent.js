@@ -1,5 +1,5 @@
 import { oneOf } from "prop-types";
-import { Chat, DocumentManager } from "../../activity";
+import { Chat, DocumentManager, PlayerList } from "../../activity";
 import { ActivitySideBar } from './ActivitySideBar';
 
 export default function ActiveComponent({ activityType }) {
@@ -7,7 +7,7 @@ export default function ActiveComponent({ activityType }) {
 		<ActivitySideBar>
 			{activityType === 'chat' && <Chat />}
 			{activityType === 'doc-manager' && <DocumentManager />}
-			{activityType === 'player-list' && <div />}
+			{activityType === 'player-list' && <PlayerList />}
 		</ActivitySideBar>
 	);
 }

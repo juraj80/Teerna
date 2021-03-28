@@ -8,7 +8,7 @@ import { ChatBoard, ChatBox, ChatItem, MessageForm, TypingBox } from './styles';
 import { ButtonPanel } from './ButtonPanel';
 
 export default function Chat() {
-	const [ws, setWs] = useState(connection([], [(e) => onMessage(e)], []));
+	const [ws, setWs] = useState(undefined);
 	const [newMessage, setNewMessage] = useState('');
 	const [whoIsTyping, setWhoIsTyping] = useState([]);
 	const [amITyping, setAmITyping] = useState(false);
@@ -19,7 +19,6 @@ export default function Chat() {
 
 	useEffect(() => {
 		setWs(connection([], [(e) => onMessage(e)], []))
-		allCommands();	
 	},[]);
 
 	/**
@@ -97,8 +96,6 @@ export default function Chat() {
 
 	return (
 		<Container>
-			{/* Instruction Panel (set visible state) */}
-			{/* Messages */}
             <ChatBox>
                 <ChatBoard>
                     {getChatBoardContent().map((m, idx) => (
@@ -121,12 +118,12 @@ export default function Chat() {
                         type='text' 
                         nameAttr='message' 
                         rightIcon='send' 
-                        rightIconAction={() => ws.getStatus() && sendMessage()} 
+                        rightIconAction={() => isOpen && sendMessage()} 
                         placeholder='Type your message...' 
                         value={newMessage} 
                         setValue={setNewMessage} 
                         onKeyPress={(e) => handleKeyPress(e)} 
-                        // disabled={() => ws.getStatus()}
+                        // disabled={() => !isOpen()}
                         requiredField
                     />
                 </MessageForm>

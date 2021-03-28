@@ -12,17 +12,17 @@ export default function Avatar({
 	...props
 }) {
 	const getSrc = () => {
-		const rand = Math.random() * 6;
+		const rand = Math.round(Math.random() * 6);
 		let rsrc;
 		switch (rand) {
-			case 0: rsrc = AvatarGreen; break;
-			case 1: rsrc = AvatarGrey; break;
-			case 2: rsrc = AvatarOrange; break;
-			case 3: rsrc = AvatarYellow; break;
-			case 4: rsrc = AvatarPurple; break;
-			case 5: rsrc = AvatarRed; break;
+			case 0: rsrc = <AvatarGreen/>; break;
+			case 1: rsrc = <AvatarGrey/>; break;
+			case 2: rsrc = <AvatarOrange/>; break;
+			case 3: rsrc = <AvatarYellow/>; break;
+			case 4: rsrc = <AvatarPurple/>; break;
+			case 5: rsrc = <AvatarRed/>; break;
 			case 6: 
-			default: rsrc = AvatarBlue; break;
+			default: rsrc = <AvatarBlue/>; break;
 		}
 		return rsrc;
 	}
@@ -44,7 +44,7 @@ export default function Avatar({
 			alt={altText || 'Profile Image'}
 			{...props}
 		>
-			<AvatarBlue/>
+			{getSrc()}
 		</Circle>
 	);
 }

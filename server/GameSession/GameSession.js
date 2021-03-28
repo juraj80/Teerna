@@ -63,7 +63,7 @@ class GameSession {
    * @param guid
    */
   setId(guid) {
-    this.guid = guid || uuid();
+    this.guid = guid || uuid().toUpperCase();
   }
 
   /**

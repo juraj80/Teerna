@@ -38,7 +38,9 @@ export function createMessage(message, author) {
      * @param {Object} data to be added to the command. These attributes are static. Dinamic attributes are added as arguments, one for each space-separated word after the command.
      */
     static register(name, type, help = "", data = {}) {
-      Command.commands.push( {name, type, help, data} );
+      if (!Command.commands.find(i => i.name === name)) {
+        Command.commands.push( {name, type, help, data} );
+      }
     }
   
     /**
@@ -47,6 +49,60 @@ export function createMessage(message, author) {
      * @returns {{name: string, type: string}} the registered command.
      */
     static isRegistered(name) {
+      const playerSpecificOptional = "This command can be player specific.";
+      const playerSpecific = "This command accepts player names as parameters to restrict the action to them.";
+      const sceneSpecificOptional = "This command can be scene specific";
+      const crudOptional = "This command accepts create/read/update/delete arguments";
+
+      //registerDiceCommands
+      [
+        ['coin', 'Throw a 2 sided coin.', {sides: 2}],
+        ['d2', 'Throw a 2 sided coin.', {sides: 2}],
+        ['d4', 'Throw a 4 sided dice.', {sides: 4}],
+        ['d6', 'Throw a 6 sided dice.', {sides: 6}],
+        ['d8', 'Throw a 8 sided dice.', {sides: 8}],
+        ['d10', 'Throw a 10 sided dice.', {sides: 10}],
+        ['d12', 'Throw a 12 sided dice.', {sides: 12}],
+        ['d20', 'Throw a 20 sided dice.', {sides: 20}]
+      ].forEach(d => Command.register(d[0], 'dice', d[1], d[2]));
+
+      //registerAccessControlCommands
+      [
+        ['gag', "Gag a player that will no longer be able to chat in this game"],
+        ['ungag', "Allow a gagged player to chat in this game again."],
+        ['kick', "Log a player out of the game and block the player to log in again"],
+        ['unkick',"Allow a blocked player to log in to this game."],
+        ['invite', "Invite a player to join the game"],
+        ['uninvite', "Cancel the invitation for a player to join the game"]
+      ].forEach(d => Command.register(d[0], 'accessControl', d[1]));
+
+      //communicationControlCommands
+      [
+        ['whisper', `Whisper to a player. ${playerSpecificOptional}`],
+        ['talk', `Talk to a player. ${playerSpecificOptional}`],
+        ['shout', `Shout to anyone who can hear. ${sceneSpecificOptional}`],
+      ].forEach(d => Command.register(d[0], 'accessControl', d[1]));
+
+      //playerCommands
+      [
+        ["list", "list of players CRUD"]
+      ].forEach(d => Command.register(d[0], 'player', d[1]));
+
+      //sceneCommands
+      [
+        ['play', "Start playing the provided media to all players. You can specify which player should the media be played to by adding their names after the media"],
+        ['scene', "Sets the scene for the game. You can specify"],
+      ].forEach(c => Command.register(c[0], 'scene', c[1]));
+
+      //documentCommands
+      [
+        ["doc", `Manages documents. ${crudOptional}`],
+        ["docSend", `Sends a given document.  ${playerSpecificOptional}`],
+        ["docHide", `Hides a given document. ${playerSpecificOptional}`],
+        ["docShow", `Displays a given document. ${playerSpecificOptional}`],
+      ].forEach(c => Command.register(c[0], 'document', c[1]));
+      console.log(Command.commands, name);
+
       return Command.commands.find(c => c.name === name);
     }
   

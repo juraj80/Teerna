@@ -6,7 +6,7 @@ export default function ButtonPanel({ sendMessage, setNewMessage, newMessage }) 
 
     const handleThrow = (type) => {
         setNewMessage(`/${type}`);
-        sendMessage();
+        sendMessage(`/${type}`);
     }
 
     return (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { node } from 'prop-types';
-import { getTimeAgo, allCommands } from '../../connection';
+import { getTimeAgo } from '../../connection';
 import { DiceBag } from './helpers';
 import { ActivityContext } from './context';
 import { useConstructor } from '../../hooks';
@@ -23,7 +23,6 @@ export const ActivityProvider = ({ children }) => {
 		// setRoll(undefined);
 		// setDiceHistory([]);
 		// setDicebag(new DiceBag());
-		// register all command
 	}, []);
 
 	useEffect(() => {

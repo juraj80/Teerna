@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { ActivityContext } from '../../../contexts';
 import { ChatMessage } from '../../../connection/utils';
-import { connection, getTimeAgo, allCommands } from '../../../connection';
+import { connection, getTimeAgo } from '../../../connection';
 import { Input } from '../../core';
 import { Container } from '../styles';
 import { ChatBoard, ChatBox, ChatItem, MessageForm, TypingBox } from './styles';
@@ -56,8 +56,8 @@ export default function Chat() {
 	/**
 	 * Sends a text message with the WebSockets Client.
 	 */
-	const sendMessage = () => {
-		ws.sendMessage(newMessage);
+	const sendMessage = (m) => {
+		ws.sendMessage(m);
 		setNewMessage('');
 	};
 

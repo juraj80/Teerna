@@ -4,5 +4,5 @@
  */
 
 update playerList 
-  set playerName = '$name'
-  where email = '$email'
+  set playerName = $name
+  where email = $email

@@ -1,36 +1,26 @@
 import { useContext, useState, useEffect } from 'react';
 import { ActivityContext } from '../../../contexts';
 import { ChatMessage } from '../../../connection/utils';
-import { connection, getTimeAgo } from '../../../connection';
-import { useConstructor } from '../../../hooks';
+import { connection, getTimeAgo, allCommands } from '../../../connection';
 import { Input } from '../../core';
 import { Container } from '../styles';
 import { ChatBoard, ChatBox, ChatItem, MessageForm, TypingBox } from './styles';
+import { ButtonPanel } from './ButtonPanel';
 
 export default function Chat() {
-	const [ws, setWs] = useState(undefined);
+	const [ws, setWs] = useState(connection([], [(e) => onMessage(e)], []));
 	const [newMessage, setNewMessage] = useState('');
 	const [whoIsTyping, setWhoIsTyping] = useState([]);
 	const [amITyping, setAmITyping] = useState(false);
-	const {
-		onOpen,
-		dicebag,
-		sides,
-		diceName,
-		diceHistory,
-		roll,
-		rollState,
-		rolledWhen,
-		updateSides,
-		rollAction,
-		chatHistory,
-		updateMessages,
-	} = useContext(ActivityContext);
+	const {diceHistory,chatHistory,updateMessages} = useContext(ActivityContext);
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => chatHistory && chatHistory.length > 0 && setMessages(chatHistory),[chatHistory]);
 
-	useConstructor(() => setWs(connection([], [(e) => onMessage(e)], [])));
+	useEffect(() => {
+		setWs(connection([], [(e) => onMessage(e)], []))
+		allCommands();	
+	},[]);
 
 	/**
 	 * Hook executed a new message arrives from the WS
@@ -100,7 +90,7 @@ export default function Chat() {
 		const diceMessages = diceHistory
 			? diceHistory.map(d => new ChatMessage( `d${d.sides}: ${d.result}`, 'GM', 'dice', d.time.toString()))
 			: [];
-		return messages.concat(diceMessages).sort((a, b) => a.time.getTime() - b.time.getTime());
+		return messages.concat(diceMessages).sort((a, b) => a.time - b.time);
 	};
 
 	const isOpen = () => ws.getStatus() === 'open';
@@ -141,7 +131,7 @@ export default function Chat() {
                     />
                 </MessageForm>
             </ChatBox>
-			{/* Dice - ButtonPanel */}
+			<ButtonPanel setNewMessage={setNewMessage} newMessage={newMessage} sendMessage={sendMessage} />
 		</Container>
 	);
 }

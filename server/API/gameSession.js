@@ -72,6 +72,12 @@ router.get('/:guid', authenticate, async (req, res) => {
  *     parameters:
  *      - $ref: '#/components/parameters/guidBody'
  *      - $ref: '#/components/parameters/tokenBody'
+ *      - in: body
+ *        name: email
+ *        description: the email of the player to be invited.
+ *        required: true
+ *        schema:
+ *          type: string
  *     responses:
  *       "200":
  *         description: A list of all pending invitations, including the newly created one.

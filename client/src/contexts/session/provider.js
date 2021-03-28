@@ -25,7 +25,7 @@ export const SessionProvider = ({ children }) => {
 
 	const { createInvitation, createSession, joinSession } = sessionMethods;
 
-	const handleCreateInvitation = () => createInvitation(guid, setMessage, sessionInputs, setSessionErrors);
+	const handleCreateInvitation = (email) => createInvitation(email, guid, setMessage, sessionInputs, setSessionErrors);
 	const handleCreateSession = () => createSession(setSessionGM, setMessage, setSessionErrors, setGuid);
 	const handleJoinSession = (guid) => joinSession(guid, setGuid, setMessage, setSessionErrors);
 

@@ -58,7 +58,7 @@ app.get(
 /**
  * Backend API
  */
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8082;
 app.use('/api', authenticate, apiRouter);
 
 // Start the HTTP server

@@ -3,10 +3,11 @@ import { node } from 'prop-types';
 import { getTimeAgo, allCommands } from '../../connection';
 import { DiceBag } from './helpers';
 import { ActivityContext } from './context';
+import { useConstructor } from '../../hooks';
 
 export const ActivityProvider = ({ children }) => {
 	// DICE
-	const [dicebag, setDicebag] = useState(undefined);
+	const [dicebag, setDicebag] = useState(new DiceBag());
 	const [sides, setSides] = useState(null);
 	const [diceName, setDiceName] = useState(undefined);
 	const [roll, setRoll] = useState(undefined);
@@ -19,11 +20,10 @@ export const ActivityProvider = ({ children }) => {
 
 	// on mount
 	useEffect(() => {
-		setRoll(undefined);
-		setDiceHistory([]);
-		setDicebag(new DiceBag());
-		// register all commands
-		allCommands();
+		// setRoll(undefined);
+		// setDiceHistory([]);
+		// setDicebag(new DiceBag());
+		// register all command
 	}, []);
 
 	useEffect(() => {

@@ -5,6 +5,8 @@ export default styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     background: transparent;
     overscroll-behavior: scroll;
     position: absolute;

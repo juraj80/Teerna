@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
-import { AlertContext, ModalContext, SessionContext } from '../../../contexts';
+import { AlertContext, AuthContext, ModalContext, SessionContext } from '../../../contexts';
 import { Input, Modal, Button } from '../../core';
 import { Container, Form, Title,  Errors, ButtonBlock } from './styles';
 
 export default function SessionActions() {
+  let guidinput;
 	const { 
-        user, setSessionErrors, sessionErrors, guid, message, setSessionInputs, handleCreateSession, handleJoinSession
+					setSessionErrors, sessionErrors, guid, setGuid, message, handleCreateSession, handleJoinSession
 	} = useContext(SessionContext);
 	const addAlert = useContext(AlertContext);
 	const { updateShow, updateContent, updateLocked } = useContext(ModalContext);
 	const [modal, setModal] = useState(undefined);
-	const [gameIdInput, setGameIdInput] = useState('');
+	const user = useContext(AuthContext);
 
 	useEffect(() => {
 		if (message) sessionErrors ? addAlert('error', message) : addAlert('success', message);
@@ -38,8 +39,7 @@ export default function SessionActions() {
 							type='text'
 							nameAttr='text'
 							placeholder='Invitation Code'
-							value={gameIdInput}
-							setValue={setGameIdInput}
+							setValue={(v) => guidinput = v}
 							requiredField
 						/>
 						<Button
@@ -47,8 +47,7 @@ export default function SessionActions() {
 							type='button'
 							status='info'
 							action={() => {
-								setSessionInputs({ email: user.email, gameId: gameIdInput });
-								handleJoinSession();
+								handleJoinSession(guidinput);
 							}}
 						>
 							Submit

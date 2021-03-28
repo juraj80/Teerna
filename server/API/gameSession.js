@@ -3,7 +3,6 @@ const router = express.Router();
 const GameSession = require("../GameSession/GameSession");
 const authenticate = require("../auth.js");
 
-
 /**
  * @openapi
  * tags:
@@ -11,74 +10,6 @@ const authenticate = require("../auth.js");
  *   description: Manage game sessions, creating games, inviting, uninviting, blocking and gagging players and other game session related services.
  */
 
-
-/**
- * Creates a new game session, making the user its Game Master.
- *
- * @openapi
- * /api/game-session:
- *   post:
- *     summary: Creates a new game for the current user.
- *     parameters:
- *      - $ref: '#/components/parameters/tokenBody'
- *     tags:
- *       - Game Session
- *     responses:
- *       "200":
- *         description: Details of the created game.
- *       "403":
- *         description: User does not have the propper permissions or is not authenticated.
- */
-router.post('/', authenticate, async (req, res) => {
-  if (!req.user || !req.user.user_id) {
-    res.status(403).send('Forbidden');
-  } else {
-    const gameSession = await GameSession.createSession(req.user);
-    res.json(
-      {
-        message: 'Game created',
-        gameId: gameSession.guid,
-        gm: req.user.name
-      }
-    );
-  }
-});
-
-/**
- * Creates a valid invitation link to be sent to users
- *
- * @openapi
- * /api/game-session/invitation:
- *   post:
- *     tags:
- *       - Game Session
- *     summary: Creates an invitation for a provided email
- *     parameters:
- *      - $ref: '#/components/parameters/guidBody'
- *      - $ref: '#/components/parameters/tokenBody'
- *     responses:
- *       "200":
- *         description: A list of all pending invitations, including the newly created one.
- *       "403":
- *         description: User does not have the propper permissions or is not authenticated.
- */
-router.post('/invitation', authenticate, async (req, res) => {
-  if (!req.user || !req.user.user_id) {
-    res.status(403).send('Forbidden');
-  } else {
-    const guid = req.body.guid;
-    const email = req.body.email;
-    const gameSession = await GameSession.getSession(req.user, guid); 
-    try {
-      await gameSession.playerInvite(email);
-      const invited = await gameSession.getPendingInvitations();
-      res.json(invited);
-    } catch (e) {
-      console.error(e);
-      res.status(500).send('Internal Server Error');
-    }
-  }
-});
 
 /**
  * Joins a new user through an invitation link
@@ -125,6 +56,76 @@ router.get('/:guid', authenticate, async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).send('Internal Server Error');
+  }
+});
+
+
+/**
+ * Creates a valid invitation link to be sent to users
+ *
+ * @openapi
+ * /api/game-session/invitation:
+ *   post:
+ *     tags:
+ *       - Game Session
+ *     summary: Creates an invitation for a provided email
+ *     parameters:
+ *      - $ref: '#/components/parameters/guidBody'
+ *      - $ref: '#/components/parameters/tokenBody'
+ *     responses:
+ *       "200":
+ *         description: A list of all pending invitations, including the newly created one.
+ *       "403":
+ *         description: User does not have the propper permissions or is not authenticated.
+ */
+router.post('/invitation', authenticate, async (req, res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else {
+    const guid = req.body.guid;
+    const email = req.body.email;
+    const gameSession = await GameSession.getSession(req.user, guid); 
+    try {
+      await gameSession.playerInvite(email);
+      const invited = await gameSession.getPendingInvitations();
+      res.json(invited);
+    } catch (e) {
+      console.error(e);
+      res.status(500).send('Internal Server Error');
+    }
+  }
+});
+
+
+/**
+ * Creates a new game session, making the user its Game Master.
+ *
+ * @openapi
+ * /api/game-session:
+ *   post:
+ *     summary: Creates a new game for the current user.
+ *     parameters:
+ *      - $ref: '#/components/parameters/tokenBody'
+ *     tags:
+ *       - Game Session
+ *     responses:
+ *       "200":
+ *         description: Details of the created game.
+ *       "403":
+ *         description: User does not have the propper permissions or is not authenticated.
+ */
+router.post('/', authenticate, async (req, res) => {
+  if (!req.user || !req.user.user_id) {
+    res.status(403).send('Forbidden');
+  } else {
+    const gameSession = await GameSession.createSession(req.user);
+    res.json(
+      {
+        message: 'Game created',
+        gameId: gameSession.guid,
+        gm: req.user.name
+      }
+    );
   }
 });
 

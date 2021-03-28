@@ -22,9 +22,9 @@ export const sessionMethods = {
             setSessionGM({ id: user.sub, username: gm });
         }).catch(err => setSessionErrors(prev => [...prev, 'Session could not be created']));
     },
-	joinSession: (guid, setGuid, setMessage, setSessionErrors) => {
-        const user = decode(localStorage.getItem('token'));
-        joinSession(guid, user)
+	joinSession: (guid, setGuid, setMessage, sessionInputs, setSessionErrors) => {
+        const email = decode(localStorage.getItem('token')).email;
+        joinSession(guid, email)
         .then(async res => {
             setMessage(res.data.message);
             setGuid(res.data.gameId);

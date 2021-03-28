@@ -27,7 +27,7 @@ export const SessionProvider = ({ children }) => {
 
 	const handleCreateInvitation = () => createInvitation(guid, setMessage, sessionInputs, setSessionErrors);
 	const handleCreateSession = () => createSession(setSessionGM, setMessage, setSessionErrors, setGuid);
-	const handleJoinSession = () => joinSession(guid, setGuid, setMessage, setSessionErrors);
+	const handleJoinSession = (guid) => joinSession(guid, setGuid, setMessage, setSessionErrors);
 
 	return (
 		<SessionContext.Provider

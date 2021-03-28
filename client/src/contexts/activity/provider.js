@@ -3,10 +3,11 @@ import { node } from 'prop-types';
 import { getTimeAgo, allCommands } from '../../connection';
 import { DiceBag } from './helpers';
 import { ActivityContext } from './context';
+import { useConstructor } from '../../hooks';
 
 export const ActivityProvider = ({ children }) => {
 	// DICE
-	const [dicebag, setDicebag] = useState(undefined);
+	const [dicebag, setDicebag] = useState(new DiceBag());
 	const [sides, setSides] = useState(null);
 	const [diceName, setDiceName] = useState(undefined);
 	const [roll, setRoll] = useState(undefined);
@@ -14,16 +15,15 @@ export const ActivityProvider = ({ children }) => {
 	const [diceHistory, setDiceHistory] = useState([]);
 
 	// CHAT
-	const [messages, setMessages] = useState([]);
-	// const [chatHistory, setChatHistory] = useState([]);
+	// const [messages, setMessages] = useState([]);
+	const [chatHistory, setChatHistory] = useState([]);
 
 	// on mount
 	useEffect(() => {
-		setRoll(undefined);
-		setDiceHistory([]);
-		setDicebag(new DiceBag());
-		// register all commands
-		allCommands();
+		// setRoll(undefined);
+		// setDiceHistory([]);
+		// setDicebag(new DiceBag());
+		// register all command
 	}, []);
 
 	useEffect(() => {
@@ -35,7 +35,7 @@ export const ActivityProvider = ({ children }) => {
 	};
 
 	const rollAction = async (type = 'public') => {
-		const roll = await dicebag.throw(sides, 'public');
+		const roll = await dicebag.throw(sides, type);
 		setDiceHistory([...diceHistory, roll]);
 		setRoll(roll);
 		setRollState('rolling');
@@ -58,12 +58,11 @@ export const ActivityProvider = ({ children }) => {
 	 */
 	const onOpen = () => {};
 
-	const addMessage = msg => setMessages([...messages, msg]);
+	// const addMessage = msg => setMessages(messages.concat([msg]));
 
-	const clearLog = limit =>
-		setMessages(messages.splice(0, messages.lengh - limit));
+	const clearLog = limit => setChatHistory(chatHistory.splice(0, chatHistory.length - limit));
 
-	const updateMessages = (msgs) => setMessages(msgs); 
+	const updateMessages = (messages) => setChatHistory(messages); 
 
 	return (
 		<ActivityContext.Provider
@@ -75,11 +74,12 @@ export const ActivityProvider = ({ children }) => {
 				diceHistory,
 				roll,
 				rollState,
-				messages,
+				chatHistory,
+				// messages,
 				rolledWhen,
 				updateSides,
 				rollAction,
-				addMessage,
+				// addMessage,
 				clearLog,
 				updateMessages
 			}}

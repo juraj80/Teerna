@@ -1,6 +1,6 @@
 import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
-import {  gradients, spacing, colours, elevation } from '../../../../styles';
+import {  gradients, spacing, colours, elevation, borderRadius } from '../../../../styles';
 
 
 export default styled.div`
@@ -9,7 +9,6 @@ export default styled.div`
     position: relative;
     display: flex;
     align-items: center;
-
     margin: ${spacing[8]};
     padding: 0;
   
@@ -36,10 +35,11 @@ const startIcon = css`
 const endIcon = css`
     svg.end {
         border-left: 1px solid ${gradients.border};
-        background: ${({theme}) => lighten(0.05, theme.input)};
+        background: transparent;
         position: absolute;
         top: 0;
         right: ${spacing[16]};
         height: 32px;
         transition: all 0.2s linear;
+        cursor: pointer;
     }`;

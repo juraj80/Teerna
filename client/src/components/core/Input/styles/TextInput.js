@@ -1,6 +1,6 @@
 import { invert } from 'polished';
 import styled, { css } from 'styled-components';
-import { colours, elevation, spacing, font } from '../../../../styles';
+import { colours, elevation, spacing, font, borderRadius } from '../../../../styles';
 
 export default styled.input`
   ${font(2, 'BODY', false)};
@@ -8,8 +8,8 @@ export default styled.input`
     padding-left: ${({iconPositions}) => (iconPositions === 'both' || iconPositions === 'start') && spacing[48]};
     height: 32px;
     width: 100%;
-    border-radius: 4px;
-    outline: none;
+    min-width: 200px;
+    border-radius: ${({name}) => name === 'message' ? borderRadius.round : borderRadius.slight};
     border: none;
     color: ${({theme}) => invert(theme.input)};
     background: ${({theme}) => theme.input};
@@ -18,8 +18,8 @@ export default styled.input`
 
     &:focus,
     &:active {
-        border: none;
-        outline: 1px solid ${colours.accent.aqua};
+        border: 1px solid ${colours.accent.aqua};
+        outline: 1px solid transparent;
         ${elevation(5)};
 
         &::placeholder {

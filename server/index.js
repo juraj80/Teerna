@@ -39,10 +39,6 @@ app.use(bodyParser.json());
 
 app.use(fileUpload());
 
-const gameFile = 'game.zip';
-
-app.use(express.static('Uploads'));
-
 
 /**
  * Create API documentation

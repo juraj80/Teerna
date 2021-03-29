@@ -1,0 +1,1336 @@
+commit 63badb11c83f08bab6ec740aadcad9558d91a542
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 22:28:32 2021 -0300
+
+    fix(server): remove unused code
+
+commit 0a23288b6a7661353701e09e9d3437ce53d5a4bf
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 18:45:24 2021 -0300
+
+    fix(dice buttons): throw dice buttons
+
+commit 4440735939c6f263ee5dfa32b8828b7b00b9dd58
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 16:52:47 2021 -0300
+
+    fix(gamesession): game uuid will be uppercase
+
+commit 5d02c9900168e5cdbc80b1d4b8e7c942925bb2c7
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 16:46:17 2021 -0300
+
+    fix: server port for nginx
+
+commit fbcefd7666f7e218f7cd24ec4608ac978535a977
+Merge: 5c20dd2 81c97b8
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 16:44:17 2021 -0300
+
+    Merge branch 'master' of github.com:juraj80/Teerna
+
+commit 5c20dd24bd67d7c320354098b092e0895e187146
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 16:43:50 2021 -0300
+
+    fix(server): remove package-lock.json
+
+commit cce7b4fbd3c516b54e23c607a6b532d7c1b16cc6
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 16:43:29 2021 -0300
+
+    explicit 200 code
+
+commit 26a6d15a6e370312a29b32abf201f470a8c9e42d
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 16:25:25 2021 -0300
+
+    fix(sqlscripts): parameters should not be enclosed in quotes
+
+commit 81c97b85ed08b6ae161e464c52ea38e596daf772
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 28 21:22:23 2021 +0200
+
+    update chat and playerlist styling
+
+commit 5eced7763f369fb26c3a892bc8c56a116fbfa744
+Merge: 8499370 3a80648
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 28 18:01:27 2021 +0200
+
+    Merge branch 'master' of github.com:juraj80/Teerna into final-ui-refactor
+
+commit 8499370aa3a0fe771d00275082194b69c998f598
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 28 18:00:20 2021 +0200
+
+    chat styling
+
+commit ade3f5ab33480caa9e0154a717569e94aa2b99fe
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 28 17:49:34 2021 +0200
+
+    styled dice panel - need to fix integration
+
+commit 24706cfbde4457ab2178e12fd08036025d36c5b2
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 28 16:33:52 2021 +0200
+
+    chatbox - needs fix, only shows 1 message
+
+commit 3a80648e169c793288c34181c694ff454febedbb
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 11:10:43 2021 -0300
+
+    fix(invitation): create invitations in the db upon generating the invitation code
+
+commit f5517380b30ba16267824ea98ede3242a30e16fb
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 09:13:52 2021 -0300
+
+    push the document manager
+
+commit d56fd77f63a197099cfe531add6a4c0e4fc76db0
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 00:31:16 2021 -0300
+
+    fix(packagejson): typo
+
+commit 993e49ea19124b1ca9e83452cdd233202017e21f
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Mar 28 00:29:23 2021 -0300
+
+    fix(joingame): use get request to retrive gamesession
+
+commit 8dc3d1ab7ce39f90ed960827184420ec56620649
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 21:06:24 2021 -0300
+
+    set domain to teerna-project
+
+commit 50c0196955479e240c4af30bbf4fb7ddce137163
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 20:58:10 2021 -0300
+
+    fix(document): display game documents
+
+commit 17bad330352d3f6af9bf707f74075273d7f00b92
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 19:57:31 2021 -0300
+
+    fix(download): allow users to download the zip file with the game contents
+
+commit 3cacc220949d5eb64584779297a5a6b28c99a890
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 18:49:19 2021 -0300
+
+    fix(upload): uploads are stored in the game folder
+
+commit 2f85d0817209015b5510224dada41f6432c80324
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 15:15:29 2021 -0300
+
+    fix(gameview): use ternary op
+
+commit 3f7ba7fc4f3320d7083bb65b2c0a0c678d9b2c4e
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 15:11:11 2021 -0300
+
+    fix sytaxt erorr
+
+commit 58c6500ca22fda7e0f62e98fd63ad586d3949a90
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 15:05:40 2021 -0300
+
+    prevent crashing i.map is not a function
+
+commit e68cb9f40d815cd7b9f61d0a94eeaa38f753a541
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 14:55:33 2021 -0300
+
+    fix: remove wwww
+
+commit 9adb30c95938d7ed7ba1d5907db91f56f0584022
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 14:48:30 2021 -0300
+
+    fix(websocket): use ssl
+
+commit 1f7c4d87eb4cf869bc0e48484c218bdc2f36387b
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 14:40:42 2021 -0300
+
+    fix(domain): add production domain
+
+commit 19681d5e9aa6e85e7e471a7d01c9294fc8a3b250
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 27 18:01:24 2021 +0200
+
+    small style fixes for accessibility
+
+commit ae0af58598cb6162cd223cf932bcdc413c8b0ebb
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 27 17:24:05 2021 +0200
+
+    small styling adjustments
+
+commit e9ad51312d6fc1c1b02d6011ca30d9844317f379
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 27 15:21:34 2021 +0200
+
+    remove unused imports
+
+commit 19d23d36b0ed06517e1231c52aafcc2e9494f8b5
+Merge: 81d41cf b0c9551
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 08:59:45 2021 -0300
+
+    Merge branch 'final-ui-refactor' into develop
+
+commit b0c9551ec15a776ba7dbc2fa55d4f34586400de4
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 27 13:57:29 2021 +0200
+
+    commit env vars (as discussed)
+
+commit 81d41cfea38562f75d26c26ce7cb978a310973e7
+Merge: 74a7118 1ed83f8
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Mar 27 08:54:03 2021 -0300
+
+    Merge branch 'final-ui-refactor' into develop
+
+commit 1ed83f88912698d408f302aca1272eb28f8febf7
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 27 06:04:24 2021 +0200
+
+    fix game session integration/workflow
+
+commit d1cc4df32166b9b03f40bfe2511b438273384bfd
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 26 09:45:46 2021 +0200
+
+    update api calls to have token
+
+commit e139c04d6003e2b220cb09aaf52e2426d1d904a9
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 26 05:23:01 2021 +0200
+
+    work on auth/user/session flow
+
+commit 3bc36bf2a62503adcfa279ba722d6ed87552512d
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Thu Mar 25 22:49:09 2021 +0200
+
+    auth-flow corrected, landing page updated
+
+commit 1237cb8f7e2bffb01f9c04719b8b99282ff450b2
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Thu Mar 25 20:07:12 2021 +0200
+
+    integrate map-renderer
+
+commit d9928e4033bd2a30401d4a78e662e05225425ced
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Thu Mar 25 07:54:27 2021 +0200
+
+    added note on todos
+
+commit 73e67e0a39bfe7b86d1cc112f84deea570d18781
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Thu Mar 25 07:45:19 2021 +0200
+
+    small fixes
+
+commit 456d6d7bcf4487720da786a5b7a0b07f1396b7d7
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Thu Mar 25 02:06:20 2021 +0200
+
+    fixes to game story viewer
+
+commit 7e4040fd35388a92a2ea1b0bfb8ddbc33dcd91b0
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Wed Mar 24 20:43:17 2021 +0200
+
+    fixes to doc manager
+
+commit e313dfb2454ad04bc8ad1434244c759b4c6c6b1a
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Wed Mar 24 07:32:09 2021 +0200
+
+    fixes to modal and doc manager
+
+commit 055de6bb4b143602e19492fdbb5c75605e38082b
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Tue Mar 23 22:16:59 2021 +0200
+
+    changes to nav and Doc Manager
+
+commit 04543a4e97cfa78c9132bb2e1d5d0aaf9a9b7b87
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Mon Mar 22 11:01:41 2021 +0200
+
+    refactor directories - connection + contexts
+
+commit 2b6da7e227fab99416a72b1936e35380119bc51f
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Mon Mar 22 10:11:11 2021 +0200
+
+    fixes to layout + accessibility, add layout story
+
+commit 834bb9ed24652553511ec671cc323a4643b13873
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Mon Mar 22 04:26:50 2021 +0200
+
+    auth form modals,  toggle btwn, test, fix story
+
+commit eae3d8d93792e5059f313d6e333d2e1ccd798c3c
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Mon Mar 22 00:32:02 2021 +0200
+
+    redo spinner to make accessible
+
+commit c7a6656d241ebe4c16eae919ed68e24f8e92ed52
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Mon Mar 22 00:06:48 2021 +0200
+
+    test alert and fix alert story
+
+commit eb8f2de031b90d98a3e12c04b6f5599cafd80fb7
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 21 22:52:27 2021 +0200
+
+    fix ThemeToggle accessibility and story
+
+commit d277dd21b694c8fb27df036a2045b9c53802391f
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 21 20:25:54 2021 +0200
+
+    test modal state changes
+
+commit b423f983af7706522e689c29a6ede12e9a175402
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Mar 21 17:58:35 2021 +0200
+
+    input test and story
+
+commit 16154846e65e3be307f12038cfec768f33ff89ca
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 20 10:49:46 2021 +0200
+
+    make icons accessible
+
+commit 110e9e9520b7c077e77056e442c26c01c52eb6e5
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 20 09:56:51 2021 +0200
+
+    cleaned svg for use with react, fixed button story
+
+commit 5a9487739b400965ed193b5a31d5c1f4f4c01014
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 20 09:31:22 2021 +0200
+
+    ensure passing tests
+
+commit 8cb2f04685bffe2b90aa0877509bd7da404f5e91
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 20 02:39:31 2021 +0200
+
+    searchbar functionality and api connect util
+
+commit 1544689dba7e372d196759e2519e125bcc324c1f
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Mar 20 01:39:53 2021 +0200
+
+    tested hooks
+
+commit b8cf88a52477d17f979f69036c81365024c9a884
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 19 23:34:05 2021 +0200
+
+    storybook configuration
+
+commit e1fb6fae597e798fe707faee02ef9fbbbdd02a45
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 19 23:32:35 2021 +0200
+
+    setup env and config for firebase
+
+commit aea6ae9093a916035a4394916edc77fd6320b159
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 19 23:25:36 2021 +0200
+
+    reduce theme objects to required values only
+
+commit ceb8eae3977b5d849f95f943ab861dbf345b739d
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 19 23:19:34 2021 +0200
+
+    assets restructure to incorporate Peter's graphics
+
+commit c56e49a7d4497a7ffc38ed74547259b652170b41
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Fri Mar 19 23:02:15 2021 +0200
+
+    refactor styles for accessibilty and ease of use
+
+commit 74a711859040848112601f9855f39a70ededf27f
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Sat Mar 6 00:06:08 2021 +0000
+
+    Updated map renderer with transparent background.
+
+commit 7977e893f1ceb871fa19be110a2fb3384eddb9f3
+Merge: 252abd0 51eda55
+Author: juraj klucka <juraj.klucka@gmail.com>
+Date:   Thu Mar 4 18:52:14 2021 +0100
+
+    Merge pull request #7 from juraj80/feature/api
+    
+    Feature/api
+
+commit 8f1f08146a7de08b6c9699850ab47491d268da09
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Mar 4 14:01:58 2021 -0300
+
+    feat(session): session middleware
+
+commit d328af53c283a7e902a0411d2da6342d8c8b33f0
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Mar 4 14:01:29 2021 -0300
+
+    refactor(gamesession): export oly get and create functions
+
+commit adb46428219eff860a28f2fd35f2693c567eaac8
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Mar 4 12:18:35 2021 -0300
+
+    add map and player endpoints
+
+commit 252abd08e7c41908d29961109dedee54e8a8becf
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Thu Mar 4 14:46:29 2021 +0000
+
+    Added default avatars
+
+commit 7da7e4953e5c0e4fefe6433465a0c6c45c1f7403
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Thu Feb 25 17:24:26 2021 +0000
+
+    Add files via upload
+    
+    Dice icons
+
+commit 51eda551d5c41385076ca4009c2584400f9db3cd
+Merge: de79054 2c50171
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 12:28:19 2021 -0300
+
+    Merge branch 'develop' into feature/api
+
+commit de7905401a5e6cfcf83ed2c17f6ad5946e993847
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 12:22:48 2021 -0300
+
+    chore: integrate ui-v2 with Chat
+
+commit 1e54961a8785189847505072f91b994c2160f407
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 11:53:36 2021 -0300
+
+    fix: merge issues
+
+commit e81b1b3627ebbef8c8924bed6cfd40f310cd6985
+Merge: d30dc16 a1e3750
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 10:15:11 2021 -0300
+
+    Merge branch 'ui-v2' into feature/api
+
+commit a1e37509ddb451fd72eaeb9be6211a8f44e52112
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 09:56:57 2021 -0300
+
+    chore: temporarily disable analytics for lack of config
+
+commit d30dc16e1ca3602ba63d6348d245460b1581ab22
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 09:31:25 2021 -0300
+
+    refactor(document): move document into API folder
+
+commit f4836e156be4925d7a1d188dd81990d53421b000
+Merge: ed1a5cb 84b5344
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 24 09:30:04 2021 -0300
+
+    Merge branch 'feature/file-upload' into feature/api
+
+commit ed1a5cbe1154cbd1280752bb5a72d2935815eea3
+Author: ndvo <nelson@ocastudios.com>
+Date:   Tue Feb 23 21:53:16 2021 -0300
+
+    doc(api): expand the api documentation
+
+commit 84b5344d6ad37c353ddbe9a28d309dd71c7c9dda
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Feb 22 20:08:46 2021 +0100
+
+    added websocket connection to the LoadGame.js component
+
+commit 2c5017135ad510dd6eeec982709aa1ed80aa1fc7
+Merge: d63a9d8 3428055
+Author: juraj klucka <juraj.klucka@gmail.com>
+Date:   Sun Feb 21 22:53:54 2021 +0100
+
+    Merge pull request #6 from juraj80/feature/game-session
+    
+    Feature/game session
+
+commit 0208b62b2b0c565b30b8674ac727bf01dc9d3e5d
+Merge: a390640 1f15cec
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Feb 21 13:46:59 2021 +0100
+
+    refactored index.js
+
+commit a3906400c761589ba4ff4b6cdafcec84d08a7260
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Feb 21 13:36:45 2021 +0100
+
+    refactored index.js, put all file system helper functions in the helpers folder
+
+commit 584ff3cfcc9a14d0e98da8088aad8c7b27f77fe2
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Feb 21 06:10:25 2021 +0200
+
+    moved document management into module folder
+
+commit bdcf50910c663543c8445e648dcff8954eaf77f9
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Feb 20 22:15:08 2021 +0200
+
+    start on integrate modules
+
+commit 1b1785a31858d612239f8eb259dbddc5a7a1f4c7
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Thu Feb 18 19:52:21 2021 +0200
+
+    initial commit
+
+commit d63a9d8937c0a4c83a25a8d98b3155f55b2ea26d
+Merge: 6199b66 5dcdccf
+Author: Liam Pender <50781082+lpenderUoL@users.noreply.github.com>
+Date:   Thu Feb 18 14:34:52 2021 +0000
+
+    Merge branch 'develop' of https://github.com/juraj80/Teerna into develop
+
+commit 6199b66b8e2c2a5de1a985b062219a8c65f92871
+Author: Liam Pender <50781082+lpenderUoL@users.noreply.github.com>
+Date:   Thu Feb 18 14:34:41 2021 +0000
+
+    example users
+    
+    sorry this is late, I thought I had commited it last week
+
+commit 302c5a5d98bc6bc74e5ed6bb2c7e01c39412f998
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 18 08:03:39 2021 -0300
+
+    feat(doc): autogenerate api doc page from JSdoc
+
+commit 183fd078702f20c283ad450ebb4892d7e216b0bb
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 14:34:09 2021 -0300
+
+    wip: document api and endpoints
+
+commit 00a103ec536f5bb3eadf3f11a3bb889bb7b20233
+Merge: 3583a3c fb6b2de
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 13:32:00 2021 -0300
+
+    Merge branch 'feature/api' of github.com:juraj80/Teerna into feature/api
+
+commit 3583a3cb2680d63f67dd885f87c9781727ce34e8
+Merge: 9a6f186 3428055
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 13:21:38 2021 -0300
+
+    Merge branch 'feature/game-session' into feature/api
+
+commit fb6b2de1ed850415411fd7c91dac091b18272048
+Merge: 9a6f186 3428055
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 13:21:38 2021 -0300
+
+    Merge branch 'feature/game-session' into feature/api
+
+commit 9a6f186d01c673e8d8f976fc01710a4a147ca34b
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 13:18:42 2021 -0300
+
+    feat(api): document api file
+
+commit e2ac454924a516936e60bb833005aeecf431be3f
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 13:14:00 2021 -0300
+
+    feat(api): add swagger documentation to the endpoint "doc"
+
+commit 0a0c9f8e49384568af24a3dc9e648dbb45d0a1bd
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 13:00:19 2021 -0300
+
+    chore(api): add swagger for API documentation.
+
+commit 34280556da8da8743b003c413835edc5ae809b66
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 12:56:36 2021 -0300
+
+    refactor(chat): move Chat component to components folder
+
+commit a04b1767cec4e1b07ffc6ec5bfa6b5e88ce2df14
+Merge: d0c4bac 5dcdccf
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 12:02:32 2021 -0300
+
+    Merge branch 'develop' into feature/game-session
+
+commit 5dcdccf6c78a031d0f29e9e6b83e46c151e17e27
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 11:42:24 2021 -0300
+
+    packages are installed in the client and server subfolders
+
+commit dc5a1d1d1f6faab388a1c0c7a6ce1d3131c0c044
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 11:22:44 2021 -0300
+
+    chore(packagejson):  create a package json for the root that references client and server package.json
+
+commit d0c4bac0b69c433fb9ad8b3d9d2e6e36c8acf666
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 11:11:08 2021 -0300
+
+    package.json is specific to either server or client
+
+commit 7821575f5b4c04eaf6abf8e9122ead18a64c3901
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 10:57:18 2021 -0300
+
+    fix: syntax
+
+commit aa003419bdef013bb15db2b1900240ac0b649ee7
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 10:55:22 2021 -0300
+
+    fix(fileupload): add dependencies
+
+commit ace7170df815b51aa9b5b25610c46756c5d6b1c7
+Merge: 3352208 6b152c8
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 10:49:09 2021 -0300
+
+    Merge branch 'feature/game-session' of github.com:juraj80/Teerna into feature/game-session
+
+commit 3352208106ee5cf850de1f5b2637f6e62d23bd29
+Merge: 7b5567b 5095e14
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 10:45:37 2021 -0300
+
+    Merge branch 'develop' into feature/game-session
+
+commit 5095e148d15db355918bfa1a50c3e73777d7cafb
+Merge: 103a95c 1f15cec
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Feb 17 10:06:59 2021 -0300
+
+    Merge pull request #5 from juraj80/feature/file-upload
+    
+    Feature/file upload
+
+commit 1f15cec1d7d59074c9c4fa787263b013038b2de5
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Feb 17 10:05:59 2021 -0300
+
+    fix(server): remove overwritten port const
+
+commit ac03f669a3901ca54215b7873e1ceeddc794868c
+Merge: c887ccc 103a95c
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Feb 17 09:59:00 2021 -0300
+
+    Merge branch 'develop' into feature/file-upload
+
+commit 7b5567b927b500e3877d2a545cea5e35a3856c1f
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:21:04 2021 -0300
+
+    feat(auth): frontend sends token to backend
+
+commit 2c33fc382367f0d1dbf92c1da643bfa1ebb2972a
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:20:10 2021 -0300
+
+    feat(invitation): create and store invitations
+
+commit fe75812e3a7c5a7f11e1c82196a092034de18678
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:16:14 2021 -0300
+
+    feat(auth): add firebase admin to dependencies
+
+commit 35d5136ed1585a658c4000eba58a0ddc2ea6f7ed
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:14:16 2021 -0300
+
+    feat(player): add email to playerList table
+    
+    Email is needed to send invitations and to keep track of invited players.
+
+commit ef668eb3991e6a078de7baf8543e0340e70e3862
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:13:16 2021 -0300
+
+    feat(player): db operations on player list
+
+commit ec535136ba65e9e49d1da2e78c28bd097dac8445
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:12:24 2021 -0300
+
+    feat(auth): get user data from firebase token
+
+commit 9b3164a9fa9801976a371640873b9da51cf1904a
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 19:24:49 2021 -0300
+
+    test(api): basic game session tests
+
+commit 86c6090ebc2570094c2834442dc47a77fd23e971
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 19:23:57 2021 -0300
+
+    refactor(api): move dice api to its own file
+
+commit 9423c21844b640feae704a5979bf2da8d90271c9
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 10:27:16 2021 -0300
+
+    refactor(api): organize api in its own folder
+
+commit db84d8aff6c054b9ca509785df930d093bb4aa69
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 10:14:07 2021 -0300
+
+    improving documentation
+
+commit 9b476b7491acebcee5c93ee9a6653f342df2f1f0
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 10:03:14 2021 -0300
+
+    fix(dice): register dice commands
+
+commit fbd6ad7fd4cdaba8a6919023e6a2a08a252dd867
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 11 13:52:16 2021 -0300
+
+    feat(api): create game session
+
+commit 103a95cc9206d9d1031a3d7d8cb1e7f68d2a2d3e
+Merge: 145afd1 db470c8
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Feb 17 09:53:10 2021 -0300
+
+    Merge pull request #4 from juraj80/feature/chat
+    
+    Feature/chat
+
+commit 6b152c84d0b38d5033313a32450a9e2799ccfc30
+Merge: e7e97d9 145afd1
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 17 09:52:46 2021 -0300
+
+    Merge branch 'develop' into feature/game-session
+
+commit c887cccf2a1979e0df1f93eb21138b1ed6a96db0
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Tue Feb 16 13:01:47 2021 +0100
+
+    merged feature/file-browser branch
+
+commit 209862929b1535683d71b37c995c37c9bf0b88d3
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Tue Feb 16 12:49:00 2021 +0100
+
+    added a new UI component for file management with event handlers and drag and drop responsiveness.
+
+commit e7e97d926cccd231e6dafb0ff56f8f61be203a04
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:21:04 2021 -0300
+
+    feat(auth): frontend sends token to backend
+
+commit cffe5e3aad591552e950a21602d1886c25ba034b
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:20:10 2021 -0300
+
+    feat(invitation): create and store invitations
+
+commit 09c09fab4e1af5a7bd6af1d933d1c8f7c86f4bc0
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:16:14 2021 -0300
+
+    feat(auth): add firebase admin to dependencies
+
+commit 6a135a33b064d1bf4d535fd7788db2c74cc65692
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:14:16 2021 -0300
+
+    feat(player): add email to playerList table
+    
+    Email is needed to send invitations and to keep track of invited players.
+
+commit e4957ca8a64aa9586dc9a8f4f6133e6669007bbc
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:13:16 2021 -0300
+
+    feat(player): db operations on player list
+
+commit 4d53815a33f6f0ca0af95d8bc567d9a6d67429a0
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 21:12:24 2021 -0300
+
+    feat(auth): get user data from firebase token
+
+commit 8a302afe24b99bf4d75fa3fb4068cc1e7345719c
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 19:24:49 2021 -0300
+
+    test(api): basic game session tests
+
+commit 2717414ec52f1a90bbd52a349fa9dcb8a7a7c755
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 19:23:57 2021 -0300
+
+    refactor(api): move dice api to its own file
+
+commit 4629cf515a84e54f264e66df0520ee11068be7f4
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 10:27:16 2021 -0300
+
+    refactor(api): organize api in its own folder
+
+commit 6557beb5cfcb499478d6074b590f473f5eb92ce5
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 10:14:07 2021 -0300
+
+    improving documentation
+
+commit 28bbb82c9fb085e62f43674299535f6a36a92347
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sat Feb 13 10:03:14 2021 -0300
+
+    fix(dice): register dice commands
+
+commit 912b990293b724a54c215d006db2937582a1c7f5
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 11 13:52:16 2021 -0300
+
+    feat(api): create game session
+
+commit 4a3b280162ec235ab24e7ce6cdf2b88c9ae226c8
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Wed Feb 10 13:01:54 2021 +0100
+
+    added Delete, Load and Download components
+
+commit b02cf135b393c97b89290ed163f0d81d7819bc41
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Tue Feb 9 19:45:09 2021 +0100
+
+    added UploadGame component, middleware logic and styling
+
+commit 145afd1d53c02b59a0021325454c2eb216092a2d
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Mon Feb 8 17:29:02 2021 +0000
+
+    Added logos, favicon and background
+
+commit db470c8f5b9a40052b42760dd0a3440f61abe947
+Author: ndvo <nelson@ocastudios.com>
+Date:   Sun Feb 7 08:48:50 2021 -0300
+
+    wip(chat): allow DM to gag any player
+
+commit 6f5e68ff076adfced6b75efae3215f28246e156b
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 16:31:04 2021 -0300
+
+    chore: use yarn for both client and server
+
+commit 8d71a27f4fa793ddcfefa0a409a3a25626b6f78c
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 16:28:30 2021 -0300
+
+    fix(database): new sqlite version cause issues on some linux versions
+    
+    It cause issues on Debian becaut it is lacking pre-compiled versions of
+    sqlite3, it seems.
+
+commit d849a7e4af4772e678cd9f936b13fb254fdf62bf
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 12:20:22 2021 -0300
+
+    feat(gamesession): endpoint for creating a game session
+
+commit dfd59308b334c57a014318d4a8ddc8381ccb4e3a
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 11:57:05 2021 -0300
+
+    feat(gamessesion): provide a promisefied method to close the database.
+
+commit 3113d583213216e74852295fbb7aaef7df84cf99
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 11:46:24 2021 -0300
+
+    feat(database): creates sqlite databases and apply initialization scripts
+
+commit c84f9752f168884bbd9ee022f3afd82565d2dc5b
+Merge: da8b170 0c75841
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 10:31:42 2021 -0300
+
+    Merge branch 'develop' into feature/chat
+
+commit da8b170ea57d8230d4b7a32cffda70b9888892b2
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Feb 4 10:18:16 2021 -0300
+
+    feat(chat): show who is typing
+
+commit cca86d5be61b465f5cd038be5109edf2ff749cd3
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 3 22:05:44 2021 -0300
+
+    feat(websocket): Websocket is now independent of the chat
+    
+    Any component or module can now use WebSocket.
+    Import the "connection" function, invoke it and receive an instance of
+    the Websocket connection.
+    
+    Send messages with ws.sendMessage.
+    
+    Ex:
+    
+    import { connection } from './WSocket.js';
+    
+    const ws = connection();
+    ws.sendMessage("Hello there");
+
+commit a68c0410a2cbe359e35e2b4e08da224c6d16c98a
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 3 21:43:45 2021 -0300
+
+    feat(chat): dice throwing completely on the server side
+
+commit 283fcbabbdd9ddbd52eeae8d2a15856b16f8c0cf
+Merge: b57f9b0 41de45c
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Feb 3 20:22:21 2021 -0300
+
+    Merge branch 'master' into feature/chat
+
+commit 0c758414820c32986a47e932cbc0f40b3fdf1c1d
+Author: Liam Pender <50781082+lpenderUoL@users.noreply.github.com>
+Date:   Wed Feb 3 21:30:26 2021 +0000
+
+    Create initilise.sql
+    
+    I created a script that runs all the SQL commands to initilise the database
+
+commit c55d475a404a8ec6fd6a84273a95843325e2fe29
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Wed Feb 3 14:53:51 2021 +0000
+
+    Added map renderer files
+
+commit 41de45cf1da1f49325230a5a60d6cd847755dcd2
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Wed Feb 3 14:52:57 2021 +0000
+
+    Delete test
+
+commit 2fe56263c88ffa280e3695857e5584db8273c002
+Author: essence-of-orange <essence-of-orange@users.noreply.github.com>
+Date:   Wed Feb 3 14:51:15 2021 +0000
+
+    Create test
+
+commit 35b769ea32c538c5ccf6e6dcd55a2148660aea94
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 22:23:28 2021 -0300
+
+    pm2 restart
+
+commit bd5527ead96f2b27bbbb81f903b61a0c2ea512c8
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 22:21:17 2021 -0300
+
+    make build silent
+
+commit 559bf0e5a45375860b5e0c417be675f811c0182f
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 22:15:57 2021 -0300
+
+    remve conditional executions
+
+commit 89c16d7538d1519ae0b0f7575cebad0ae5be7873
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 21:21:04 2021 -0300
+
+    avoid versioning .eslintcache
+
+commit 920887522df0d4a9a8cd4bd0c4cde70af9901c6b
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 20:59:27 2021 -0300
+
+    add browserslist
+
+commit 04ae04ae15f8709bf403f0e5a10120a81551cd60
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 20:38:20 2021 -0300
+
+    add yarn install and npm install to deploy
+
+commit 3b29a5e8f7636f627493af92ef49ddd172c5f37f
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 20:37:33 2021 -0300
+
+    add tsc dev dependency
+
+commit 1562bce683d5c8a95234fc2395db3102e144c775
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 20:36:18 2021 -0300
+
+    client uses yarn
+
+commit 00df229d2e2f5970085b9ce274ac175c40a2d541
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 20:35:08 2021 -0300
+
+    remove unused files
+
+commit 308cb090021ac9dc2aa915d6f07635fd8b74f643
+Author: ndvo <nelson@ocastudios.com>
+Date:   Mon Feb 1 20:34:07 2021 -0300
+
+    not versioning .eslintcache
+
+commit 348f1ce9e66535d6f4f9b8031536699421d25042
+Merge: 5025921 7577fdc
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Fri Jan 29 10:52:32 2021 -0300
+
+    Merge pull request #3 from juraj80/ui
+    
+    UI
+
+commit b57f9b01bc3596035b8d86fc4eb096aefbe9cbb1
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Jan 28 13:30:36 2021 -0300
+
+    feat(chat): Chat Command: dice roll
+
+commit 1ec816c2c76d18eafcfb17ce87c5dae16c826755
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Jan 28 11:30:32 2021 -0300
+
+    fix(chat): dice roll validation
+
+commit 98da232fe869cad9e6f0324f257c393bb154a907
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Jan 28 11:28:09 2021 -0300
+
+    wip: move dice throwing to server-side
+
+commit 3338a93494cb54d4086bec90835417eec4cb2bcc
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 20:32:42 2021 -0300
+
+    feat(chat): displays dice throws
+
+commit 32229df18640bf881e91370e4ab9150b31fca6e2
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 19:47:02 2021 -0300
+
+    fix(dice): remove unused code
+
+commit b60d1022974bb9f75d45de0748d1ad9a7d7f52b4
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 19:19:48 2021 -0300
+
+    refactor(dice): use DiceBag context to share Dice data
+
+commit eccf770b11d135b670705785cad24a3dfcc53898
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 19:18:16 2021 -0300
+
+    docs: create separate README for client
+
+commit 085b2e3308f2186ea5b8bcff85ff3f0dc9db0557
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 19:13:55 2021 -0300
+
+    chore: client and server have their own package.json files
+
+commit 9dcf0e945b64dcea742af199fa12b2627a4874b7
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 19:11:04 2021 -0300
+
+    feat(dice): allow for throwing dice
+
+commit a2c44cb08c4a3a64aa044f6aed6de29f1112f3a4
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 10:14:47 2021 -0300
+
+    docs(readme): add usefull commands section
+
+commit 5025921142d4799037410df45b1d5099ea851184
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 09:52:02 2021 -0300
+
+    fix: .eslintcache should be ignored
+
+commit f85a1389dc2d6d709f61bdd876a8818645a66af5
+Merge: 550bb7e 9d2331c
+Author: ndvo <nelson@ocastudios.com>
+Date:   Wed Jan 27 09:48:56 2021 -0300
+
+    Merge branch 'master' of github.com:juraj80/Teerna
+
+commit 9d2331caaafdedbe1ba2d10984c005eb92e8262d
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 25 22:00:01 2021 +0100
+
+    workflow edit
+
+commit 03f3889e5733bbf5406d36b48068ddfea562f8b2
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 25 21:19:31 2021 +0100
+
+    added workflow
+
+commit 7577fdcde94605be234534a01a450fe40fb1eb70
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Jan 24 16:53:01 2021 +0200
+
+    fixed auth bug and styling bugs
+
+commit 78b6f2c817aef0f4e2e0b23fdc9617c891e70a7e
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Jan 24 09:46:42 2021 +0200
+
+    fixed bugs with auth
+
+commit 8667c9a3bcfc6853ef3db1457600d38fb5ede50f
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Jan 24 03:47:49 2021 +0200
+
+    add p5js hook
+
+commit cf90712eb99d4052922a3d4ef716c1eb6a403abe
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sun Jan 24 02:48:29 2021 +0200
+
+    setup auth and dark/light mode
+
+commit aea374adaae093d7cbf370b43d5beb2ad623c609
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Jan 23 15:51:00 2021 +0200
+
+    added components and stories
+
+commit 9f99d1c59001061af0d97cc5fd04561160fc72b3
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Jan 23 13:31:47 2021 +0200
+
+    structure files and add components
+
+commit a55ea9a5f9e640ec48c0420ca2dba2f414e66866
+Author: Gabi Brouze <gabibro@hotmail.com>
+Date:   Sat Jan 23 10:40:42 2021 +0200
+
+    initial setup - storybook and styled-components
+
+commit 9f2a3ef25f7c442c2c9ed9730e3e78718fbbc371
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Thu Jan 21 21:37:55 2021 +0100
+
+    deploy.yml
+
+commit a97a37ca606ad123d8d07e5ad4efff49a01ee371
+Merge: f46172c 5e21a8e
+Author: juraj klucka <juraj.klucka@gmail.com>
+Date:   Thu Jan 21 21:21:30 2021 +0100
+
+    Merge pull request #1 from juraj80/feature/chat
+    
+    Feature/chat
+
+commit 5e21a8ec1cf9ff95907cec413de492f55ab181c5
+Author: ndvo <nelson@ocastudios.com>
+Date:   Thu Jan 21 11:25:00 2021 -0300
+
+    feat(chat): chat messaging working, without routing messages
+
+commit 22cb7a1ecd2f3239aa5f2fefbc0abcd98eacfb45
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Jan 20 23:49:11 2021 -0300
+
+    feat(chat-client): first commit of chat client
+
+commit ceeae3f661200329c4fa7131db2edccc5cb6f5de
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Jan 20 23:48:14 2021 -0300
+
+    feat(chat-server): first commit of chat server
+
+commit a250251e3d185b9ea219773977c4c3b326781121
+Author: Nelson do Vale Oliveira <nelson@ocastudios.com>
+Date:   Wed Jan 20 23:41:29 2021 -0300
+
+    refactor: move frontend code to 'client' create 'server' folder
+
+commit f46172c0ef6f1438e8957fb27ad4beae91303e1c
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 19:58:45 2021 +0100
+
+    deploy.yml
+
+commit b03165399b6907bd550b515f8f8c2de0efe73bd9
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 19:56:23 2021 +0100
+
+    deploy.yml
+
+commit 44ad55e873d60662002bb52150302834ace5e9b1
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 19:54:09 2021 +0100
+
+    deploy.yml
+
+commit 3709f4b59ec96284d5b9499b9dc68b0132453ec8
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 19:25:05 2021 +0100
+
+    deploy.yml
+
+commit 0a73e836a5e309f8153fef9d54287a0eeccebae4
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 19:23:55 2021 +0100
+
+    deploy.yml
+
+commit fa256445fb2cecb8e7174f0b226596f96b075104
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 19:22:06 2021 +0100
+
+    deploy.yml
+
+commit 457ca679902364d7ba091b533a7a6ac08a94e3da
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 15:31:11 2021 +0100
+
+    changed credentials
+
+commit f897b8ea57d3360a1c4e4d2fc44c045c4c6cbd63
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 15:22:35 2021 +0100
+
+    changed deploy.yml
+
+commit 21c62825168095a5e8a72a17df11967f7490cdd9
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 15:15:12 2021 +0100
+
+    deployed workflow
+
+commit dc5204476048448bb344e07f8845b89f0807531b
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 14:49:07 2021 +0100
+
+    edited deploy.yml
+
+commit c7ce68d8f01ac586e96cf4a4583a0795f10739e4
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 14:25:27 2021 +0100
+
+    edited deploy.yml
+
+commit bf3cd8b09fae47c499de8e1b463f725709500301
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 14:22:31 2021 +0100
+
+    modified eslintcache
+
+commit e186509dcbd4cc519e0a5f7ccf96dec15e249e47
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 13:24:41 2021 +0100
+
+    initial commit
+
+commit cba2c0ed6a4a12564da13c5bb93ff828023d85fc
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Mon Jan 18 13:08:17 2021 +0100
+
+    Initialize project using Create React App
+
+commit 550bb7e96d82f6790ce3f69797b8dd7d9e66adc5
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Jan 17 22:51:38 2021 +0100
+
+    edited workflow
+
+commit e0b6b224bcaedd132839c1e10f10c505ca0044a8
+Merge: a0a0c6f a177793
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Jan 17 22:30:39 2021 +0100
+
+    Merge branch 'master' of https://github.com/juraj80/Agile-team-project-g9g2-x01
+
+commit a0a0c6f81f5065a7cfe60f8fe9e5d835b9ed5e0a
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Jan 17 22:29:50 2021 +0100
+
+    first commit
+
+commit a177793244a9ea9e23f80736d394019c6b5ff1d0
+Author: juraj klucka <juraj.klucka@gmail.com>
+Date:   Sun Jan 17 21:45:23 2021 +0100
+
+    Create deploy.yml
+
+commit 90985b735702733af7f41fa3a811ccfcb868e273
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Jan 17 15:46:15 2021 +0100
+
+    first commit
+
+commit fb1142b8ee1067deb2fe4c0130a48c2ff8d5d6f1
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Sun Jan 17 15:39:00 2021 +0100
+
+    first commit
+
+commit f621bc151f1210eb92f00c99c7affe6230c8ed19
+Author: juraj80 <juraj.klucka@gmail.com>
+Date:   Fri Jan 15 15:06:35 2021 +0100
+
+    Node + Express
+
+commit cde888b87479d18f892e059795f2fd62b58bfd8b
+Author: ndvo <nelson@ocastudios.com>
+Date:   Tue Jan 12 22:44:06 2021 -0300
+
+    first commit

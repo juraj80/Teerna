@@ -17,8 +17,10 @@ Now enter the project folder: `cd Teerna`. **Following instructions assume the c
 1. Build the client: `cd server && npm run build-client && cd - `
 1. Run the project locally: `cd server && npm start `
 
+It is not necessary to setup a Database for Teerna.
 
-
+It creates temporary folders for each game and within it a dedicated Sqlite file for the game database.
+Teerna relies on users to download and store their data, and provide only temporary storage to be used during games.
 
 ### Development
 

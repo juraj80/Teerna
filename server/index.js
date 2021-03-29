@@ -37,6 +37,9 @@ app.use('/', express.static('../client/build'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+/**
+ * Process file uploads
+ */
 app.use(fileUpload());
 
 

@@ -76,6 +76,12 @@ function setUpChat() {
   });
 }
 
+/**
+ * Verifies that a message is a valid dice message.
+ *
+ * @param {Object} msg the message to be validated.
+ * @returns {boolean} the message is a valid dice message.
+ */
 function validateDice(msg) {
   return msg.data && msg.data.sides &&
     parseInt(msg.data.sides, 10) &&

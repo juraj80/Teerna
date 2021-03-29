@@ -196,7 +196,6 @@ export function createMessage(message, author) {
       this.data = registered.data;
     }
   
-  
   }
   
   
